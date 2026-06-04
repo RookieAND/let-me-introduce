@@ -1,6 +1,7 @@
 import { STACK_CARDS } from "#/data/Portfolio";
 import { Chip } from "#/components/ui/chip";
 import { Reveal } from "#/components/ui/reveal";
+import { TechIcon } from "#/components/ui/TechIcon";
 import { Text } from "#/components/ui/text";
 
 export function Stack() {
@@ -26,6 +27,7 @@ export function Stack() {
                 <div className="flex flex-wrap gap-[9px]">
                   {card.chips.map((chip) => (
                     <Chip key={chip.label} variant={chip.key ? "key" : "default"}>
+                      {chip.icon && <TechIcon slug={chip.icon} />}
                       {chip.label}
                     </Chip>
                   ))}

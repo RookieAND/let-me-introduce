@@ -29,36 +29,36 @@ export const STACK_CARDS = [
   {
     category: "Language",
     chips: [
-      { label: "TypeScript", key: true },
-      { label: "JavaScript", key: false },
+      { label: "TypeScript", key: true, icon: "siTypescript" },
+      { label: "JavaScript", key: false, icon: "siJavascript" },
     ],
   },
   {
     category: "Frontend",
     chips: [
-      { label: "React", key: true },
-      { label: "Next.js", key: true },
-      { label: "Vite", key: false },
-      { label: "TanStack Query", key: false },
-      { label: "Zustand", key: false },
+      { label: "React", key: true, icon: "siReact" },
+      { label: "Next.js", key: true, icon: "siNextdotjs" },
+      { label: "Vite", key: false, icon: "siVite" },
+      { label: "TanStack Query", key: false, icon: "siReactquery" },
+      { label: "Zustand", key: false, icon: null },
     ],
   },
   {
     category: "Backend",
     chips: [
-      { label: "NestJS", key: true },
-      { label: "Node.js", key: false },
-      { label: "MongoDB", key: false },
-      { label: "Mongoose", key: false },
+      { label: "NestJS", key: true, icon: "siNestjs" },
+      { label: "Node.js", key: false, icon: "siNodedotjs" },
+      { label: "MongoDB", key: false, icon: "siMongodb" },
+      { label: "Mongoose", key: false, icon: "siMongoose" },
     ],
   },
   {
     category: "Infra / DevOps",
     chips: [
-      { label: "Docker", key: false },
-      { label: "GitHub Actions", key: false },
-      { label: "Turborepo", key: false },
-      { label: "pnpm", key: false },
+      { label: "Docker", key: false, icon: "siDocker" },
+      { label: "GitHub Actions", key: false, icon: "siGithubactions" },
+      { label: "Turborepo", key: false, icon: "siTurborepo" },
+      { label: "pnpm", key: false, icon: "siPnpm" },
     ],
   },
 ] as const;
