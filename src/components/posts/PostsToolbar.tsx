@@ -1,0 +1,87 @@
+import * as ToggleGroupPrimitive from "@radix-ui/react-toggle-group";
+import { groupBy } from "es-toolkit";
+import { type ChangeEvent, useId } from "react";
+import { cn } from "#/lib/Utils";
+import { CATEGORIES, POSTS, type Category } from "#/data/Posts";
+
+interface PostsToolbarProps {
+  activeCat: Category | "all";
+  query: string;
+  onCatChange: (cat: Category | "all") => void;
+  onQueryChange: (q: string) => void;
+}
+
+const grouped = groupBy(POSTS, (p) => p.cat);
+const counts: Record<string, number> = {
+  all: POSTS.length,
+  ...Object.fromEntries(Object.entries(grouped).map(([k, v]) => [k, v.length])),
+};
+
+const CATEGORY_LABELS: Record<string, string> = {
+  all: "전체",
+  Frontend: "Frontend",
+  Backend: "Backend",
+  Architecture: "Architecture",
+  Infra: "Infra",
+  "회고": "회고",
+};
+
+export function PostsToolbar({
+  activeCat,
+  query,
+  onCatChange,
+  onQueryChange,
+}: PostsToolbarProps) {
+  const searchId = useId();
+
+  const handleSearch = (e: ChangeEvent<HTMLInputElement>) => {
+    onQueryChange(e.target.value);
+  };
+
+  const handleCatChange = (val: string) => {
+    if (val) onCatChange(val as Category | "all");
+  };
+
+  return (
+    <div className="flex items-center gap-[18px] flex-wrap py-[22px] border-b border-border">
+      <ToggleGroupPrimitive.Root
+        type="single"
+        value={activeCat}
+        onValueChange={handleCatChange}
+        className="flex gap-2 flex-wrap"
+        aria-label="카테고리 필터"
+      >
+        {CATEGORIES.map((cat) => (
+          <ToggleGroupPrimitive.Item
+            key={cat}
+            value={cat}
+            className={cn(
+              "font-mono text-[12.5px] text-text-2 bg-transparent border border-border rounded-full px-[15px] py-2 cursor-pointer transition-all duration-200 tracking-[0.02em] hover:border-border-strong hover:text-text",
+              activeCat === cat && "bg-accent border-accent text-white",
+            )}
+          >
+            {CATEGORY_LABELS[cat]}
+            <span className="opacity-60 ml-[6px]">{counts[cat] ?? 0}</span>
+          </ToggleGroupPrimitive.Item>
+        ))}
+      </ToggleGroupPrimitive.Root>
+
+      <div className="ml-auto relative max-[640px]:ml-0 max-[640px]:w-full">
+        <label htmlFor={searchId} className="sr-only">
+          글 검색
+        </label>
+        <span className="absolute left-[13px] top-1/2 -translate-y-1/2 text-text-3 text-[14px] pointer-events-none select-none">
+          ⌕
+        </span>
+        <input
+          id={searchId}
+          type="text"
+          placeholder="search posts…"
+          value={query}
+          onChange={handleSearch}
+          className="font-mono text-[13px] text-text bg-surface border border-border rounded-[9px] py-[9px] pl-[36px] pr-[14px] w-[210px] transition-[border-color,width] duration-[200ms] outline-none placeholder:text-text-3 focus:border-accent focus:w-[250px] max-[640px]:w-full max-[640px]:focus:w-full"
+        />
+      </div>
+    </div>
+  );
+}
