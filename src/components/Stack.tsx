@@ -1,8 +1,8 @@
 import { STACK_CARDS } from "#/data/Portfolio";
-import { Chip } from "#/components/ui/chip";
 import { Reveal } from "#/components/ui/reveal";
 import { TechIcon } from "#/components/ui/TechIcon";
 import { Text } from "#/components/ui/text";
+import { cn } from "#/lib/Utils";
 
 export function Stack() {
   return (
@@ -24,12 +24,28 @@ export function Stack() {
                   <span className="w-[18px] h-[2px] bg-accent" />
                   {card.category}
                 </div>
-                <div className="flex flex-wrap gap-[9px]">
+                <div className="grid grid-cols-[repeat(auto-fill,minmax(72px,1fr))] gap-[8px]">
                   {card.chips.map((chip) => (
-                    <Chip key={chip.label} variant={chip.key ? "key" : "default"}>
-                      {chip.icon && <TechIcon slug={chip.icon} />}
-                      {chip.label}
-                    </Chip>
+                    <div
+                      key={chip.label}
+                      className={cn(
+                        "flex flex-col items-center gap-[10px] rounded-[10px] px-2 py-[14px] transition-all duration-200 cursor-default select-none group",
+                        chip.key
+                          ? "bg-accent-dim text-accent-bright hover:bg-[rgba(91,141,239,0.22)] hover:-translate-y-0.5"
+                          : "bg-surface-2 text-text-3 hover:text-text-2 hover:bg-[rgba(255,255,255,0.04)] hover:-translate-y-0.5",
+                      )}
+                    >
+                      {chip.icon ? (
+                        <TechIcon slug={chip.icon} size={26} />
+                      ) : (
+                        <span className="w-[26px] h-[26px] rounded-full border border-current opacity-30 flex items-center justify-center font-mono text-[10px]">
+                          ~
+                        </span>
+                      )}
+                      <span className="font-mono text-[11px] tracking-[0.01em] leading-tight text-center w-full truncate px-1">
+                        {chip.label}
+                      </span>
+                    </div>
                   ))}
                 </div>
               </div>
