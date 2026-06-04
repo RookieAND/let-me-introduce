@@ -132,6 +132,8 @@ export function Hero() {
               src="/assets/profile.jpg"
               alt="백광인 프로필 사진"
               className="portrait-img"
+              fetchPriority="high"
+              decoding="async"
             />
           </div>
           <div className="absolute -bottom-[14px] -left-[18px] bg-surface border border-border-strong rounded-[10px] px-[14px] py-[9px] font-mono text-[11.5px] text-text-2 flex items-center gap-2 shadow-[0_12px_30px_-12px_rgba(0,0,0,0.7)]">

@@ -13,7 +13,7 @@ Two routes: `/` (portfolio) and `/posts` (writing list).
 - framer-motion — all animations (scroll reveal via `<Reveal>`, count-up, glow parallax)
 - class-variance-authority (CVA) + tailwind-merge for component variants
 - es-toolkit for utility functions (debounce, groupBy helpers, last, etc.)
-- OxLint for linting, Biome for formatting
+- Biome for both linting and formatting
 
 ## Conventions
 
@@ -51,6 +51,7 @@ No comments unless the WHY is non-obvious. No docstrings.
 pnpm dev        # start dev server
 pnpm build      # tsc -b && vite build
 pnpm preview    # preview production build
-pnpm lint       # oxlint
-pnpm format     # biome format --write .
+pnpm lint       # biome lint --write src
+pnpm format     # biome format --write src
+pnpm check      # biome check --write src (lint + format)
 ```
