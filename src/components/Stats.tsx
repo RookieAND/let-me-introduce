@@ -16,16 +16,17 @@ function CountUp({ target, prefix, unit }: { target: number; prefix?: string; un
   );
 }
 
-function StatItem({ prefix, target, unit, label }: (typeof STATS)[number]) {
-  const lines = label.split("\n");
-
+function StatItem({ prefix, target, unit, label, method, context }: (typeof STATS)[number]) {
   return (
     <div className="py-8 px-6.5 border-r border-border last:border-r-0 max-[760px]:nth-2:border-r-0 max-[760px]:nth-1:border-b max-[760px]:nth-2:border-b">
       <CountUp target={target} prefix={prefix} unit={unit} />
       <Text variant="caption" color="subtle" className="mt-3 leading-normal block">
-        {lines[0]}
+        {label}
         <br />
-        {lines[1]}
+        {method}
+      </Text>
+      <Text variant="caption" color="subtle" className="mt-1.5 block opacity-50 text-[10.5px] tracking-[0.06em]">
+        {context}
       </Text>
     </div>
   );

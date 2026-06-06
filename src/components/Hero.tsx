@@ -142,9 +142,11 @@ export function Hero() {
               decoding="async"
             />
           </div>
-          <div className="absolute -bottom-3.5 -left-4.5 bg-surface border border-border-strong rounded-[10px] px-3.5 py-2.25 font-mono text-[11.5px] text-text-2 flex items-center gap-2 shadow-[0_12px_30px_-12px_rgba(0,0,0,0.7)]">
+          <div className="absolute -bottom-3.5 -left-4.5 bg-surface border border-border-strong rounded-[10px] px-3.5 py-2.25 flex items-center gap-2 shadow-[0_12px_30px_-12px_rgba(0,0,0,0.7)]">
             <span className="w-2 h-2 rounded-full bg-green-ping shadow-[0_0_8px_var(--color-green-ping)] shrink-0" />
-            Fullstack Engineer · RookieAND
+            <Text as="span" variant="caption" color="muted" className="text-[11.5px]">
+              Fullstack Engineer · RookieAND
+            </Text>
           </div>
         </div>
       </div>

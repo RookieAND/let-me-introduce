@@ -1,27 +1,35 @@
 export const STATS = [
   {
-    prefix: "$",
-    target: 500,
-    unit: "",
-    label: "월 고정 비용 절감\n외부 서비스 내재화",
+    prefix: "",
+    target: 70,
+    unit: "% ↓",
+    label: "CI 빌드 시간 단축",
+    method: "Turborepo Remote Cache 도입",
+    context: "단독 · 모노레포",
   },
   {
     prefix: "",
     target: 83,
     unit: "% ↓",
-    label: "Docker 배포 시간\n멀티스테이지 빌드 최적화",
+    label: "Docker 배포 시간 단축",
+    method: "멀티스테이지 빌드 최적화",
+    context: "단독 · Docker",
   },
   {
     prefix: "",
     target: 52,
     unit: "% ↓",
-    label: "출결 관련 CS 문의\n전체 CS의 74% 차지하던 영역",
+    label: "출결 문의 감소 (전년 대비)",
+    method: "이벤트 기반 출결 재설계",
+    context: "GEM · 출결 시스템",
   },
   {
     prefix: "",
     target: 79,
     unit: "/79",
-    label: "유닛 테스트 통과\n0건에서 안전망 구축",
+    label: "유닛 테스트 통과",
+    method: "0건에서 안전망 구축",
+    context: "단독 · 테스트 도입",
   },
 ] as const;
 
