@@ -4,7 +4,7 @@ import { Pagination } from "#/components/ui/pagination";
 import { Text } from "#/components/ui/text";
 import { PostCard } from "./PostCard";
 
-const PAGE_SIZE = 8;
+const PAGE_SIZE = 10;
 
 interface PostsListProps {
   activeCat: Category | "all";

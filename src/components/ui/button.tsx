@@ -11,20 +11,20 @@ const buttonVariants = cva(
         ghost: "border border-border-strong text-text-2 bg-transparent hover:border-accent hover:text-text hover:-translate-y-0.5",
       },
       size: {
-        default: "px-5 py-3 text-[14px] rounded-[9px]",
-        sm: "px-3 py-2 text-[12px] rounded-[7px]",
+        default: "px-5 py-3 text-sm rounded-btn",
+        sm: "px-3 py-2 text-xs rounded-btn-sm",
       },
     },
     compoundVariants: [
       {
         variant: "primary",
         size: "default",
-        className: "hover:shadow-[0_10px_30px_-8px_rgba(91,141,239,0.6)]",
+        className: "hover:shadow-btn-glow",
       },
       {
         variant: "primary",
         size: "sm",
-        className: "hover:shadow-[0_6px_16px_-6px_rgba(91,141,239,0.5)]",
+        className: "hover:shadow-btn-glow-sm",
       },
     ],
     defaultVariants: {

@@ -54,8 +54,8 @@ export function Pagination({ page, totalPages, onChange }: PaginationProps) {
             aria-current={p === page ? "page" : undefined}
             className={
               p === page
-                ? "w-8.5 h-8.5 flex items-center justify-center rounded-lg font-mono text-[12.5px] bg-accent text-white cursor-default"
-                : "w-8.5 h-8.5 flex items-center justify-center rounded-lg font-mono text-[12.5px] border border-border text-text-3 hover:border-border-strong hover:text-text transition-all duration-200 cursor-pointer"
+                ? "w-8.5 h-8.5 flex items-center justify-center rounded-lg font-mono text-xs bg-accent text-white cursor-default"
+                : "w-8.5 h-8.5 flex items-center justify-center rounded-lg font-mono text-xs border border-border text-text-3 hover:border-border-strong hover:text-text transition-all duration-200 cursor-pointer"
             }
           >
             {p}

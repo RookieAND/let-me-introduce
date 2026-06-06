@@ -23,6 +23,14 @@
   --color-accent-bright: #84acff;
   --color-accent-dim: rgba(91, 141, 239, 0.14);
   --color-green-ping: #3fd07a;
+
+  /* ── Radius ── */
+  --radius-btn: 9px;
+  --radius-btn-sm: 7px;
+
+  /* ── Shadows ── */
+  --shadow-btn-glow: 0 10px 30px -8px rgba(91, 141, 239, 0.6);
+  --shadow-btn-glow-sm: 0 6px 16px -6px rgba(91, 141, 239, 0.5);
 }
 
 /* ── Base ── */

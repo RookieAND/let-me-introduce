@@ -4,7 +4,7 @@ import { Reveal } from "#/components/ui/reveal";
 import { Text } from "#/components/ui/text";
 
 const CARD_CLASS =
-  "group grid border border-border rounded-[18px] overflow-hidden bg-gradient-to-r from-surface to-bg-soft transition-[border-color,transform] duration-300 hover:border-border-strong hover:-translate-y-1 block";
+  "group grid border border-border rounded-[18px] overflow-hidden bg-gradient-to-r from-surface to-bg-soft transition-[border-color] duration-300 hover:border-border-strong block";
 
 function FeaturedCardInner() {
   return (
@@ -34,7 +34,7 @@ function FeaturedCardInner() {
 
 export function FeaturedPost() {
   return (
-    <section className="pt-11 pb-0">
+    <section className="pt-11 pb-10">
       <Reveal as="div">
         {FEATURED_POST.content ? (
           <Link to={`/posts/${FEATURED_POST.slug}`} className={CARD_CLASS}>
