@@ -34,10 +34,11 @@ export function About() {
               <Text variant="body1" color="muted">
                 가장 자신 있는 영역은 개발 생산성을 끌어올리는 <strong className="text-text font-semibold">Build Tooling</strong> 입니다. <br/>
                 그러면서도 폼 빌더·권한 관리처럼 사용자가 마주하는 화면 안쪽의 구조까지 직접 설계합니다.<br/>
+                팀이 개발하는 환경과 사용자가 바라보는 화면을 {" "}
                 <strong className="text-text font-semibold">
-                  팀이 올라서는 바닥과 사용자가 보는 화면을 같은 손으로 다루는 것
+                  같은 손으로 다루는 것이
                 </strong>
-                이 제 강점입니다.
+                {" "}제 강점입니다.
               </Text>
             </Reveal>
           </div>

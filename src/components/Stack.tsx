@@ -23,11 +23,11 @@ export function Stack() {
                   <span className="w-4.5 h-0.5 bg-accent" />
                   {card.category}
                 </div>
-                <div className="grid grid-cols-[repeat(auto-fill,minmax(72px,1fr))] gap-2">
+                <div className="grid grid-cols-[repeat(auto-fill,minmax(90px,1fr))] gap-2">
                   {card.chips.map((chip) => (
                     <div
                       key={chip.label}
-                      className="flex flex-col items-center gap-2.5 rounded-[10px] px-2 py-3.5 cursor-default select-none group bg-accent-dim text-accent-bright transition-all duration-200 hover:scale-105 hover:brightness-110"
+                      className="flex flex-col items-center justify-center gap-2.5 rounded-[10px] px-2 h-20 cursor-default select-none group bg-accent-dim text-accent-bright transition-all duration-200 hover:scale-105 hover:brightness-110"
                     >
                       {chip.icon ? (
                         <TechIcon slug={chip.icon} size={26} />
@@ -36,7 +36,7 @@ export function Stack() {
                           ~
                         </span>
                       )}
-                      <span className="font-mono text-[11px] tracking-[0.01em] leading-tight text-center w-full truncate px-1">
+                      <span className="font-mono text-[11px] tracking-[0.01em] leading-tight text-center w-full break-words px-1">
                         {chip.label}
                       </span>
                     </div>
