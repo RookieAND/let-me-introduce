@@ -75,6 +75,7 @@ export function Hero() {
           }}
         />
         <div className="grid-overlay" />
+        <div className="grid-fade" />
       </div>
 
       {/* Content */}
@@ -110,7 +111,7 @@ export function Hero() {
               <svg viewBox="0 0 24 24" width={15} height={15} fill="currentColor" aria-hidden>
                 <path d="M20 4H4c-1.1 0-2 .9-2 2v12c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 4-8 5-8-5V6l8 5 8-5v2z" />
               </svg>
-              연락하기
+              Contact
             </Button>
             <Button
               as="a"
@@ -122,7 +123,7 @@ export function Hero() {
               <svg viewBox="0 0 24 24" width={15} height={15} fill="currentColor" aria-hidden>
                 <path d={siGithub.path} />
               </svg>
-              GitHub ↗
+              GitHub
             </Button>
           </div>
         </div>
