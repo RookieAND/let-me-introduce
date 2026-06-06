@@ -19,7 +19,7 @@ export function Contact() {
 
         <Reveal delay={0.08}>
           <Text variant="subtitle2" color="muted" className="mb-11">
-            새로운 문제와 좋은 팀을 언제든 기다리고 있습니다.
+            새로운 문제와 좋은 구성원이 함께하는 팀을 항상 기다리고 있습니다.
           </Text>
         </Reveal>
 
@@ -51,7 +51,7 @@ export function Contact() {
             <span className="text-text-3 group-hover:text-accent-bright transition-colors duration-250">
               Writing
             </span>
-            기록 보기 →
+            기록 보기
           </Link>
         </Reveal>
 

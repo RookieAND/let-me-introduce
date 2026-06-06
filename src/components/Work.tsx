@@ -17,7 +17,7 @@ export function Work() {
         <div className="flex flex-col">
           {WORK_ITEMS.map((item, i) => (
             <Reveal key={item.name} delay={i * 0.05}>
-              <div className="grid grid-cols-[230px_1fr] gap-7 px-1 py-6 border-t border-border last:border-b transition-[padding,background,border-radius] duration-250 hover:bg-surface hover:rounded-xl hover:px-4.5 max-[640px]:grid-cols-1 max-[640px]:gap-2">
+              <div className="grid grid-cols-[230px_1fr] gap-7 px-1 py-6 border-t border-border last:border-b transition-[padding,background] duration-250 hover:bg-surface hover:px-4.5 max-[640px]:grid-cols-1 max-[640px]:gap-2">
                 <div>
                   <Text variant="heading6">{item.name}</Text>
                   <Text variant="label" color="subtle" className="tracking-[0.06em] mt-1.75 block">

@@ -48,7 +48,6 @@ export const STACK_CARDS = [
       { label: "Next.js", key: true, icon: "siNextdotjs" },
       { label: "Vite", key: false, icon: "siVite" },
       { label: "TanStack Query", key: false, icon: "siReactquery" },
-      { label: "Zustand", key: false, icon: null },
     ],
   },
   {
@@ -77,9 +76,11 @@ export const CAREER_ITEMS = [
     title: "Exelearnce Tech Cell 2",
     badge: null,
     bullets: [
-      "수동 DB 제어에 의존하던 권한 관리를 <b>역할·리소스 기반 모델</b>로 재설계",
-      "파편화돼 있던 모노레포 빌드 환경을 정리해 팀 생산성 향상",
-      "테스트가 없던 핵심 로직에 유닛 테스트를 도입해 변경에 강한 안전망 구축",
+      "수동 DB 제어에 의존하던 권한을 <b>역할·리소스 기반 ABAC 모델</b>로 재설계하고 BE·FE 구현",
+      "<b>Turborepo 호환 Remote Cache</b>를 AWS EFS 위에 구성해 CI 빌드 시간 최대 70% 단축",
+      "<b>Playwright E2E</b>와 유닛 테스트 79건을 설계해 시스템 버그를 사전 차단하는 테스트망 구축",
+      "빌드 속도와 캐시 효율의 Trade-Off를 고려하여 <b>청크 분리 전략</b>을 설계, 재다운로드 90% 절감",
+      "pnpm v11 <b>native deploy</b> 로 전환해 store 재활용 이점을 살려 Docker 빌드 시간 82% 단축",
     ],
   },
   {
@@ -87,10 +88,11 @@ export const CAREER_ITEMS = [
     title: "GEM SQD",
     badge: "스쿼드 리더",
     bullets: [
-      "모집부터 운영까지 담당하는 자체 플랫폼 <b>GEM</b>을 구축하고 6~7명 스쿼드를 리딩",
-      "외부 서비스에 흩어져 있던 지원자 데이터를 한곳으로 통합",
-      "운영팀이 직접 폼을 만들고 데이터를 추출하는 도구를 개발",
-      "팀의 비전·로드맵을 세우고 개발자 스크럼을 열어 성장 문화 정착",
+      "Tally·Google Form 에 흩어져 있던 모집 과정을 <b>GEM</b>으로 내재화해 외부 의존 비용 제거",
+      "지원자 행동 데이터를 자체 트래킹해 모집 과정의 이탈 구간을 짚어내는 <b>데이터 기반 운영</b> 전환",
+      "4~5명 스쿼드 구성원을 리딩하며 자체 비전·로드맵 제시와 개발자 스크럼 진행으로 성장 주도",
+      "복잡한 지원서·강좌·유닛 테이블을 <b>Headless 기반 공통 UI 시스템</b>으로 통합 전환",
+      "이벤트 기반 출결 처리를 재설계해 데이터 실시간 반영, 출결 문의 전월 대비 52% 감소",
     ],
   },
   {
@@ -98,8 +100,9 @@ export const CAREER_ITEMS = [
     title: "AI/DT TF",
     badge: null,
     bullets: [
-      "교육부 <b>AI 디지털 교과서(AIDT)</b> 사업 플랫폼 구축에 참여",
-      "오답노트·학습맵 트리·AI 추천 콘텐츠 모달 등 핵심 학습 기능을 설계·개발",
+      "구름의 교육부 <b>AI 디지털 교과서 (AIDT)</b> 사업 플랫폼의 학생 대시보드 내 기능 UI 개발 전담",
+      "오답노트·AI 추천 콘텐츠 모달 등 핵심 학습 기능을 Compound Pattern 기반으로 설계·개발",
+      "5Depth 구조의 학습맵 내 선택·연동 로직을 트리 자료구조로 설계하고 이를 React가 구독하도록 개발",
     ],
   },
   {
@@ -107,10 +110,11 @@ export const CAREER_ITEMS = [
     title: "EDU Public SQD",
     badge: null,
     bullets: [
-      "교육 사업 운영에 필요한 관리 시스템을 개발·운영",
-      "<b>학습시간 관리 API</b>를 기획부터 배포까지 단독으로 담당",
-      "레거시로 남아 있던 주요 페이지를 사내 디자인 시스템 기준으로 재구현",
-      "프론트와 백엔드를 오가며 제품의 전 과정을 처음 경험한 시기",
+      "강사·교구재·캠프 운영 등 교육 사업 <b>관리 시스템(PMS)</b>을 KoaJS 기반으로 개발·운영",
+      "재단용 PMS 운영 통계 어드민을 풀스택 개발, 통계 전용 스키마 설계로 반복 집계 비용 제거",
+      "KDT 사업 증빙용 누적·기간별 <b>학습시간 집계 API</b>를 NestJS로 설계하여 실 사용 진행",
+      "기존의 Legacy 강의 페이지를 사내 디자인 시스템 기준으로 재구현하고 모바일 반응형까지 대응",
+      "외부 플랫폼 강좌 <b>쿠폰 발급 도메인</b>을 신설하고 결제 시 선착순 발급 시스템을 설계",
     ],
   },
 ] as const;
@@ -120,8 +124,8 @@ export const WORK_ITEMS = [
     name: "모노레포 빌드 환경 고도화",
     kind: "Infra / DevOps",
     lines: [
-      "Turborepo Remote Cache와 Docker 멀티스테이지 빌드를 도입해 CI 빌드 70%, 배포 시간 83%를 줄였습니다.",
-      "pnpm·Vite·ESLint를 순차 정리하며 팀이 올라설 빌드 바닥을 다졌습니다.",
+      "Turbo Remote Cache와 Docker 멀티스테이지 빌드를 도입해 CI 빌드 70%, 배포 시간 83%를 줄였습니다.",
+      "pnpm·Vite·ESLint 버전 업데이트를 순차적으로 반영하며 팀이 사용할 개발 환경을 다졌습니다.",
     ],
   },
   {
@@ -129,7 +133,7 @@ export const WORK_ITEMS = [
     kind: "Architecture",
     lines: [
       "수동 DB 제어에 기대던 권한 관리를 역할·리소스·액션 기반 모델로 재설계했습니다.",
-      "PoC부터 프로덕션 적용까지 BE·FE를 단독으로 구현하고 선언형 <Can>으로 화면 노출을 제어했습니다.",
+      "PoC부터 프로덕션 적용까지 BE·FE를 단독으로 구현하고 선언형 <Can> 으로 화면 노출을 제어했습니다.",
     ],
   },
   {
@@ -158,15 +162,16 @@ export const PRINCIPLES = [
     num: "01",
     title: "개발로 풀 문제인지 먼저 가린다",
     lines: [
-      "코드를 짜기 전에, 정말 개발로 해결할 문제인지부터 정의한다.",
-      "문제 정의가 곧 출발점이다.",
+      "코드를 짜기 전에 어떻게 이를 해결할지 정의한다.",
+      "문제를 제대로 정의하는 순간 좋은 개발이 시작된다.",
     ],
   },
   {
     num: "02",
     title: "협업으로 더 잘 풀 수 있는지 본다",
     lines: [
-      "혼자 끌어안기보다, 협업·프로세스로 풀 여지가 있는지 함께 따져 더 나은 해법을 고른다.",
+      "혼자 끌어안기보다는 협업으로 풀 여지가 있는지",
+      "함께 논의하여 더 나은 해답을 찾아 고른다.",
     ],
   },
   {

@@ -17,7 +17,7 @@ export function About() {
         <div className="flex flex-col gap-16">
           <Reveal>
             <Text variant="heading3" className="max-w-[18ch]">
-              좋은 개발은 <span className="text-accent">올바른 문제 정의</span>에서<br />
+              좋은 개발은 <br /><span className="text-accent">올바른 문제 정의</span>에서<br />
               시작한다고 믿습니다.
             </Text>
           </Reveal>
@@ -27,13 +27,13 @@ export function About() {
               <Text variant="body1" color="muted">
                 무언가를 맡으면 코드부터 짜지 않습니다. 정말 풀어야 할 문제가 무엇인지를 먼저
                 들여다봅니다.<br />
-                코드가 답일 때도, 사람들과 맞추는 게 답일 때도 있습니다.
+                코드가 답일 때도 있지만, 때로는 <strong className="text-text font-semibold">사람들과 의견을 맞추는 게 </strong> 답일 때도 있기 때문입니다.
               </Text>
             </Reveal>
             <Reveal delay={0.08}>
               <Text variant="body1" color="muted">
-                가장 자신 있는 영역은 개발 생산성을 끌어올리는 빌드·툴링입니다. 그러면서도
-                폼 빌더·권한 관리처럼 사용자가 마주하는 화면 안쪽의 구조까지 직접 설계합니다.{" "}
+                가장 자신 있는 영역은 개발 생산성을 끌어올리는 <strong className="text-text font-semibold">Build Tooling</strong> 입니다. <br/>
+                그러면서도 폼 빌더·권한 관리처럼 사용자가 마주하는 화면 안쪽의 구조까지 직접 설계합니다.<br/>
                 <strong className="text-text font-semibold">
                   팀이 올라서는 바닥과 사용자가 보는 화면을 같은 손으로 다루는 것
                 </strong>

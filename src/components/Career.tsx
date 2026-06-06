@@ -16,9 +16,13 @@ export function Career() {
         </Reveal>
 
         <Reveal className="flex items-center gap-4.5 mb-11 px-6.5 py-5.5 bg-linear-to-r from-surface to-bg-soft border border-border rounded-2xl">
-          <div className="w-12 h-12 rounded-xl bg-accent-dim border border-[rgba(91,141,239,0.35)] grid place-items-center font-display font-bold text-accent-bright text-xl shrink-0">
-            g
-          </div>
+          <img
+            src="https://logo-resources.thevc.kr/organizations/200x200/8c0d21390153be22cc7715dbffaf133f821d54cce68f3c2f5e2a758f2befc77c_1775700700735069.jpg"
+            alt="goorm 로고"
+            width={48}
+            height={48}
+            className="w-12 h-12 rounded-xl shrink-0 object-cover"
+          />
           <div>
             <Text variant="heading5">
               주식회사 구름{" "}

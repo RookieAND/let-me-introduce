@@ -2,7 +2,6 @@ import { STACK_CARDS } from "#/data/Portfolio";
 import { Reveal } from "#/components/ui/reveal";
 import { TechIcon } from "#/components/ui/TechIcon";
 import { Text } from "#/components/ui/text";
-import { cn } from "#/lib/Utils";
 
 export function Stack() {
   return (
@@ -28,12 +27,7 @@ export function Stack() {
                   {card.chips.map((chip) => (
                     <div
                       key={chip.label}
-                      className={cn(
-                        "flex flex-col items-center gap-2.5 rounded-[10px] px-2 py-3.5 transition-all duration-200 cursor-default select-none group",
-                        chip.key
-                          ? "bg-accent-dim text-accent-bright hover:bg-[rgba(91,141,239,0.22)] hover:-translate-y-0.5"
-                          : "bg-surface-2 text-text-3 hover:bg-accent-dim hover:text-accent-bright hover:-translate-y-0.5",
-                      )}
+                      className="flex flex-col items-center gap-2.5 rounded-[10px] px-2 py-3.5 cursor-default select-none group bg-accent-dim text-accent-bright transition-all duration-200 hover:scale-105 hover:brightness-110"
                     >
                       {chip.icon ? (
                         <TechIcon slug={chip.icon} size={26} />
