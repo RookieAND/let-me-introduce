@@ -86,6 +86,15 @@ export const CAREER_ITEMS = [
     ],
   },
   {
+    when: "2024.06 — 2024.11",
+    title: "AI/DT TF",
+    badge: null,
+    bullets: [
+      "교육부 <b>AI 디지털 교과서(AIDT)</b> 사업 플랫폼 구축에 참여",
+      "오답노트·학습맵 트리·AI 추천 콘텐츠 모달 등 핵심 학습 기능을 설계·개발",
+    ],
+  },
+  {
     when: "2023.08 — 2024.11",
     title: "EDU Public SQD",
     badge: null,
