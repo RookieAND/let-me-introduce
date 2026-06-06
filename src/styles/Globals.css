@@ -87,8 +87,8 @@
 
 /* ── Animations ── */
 @keyframes nameSheen {
-  0%, 100% { background-position: 100% 0; }
-  50% { background-position: 0 0; }
+  from { background-position: 100% 0; }
+  to { background-position: 0% 0; }
 }
 
 @keyframes drift1 {
@@ -109,13 +109,13 @@
 
 @layer utilities {
   .hero-name-sheen {
-    background: linear-gradient(105deg, #ededee 0%, #ededee 36%, #aab4cc 50%, #ededee 64%, #ededee 100%);
+    background: linear-gradient(105deg, #ededee 0%, #ededee 35%, #ffffff 50%, #ededee 65%, #ededee 100%);
     background-size: 250% 100%;
     -webkit-background-clip: text;
     background-clip: text;
     -webkit-text-fill-color: transparent;
     color: transparent;
-    animation: nameSheen 9s ease-in-out infinite;
+    animation: nameSheen 3s ease-in-out infinite alternate;
   }
 }
 

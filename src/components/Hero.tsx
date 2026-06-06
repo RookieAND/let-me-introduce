@@ -1,4 +1,5 @@
 import { useEffect, useRef } from "react";
+import { siGithub } from "simple-icons";
 import { Button } from "#/components/ui/button";
 import { Text } from "#/components/ui/text";
 
@@ -106,7 +107,10 @@ export function Hero() {
 
           <div className="reveal in d3 flex gap-3.5 mt-10 flex-wrap">
             <Button as="a" href="#contact" variant="primary">
-              연락하기 <span>→</span>
+              <svg viewBox="0 0 24 24" width={15} height={15} fill="currentColor" aria-hidden>
+                <path d="M20 4H4c-1.1 0-2 .9-2 2v12c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 4-8 5-8-5V6l8 5 8-5v2z" />
+              </svg>
+              연락하기
             </Button>
             <Button
               as="a"
@@ -115,6 +119,9 @@ export function Hero() {
               rel="noopener"
               variant="ghost"
             >
+              <svg viewBox="0 0 24 24" width={15} height={15} fill="currentColor" aria-hidden>
+                <path d={siGithub.path} />
+              </svg>
               GitHub ↗
             </Button>
           </div>

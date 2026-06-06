@@ -3,7 +3,7 @@ import type { AnchorHTMLAttributes, ButtonHTMLAttributes } from "react";
 import { cn } from "#/lib/Utils";
 
 const buttonVariants = cva(
-  "inline-flex items-center gap-2 font-mono text-[13px] rounded-[9px] transition-all duration-200 tracking-[0.02em] cursor-pointer select-none",
+  "inline-flex items-center gap-2 font-sans font-medium text-[14px] rounded-[9px] transition-all duration-200 tracking-[-0.01em] cursor-pointer select-none",
   {
     variants: {
       variant: {
