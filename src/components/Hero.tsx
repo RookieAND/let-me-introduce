@@ -12,31 +12,36 @@ export function Hero() {
     if (!hero) return;
     if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
 
-    const scrollOffsetX = 0;
     let scrollOffsetY = 0;
+    let lastNx = 0;
+    let lastNy = 0;
+    let rafId = 0;
 
     const applyTransform = (nx: number, ny: number) => {
       if (g1Ref.current)
-        g1Ref.current.style.transform = `translate(${nx * -40 + scrollOffsetX}px, ${ny * -30 + scrollOffsetY}px)`;
+        g1Ref.current.style.transform = `translate(${nx * -40}px, ${ny * -30 + scrollOffsetY}px)`;
       if (g2Ref.current)
-        g2Ref.current.style.transform = `translate(${nx * 30 - scrollOffsetX}px, ${ny * 20 - scrollOffsetY}px)`;
+        g2Ref.current.style.transform = `translate(${nx * 30}px, ${ny * 20 - scrollOffsetY}px)`;
     };
 
     const handlePointerMove = (e: PointerEvent) => {
       if (e.pointerType === "touch") return;
-      const nx = e.clientX / window.innerWidth - 0.5;
-      const ny = e.clientY / window.innerHeight - 0.5;
-      applyTransform(nx, ny);
+      lastNx = e.clientX / window.innerWidth - 0.5;
+      lastNy = e.clientY / window.innerHeight - 0.5;
+      cancelAnimationFrame(rafId);
+      rafId = requestAnimationFrame(() => applyTransform(lastNx, lastNy));
     };
 
     const handleScroll = () => {
       scrollOffsetY = window.scrollY * -0.04;
-      applyTransform(0, 0);
+      cancelAnimationFrame(rafId);
+      rafId = requestAnimationFrame(() => applyTransform(lastNx, lastNy));
     };
 
     hero.addEventListener("pointermove", handlePointerMove);
     window.addEventListener("scroll", handleScroll, { passive: true });
     return () => {
+      cancelAnimationFrame(rafId);
       hero.removeEventListener("pointermove", handlePointerMove);
       window.removeEventListener("scroll", handleScroll);
     };
@@ -118,7 +123,7 @@ export function Hero() {
         {/* Right: portrait */}
         <div className="portrait-wrap relative justify-self-center max-[900px]:justify-self-start">
           <div
-            className="absolute -inset-3.5 border border-border rounded-[26px] -z-[1]"
+            className="absolute -inset-3.5 border border-border rounded-[26px] z-[-1]"
             aria-hidden
           />
           <div className="portrait-overlay relative w-80 h-100 rounded-[18px] overflow-hidden border border-border-strong shadow-[0_30px_80px_-30px_rgba(0,0,0,0.8),0_0_60px_-20px_rgba(91,141,239,0.4)] max-[900px]:w-65 max-[900px]:h-80">
@@ -132,15 +137,15 @@ export function Hero() {
           </div>
           <div className="absolute -bottom-3.5 -left-4.5 bg-surface border border-border-strong rounded-[10px] px-3.5 py-2.25 font-mono text-[11.5px] text-text-2 flex items-center gap-2 shadow-[0_12px_30px_-12px_rgba(0,0,0,0.7)]">
             <span className="w-2 h-2 rounded-full bg-green-ping shadow-[0_0_8px_var(--color-green-ping)] shrink-0" />
-            goorm Inc. · Fullstack
+            Fullstack Engineer · RookieAND
           </div>
         </div>
       </div>
 
       {/* Scroll hint */}
-      <div className="absolute bottom-7.5 left-1/2 -translate-x-1/2 z-[2] font-mono text-[11px] tracking-[0.2em] text-text-3 flex flex-col items-center gap-2.5 uppercase">
+      <div className="absolute bottom-7.5 left-1/2 -translate-x-1/2 z-2 font-mono text-[11px] tracking-[0.2em] text-text-3 flex flex-col items-center gap-2.5 uppercase">
         <span>SCROLL</span>
-        <span className="w-px h-10 bg-gradient-to-b from-accent to-transparent animate-scroll-line" />
+        <span className="w-px h-10 bg-linear-to-b from-accent to-transparent animate-scroll-line" />
       </div>
     </header>
   );
