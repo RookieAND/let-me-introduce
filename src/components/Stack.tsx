@@ -32,7 +32,7 @@ export function Stack() {
                         "flex flex-col items-center gap-2.5 rounded-[10px] px-2 py-3.5 transition-all duration-200 cursor-default select-none group",
                         chip.key
                           ? "bg-accent-dim text-accent-bright hover:bg-[rgba(91,141,239,0.22)] hover:-translate-y-0.5"
-                          : "bg-surface-2 text-text-3 hover:text-text-2 hover:bg-[rgba(255,255,255,0.04)] hover:-translate-y-0.5",
+                          : "bg-surface-2 text-text-3 hover:bg-accent-dim hover:text-accent-bright hover:-translate-y-0.5",
                       )}
                     >
                       {chip.icon ? (

@@ -86,6 +86,11 @@
 }
 
 /* ── Animations ── */
+@keyframes nameSheen {
+  0%, 100% { background-position: 100% 0; }
+  50% { background-position: 0 0; }
+}
+
 @keyframes drift1 {
   0%, 100% { transform: translate(0, 0); }
   50% { transform: translate(-50px, 40px); }
@@ -100,6 +105,18 @@
   0% { opacity: 0.2; transform: scaleY(0.4); transform-origin: top; }
   50% { opacity: 1; }
   100% { opacity: 0.2; transform: scaleY(1); transform-origin: top; }
+}
+
+@layer utilities {
+  .hero-name-sheen {
+    background: linear-gradient(105deg, #ededee 0%, #ededee 36%, #aab4cc 50%, #ededee 64%, #ededee 100%);
+    background-size: 250% 100%;
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+    color: transparent;
+    animation: nameSheen 9s ease-in-out infinite;
+  }
 }
 
 @layer utilities {
