@@ -1,20 +1,28 @@
 import { type VariantProps, cva } from "class-variance-authority";
-import { type ElementType, type HTMLAttributes, type ReactNode, type Ref } from "react";
+import type { ElementType, HTMLAttributes, ReactNode, Ref } from "react";
 import { cn } from "#/lib/Utils";
 
 const textVariants = cva("", {
   variants: {
     variant: {
-      h1: "font-sans font-extrabold leading-[1.02] tracking-[-0.02em]",
-      h2: "font-display font-semibold tracking-[-0.01em]",
-      h3: "font-sans font-bold tracking-[-0.01em]",
-      h4: "font-sans font-bold tracking-[-0.01em]",
-      lead: "font-sans font-medium leading-[1.5] tracking-[-0.01em]",
-      body: "font-sans leading-[1.85]",
-      mono: "font-mono",
+      // Headings: font-size + weight + tracking + leading all encoded
+      heading1: "font-sans font-extrabold text-[clamp(48px,7vw,92px)] leading-[1.02] tracking-[-0.02em]",
+      heading2: "font-sans font-extrabold text-[clamp(36px,6vw,76px)] leading-[1.04] tracking-[-0.025em]",
+      heading3: "font-sans font-extrabold text-[clamp(28px,4vw,50px)] leading-[1.22] tracking-[-0.02em]",
+      heading4: "font-display font-semibold text-[clamp(28px,3.6vw,44px)] tracking-[-0.01em]",
+      heading5: "font-sans font-bold text-[19px] tracking-[-0.01em]",
+      heading6: "font-sans font-semibold text-[17px] tracking-[-0.01em]",
+      // Subtitles: larger body-level text with distinct weight/leading
+      subtitle1: "font-sans font-medium text-[clamp(18px,1.9vw,23px)] leading-[1.5] tracking-[-0.01em]",
+      subtitle2: "font-sans text-[17px] leading-[1.8]",
+      // Body: narrative text in three sizes
+      body1: "font-sans text-[16.5px] leading-[1.85]",
+      body2: "font-sans text-[14.5px] leading-[1.7]",
+      body3: "font-sans text-[13.5px] leading-[1.65]",
+      // Mono labels
+      caption: "font-mono text-[12px] tracking-[0.03em]",
       label: "font-mono text-[12px] tracking-[0.06em] uppercase",
       eyebrow: "font-mono text-[13px] tracking-[0.14em] uppercase",
-      caption: "font-mono text-[12px] tracking-[0.03em]",
     },
     color: {
       default: "text-text",
@@ -43,12 +51,17 @@ interface TextProps
 
 const defaultTagFor = (variant: TextProps["variant"]): TextAs => {
   switch (variant) {
-    case "h1": return "h1";
-    case "h2": return "h2";
-    case "h3": return "h3";
-    case "h4": return "h4";
-    case "lead":
-    case "body": return "p";
+    case "heading1": return "h1";
+    case "heading2":
+    case "heading3":
+    case "heading4": return "h2";
+    case "heading5": return "h3";
+    case "heading6": return "h4";
+    case "subtitle1":
+    case "subtitle2":
+    case "body1":
+    case "body2":
+    case "body3": return "p";
     default: return "span";
   }
 };

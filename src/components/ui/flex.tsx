@@ -1,4 +1,4 @@
-import { type Ref } from "react";
+import type { Ref } from "react";
 import { cn } from "#/lib/Utils";
 import { type BoxProps, Box } from "./box";
 

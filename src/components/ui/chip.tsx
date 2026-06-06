@@ -1,9 +1,9 @@
 import { type VariantProps, cva } from "class-variance-authority";
-import { type HTMLAttributes } from "react";
+import type { HTMLAttributes } from "react";
 import { cn } from "#/lib/Utils";
 
 const chipVariants = cva(
-  "font-mono text-[13px] border rounded-[8px] px-[13px] py-[7px] transition-all duration-200 cursor-default",
+  "font-mono text-[13px] border rounded-[8px] px-3.25 py-1.75 transition-all duration-200 cursor-default",
   {
     variants: {
       variant: {

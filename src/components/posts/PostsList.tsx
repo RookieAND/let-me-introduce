@@ -18,14 +18,14 @@ export function PostsList({ activeCat, query }: PostsListProps) {
 
   if (filtered.length === 0) {
     return (
-      <div className="text-center py-[70px] text-text-3 font-mono text-[14px]">
-        // 조건에 맞는 글이 없습니다.
+      <div className="text-center py-17.5 text-text-3 font-mono text-[14px]">
+        {"// 조건에 맞는 글이 없습니다."}
       </div>
     );
   }
 
   return (
-    <div className="flex flex-col pb-[110px]">
+    <div className="flex flex-col pb-27.5">
       {filtered.map((post) => (
         <PostCard key={post.title} post={post} />
       ))}

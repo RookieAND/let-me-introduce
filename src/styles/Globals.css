@@ -1,7 +1,6 @@
 @import "@fontsource-variable/space-grotesk";
 @import "@fontsource/jetbrains-mono/latin-400.css";
 @import "@fontsource/jetbrains-mono/latin-500.css";
-@import "@fontsource/jetbrains-mono/latin-600.css";
 @import "tailwindcss";
 
 @theme {
@@ -84,7 +83,6 @@
   .reveal.d1 { transition-delay: 0.08s; }
   .reveal.d2 { transition-delay: 0.16s; }
   .reveal.d3 { transition-delay: 0.24s; }
-  .reveal.d4 { transition-delay: 0.32s; }
 }
 
 /* ── Animations ── */

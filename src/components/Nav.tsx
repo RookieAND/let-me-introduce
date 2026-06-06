@@ -24,22 +24,22 @@ export function Nav({ alwaysScrolled = false }: NavProps) {
   return (
     <nav
       className={cn(
-        "fixed top-0 left-0 right-0 z-[100] h-[68px] flex items-center transition-[background,border-color,backdrop-filter] duration-300 border-b border-transparent",
+        "fixed top-0 left-0 right-0 z-[100] h-17 flex items-center transition-[background,border-color,backdrop-filter] duration-300 border-b border-transparent",
         navScrolled &&
           "bg-[rgba(10,10,11,0.72)] backdrop-blur-[14px] saturate-[1.2] border-border",
       )}
     >
-      <div className="max-w-[1120px] mx-auto px-8 w-full flex items-center justify-between">
+      <div className="max-w-280 mx-auto px-8 w-full flex items-center justify-between">
         <Link
           to="/"
-          className="font-mono text-[14px] tracking-[0.04em] text-text font-medium flex items-center gap-[9px]"
+          className="font-mono text-[14px] tracking-[0.04em] text-text font-medium flex items-center gap-2.25"
         >
-          <span className="w-[7px] h-[7px] rounded-full bg-accent shadow-[0_0_10px_var(--color-accent)] shrink-0" />
+          <span className="w-1.75 h-1.75 rounded-full bg-accent shadow-[0_0_10px_var(--color-accent)] shrink-0" />
           BAIK GWANGIN
         </Link>
 
         <NavigationMenuPrimitive.Root>
-          <NavigationMenuPrimitive.List className="hidden md:flex gap-[30px] items-center list-none">
+          <NavigationMenuPrimitive.List className="hidden md:flex gap-7.5 items-center list-none">
             {isPostsPage ? (
               <>
                 <NavigationMenuPrimitive.Item>
@@ -57,18 +57,6 @@ export function Nav({ alwaysScrolled = false }: NavProps) {
                     Writing
                   </span>
                 </NavigationMenuPrimitive.Item>
-                <NavigationMenuPrimitive.Item>
-                  <NavigationMenuPrimitive.Link asChild>
-                    <a
-                      href="https://velog.io/@rookieand/posts"
-                      target="_blank"
-                      rel="noopener"
-                      className="font-mono text-[12.5px] tracking-[0.03em] text-text-3 hover:text-text transition-colors duration-200"
-                    >
-                      velog ↗
-                    </a>
-                  </NavigationMenuPrimitive.Link>
-                </NavigationMenuPrimitive.Item>
               </>
             ) : (
               <>
@@ -82,7 +70,7 @@ export function Nav({ alwaysScrolled = false }: NavProps) {
                           activeSection === href.slice(1) && "text-text nav-active",
                         )}
                       >
-                        <span className="text-accent mr-[5px]">{idx}</span>
+                        <span className="text-accent mr-1.25">{idx}</span>
                         {label}
                       </a>
                     </NavigationMenuPrimitive.Link>
@@ -94,7 +82,7 @@ export function Nav({ alwaysScrolled = false }: NavProps) {
                       to="/posts"
                       className="font-mono text-[12.5px] tracking-[0.03em] text-accent hover:text-accent-bright transition-colors duration-200"
                     >
-                      <span className="mr-[5px]">↗</span>Writing
+                      <span className="mr-1.25">↗</span>Writing
                     </Link>
                   </NavigationMenuPrimitive.Link>
                 </NavigationMenuPrimitive.Item>

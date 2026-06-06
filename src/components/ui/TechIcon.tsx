@@ -50,6 +50,7 @@ export function TechIcon({ slug, size = 13 }: TechIconProps) {
       aria-hidden
       className="shrink-0"
     >
+      <title>{slug}</title>
       <path d={path} />
     </svg>
   );
