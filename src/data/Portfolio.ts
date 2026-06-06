@@ -117,11 +117,11 @@ export const CAREER_ITEMS = [
 
 export const WORK_ITEMS = [
   {
-    name: "모집 플랫폼 내재화",
-    kind: "Platform",
+    name: "모노레포 빌드 환경 고도화",
+    kind: "Infra / DevOps",
     lines: [
-      "Tally·Google Form으로 분산돼 있던 모집·운영을 자체 시스템 GEM으로 일원화했습니다.",
-      "반복되던 수작업 운영을 자동화해 운영팀이 도구에만 집중할 수 있게 했습니다.",
+      "Turborepo Remote Cache와 Docker 멀티스테이지 빌드를 도입해 CI 빌드 70%, 배포 시간 83%를 줄였습니다.",
+      "pnpm·Vite·ESLint를 순차 정리하며 팀이 올라설 빌드 바닥을 다졌습니다.",
     ],
   },
   {
@@ -129,15 +129,15 @@ export const WORK_ITEMS = [
     kind: "Architecture",
     lines: [
       "수동 DB 제어에 기대던 권한 관리를 역할·리소스·액션 기반 모델로 재설계했습니다.",
-      "어디서든 동일한 규칙으로 권한을 검사하는 일관된 구조를 만들었습니다.",
+      "PoC부터 프로덕션 적용까지 BE·FE를 단독으로 구현하고 선언형 <Can>으로 화면 노출을 제어했습니다.",
     ],
   },
   {
-    name: "GEM Form Builder",
+    name: "공통 Table 시스템",
     kind: "Frontend",
     lines: [
-      "기수마다 달라지는 지원서를 운영팀이 직접 구성하는 계층형 폼 빌더를 개발했습니다.",
-      "개발자 개입 없이 폼 생성부터 데이터 추출까지 자립 운영이 가능해졌습니다.",
+      "페이지마다 제각기 구현되던 테이블을 Headless 코어 위 공통 시스템으로 통합했습니다.",
+      "Compound 패턴과 URL 동기화로 페이지별 요구사항과 북마크·공유를 한 시스템에서 수용했습니다.",
     ],
   },
 ] as const;
