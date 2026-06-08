@@ -2,8 +2,8 @@ import { useEffect, useState } from "react";
 import { Link, Navigate, useParams } from "react-router-dom";
 import { Footer } from "#/components/Footer";
 import { Nav } from "#/components/Nav";
-import { MarkdownRenderer } from "#/lib/Markdown";
 import { ALL_POSTS } from "#/data/Posts";
+import { MarkdownRenderer } from "#/lib/Markdown";
 
 export function PostDetailPage() {
   const { slug } = useParams<{ slug: string }>();
@@ -32,17 +32,22 @@ export function PostDetailPage() {
 
   return (
     <>
-      {/* Reading progress bar */}
       <div
         className="fixed top-0 left-0 h-[2px] bg-accent z-[200] transition-[width] duration-75 ease-linear"
         style={{ width: `${progress}%` }}
         aria-hidden
       />
 
-      <Nav alwaysScrolled />
+      <Nav alwaysScrolled>
+        <Nav.Link to="/" className="text-text-3 hover:text-text">
+          ← Portfolio
+        </Nav.Link>
+        <Nav.Link to="/posts" className="text-text-3 hover:text-text">
+          Writing
+        </Nav.Link>
+      </Nav>
 
       <article className="max-w-[740px] mx-auto px-8 pt-32 pb-28 max-[520px]:px-5">
-        {/* Back */}
         <Link
           to="/posts"
           className="group inline-flex items-center gap-2 font-mono text-[12.5px] text-text-3 hover:text-text mb-10 transition-colors duration-150"
@@ -51,7 +56,6 @@ export function PostDetailPage() {
           글 목록으로
         </Link>
 
-        {/* Header */}
         <header className="mb-10">
           <div className="font-mono text-[11.5px] tracking-[0.1em] uppercase text-accent mb-4">
             {post.cat}
@@ -85,10 +89,8 @@ export function PostDetailPage() {
 
         <hr className="border-0 border-t border-border mb-12" />
 
-        {/* Content */}
         <MarkdownRenderer content={post.content} />
 
-        {/* Footer nav */}
         <div className="mt-16 pt-8 border-t border-border">
           <Link
             to="/posts"

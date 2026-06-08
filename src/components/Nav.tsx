@@ -1,32 +1,23 @@
+import type { ReactNode } from "react";
 import * as NavigationMenuPrimitive from "@radix-ui/react-navigation-menu";
-import { Link, useLocation } from "react-router-dom";
-import { cn } from "#/lib/Utils";
+import { Link } from "react-router-dom";
 import { useNavScroll } from "#/hooks/UseNavScroll";
+import { cn } from "#/lib/Utils";
 
 interface NavProps {
   alwaysScrolled?: boolean;
+  children?: ReactNode;
 }
 
-const PORTFOLIO_NAV = [
-  { href: "#about", label: "About", idx: "01" },
-  { href: "#stack", label: "Stack", idx: "02" },
-  { href: "#career", label: "Career", idx: "03" },
-  { href: "#work", label: "Work", idx: "04" },
-  { href: "#contact", label: "Contact", idx: "05" },
-] as const;
-
-export function Nav({ alwaysScrolled = false }: NavProps) {
-  const { scrolled, activeSection } = useNavScroll();
-  const location = useLocation();
-  const isPostsPage = location.pathname === "/posts";
+function NavRoot({ alwaysScrolled = false, children }: NavProps) {
+  const { scrolled } = useNavScroll();
   const navScrolled = alwaysScrolled || scrolled;
 
   return (
     <nav
       className={cn(
         "fixed top-0 left-0 right-0 z-[100] h-17 flex items-center transition-[background,border-color,backdrop-filter] duration-300 border-b border-transparent",
-        navScrolled &&
-          "bg-[rgba(10,10,11,0.72)] backdrop-blur-[14px] saturate-[1.2] border-border",
+        navScrolled && "bg-[rgba(10,10,11,0.72)] backdrop-blur-[14px] saturate-[1.2] border-border",
       )}
     >
       <div className="max-w-280 mx-auto px-8 w-full flex items-center justify-between">
@@ -38,59 +29,46 @@ export function Nav({ alwaysScrolled = false }: NavProps) {
           BAIK GWANGIN
         </Link>
 
-        <NavigationMenuPrimitive.Root>
-          <NavigationMenuPrimitive.List className="hidden md:flex gap-7.5 items-center list-none">
-            {isPostsPage ? (
-              <>
-                <NavigationMenuPrimitive.Item>
-                  <NavigationMenuPrimitive.Link asChild>
-                    <Link
-                      to="/"
-                      className="font-mono text-[12.5px] tracking-[0.03em] text-text-3 hover:text-text transition-colors duration-200"
-                    >
-                      ← Portfolio
-                    </Link>
-                  </NavigationMenuPrimitive.Link>
-                </NavigationMenuPrimitive.Item>
-                <NavigationMenuPrimitive.Item>
-                  <span className="font-mono text-[12.5px] tracking-[0.03em] text-accent">
-                    Writing
-                  </span>
-                </NavigationMenuPrimitive.Item>
-              </>
-            ) : (
-              <>
-                {PORTFOLIO_NAV.map(({ href, label, idx }) => (
-                  <NavigationMenuPrimitive.Item key={href}>
-                    <NavigationMenuPrimitive.Link asChild>
-                      <a
-                        href={href}
-                        className={cn(
-                          "font-mono text-[12.5px] tracking-[0.03em] text-text-3 hover:text-text transition-colors duration-200 relative py-1",
-                          activeSection === href.slice(1) && "text-text nav-active",
-                        )}
-                      >
-                        <span className="text-accent mr-1.25">{idx}</span>
-                        {label}
-                      </a>
-                    </NavigationMenuPrimitive.Link>
-                  </NavigationMenuPrimitive.Item>
-                ))}
-                <NavigationMenuPrimitive.Item>
-                  <NavigationMenuPrimitive.Link asChild>
-                    <Link
-                      to="/posts"
-                      className="font-mono text-[12.5px] tracking-[0.03em] text-accent hover:text-accent-bright transition-colors duration-200"
-                    >
-                      <span className="mr-1.25">↗</span>Writing
-                    </Link>
-                  </NavigationMenuPrimitive.Link>
-                </NavigationMenuPrimitive.Item>
-              </>
-            )}
-          </NavigationMenuPrimitive.List>
-        </NavigationMenuPrimitive.Root>
+        {children && (
+          <NavigationMenuPrimitive.Root>
+            <NavigationMenuPrimitive.List className="hidden md:flex gap-7.5 items-center list-none">
+              {children}
+            </NavigationMenuPrimitive.List>
+          </NavigationMenuPrimitive.Root>
+        )}
       </div>
     </nav>
   );
 }
+
+function NavLink({
+  href,
+  to,
+  className,
+  children,
+}: {
+  href?: string;
+  to?: string;
+  className?: string;
+  children: ReactNode;
+}) {
+  const base = "font-mono text-[12.5px] tracking-[0.03em] transition-colors duration-200";
+
+  return (
+    <NavigationMenuPrimitive.Item>
+      <NavigationMenuPrimitive.Link asChild>
+        {to ? (
+          <Link to={to} className={cn(base, className)}>
+            {children}
+          </Link>
+        ) : (
+          <a href={href} className={cn(base, className)}>
+            {children}
+          </a>
+        )}
+      </NavigationMenuPrimitive.Link>
+    </NavigationMenuPrimitive.Item>
+  );
+}
+
+export const Nav = Object.assign(NavRoot, { Link: NavLink });
