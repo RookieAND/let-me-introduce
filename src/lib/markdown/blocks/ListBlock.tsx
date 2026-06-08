@@ -37,7 +37,7 @@ export function OrderedListBlock({ items }: OlProps) {
       {items.map((item, j) => (
         <li key={j} className="font-sans text-[16px] leading-[1.75] text-text-2">
           <div className="flex gap-3">
-            <span className="font-mono text-[12px] text-accent-bright shrink-0 mt-[0.3em] w-5 text-right">
+            <span className="font-mono font-semibold text-[13px] text-accent-bright shrink-0 mt-[0.3em] w-5 text-right">
               {item.num ?? j + 1}.
             </span>
             <span>{parseInline(item.text)}</span>

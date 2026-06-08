@@ -127,8 +127,8 @@ export function tokenize(md: string): Block[] {
           num: m ? parseInt(m[1], 10) : items.length + 1,
         };
         i++;
-        // collect following indented bullet sub-items (depth >= 1)
-        while (i < lines.length && /^[ \t]+[-*+]\s/.test(lines[i])) {
+        // collect following bullet sub-items — indented OR non-indented (no blank line separator)
+        while (i < lines.length && /^[ \t]*[-*+]\s/.test(lines[i])) {
           const subM = lines[i].match(/^[ \t]*[-*+]\s+(.*)/);
           if (!item.subItems) item.subItems = [];
           item.subItems.push({ text: subM?.[1] ?? "", depth: bulletDepth(lines[i]) });
