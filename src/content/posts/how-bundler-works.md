@@ -18,19 +18,19 @@
     - 과거 Javascript 는 모듈 시스템을 지원하지 않았기 때문에, 각 파일을 브라우저에서 받아 실행하는 과정에서 코드 간의 충돌 문제가 발생하였음.
     - 브라우저는 `<script>` 태그를 통해 js 파일을 받는데, Parser의 구조 상 나중에 받은 js 파일의 컨텍스트가 이전에 받았던 js 파일의 컨텍스트를 **Override** 하기 때문에 문제가 발생한다.
     
-    ```html
-    <head>
-        <script src="./source/hello.js"></script>
-        <script src="./source/world.js"></script>
-    </head>
-    <body>
-        <h1>Hello, Webpack</h1>
-        <div id="root"></div>
-        <script type="module">
-            document.querySelector("#root").innerHTML = word;
-        </script>
-    </body>
-    ```
+```html
+<head>
+    <script src="./source/hello.js"></script>
+    <script src="./source/world.js"></script>
+</head>
+<body>
+    <h1>Hello, Webpack</h1>
+    <div id="root"></div>
+    <script type="module">
+        document.querySelector("#root").innerHTML = word;
+    </script>
+</body>
+```
     
     - 상단의 HTML 에서는 script 태그를 통해 `hello.js` 와 `world.js` 파일을 불러온다. 이때 `hello.js` 와 `world.js` 에서 같은 식별자인 word 를 사용한다고 가정해보자.
     - 첫 번째로 읽힌 `hello.js` 내에 선언된 변수 word 의 값을 먼저 불러온다.
@@ -86,10 +86,10 @@
     - 의존성 트리를 기반으로 각 모듈을 독립적인 함수로 감싸 스코프를 격리시킨 후, 이를 하나의 Module Map 으로 묶어 관리한다.
     - 각 모듈의 절대 경로는 코드를 감산 함수와 매핑되며, 추후 Runtime 과정에서 함수를 통해 실행된다.
     
-    ```jsx
-    const modules = {
-    	// 각 모듈 별로 별도의 함수를 감싸 스코프를 격리시킨 모습이다.
-      'circle.js': function(exports, require) {
+```jsx
+const modules = {
+  // 각 모듈 별로 별도의 함수를 감싸 스코프를 격리시킨 모습이다.
+  'circle.js': function(exports, require) {
         const PI = 3.141;
         exports.default = function area(radius) {
           return PI * radius * radius;
@@ -108,13 +108,13 @@
         console.log('Area of circle', circleArea(5))
       }
     }
-    ```
-    
+```
+
     - 모듈을 실행하는 과정에서 다른 모듈을 실행하는 경우 `require` 함수를 내부에서 실행하고, 이는 이전에 캐싱된 모듈을 반환할지를 결정하여 순환 참조로 발생하는 문제를 방지한다.
     - 만약 Module Cache 가 없다면 모듈을 참조할 경우 계속해서 서로를 탐색하는 과정을 거치게 되므로 문제가 발생한다.
     
-    ```jsx
-    function webpackStart({ modules, entry }) {
+```jsx
+function webpackStart({ modules, entry }) {
     	// 이미 실행되어 캐싱된 모듈 목록을 저장하는 Module Cache Object.
       const moduleCache = {};
       const require = moduleName => {
@@ -135,20 +135,19 @@
       require(entry);
     }
     
-    webpackStart({
-    	modules,
-    	entry
-    })
-    ```
-    
+webpackStart({
+  modules,
+  entry
+})
+```
 
 - **Rollup** 방식의 번들러 동작 과정은 아래와 같다.
     - 각 모듈 내부의 코드를 동일한 컨텍스트 상에 위치시키고 (호이스팅) 이를 기반으로 번들 파일을 생성한다.
     - 동일한 컨텍스트 내에서 코드가 실행되기 때문에, Rollup 에서는 실행 케이스에 따라 identifier 를 **동적으로 변경**하여 이를 방지하고자 한다.
     - 모듈 간의 올바른 선언 및 실행 순서를 보장해야 하기 때문에 Rollup 에서는 의존성 트리를 기반으로 **모듈 간의 선언부 위치를 정렬하는 과정**이 매우 중요하다.
     
-    ```jsx
-    const PI = 3.141;
+```jsx
+const PI = 3.141;
     
     // 다른 모듈에서 동일한 이름의 식별자를 사용할 경우, Rollup 에서 이를 동적으로 변경한다.
     function circle$area(radius) {
@@ -162,8 +161,7 @@
     // square$area 가 먼저 선언된 이후 실행되어야 할 코드이기에 실행 순서를 맞춘다.
     console.log('Area of square: ', square$area(5));
     console.log('Area of circle', circle$area(5));
-    ```
-    
+```
 
 - **Webpack** 방식의 장/단점은 아래와 같다.
     - 각 모듈을 함수로 감싸 스코프를 격리시켰기 때문에, 모듈 간의 식별자 충돌을 완벽하게 방지할 수 있다.

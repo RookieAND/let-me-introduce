@@ -19,14 +19,14 @@
     - `didCatch`  는 현재 ErrorBoundary 의 자식 컴포넌트에 에러가 발생하여 catch 한 상태인지를 나타낸다.
     - `error` 는 자식 컴포넌트에 어떤 에러가 발생했는지에 대한 정보를 담은 Error 객체이다.
     
-    ```jsx
-    type ErrorBoundaryState = { didCatch: boolean; error: any };
-    
-    const initialState: ErrorBoundaryState = {
-      didCatch: false,
-      error: null,
-    };
-    ```
+```jsx
+type ErrorBoundaryState = { didCatch: boolean; error: any };
+
+const initialState: ErrorBoundaryState = {
+  didCatch: false,
+  error: null,
+};
+```
     
 
 2. ui props
@@ -35,7 +35,7 @@
     - `fallbackRender` 의 경우 함수형 컴포넌트만을 받으며, 발생한 에러 객체와 ErrorBoundary 내의 state 를 초기화할 함수인 resetErrorBoundary 함수를 props로 넘겨준다.
     - `fallbackComponent` 의 경우 클래스형 컴포넌트, 함수형 컴포넌트 두 개를 모두 받을 수 있으며, 여기서는 클래스형 컴포넌트를 고려하여 추가한 것으로 보인다.
         
-        ```jsx
+```jsx
         const { didCatch, error } = this.state;
         
         // 일단 렌더링할 대상을 자식 컴포넌트로 둔다.
@@ -80,8 +80,7 @@
               },
               childToRender // 자식 컴포넌트를 렌더링
             );
-        ```
-        
+```
 
 3. error props
     - `onReset` 함수는 `resetErrorBoundary` 함수가 실행되어 ErrorBoundary 내 state 가 변경되었을 때, 혹은 props 로 받은 resetKey 배열이 변경되었을 경우 실행된다.
@@ -119,22 +118,22 @@
     - 따라서 state 가 변경되어 리렌더링을 유발시키며, ErrorBoundary 의 경우 `didCatch` 를 true 로 변경시켜 fallback UI를 보이도록 한다.
     - 해당 메서드는 **render phase** 에서 호출된다.
         
-        ```jsx
-        static getDerivedStateFromError(error: Error) {
-        	return { didCatch: true, error };
-        }
-        ```
+```jsx
+static getDerivedStateFromError(error: Error) {
+  return { didCatch: true, error };
+}
+```
         
     - **`componentDidCatch`** 메서드는 자식 컴포넌트에서 에러가 발생한 경우 호출되며, 두 개의 매개변수를 전달 받는다.
     - 매개변수는 에러 객체인 `error` 와 어떤 컴포넌트에서 에러가 발생했는지에 대한 StackTrace 정보를 담은 `info` 객체다.
     - ErrorBoundary 에서는 두 인자를 `onError` 콜백 함수에게 넘긴다.
     - **commit phase 에서 실행**되므로 Error Logging 작업을 보통 여기서 처리한다. 따라서 `onError` props 에 에러를 로깅하는 로직을 넣는 것이 바람직하다.
         
-        ```jsx
-        componentDidCatch(error: Error, info: ErrorInfo) {
-        	this.props.onError?.(error, info);
-        }
-        ```
+```jsx
+componentDidCatch(error: Error, info: ErrorInfo) {
+  this.props.onError?.(error, info);
+}
+```
        
 ## ✒️ 현재 개인적으로 사용 중인 모습
 
