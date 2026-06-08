@@ -87,7 +87,12 @@ export function Hero() {
           </div>
 
           <Text variant="heading1" className="reveal in d1 mb-2.5 hero-name-sheen">
-            백광인<span style={{ WebkitTextFillColor: "var(--color-accent)", color: "var(--color-accent)" }}>.</span>
+            백광인
+            <span
+              style={{ WebkitTextFillColor: "var(--color-accent)", color: "var(--color-accent)" }}
+            >
+              .
+            </span>
           </Text>
 
           <Text

@@ -58,7 +58,11 @@
     overflow-wrap: break-word;
   }
 
-  h1, h2, h3, h4, p {
+  h1,
+  h2,
+  h3,
+  h4,
+  p {
     text-wrap: pretty;
   }
 
@@ -78,9 +82,8 @@
   .reveal {
     opacity: 0;
     transform: translateY(28px);
-    transition:
-      opacity 0.8s cubic-bezier(0.16, 0.8, 0.3, 1),
-      transform 0.8s cubic-bezier(0.16, 0.8, 0.3, 1);
+    transition: opacity 0.8s cubic-bezier(0.16, 0.8, 0.3, 1), transform 0.8s
+      cubic-bezier(0.16, 0.8, 0.3, 1);
   }
 
   .reveal.in {
@@ -88,36 +91,73 @@
     transform: none;
   }
 
-  .reveal.d1 { transition-delay: 0.08s; }
-  .reveal.d2 { transition-delay: 0.16s; }
-  .reveal.d3 { transition-delay: 0.24s; }
+  .reveal.d1 {
+    transition-delay: 0.08s;
+  }
+  .reveal.d2 {
+    transition-delay: 0.16s;
+  }
+  .reveal.d3 {
+    transition-delay: 0.24s;
+  }
 }
 
 /* ── Animations ── */
 @keyframes nameSheen {
-  from { background-position: 100% 0; }
-  to { background-position: 0% 0; }
+  from {
+    background-position: 100% 0;
+  }
+  to {
+    background-position: 0% 0;
+  }
 }
 
 @keyframes drift1 {
-  0%, 100% { transform: translate(0, 0); }
-  50% { transform: translate(-50px, 40px); }
+  0%,
+  100% {
+    transform: translate(0, 0);
+  }
+  50% {
+    transform: translate(-50px, 40px);
+  }
 }
 
 @keyframes drift2 {
-  0%, 100% { transform: translate(0, 0); }
-  50% { transform: translate(60px, -30px); }
+  0%,
+  100% {
+    transform: translate(0, 0);
+  }
+  50% {
+    transform: translate(60px, -30px);
+  }
 }
 
 @keyframes scrollLine {
-  0% { opacity: 0.2; transform: scaleY(0.4); transform-origin: top; }
-  50% { opacity: 1; }
-  100% { opacity: 0.2; transform: scaleY(1); transform-origin: top; }
+  0% {
+    opacity: 0.2;
+    transform: scaleY(0.4);
+    transform-origin: top;
+  }
+  50% {
+    opacity: 1;
+  }
+  100% {
+    opacity: 0.2;
+    transform: scaleY(1);
+    transform-origin: top;
+  }
 }
 
 @layer utilities {
   .hero-name-sheen {
-    background: linear-gradient(105deg, #ededee 0%, #ededee 35%, #ffffff 50%, #ededee 65%, #ededee 100%);
+    background: linear-gradient(
+      105deg,
+      #ededee 0%,
+      #ededee 35%,
+      #ffffff 50%,
+      #ededee 65%,
+      #ededee 100%
+    );
     background-size: 250% 100%;
     -webkit-background-clip: text;
     background-clip: text;
@@ -146,8 +186,7 @@
   .grid-overlay {
     position: absolute;
     inset: 0;
-    background-image:
-      linear-gradient(var(--color-border) 1px, transparent 1px),
+    background-image: linear-gradient(var(--color-border) 1px, transparent 1px),
       linear-gradient(90deg, var(--color-border) 1px, transparent 1px);
     background-size: 64px 64px;
     opacity: 0.5;
@@ -180,8 +219,7 @@
     content: "";
     position: absolute;
     inset: 0;
-    background:
-      linear-gradient(180deg, transparent 35%, rgba(10, 10, 11, 0.55) 100%),
+    background: linear-gradient(180deg, transparent 35%, rgba(10, 10, 11, 0.55) 100%),
       radial-gradient(circle at 70% 20%, rgba(91, 141, 239, 0.28), transparent 60%);
     mix-blend-mode: soft-light;
     pointer-events: none;

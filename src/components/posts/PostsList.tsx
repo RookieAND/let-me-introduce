@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
-import { type Category, POSTS } from "#/data/Posts";
 import { Pagination } from "#/components/ui/pagination";
 import { Text } from "#/components/ui/text";
+import { type Category, POSTS } from "#/data/Posts";
 import { PostCard } from "./PostCard";
 
 const PAGE_SIZE = 10;
@@ -14,7 +14,9 @@ interface PostsListProps {
 export function PostsList({ activeCat, query }: PostsListProps) {
   const [page, setPage] = useState(1);
 
-  useEffect(() => { setPage(1); }, [activeCat, query]);
+  useEffect(() => {
+    setPage(1);
+  }, [activeCat, query]);
 
   const q = query.trim().toLowerCase();
 
@@ -28,7 +30,9 @@ export function PostsList({ activeCat, query }: PostsListProps) {
   if (filtered.length === 0) {
     return (
       <div className="text-center py-17.5">
-        <Text variant="caption" color="subtle">{"// 조건에 맞는 글이 없습니다."}</Text>
+        <Text variant="caption" color="subtle">
+          {"// 조건에 맞는 글이 없습니다."}
+        </Text>
       </div>
     );
   }

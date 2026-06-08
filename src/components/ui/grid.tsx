@@ -1,7 +1,7 @@
 import { type VariantProps, cva } from "class-variance-authority";
 import type { Ref } from "react";
 import { cn } from "#/lib/Utils";
-import { type BoxProps, Box } from "./box";
+import { Box, type BoxProps } from "./box";
 
 const gridVariants = cva("grid", {
   variants: {
@@ -47,7 +47,18 @@ export interface GridProps extends BoxProps, VariantProps<typeof gridVariants> {
   rowGap?: string;
 }
 
-export function Grid({ cols, rows, flow, align, justify, gap, colGap, rowGap, className, ...props }: GridProps) {
+export function Grid({
+  cols,
+  rows,
+  flow,
+  align,
+  justify,
+  gap,
+  colGap,
+  rowGap,
+  className,
+  ...props
+}: GridProps) {
   return (
     <Box
       className={cn(

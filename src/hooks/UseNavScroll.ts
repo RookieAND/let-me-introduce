@@ -1,5 +1,5 @@
-import { useState, useEffect } from "react";
 import { last } from "es-toolkit";
+import { useEffect, useState } from "react";
 
 const SECTION_IDS = ["about", "stack", "career", "work", "contact"];
 

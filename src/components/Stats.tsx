@@ -1,8 +1,8 @@
 import { motion } from "framer-motion";
-import { STATS } from "#/data/Portfolio";
-import { useCountAnimation } from "#/hooks/UseCountAnimation";
 import { Reveal } from "#/components/ui/reveal";
 import { Text } from "#/components/ui/text";
+import { STATS } from "#/data/Portfolio";
+import { useCountAnimation } from "#/hooks/UseCountAnimation";
 
 function CountUp({ target, prefix, unit }: { target: number; prefix?: string; unit?: string }) {
   const { rounded, ref } = useCountAnimation(target);
@@ -25,7 +25,11 @@ function StatItem({ prefix, target, unit, label, method, context }: (typeof STAT
         <br />
         {method}
       </Text>
-      <Text variant="caption" color="subtle" className="mt-1.5 block opacity-50 text-[10.5px] tracking-[0.06em]">
+      <Text
+        variant="caption"
+        color="subtle"
+        className="mt-1.5 block opacity-50 text-[10.5px] tracking-[0.06em]"
+      >
         {context}
       </Text>
     </div>

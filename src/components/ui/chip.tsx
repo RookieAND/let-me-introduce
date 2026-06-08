@@ -18,9 +18,7 @@ const chipVariants = cva(
   },
 );
 
-interface ChipProps
-  extends HTMLAttributes<HTMLSpanElement>,
-    VariantProps<typeof chipVariants> {}
+interface ChipProps extends HTMLAttributes<HTMLSpanElement>, VariantProps<typeof chipVariants> {}
 
 export function Chip({ variant, className, ...props }: ChipProps) {
   return <span className={cn(chipVariants({ variant }), className)} {...props} />;

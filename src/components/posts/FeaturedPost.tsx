@@ -1,7 +1,7 @@
 import { Link } from "react-router-dom";
-import { FEATURED_POST } from "#/data/Posts";
 import { Reveal } from "#/components/ui/reveal";
 import { Text } from "#/components/ui/text";
+import { FEATURED_POST } from "#/data/Posts";
 
 const CARD_CLASS =
   "group grid border border-border rounded-[18px] overflow-hidden bg-gradient-to-r from-surface to-bg-soft transition-[border-color] duration-300 hover:border-border-strong block";

@@ -1,5 +1,5 @@
-import { tokenize } from "./markdown/tokenize";
 import { renderBlock } from "./markdown/renderBlock";
+import { tokenize } from "./markdown/tokenize";
 
 interface MarkdownRendererProps {
   content: string;

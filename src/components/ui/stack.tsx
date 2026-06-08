@@ -1,4 +1,4 @@
-import { type FlexProps, Flex } from "./flex";
+import { Flex, type FlexProps } from "./flex";
 
 export interface HStackProps extends Omit<FlexProps, "direction"> {
   reverse?: boolean;

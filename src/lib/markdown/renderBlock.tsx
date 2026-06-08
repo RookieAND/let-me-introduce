@@ -1,8 +1,8 @@
 import type { ReactNode } from "react";
-import type { Block, CalloutType } from "./types";
-import { parseInline } from "./parseInline";
 import { MermaidBlock } from "./MermaidBlock";
 import { highlight } from "./highlight";
+import { parseInline } from "./parseInline";
+import type { Block, CalloutType } from "./types";
 
 const H_CLASS: Record<number, string> = {
   1: "font-display font-semibold text-[clamp(26px,3.5vw,36px)] leading-[1.2] tracking-[-0.02em] text-text mt-14 mb-5 first:mt-0",
@@ -17,11 +17,46 @@ const CALLOUT_CONFIG: Record<
   CalloutType,
   { icon: string; label: string; bg: string; border: string; title: string; text: string }
 > = {
-  note:      { icon: "📝", label: "Note",      bg: "bg-blue-500/8",   border: "border-blue-400/40",   title: "text-blue-300",   text: "text-blue-200/80"  },
-  tip:       { icon: "💡", label: "Tip",       bg: "bg-green-500/8",  border: "border-green-400/40",  title: "text-green-300",  text: "text-green-200/80" },
-  warning:   { icon: "⚠️",  label: "Warning",   bg: "bg-amber-500/8",  border: "border-amber-400/40",  title: "text-amber-300",  text: "text-amber-200/80" },
-  important: { icon: "🔥", label: "Important", bg: "bg-purple-500/8", border: "border-purple-400/40", title: "text-purple-300", text: "text-purple-200/80" },
-  caution:   { icon: "🚨", label: "Caution",   bg: "bg-red-500/8",    border: "border-red-400/40",    title: "text-red-300",    text: "text-red-200/80"   },
+  note: {
+    icon: "📝",
+    label: "Note",
+    bg: "bg-blue-500/8",
+    border: "border-blue-400/40",
+    title: "text-blue-300",
+    text: "text-blue-200/80",
+  },
+  tip: {
+    icon: "💡",
+    label: "Tip",
+    bg: "bg-green-500/8",
+    border: "border-green-400/40",
+    title: "text-green-300",
+    text: "text-green-200/80",
+  },
+  warning: {
+    icon: "⚠️",
+    label: "Warning",
+    bg: "bg-amber-500/8",
+    border: "border-amber-400/40",
+    title: "text-amber-300",
+    text: "text-amber-200/80",
+  },
+  important: {
+    icon: "🔥",
+    label: "Important",
+    bg: "bg-purple-500/8",
+    border: "border-purple-400/40",
+    title: "text-purple-300",
+    text: "text-purple-200/80",
+  },
+  caution: {
+    icon: "🚨",
+    label: "Caution",
+    bg: "bg-red-500/8",
+    border: "border-red-400/40",
+    title: "text-red-300",
+    text: "text-red-200/80",
+  },
 };
 
 export function renderBlock(block: Block, idx: number): ReactNode {
@@ -79,11 +114,10 @@ export function renderBlock(block: Block, idx: number): ReactNode {
     case "callout": {
       const cfg = CALLOUT_CONFIG[block.calloutType];
       return (
-        <div
-          key={idx}
-          className={`${cfg.bg} border ${cfg.border} rounded-[10px] px-5 py-4 my-6`}
-        >
-          <div className={`flex items-center gap-2 font-sans font-semibold text-[13px] tracking-[0.04em] uppercase mb-2 ${cfg.title}`}>
+        <div key={idx} className={`${cfg.bg} border ${cfg.border} rounded-[10px] px-5 py-4 my-6`}>
+          <div
+            className={`flex items-center gap-2 font-sans font-semibold text-[13px] tracking-[0.04em] uppercase mb-2 ${cfg.title}`}
+          >
             <span>{cfg.icon}</span>
             <span>{cfg.label}</span>
           </div>
@@ -110,7 +144,10 @@ export function renderBlock(block: Block, idx: number): ReactNode {
                 <span className="text-text-3 shrink-0 mt-[0.6em] text-[9px]">◇</span>
               );
             return (
-              <li key={j} className={`flex gap-3 font-sans text-[16px] leading-[1.75] text-text-2 ${ml}`}>
+              <li
+                key={j}
+                className={`flex gap-3 font-sans text-[16px] leading-[1.75] text-text-2 ${ml}`}
+              >
                 {bullet}
                 <span>{parseInline(item.text)}</span>
               </li>

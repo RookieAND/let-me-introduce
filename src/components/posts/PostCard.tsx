@@ -1,6 +1,6 @@
 import { Link } from "react-router-dom";
-import type { Post } from "#/data/Posts";
 import { Text } from "#/components/ui/text";
+import type { Post } from "#/data/Posts";
 
 interface PostCardProps {
   post: Post;

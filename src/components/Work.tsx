@@ -1,13 +1,15 @@
-import { WORK_ITEMS } from "#/data/Portfolio";
 import { Reveal } from "#/components/ui/reveal";
 import { Text } from "#/components/ui/text";
+import { WORK_ITEMS } from "#/data/Portfolio";
 
 export function Work() {
   return (
     <section className="relative py-30 max-[520px]:py-21" id="work">
       <div className="max-w-280 mx-auto px-8 w-full max-[520px]:px-5">
         <Reveal className="flex items-baseline gap-4.5 mb-14">
-          <Text variant="caption" color="accent">04</Text>
+          <Text variant="caption" color="accent">
+            04
+          </Text>
           <Text variant="heading4">Selected Work</Text>
           <Text variant="caption" color="subtle" className="ml-auto max-[600px]:hidden">
             {"// 실무에서는 이런 일들을 해왔습니다"}
@@ -26,7 +28,10 @@ export function Work() {
                 </div>
                 <Text variant="body2" color="muted">
                   {item.lines.map((line, j) => (
-                    <span key={line}>{line}{j < item.lines.length - 1 && <br />}</span>
+                    <span key={line}>
+                      {line}
+                      {j < item.lines.length - 1 && <br />}
+                    </span>
                   ))}
                 </Text>
               </div>

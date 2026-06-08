@@ -1,5 +1,5 @@
-import { useEffect, useRef } from "react";
 import { animate, useInView, useMotionValue, useTransform } from "framer-motion";
+import { useEffect, useRef } from "react";
 
 export function useCountAnimation(target: number, duration = 1.4) {
   const ref = useRef<HTMLElement>(null);

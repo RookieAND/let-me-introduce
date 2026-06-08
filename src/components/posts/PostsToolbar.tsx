@@ -1,8 +1,8 @@
 import * as ToggleGroupPrimitive from "@radix-ui/react-toggle-group";
 import { groupBy } from "es-toolkit";
 import { type ChangeEvent, useId } from "react";
+import { CATEGORIES, type Category, POSTS } from "#/data/Posts";
 import { cn } from "#/lib/Utils";
-import { CATEGORIES, POSTS, type Category } from "#/data/Posts";
 
 interface PostsToolbarProps {
   activeCat: Category | "all";
@@ -23,15 +23,10 @@ const CATEGORY_LABELS: Record<string, string> = {
   Backend: "Backend",
   Architecture: "Architecture",
   Infra: "Infra",
-  "회고": "회고",
+  회고: "회고",
 };
 
-export function PostsToolbar({
-  activeCat,
-  query,
-  onCatChange,
-  onQueryChange,
-}: PostsToolbarProps) {
+export function PostsToolbar({ activeCat, query, onCatChange, onQueryChange }: PostsToolbarProps) {
   const searchId = useId();
 
   const handleSearch = (e: ChangeEvent<HTMLInputElement>) => {

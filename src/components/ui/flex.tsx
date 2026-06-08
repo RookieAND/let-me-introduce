@@ -1,6 +1,6 @@
 import type { Ref } from "react";
 import { cn } from "#/lib/Utils";
-import { type BoxProps, Box } from "./box";
+import { Box, type BoxProps } from "./box";
 
 type Direction = "row" | "col" | "row-reverse" | "col-reverse";
 type Align = "start" | "center" | "end" | "stretch" | "baseline";

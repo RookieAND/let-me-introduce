@@ -1,14 +1,16 @@
-import { CAREER_ITEMS } from "#/data/Portfolio";
 import { Badge } from "#/components/ui/badge";
 import { Reveal } from "#/components/ui/reveal";
 import { Text } from "#/components/ui/text";
+import { CAREER_ITEMS } from "#/data/Portfolio";
 
 export function Career() {
   return (
     <section className="relative py-30 max-[520px]:py-21" id="career">
       <div className="max-w-280 mx-auto px-8 w-full max-[520px]:px-5">
         <Reveal className="flex items-baseline gap-4.5 mb-14">
-          <Text variant="caption" color="accent">03</Text>
+          <Text variant="caption" color="accent">
+            03
+          </Text>
           <Text variant="heading4">Career</Text>
           <Text variant="caption" color="subtle" className="ml-auto max-[600px]:hidden">
             {"// 2023 — Now"}
@@ -25,8 +27,7 @@ export function Career() {
           />
           <div>
             <Text variant="heading5">
-              주식회사 구름{" "}
-              <span className="text-text-3 font-medium text-[14px]">goorm Inc.</span>
+              주식회사 구름 <span className="text-text-3 font-medium text-[14px]">goorm Inc.</span>
             </Text>
             <Text variant="caption" color="muted" className="mt-0.75 block">
               Fullstack Engineer
@@ -42,9 +43,9 @@ export function Career() {
           <Text variant="subtitle2" color="muted" className="max-w-[80ch] -mt-7 mb-10">
             IT 에듀테크 기업인 구름의 교육 사업 플랫폼 (구름 EDU) 을 개발해왔습니다.
             <br />
-            서비스 개발에서 소규모의 {" "}
-            <strong className="text-text font-semibold">스쿼드 리더</strong>를 거쳤고, 지금은
-           교육 사업의 모집 단계와 학습 경험을 주로 다룹니다.
+            서비스 개발에서 소규모의{" "}
+            <strong className="text-text font-semibold">스쿼드 리더</strong>를 거쳤고, 지금은 교육
+            사업의 모집 단계와 학습 경험을 주로 다룹니다.
           </Text>
         </Reveal>
 

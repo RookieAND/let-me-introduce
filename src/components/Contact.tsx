@@ -1,7 +1,7 @@
 import { Link } from "react-router-dom";
-import { AWARDS, CERTS } from "#/data/Portfolio";
 import { Reveal } from "#/components/ui/reveal";
 import { Text } from "#/components/ui/text";
+import { AWARDS, CERTS } from "#/data/Portfolio";
 
 export function Contact() {
   return (
@@ -62,7 +62,10 @@ export function Contact() {
                 Awards
               </Text>
               {AWARDS.map((award) => (
-                <div key={award.name} className="flex justify-between gap-3 py-2.25 border-t border-border first:border-t-0 text-[14px]">
+                <div
+                  key={award.name}
+                  className="flex justify-between gap-3 py-2.25 border-t border-border first:border-t-0 text-[14px]"
+                >
                   <span className="text-text">
                     {award.name}{" "}
                     <strong className="text-accent-bright font-semibold">{award.prize}</strong>
@@ -81,7 +84,10 @@ export function Contact() {
                 Certificates &amp; Education
               </Text>
               {CERTS.map((cert) => (
-                <div key={cert.name} className="flex justify-between items-center gap-3 py-2.25 border-t border-border first:border-t-0 text-[14px]">
+                <div
+                  key={cert.name}
+                  className="flex justify-between items-center gap-3 py-2.25 border-t border-border first:border-t-0 text-[14px]"
+                >
                   <span className="text-text">{cert.name}</span>
                   <Text variant="caption" color="subtle" className="text-[12px] shrink-0">
                     {cert.year}

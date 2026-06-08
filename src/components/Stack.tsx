@@ -1,14 +1,16 @@
-import { STACK_CARDS } from "#/data/Portfolio";
-import { Reveal } from "#/components/ui/reveal";
 import { TechIcon } from "#/components/ui/TechIcon";
+import { Reveal } from "#/components/ui/reveal";
 import { Text } from "#/components/ui/text";
+import { STACK_CARDS } from "#/data/Portfolio";
 
 export function Stack() {
   return (
     <section className="relative py-30 max-[520px]:py-21" id="stack">
       <div className="max-w-280 mx-auto px-8 w-full max-[520px]:px-5">
         <Reveal className="flex items-baseline gap-4.5 mb-14">
-          <Text variant="caption" color="accent">02</Text>
+          <Text variant="caption" color="accent">
+            02
+          </Text>
           <Text variant="heading4">Tech Stack</Text>
           <Text variant="caption" color="subtle" className="ml-auto max-[600px]:hidden">
             {"// 실무에서 주로 사용한 기술입니다"}

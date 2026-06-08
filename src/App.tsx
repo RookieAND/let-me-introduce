@@ -1,6 +1,6 @@
-import { createBrowserRouter, Outlet, RouterProvider, ScrollRestoration } from "react-router-dom";
 import { Analytics } from "@vercel/analytics/react";
 import { SpeedInsights } from "@vercel/speed-insights/react";
+import { Outlet, RouterProvider, ScrollRestoration, createBrowserRouter } from "react-router-dom";
 import { PortfolioPage } from "#/pages/PortfolioPage";
 import { PostDetailPage } from "#/pages/PostDetailPage";
 import { PostsPage } from "#/pages/PostsPage";

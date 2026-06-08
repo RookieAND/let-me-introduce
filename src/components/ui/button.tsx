@@ -8,7 +8,8 @@ const buttonVariants = cva(
     variants: {
       variant: {
         primary: "bg-accent text-white hover:bg-accent-bright hover:-translate-y-0.5",
-        ghost: "border border-border-strong text-text-2 bg-transparent hover:border-accent hover:text-text hover:-translate-y-0.5",
+        ghost:
+          "border border-border-strong text-text-2 bg-transparent hover:border-accent hover:text-text hover:-translate-y-0.5",
       },
       size: {
         default: "px-5 py-3 text-sm rounded-btn",
