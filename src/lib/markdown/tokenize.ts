@@ -116,13 +116,25 @@ export function tokenize(md: string): Block[] {
       continue;
     }
 
-    // Ordered list — preserve original numbers for non-contiguous lists
+    // Ordered list — preserve original numbers, collect indented sub-bullets
     if (/^\d+\.\s/.test(line)) {
       const items: ListItem[] = [];
       while (i < lines.length && /^\d+\.\s/.test(lines[i])) {
         const m = lines[i].match(/^(\d+)\.\s+(.*)/);
-        items.push({ text: m?.[2] ?? lines[i], depth: 0, num: m ? parseInt(m[1], 10) : items.length + 1 });
+        const item: ListItem = {
+          text: m?.[2] ?? lines[i],
+          depth: 0,
+          num: m ? parseInt(m[1], 10) : items.length + 1,
+        };
         i++;
+        // collect following indented bullet sub-items (depth >= 1)
+        while (i < lines.length && /^[ \t]+[-*+]\s/.test(lines[i])) {
+          const subM = lines[i].match(/^[ \t]*[-*+]\s+(.*)/);
+          if (!item.subItems) item.subItems = [];
+          item.subItems.push({ text: subM?.[1] ?? "", depth: bulletDepth(lines[i]) });
+          i++;
+        }
+        items.push(item);
       }
       blocks.push({ kind: "ol", items });
       continue;

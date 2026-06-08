@@ -1,6 +1,6 @@
 export type CalloutType = "note" | "tip" | "warning" | "important" | "caution";
 
-export type ListItem = { text: string; depth: number; num?: number };
+export type ListItem = { text: string; depth: number; num?: number; subItems?: ListItem[] };
 
 export type Block =
   | { kind: "h"; level: 1 | 2 | 3 | 4 | 5 | 6; text: string }
