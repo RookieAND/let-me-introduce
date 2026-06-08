@@ -1,9 +1,5 @@
-import { useEffect, useState, type ReactNode } from "react";
+import { useEffect, useRef, useState, type ReactNode } from "react";
 import type { TocEntry } from "#/lib/markdown/slugify";
-
-interface PostTocProps {
-  headings: TocEntry[];
-}
 
 function renderTocText(raw: string): ReactNode {
   const clean = raw.replace(/^[^\p{L}\p{N}`]+/u, "").trim();
@@ -26,12 +22,14 @@ function renderTocText(raw: string): ReactNode {
   );
 }
 
-export function PostToc({ headings }: PostTocProps) {
+export function PostToc({ headings }: { headings: TocEntry[] }) {
   const [activeId, setActiveId] = useState("");
+  const [indicator, setIndicator] = useState({ top: 0, height: 20 });
+  const listRef = useRef<HTMLUListElement>(null);
 
+  // Viewport-based active heading detection
   useEffect(() => {
     if (headings.length === 0) return;
-
     const NAV_HEIGHT = 68;
 
     const handleScroll = () => {
@@ -42,7 +40,6 @@ export function PostToc({ headings }: PostTocProps) {
         const el = document.getElementById(id);
         if (!el) continue;
         const { top } = el.getBoundingClientRect();
-
         if (top >= NAV_HEIGHT && top < window.innerHeight) {
           inViewport.push({ id, top });
         } else if (top < NAV_HEIGHT) {
@@ -62,6 +59,17 @@ export function PostToc({ headings }: PostTocProps) {
     return () => window.removeEventListener("scroll", handleScroll);
   }, [headings]);
 
+  // Slide indicator to the active item — top & height transition like Vapor UI
+  useEffect(() => {
+    if (!activeId || !listRef.current) return;
+    const item = listRef.current.querySelector(
+      `[data-toc-id="${activeId}"]`,
+    ) as HTMLElement | null;
+    if (item) {
+      setIndicator({ top: item.offsetTop, height: item.offsetHeight });
+    }
+  }, [activeId]);
+
   if (headings.length < 2) return null;
 
   return (
@@ -70,70 +78,92 @@ export function PostToc({ headings }: PostTocProps) {
         On this page
       </p>
 
-      <ul className="border-l border-border">
-        {headings.map(({ id, text, level }) => {
-          const isActive = activeId === id;
+      <div className="relative">
+        {/* Static track line */}
+        <div className="absolute left-0 top-0 bottom-0 w-px bg-border" />
 
-          /*
-           * Indent per level:
-           *   h1 → pl-4  (16px)
-           *   h2 → pl-6  (24px) — connector occupies 0~16px, 8px gap
-           *   h3 → pl-10 (40px) — connector occupies 16~30px, 10px gap
-           */
-          const textIndent =
-            level === 1 ? "pl-4" : level === 2 ? "pl-6" : "pl-10";
+        {/*
+         * Sliding indicator — single element, transitions `top` and `height`.
+         * Moves to the active item instead of fading in/out per item.
+         */}
+        <div
+          className="absolute left-0 w-[2px] bg-accent rounded-full transition-[top,height] duration-200 ease-out"
+          style={{ top: indicator.top, height: indicator.height }}
+        />
 
-          return (
-            <li key={id} className="relative">
-              {/* Active indicator — short pip, vertically centered in the row */}
-              <span
-                className={`absolute left-0 top-1/2 -translate-y-1/2 w-[2px] h-4 rounded-full transition-opacity duration-200 ${
-                  isActive ? "bg-accent" : "bg-transparent"
-                }`}
-              />
+        <ul ref={listRef} className="relative">
+          {headings.map(({ id, text, level }) => {
+            const isActive = activeId === id;
+            const textIndent =
+              level === 1 ? "pl-4" : level === 2 ? "pl-[26px]" : "pl-[40px]";
 
-              {/*
-               * CSS-drawn depth connector.
-               * The span is positioned absolutely so its left border aligns
-               * with the ul's border-l track, then bends right at mid-height.
-               *
-               *  h2: starts at the main track (left-0), width 16px
-               *  h3: starts at h2 text level (left-4 = 16px), width 14px
-               *
-               * border-l  = vertical segment (continues the track down to midpoint)
-               * border-b  = horizontal segment (bends right toward the text)
-               * rounded-bl = smooth corner at the bend
-               */}
-              {level === 2 && (
-                <span
-                  className="pointer-events-none absolute left-0 top-0 w-4 h-[calc(50%+1px)] border-l border-b border-border rounded-bl"
-                  aria-hidden
-                />
-              )}
-              {level === 3 && (
-                <span
-                  className="pointer-events-none absolute left-4 top-0 w-[14px] h-[calc(50%+1px)] border-l border-b border-border rounded-bl"
-                  aria-hidden
-                />
-              )}
+            return (
+              <li key={id} className="relative">
+                {/*
+                 * SVG diagonal connector — matches Vapor UI's approach.
+                 * A line from (1,0) → (10,12) inside a 16×16 viewBox
+                 * creates a gentle diagonal bend from the track into the item.
+                 *
+                 * h2: branches from the main track (left-0)
+                 * h3: branches from the h2 continuation level (left=[10px])
+                 */}
+                {level === 2 && (
+                  <svg
+                    viewBox="0 0 16 16"
+                    className="pointer-events-none absolute -top-1.5 left-0 size-4"
+                    aria-hidden
+                  >
+                    <line
+                      x1="1" y1="0" x2="10" y2="12"
+                      strokeWidth="1"
+                      className="stroke-border"
+                    />
+                  </svg>
+                )}
+                {level === 3 && (
+                  <svg
+                    viewBox="0 0 16 16"
+                    className="pointer-events-none absolute -top-1.5 size-4"
+                    style={{ left: "10px" }}
+                    aria-hidden
+                  >
+                    <line
+                      x1="1" y1="0" x2="10" y2="12"
+                      strokeWidth="1"
+                      className="stroke-border"
+                    />
+                  </svg>
+                )}
 
-              <a
-                href={`#${id}`}
-                className={`block py-[5px] font-sans text-[12.5px] leading-[1.45] transition-colors duration-150 ${textIndent} ${
-                  isActive ? "text-text font-medium" : "text-text-3 hover:text-text-2"
-                }`}
-                onClick={(e) => {
-                  e.preventDefault();
-                  document.getElementById(id)?.scrollIntoView({ behavior: "smooth", block: "start" });
-                  setActiveId(id);
-                }}
-              >
-                {renderTocText(text)}
-              </a>
-            </li>
-          );
-        })}
-      </ul>
+                {/* Continuation vertical line for h2 — connects sibling h2 items */}
+                {level === 2 && (
+                  <div
+                    className="absolute w-px bg-border"
+                    style={{ left: "10px", top: "6px", bottom: 0 }}
+                  />
+                )}
+
+                <a
+                  href={`#${id}`}
+                  data-toc-id={id}
+                  className={`block py-[5px] font-sans text-[12.5px] leading-[1.45] transition-colors duration-150 ${textIndent} ${
+                    isActive ? "text-text font-medium" : "text-text-3 hover:text-text-2"
+                  }`}
+                  onClick={(e) => {
+                    e.preventDefault();
+                    document
+                      .getElementById(id)
+                      ?.scrollIntoView({ behavior: "smooth", block: "start" });
+                    setActiveId(id);
+                  }}
+                >
+                  {renderTocText(text)}
+                </a>
+              </li>
+            );
+          })}
+        </ul>
+      </div>
     </nav>
   );
 }
