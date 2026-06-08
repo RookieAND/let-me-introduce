@@ -1,4 +1,13 @@
-import type { Block, CalloutType } from "./types";
+import type { Block, CalloutType, ListItem } from "./types";
+
+function bulletDepth(line: string): number {
+  const leading = line.match(/^([ \t]*)/)?.[1] ?? "";
+  const spaces = leading.replace(/\t/g, "    ").length;
+  if (spaces <= 0) return 0;
+  if (spaces <= 4) return 1;
+  if (spaces <= 8) return 2;
+  return 3;
+}
 
 const CALLOUT_RE = /^\[!(NOTE|TIP|WARNING|IMPORTANT|CAUTION)\]\s*$/i;
 const BLOCK_START_RE = /^#{1,6}\s/;
@@ -79,9 +88,9 @@ export function tokenize(md: string): Block[] {
 
     // Unordered list (including indented sub-bullets)
     if (/^[ \t]*[-*+]\s/.test(line)) {
-      const items: string[] = [];
+      const items: ListItem[] = [];
       while (i < lines.length && /^[ \t]*[-*+]\s/.test(lines[i])) {
-        items.push(lines[i].replace(/^[ \t]*[-*+]\s+/, ""));
+        items.push({ text: lines[i].replace(/^[ \t]*[-*+]\s+/, ""), depth: bulletDepth(lines[i]) });
         i++;
       }
       blocks.push({ kind: "ul", items });
@@ -90,9 +99,9 @@ export function tokenize(md: string): Block[] {
 
     // Ordered list
     if (/^\d+\.\s/.test(line)) {
-      const items: string[] = [];
+      const items: ListItem[] = [];
       while (i < lines.length && /^\d+\.\s/.test(lines[i])) {
-        items.push(lines[i].replace(/^\d+\.\s+/, ""));
+        items.push({ text: lines[i].replace(/^\d+\.\s+/, ""), depth: 0 });
         i++;
       }
       blocks.push({ kind: "ol", items });
