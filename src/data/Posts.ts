@@ -1,4 +1,5 @@
 import caslAbacMd from "#/content/posts/casl-abac-declarative-permissions.md?raw";
+import caslTsDeepDiveMd from "#/content/posts/casl-typescript-deep-dive.md?raw";
 import turborepoMd from "#/content/posts/turborepo-remote-cache-self-hosted.md?raw";
 import zustandSliceMd from "#/content/posts/zustand-slice-form-builder.md?raw";
 
@@ -8,7 +9,7 @@ import tsEnumMd from "#/content/posts/typescript-enum.md?raw";
 import tsSatisfiesMd from "#/content/posts/typescript-satisfies.md?raw";
 import tsModuleResolutionMd from "#/content/posts/typescript-module-resolution.md?raw";
 
-// FrontEnd
+// Frontend — 최신
 import sseReactMd from "#/content/posts/sse-react-event-registry.md?raw";
 import reactDisplayNameMd from "#/content/posts/react-display-name.md?raw";
 import reactQueryMutationMd from "#/content/posts/react-query-mutation.md?raw";
@@ -21,16 +22,67 @@ import edgeRuntimeMd from "#/content/posts/edge-runtime-internals.md?raw";
 import customEventMd from "#/content/posts/custom-event-observer.md?raw";
 import viteBundleMd from "#/content/posts/vite-code-splitting-bundle.md?raw";
 
+// Frontend — 2024
+import reactErrorBoundaryMd from "#/content/posts/react-error-boundary.md?raw";
+import useEffectAfterPaintMd from "#/content/posts/useeffect-after-paint.md?raw";
+import promiseWithResolverMd from "#/content/posts/promise-with-resolver.md?raw";
+import howBundlerWorksMd from "#/content/posts/how-bundler-works.md?raw";
+
+// Frontend — 2023
+import reactRenderingMd from "#/content/posts/react-rendering.md?raw";
+import reactStateMd from "#/content/posts/react-state-usestate.md?raw";
+import reactAutoBatchingMd from "#/content/posts/react-18-auto-batching.md?raw";
+import eventBubblingMd from "#/content/posts/event-bubbling-capturing-delegation.md?raw";
+import eventLoopMd from "#/content/posts/javascript-event-loop.md?raw";
+import jsObjectMd from "#/content/posts/javascript-object-deep-dive.md?raw";
+import useEffectLayoutMd from "#/content/posts/useeffect-vs-uselayouteffect.md?raw";
+import jsEqualityMd from "#/content/posts/javascript-equality-comparison.md?raw";
+import jsIterableMd from "#/content/posts/javascript-iterable.md?raw";
+import howBrowserWorksMd from "#/content/posts/how-browser-works.md?raw";
+import serverStateReactQueryMd from "#/content/posts/server-state-react-query.md?raw";
+import csrSsrMd from "#/content/posts/csr-ssr-spa-mpa.md?raw";
+import forLoopLetVarMd from "#/content/posts/for-loop-let-var.md?raw";
+import globPatternMd from "#/content/posts/glob-pattern.md?raw";
+
+// Architecture
+import httpCookieMd from "#/content/posts/http-cookie-samesite.md?raw";
+import corsMd from "#/content/posts/cors-deep-dive.md?raw";
+import tddMd from "#/content/posts/tdd-introduction.md?raw";
+import jestTestMd from "#/content/posts/jest-functional-test.md?raw";
+import mimeTypeMd from "#/content/posts/mime-content-type.md?raw";
+import gitHookMd from "#/content/posts/git-hook-husky.md?raw";
+import eslintPrettierMd from "#/content/posts/eslint-prettier.md?raw";
+
 // Infra / Monorepo
 import pnpmDependencyMd from "#/content/posts/pnpm-dependency-deep-dive.md?raw";
 import pnpmCatalogMd from "#/content/posts/pnpm-catalog.md?raw";
 import turboPruneMd from "#/content/posts/turbo-prune-monorepo.md?raw";
 import dockerComposeMd from "#/content/posts/docker-compose-basics.md?raw";
 import githubActionsDockerMd from "#/content/posts/github-actions-docker-deploy.md?raw";
+import nestjsDockerMd from "#/content/posts/nestjs-docker-image-optimization.md?raw";
+import hardLinkMd from "#/content/posts/hard-link-symbolic-link.md?raw";
 
 // Other
 import plopMd from "#/content/posts/plop-code-generator.md?raw";
 import suitesNestjsMd from "#/content/posts/suites-nestjs-auto-mock.md?raw";
+
+// 회고
+import retrospective2025HMd from "#/content/posts/retrospective-2025-1h.md?raw";
+import retrospective2024Md from "#/content/posts/retrospective-2024.md?raw";
+import retrospective2024HMd from "#/content/posts/retrospective-2024-1h.md?raw";
+import retrospective2023Md from "#/content/posts/retrospective-2023.md?raw";
+import retrospective2023HMd from "#/content/posts/retrospective-2023-1h.md?raw";
+import retrospective2022Md from "#/content/posts/retrospective-2022.md?raw";
+import joiningCompany4MonthsMd from "#/content/posts/joining-company-4months.md?raw";
+import joiningCompany2WeeksMd from "#/content/posts/joining-company-2weeks.md?raw";
+import theoConference3rdMd from "#/content/posts/theo-conference-3rd.md?raw";
+import theoSprint17thMd from "#/content/posts/theo-sprint-17th.md?raw";
+import theoSprint15thMd from "#/content/posts/theo-sprint-15th.md?raw";
+import theoSprint14thMd from "#/content/posts/theo-sprint-14th.md?raw";
+import devmalsamiReleaseMd from "#/content/posts/devmalsami-release.md?raw";
+import nexters24thMd from "#/content/posts/nexters-24th.md?raw";
+import ictInternshipMd from "#/content/posts/ict-internship-2023.md?raw";
+import kbCompetitionMd from "#/content/posts/kb-software-competition.md?raw";
 
 export type Category = "Frontend" | "Backend" | "Architecture" | "Infra" | "회고";
 
@@ -57,11 +109,12 @@ export const FEATURED_POST: Post = {
   excerpt:
     "CS가 반복되고 개발 의존도가 커지던 권한 관리를, 역할·리소스·액션 기반 ABAC 모델로 옮긴 과정. 미들웨어에서 만든 Ability 객체를 nestjs-cls로 요청 컨텍스트에 전파해, 어디서든 추가 의존성 주입 없이 권한을 검사하는 구조를 만든 이야기.",
   tags: ["CASL", "ABAC", "NestJS", "권한"],
-  href: "https://velog.io/@rookieand/posts",
+  href: "/posts/casl-abac-declarative-permissions",
   content: caslAbacMd,
 };
 
 export const POSTS: Post[] = [
+  // ── 2026 ──────────────────────────────────────────────────────────────────
   {
     slug: "vite-code-splitting-bundle",
     date: "2026.06",
@@ -74,6 +127,19 @@ export const POSTS: Post[] = [
     read: "10 min",
     href: "/posts/vite-code-splitting-bundle",
     content: viteBundleMd,
+  },
+  {
+    slug: "suites-nestjs-auto-mock",
+    date: "2026.06",
+    year: "2026",
+    cat: "Backend",
+    title: "@suites로 NestJS 단위 테스트 Auto-Mock 적용하기",
+    excerpt:
+      "수동 jest.fn()과 as any 캐스팅으로 가득한 테스트 셋업을 줄이기 위해 도입한 @suites. NestJS DI 메타데이터를 읽어 의존성을 자동 Mock하는 원리와 solitary/sociable 두 전략을 정리했다.",
+    tags: ["NestJS", "Testing", "Jest", "Auto-Mock"],
+    read: "8 min",
+    href: "/posts/suites-nestjs-auto-mock",
+    content: suitesNestjsMd,
   },
   {
     slug: "module-federation",
@@ -100,19 +166,6 @@ export const POSTS: Post[] = [
     read: "7 min",
     href: "/posts/typescript-module-resolution",
     content: tsModuleResolutionMd,
-  },
-  {
-    slug: "suites-nestjs-auto-mock",
-    date: "2026.06",
-    year: "2026",
-    cat: "Backend",
-    title: "@suites로 NestJS 단위 테스트 Auto-Mock 적용하기",
-    excerpt:
-      "수동 jest.fn()과 as any 캐스팅으로 가득한 테스트 셋업을 줄이기 위해 도입한 @suites. NestJS DI 메타데이터를 읽어 의존성을 자동 Mock하는 원리와 solitary/sociable 두 전략을 정리했다.",
-    tags: ["NestJS", "Testing", "Jest", "Auto-Mock"],
-    read: "8 min",
-    href: "/posts/suites-nestjs-auto-mock",
-    content: suitesNestjsMd,
   },
   {
     slug: "typescript-union-contravariance",
@@ -180,17 +233,17 @@ export const POSTS: Post[] = [
     content: tsSatisfiesMd,
   },
   {
-    slug: "partial-pre-rendering",
-    date: "2026.01",
+    slug: "casl-typescript-deep-dive",
+    date: "2026.02",
     year: "2026",
-    cat: "Frontend",
-    title: "Partial Pre-rendering",
+    cat: "Architecture",
+    title: "CASL 타입 시스템과 두 단계 권한 체크",
     excerpt:
-      "Streaming SSR과 달리 정적 영역을 Build Time에 분리하는 PPR의 Partial First Page 개념, B/S/P placeholder가 Transfer-Encoding: chunked 기반으로 교체되는 원리를 HTML 직접 분석하며 파악한 내용.",
-    tags: ["Next.js", "PPR", "Streaming SSR"],
-    read: "10 min",
-    href: "/posts/partial-pre-rendering",
-    content: nextjsPprMd,
+      "CASL/ABAC 포스트에서 미뤘던 두 가지. InferSubjects·MongoAbility·ForcedSubject가 타입 시스템에서 하는 역할과, Route Guard와 Service 두 단계에서 모두 권한을 검사해야 하는 이유를 정리했다.",
+    tags: ["CASL", "TypeScript", "NestJS", "권한"],
+    read: "8 min",
+    href: "/posts/casl-typescript-deep-dive",
+    content: caslTsDeepDiveMd,
   },
   {
     slug: "squad-leader-retrospective",
@@ -204,6 +257,20 @@ export const POSTS: Post[] = [
     read: "9 min",
     href: "https://velog.io/@rookieand/posts",
   },
+  {
+    slug: "partial-pre-rendering",
+    date: "2026.01",
+    year: "2026",
+    cat: "Frontend",
+    title: "Partial Pre-rendering",
+    excerpt:
+      "Streaming SSR과 달리 정적 영역을 Build Time에 분리하는 PPR의 Partial First Page 개념, B/S/P placeholder가 Transfer-Encoding: chunked 기반으로 교체되는 원리를 HTML 직접 분석하며 파악한 내용.",
+    tags: ["Next.js", "PPR", "Streaming SSR"],
+    read: "10 min",
+    href: "/posts/partial-pre-rendering",
+    content: nextjsPprMd,
+  },
+  // ── 2025 ──────────────────────────────────────────────────────────────────
   {
     slug: "nestjs-cls-ability-context",
     date: "2025.11",
@@ -239,8 +306,21 @@ export const POSTS: Post[] = [
       "문항이 수십 개로 늘어도 전체 리렌더링 없이 개별 수정이 가능해야 했다. 슬라이스로 상태를 쪼개 독립적으로 다룬 설계 기록.",
     tags: ["React", "Zustand", "Form"],
     read: "10 min",
-    href: "https://velog.io/@rookieand/posts",
+    href: "/posts/zustand-slice-form-builder",
     content: zustandSliceMd,
+  },
+  {
+    slug: "retrospective-2025-1h",
+    date: "2025.07",
+    year: "2025",
+    cat: "회고",
+    title: "2025년 상반기 회고록",
+    excerpt:
+      "격변의 반년. 처음으로 소규모 팀을 리딩하고, 체중 16kg 감량, 스마일라식, 일본어 학원까지. 개발에만 집중하던 나에서 삶의 여러 측면을 다루는 나로 변화하려 애썼던 2025년 상반기 기록.",
+    tags: ["회고", "2025", "성장"],
+    read: "18 min",
+    href: "/posts/retrospective-2025-1h",
+    content: retrospective2025HMd,
   },
   {
     slug: "css-custom-properties-runtime-theme",
@@ -264,7 +344,7 @@ export const POSTS: Post[] = [
       "추가 비용 없이 CI 빌드 캐시를 쓰고 싶었다. AWS EFS + Jenkins로 원격 캐시 서버를 세워 팀 전체 빌드 속도를 끌어올린 과정.",
     tags: ["Turborepo", "pnpm", "CI"],
     read: "11 min",
-    href: "https://velog.io/@rookieand/posts",
+    href: "/posts/turborepo-remote-cache-self-hosted",
     content: turborepoMd,
   },
   {
@@ -278,6 +358,20 @@ export const POSTS: Post[] = [
     tags: ["Docker", "최적화"],
     read: "8 min",
     href: "https://velog.io/@rookieand/posts",
+  },
+  // ── 2024 ──────────────────────────────────────────────────────────────────
+  {
+    slug: "retrospective-2024",
+    date: "2025.01",
+    year: "2025",
+    cat: "회고",
+    title: "2024년 회고록",
+    excerpt:
+      "구름 1주년, 학사 졸업, Nexters 25기. 개발자 스크럼 67개 주제를 팀과 함께 나누고, 모노레포를 도입하고, 꾸준함의 부재를 반성하면서도 성장한 흔적을 되돌아본 2024년 연간 회고.",
+    tags: ["회고", "2024", "성장"],
+    read: "16 min",
+    href: "/posts/retrospective-2024",
+    content: retrospective2024Md,
   },
   {
     slug: "google-oauth2-server-side-sheets",
@@ -318,19 +412,6 @@ export const POSTS: Post[] = [
     content: pnpmCatalogMd,
   },
   {
-    slug: "turbo-prune-monorepo",
-    date: "2024.11",
-    year: "2024",
-    cat: "Infra",
-    title: "Turbo prune 으로 모노레포 앱 빌드하기",
-    excerpt:
-      "--docker 옵션으로 /full과 /json을 분리해 관련 없는 패키지 변경이 Cache Miss를 유발하는 문제를 차단한 과정. pnpm store Cache Mount를 함께 적용한 멀티스테이지 Dockerfile 구성까지.",
-    tags: ["Turborepo", "Docker", "Monorepo"],
-    read: "8 min",
-    href: "/posts/turbo-prune-monorepo",
-    content: turboPruneMd,
-  },
-  {
     slug: "plop-code-generator",
     date: "2024.12",
     year: "2024",
@@ -344,6 +425,45 @@ export const POSTS: Post[] = [
     content: plopMd,
   },
   {
+    slug: "theo-conference-3rd",
+    date: "2024.11",
+    year: "2024",
+    cat: "회고",
+    title: "테오의 컨퍼런스 3회차 MC 후기",
+    excerpt:
+      "400명 규모의 테오 컨퍼런스 3회차에서 처음으로 MC를 맡은 후기. 무대 뒤에서 진행을 이끌며 느낀 것들과, 행사 준비 과정에서 배운 점.",
+    tags: ["회고", "커뮤니티", "테오"],
+    read: "8 min",
+    href: "/posts/theo-conference-3rd",
+    content: theoConference3rdMd,
+  },
+  {
+    slug: "hard-link-symbolic-link",
+    date: "2024.11",
+    year: "2024",
+    cat: "Infra",
+    title: "Hard Link, Symbolic Link 에 대해 알아보자",
+    excerpt:
+      "pnpm을 파다 보면 계속 나오는 Hard Link와 Symbolic Link. 두 개념의 차이와 pnpm이 Global Store와 프로젝트 node_modules 사이에서 두 가지를 함께 쓰는 이유를 정리했다.",
+    tags: ["pnpm", "Linux", "파일 시스템"],
+    read: "7 min",
+    href: "/posts/hard-link-symbolic-link",
+    content: hardLinkMd,
+  },
+  {
+    slug: "turbo-prune-monorepo",
+    date: "2024.11",
+    year: "2024",
+    cat: "Infra",
+    title: "Turbo prune 으로 모노레포 앱 빌드하기",
+    excerpt:
+      "--docker 옵션으로 /full과 /json을 분리해 관련 없는 패키지 변경이 Cache Miss를 유발하는 문제를 차단한 과정. pnpm store Cache Mount를 함께 적용한 멀티스테이지 Dockerfile 구성까지.",
+    tags: ["Turborepo", "Docker", "Monorepo"],
+    read: "8 min",
+    href: "/posts/turbo-prune-monorepo",
+    content: turboPruneMd,
+  },
+  {
     slug: "vitest-legacy-test-coverage",
     date: "2024.10",
     year: "2024",
@@ -354,6 +474,19 @@ export const POSTS: Post[] = [
     tags: ["Vitest", "Testing", "TDD"],
     read: "10 min",
     href: "https://velog.io/@rookieand/posts",
+  },
+  {
+    slug: "docker-compose-basics",
+    date: "2024.10",
+    year: "2024",
+    cat: "Infra",
+    title: "Docker Compose 찍먹하기",
+    excerpt:
+      "다수의 컨테이너를 일괄 실행·관리하기 위한 Docker Compose의 필요성과 compose 파일 작성 방법, 컨테이너 간 네트워크 구성, 주요 명령어를 정리했다.",
+    tags: ["Docker", "Docker Compose", "Infra"],
+    read: "6 min",
+    href: "/posts/docker-compose-basics",
+    content: dockerComposeMd,
   },
   {
     slug: "react-query-mutation",
@@ -369,6 +502,45 @@ export const POSTS: Post[] = [
     content: reactQueryMutationMd,
   },
   {
+    slug: "retrospective-2024-1h",
+    date: "2024.06",
+    year: "2024",
+    cat: "회고",
+    title: "2024년 상반기 회고록",
+    excerpt:
+      "goorm에서 보낸 첫 1년의 절반. 익힌 것들과 부족함을 솔직하게 정리한 2024년 상반기 회고. 모노레포 도입, 팀 스터디, 그리고 꾸준함에 대한 고민.",
+    tags: ["회고", "2024", "성장"],
+    read: "14 min",
+    href: "/posts/retrospective-2024-1h",
+    content: retrospective2024HMd,
+  },
+  {
+    slug: "devmalsami-release",
+    date: "2024.06",
+    year: "2024",
+    cat: "회고",
+    title: "마침내, 데브말싸미 프로젝트 릴리즈를 마치며",
+    excerpt:
+      "2전 3기 끝에 드디어 데브말싸미 사이드 프로젝트를 세상에 내놓았다. 팀 빌딩부터 배포까지, 좌충우돌 협업의 모든 과정을 담은 기록.",
+    tags: ["회고", "사이드 프로젝트", "협업"],
+    read: "10 min",
+    href: "/posts/devmalsami-release",
+    content: devmalsamiReleaseMd,
+  },
+  {
+    slug: "nestjs-docker-image-optimization",
+    date: "2024.06",
+    year: "2024",
+    cat: "Infra",
+    title: "내겐 너무나 컸던 NestJS Docker Image, 이젠 좀 줄여보자",
+    excerpt:
+      "급하게 만든 NestJS Dockerfile이 1GB에 육박했다. pnpm + turbo prune + 멀티스테이지 빌드를 조합해 이미지를 대폭 줄인 과정.",
+    tags: ["NestJS", "Docker", "pnpm", "최적화"],
+    read: "8 min",
+    href: "/posts/nestjs-docker-image-optimization",
+    content: nestjsDockerMd,
+  },
+  {
     slug: "nextjs-image-optimization",
     date: "2024.06",
     year: "2024",
@@ -382,17 +554,69 @@ export const POSTS: Post[] = [
     content: nextjsImageMd,
   },
   {
-    slug: "zero-runtime-vanilla-extract",
+    slug: "github-actions-docker-deploy",
+    date: "2024.06",
+    year: "2024",
+    cat: "Infra",
+    title: "Github Actions으로 Docker 배포 오답노트",
+    excerpt:
+      "scp-action source 경로 오류, Job 간 checkout 누락, .env 숨김 파일 문제, Nginx 502·host.docker.internal Linux 미지원까지. 처음 배포 파이프라인을 구축하며 삽질한 것들의 기록.",
+    tags: ["GitHub Actions", "Docker", "CI/CD"],
+    read: "7 min",
+    href: "/posts/github-actions-docker-deploy",
+    content: githubActionsDockerMd,
+  },
+  {
+    slug: "theo-sprint-17th",
+    date: "2024.04",
+    year: "2024",
+    cat: "회고",
+    title: "테오의 스프린트 17기 퍼실리테이터 후기",
+    excerpt:
+      "테오의 스프린트 17기 퍼실리테이터 경험기. 참여자에서 운영진으로 역할이 바뀌며 배운 협업과 공감의 방식.",
+    tags: ["회고", "커뮤니티", "테오"],
+    read: "8 min",
+    href: "/posts/theo-sprint-17th",
+    content: theoSprint17thMd,
+  },
+  {
+    slug: "promise-with-resolver",
+    date: "2024.04",
+    year: "2024",
+    cat: "Frontend",
+    title: "Promise.withResolvers 라는 친구가 새로 나왔다",
+    excerpt:
+      "2024년에 새롭게 등장한 Promise.withResolvers(). 기존 Promise 생성자의 한계와 비교해 어떤 상황에서 유용한지 살펴봤다.",
+    tags: ["JavaScript", "Promise", "ES2024"],
+    read: "4 min",
+    href: "/posts/promise-with-resolver",
+    content: promiseWithResolverMd,
+  },
+  {
+    slug: "useeffect-after-paint",
     date: "2024.03",
     year: "2024",
     cat: "Frontend",
-    title: "Zero Runtime CSS-in-JS (with Vanilla Extract)",
+    title: "useEffect는 어떻게 Paint 이후에 정확히 실행될 수 있을까?",
     excerpt:
-      "런타임에 스타일을 생성하는 Emotion/styled-components의 성능 비용과, Vanilla Extract가 빌드 타임 CSS 변환으로 이를 해결하는 방식. sprinkles와 recipe를 활용한 실제 사용법까지.",
-    tags: ["CSS-in-JS", "Vanilla Extract", "Zero Runtime"],
+      "MessageChannel API를 통해 useEffect가 Paint 이후에 실행되는 원리를 파헤쳤다. 스케줄러 내부 코드를 통해 Passive Effect가 언제 큐에 쌓이는지 직접 추적한 기록.",
+    tags: ["React", "useEffect", "브라우저"],
+    read: "7 min",
+    href: "/posts/useeffect-after-paint",
+    content: useEffectAfterPaintMd,
+  },
+  {
+    slug: "react-error-boundary",
+    date: "2024.02",
+    year: "2024",
+    cat: "Frontend",
+    title: "ErrorBoundary 의 구조를 파헤쳐보자",
+    excerpt:
+      "React 공식 문서에서 ErrorBoundary 구현체를 직접 살펴보며 componentDidCatch·getDerivedStateFromError의 역할과 Suspense와의 조합을 정리했다.",
+    tags: ["React", "ErrorBoundary", "에러 처리"],
     read: "8 min",
-    href: "/posts/zero-runtime-vanilla-extract",
-    content: zeroRuntimeMd,
+    href: "/posts/react-error-boundary",
+    content: reactErrorBoundaryMd,
   },
   {
     slug: "edge-runtime-internals",
@@ -421,30 +645,436 @@ export const POSTS: Post[] = [
     content: customEventMd,
   },
   {
-    slug: "docker-compose-basics",
-    date: "2024.10",
+    slug: "zero-runtime-vanilla-extract",
+    date: "2024.03",
     year: "2024",
-    cat: "Infra",
-    title: "Docker Compose 찍먹하기",
+    cat: "Frontend",
+    title: "Zero Runtime CSS-in-JS (with Vanilla Extract)",
     excerpt:
-      "다수의 컨테이너를 일괄 실행·관리하기 위한 Docker Compose의 필요성과 compose 파일 작성 방법, 컨테이너 간 네트워크 구성, 주요 명령어를 정리했다.",
-    tags: ["Docker", "Docker Compose", "Infra"],
-    read: "6 min",
-    href: "/posts/docker-compose-basics",
-    content: dockerComposeMd,
+      "런타임에 스타일을 생성하는 Emotion/styled-components의 성능 비용과, Vanilla Extract가 빌드 타임 CSS 변환으로 이를 해결하는 방식. sprinkles와 recipe를 활용한 실제 사용법까지.",
+    tags: ["CSS-in-JS", "Vanilla Extract", "Zero Runtime"],
+    read: "8 min",
+    href: "/posts/zero-runtime-vanilla-extract",
+    content: zeroRuntimeMd,
+  },
+  // ── 2024.01 ───────────────────────────────────────────────────────────────
+  {
+    slug: "retrospective-2023",
+    date: "2024.01",
+    year: "2024",
+    cat: "회고",
+    title: "2023년 회고록",
+    excerpt:
+      "Nexters 24기 활동, 데브말싸미 사이드 프로젝트, goorm 입사. 개발자로 본격적으로 자리를 잡아가던 2023년을 돌아본 기록.",
+    tags: ["회고", "2023", "성장"],
+    read: "16 min",
+    href: "/posts/retrospective-2023",
+    content: retrospective2023Md,
+  },
+  // ── 2023 ──────────────────────────────────────────────────────────────────
+  {
+    slug: "how-bundler-works",
+    date: "2023.10",
+    year: "2023",
+    cat: "Frontend",
+    title: "번들러란 무엇이며, 어떻게 동작하는 걸까?",
+    excerpt:
+      "Webpack, Rollup, esbuild가 소스코드를 어떻게 단일 번들로 만드는지 단계별로 정리했다. 각 번들러의 설계 철학과 장단점 비교. Rollup의 정적 분석 기반 Tree-shaking이 Dynamic import와 어떻게 관계되는지도 다룬다.",
+    tags: ["Webpack", "Rollup", "esbuild", "번들러"],
+    read: "10 min",
+    href: "/posts/how-bundler-works",
+    content: howBundlerWorksMd,
   },
   {
-    slug: "github-actions-docker-deploy",
-    date: "2024.06",
-    year: "2024",
-    cat: "Infra",
-    title: "Github Actions으로 Docker 배포 오답노트",
+    slug: "nexters-24th",
+    date: "2023.07",
+    year: "2023",
+    cat: "회고",
+    title: "Nexters 24기 FE 합격 후기",
     excerpt:
-      "scp-action source 경로 오류, Job 간 checkout 누락, .env 숨김 파일 문제, Nginx 502·host.docker.internal Linux 미지원까지. 처음 배포 파이프라인을 구축하며 삽질한 것들의 기록.",
-    tags: ["GitHub Actions", "Docker", "CI/CD"],
+      "IT 창업 동아리 Nexters 24기 FE 합격 후기. 포트폴리오 준비부터 면접까지 거친 과정과 합격 후 느낀 기대감.",
+    tags: ["회고", "Nexters", "동아리"],
+    read: "8 min",
+    href: "/posts/nexters-24th",
+    content: nexters24thMd,
+  },
+  {
+    slug: "retrospective-2023-1h",
+    date: "2023.07",
+    year: "2023",
+    cat: "회고",
+    title: "2023년 상반기 회고록",
+    excerpt:
+      "ICT 학점연계 인턴십, 첫 사이드 프로젝트 경험, 성장에 대한 갈망. 개발자로서 첫 반년을 정리한 2023년 상반기 회고.",
+    tags: ["회고", "2023", "성장"],
+    read: "12 min",
+    href: "/posts/retrospective-2023-1h",
+    content: retrospective2023HMd,
+  },
+  {
+    slug: "joining-company-4months",
+    date: "2023.06",
+    year: "2023",
+    cat: "회고",
+    title: "입사한 지 4개월이 지난 지금",
+    excerpt:
+      "ICT 학점연계 인턴십 4개월째, 6월 30일 종료를 앞두고 회사에서 무엇을 배웠고 무엇이 부족했는지 되짚은 글.",
+    tags: ["회고", "인턴십", "성장"],
+    read: "8 min",
+    href: "/posts/joining-company-4months",
+    content: joiningCompany4MonthsMd,
+  },
+  {
+    slug: "http-cookie-samesite",
+    date: "2023.05",
+    year: "2023",
+    cat: "Architecture",
+    title: "HTTP Cookie 와 SameSite 정책에 대해서",
+    excerpt:
+      "Set-Cookie 속성과 SameSite 정책(None·Strict·Lax)을 실제 사이드 프로젝트에서 겪은 CSRF 문제와 함께 정리했다. 서드 파티 쿠키가 차단되는 흐름도 설명한다.",
+    tags: ["HTTP", "Cookie", "SameSite", "CSRF"],
+    read: "8 min",
+    href: "/posts/http-cookie-samesite",
+    content: httpCookieMd,
+  },
+  {
+    slug: "cors-deep-dive",
+    date: "2023.05",
+    year: "2023",
+    cat: "Architecture",
+    title: "이번에야말로 CORS를 좀 확실하게 알아보자",
+    excerpt:
+      "Origin 개념부터 Preflight·Simple Request·Credentialed Request 세 시나리오까지, CORS가 작동하는 원리와 브라우저에서만 체크되는 이유를 설명했다.",
+    tags: ["CORS", "HTTP", "보안"],
+    read: "10 min",
+    href: "/posts/cors-deep-dive",
+    content: corsMd,
+  },
+  {
+    slug: "theo-sprint-15th",
+    date: "2023.04",
+    year: "2023",
+    cat: "회고",
+    title: "테오의 스프린트 15기 후기",
+    excerpt:
+      "테오의 스프린트 15기 참여 후기. 낯선 사람들과 단기 프로젝트를 완성하며 협업과 방향성의 중요성을 다시 배운 과정.",
+    tags: ["회고", "커뮤니티", "테오"],
     read: "7 min",
-    href: "/posts/github-actions-docker-deploy",
-    content: githubActionsDockerMd,
+    href: "/posts/theo-sprint-15th",
+    content: theoSprint15thMd,
+  },
+  {
+    slug: "react-state-usestate",
+    date: "2023.04",
+    year: "2023",
+    cat: "Frontend",
+    title: "React의 state, 그리고 useState에 대해 더 알고 싶어졌다",
+    excerpt:
+      "useState의 setter가 렌더링을 어떻게 예약하는지, 클로저와 stale state 문제, batch update가 작동하는 원리를 파헤쳤다.",
+    tags: ["React", "useState", "렌더링"],
+    read: "9 min",
+    href: "/posts/react-state-usestate",
+    content: reactStateMd,
+  },
+  {
+    slug: "react-18-auto-batching",
+    date: "2023.04",
+    year: "2023",
+    cat: "Frontend",
+    title: "React 18에서 추가된 Auto Batching 은 무엇인가?",
+    excerpt:
+      "React 18 이전에는 이벤트 핸들러 안에서만 배치됐던 상태 업데이트가, 이제는 Promise·setTimeout 안에서도 자동 배치된다. 무엇이 바뀌었는지 정리했다.",
+    tags: ["React", "React 18", "Batching"],
+    read: "6 min",
+    href: "/posts/react-18-auto-batching",
+    content: reactAutoBatchingMd,
+  },
+  {
+    slug: "event-bubbling-capturing-delegation",
+    date: "2023.04",
+    year: "2023",
+    cat: "Frontend",
+    title: "이벤트 버블링, 캡처링, 위임을 알아보자",
+    excerpt:
+      "이벤트 흐름의 세 단계(캡처링 → 타깃 → 버블링)와 stopPropagation·stopImmediatePropagation의 차이, 그리고 이벤트 위임 패턴을 정리했다.",
+    tags: ["JavaScript", "이벤트", "DOM"],
+    read: "7 min",
+    href: "/posts/event-bubbling-capturing-delegation",
+    content: eventBubblingMd,
+  },
+  {
+    slug: "kb-software-competition",
+    date: "2023.03",
+    year: "2023",
+    cat: "회고",
+    title: "제 5회 KB 국민은행 소프트웨어 경진대회",
+    excerpt:
+      "제 5회 KB 국민은행 소프트웨어 경진대회 참가 후기. 팀 프로젝트를 준비하며 겪은 시행착오와 아쉬웠던 결과, 그리고 다음 도전의 다짐.",
+    tags: ["회고", "대회", "프로젝트"],
+    read: "6 min",
+    href: "/posts/kb-software-competition",
+    content: kbCompetitionMd,
+  },
+  {
+    slug: "theo-sprint-14th",
+    date: "2023.03",
+    year: "2023",
+    cat: "회고",
+    title: "테오의 스프린트 14기 후기",
+    excerpt:
+      "처음 참여한 테오의 스프린트 14기 후기. 48시간 안에 아이디어를 프로덕트로 만드는 경험과 팀원들에게서 받은 자극.",
+    tags: ["회고", "커뮤니티", "테오"],
+    read: "7 min",
+    href: "/posts/theo-sprint-14th",
+    content: theoSprint14thMd,
+  },
+  {
+    slug: "ict-internship-2023",
+    date: "2023.03",
+    year: "2023",
+    cat: "회고",
+    title: "2023 상반기 ICT 학점연계 인턴십 합격 후기",
+    excerpt:
+      "2023 상반기 ICT 학점연계 인턴십 합격 후기. 지원 동기부터 서류와 면접 준비 과정, 그리고 최종 합격까지.",
+    tags: ["회고", "인턴십", "ICT"],
+    read: "7 min",
+    href: "/posts/ict-internship-2023",
+    content: ictInternshipMd,
+  },
+  {
+    slug: "joining-company-2weeks",
+    date: "2023.03",
+    year: "2023",
+    cat: "회고",
+    title: "입사한 후 2주가 지난 지금",
+    excerpt:
+      "goorm 입사 2주 후 느낀 첫 인상과 적응기. 실무와 학교 공부의 차이, 코드 리뷰를 처음 받으며 느낀 것들을 정리했다.",
+    tags: ["회고", "인턴십", "성장"],
+    read: "6 min",
+    href: "/posts/joining-company-2weeks",
+    content: joiningCompany2WeeksMd,
+  },
+  {
+    slug: "glob-pattern",
+    date: "2023.02",
+    year: "2023",
+    cat: "Architecture",
+    title: "Glob Pattern을 완벽하게 정리해보자",
+    excerpt:
+      "*.js·**/*.ts·{a,b}·[!abc] 같은 Glob 패턴의 와일드카드와 대괄호 문법을 실제 파일 매칭 예시와 함께 완벽하게 정리했다.",
+    tags: ["Glob", "파일 시스템", "CLI"],
+    read: "6 min",
+    href: "/posts/glob-pattern",
+    content: globPatternMd,
+  },
+  {
+    slug: "for-loop-let-var",
+    date: "2023.02",
+    year: "2023",
+    cat: "Frontend",
+    title: "for 문 안에 let 과 var를 넣으면 뭐가 달라지나?",
+    excerpt:
+      "for 루프 안에 var를 쓰면 클로저가 예상대로 작동하지 않는 이유, let이 블록 스코프로 이 문제를 해결하는 방식을 코드와 함께 설명했다.",
+    tags: ["JavaScript", "let", "var", "클로저"],
+    read: "5 min",
+    href: "/posts/for-loop-let-var",
+    content: forLoopLetVarMd,
+  },
+  {
+    slug: "javascript-event-loop",
+    date: "2023.02",
+    year: "2023",
+    cat: "Frontend",
+    title: "이벤트 루프란 무엇이며, 어떻게 진행되는 건가?",
+    excerpt:
+      "JS 엔진은 단일 스레드지만 브라우저는 그렇지 않다. Task Queue와 Microtask Queue의 처리 순서, requestAnimationFrame과의 관계까지 이벤트 루프를 정확하게 정리했다.",
+    tags: ["JavaScript", "이벤트 루프", "비동기"],
+    read: "10 min",
+    href: "/posts/javascript-event-loop",
+    content: eventLoopMd,
+  },
+  {
+    slug: "javascript-object-deep-dive",
+    date: "2023.02",
+    year: "2023",
+    cat: "Frontend",
+    title: "JS의 Object를 조금 더 깊게 파헤쳐보자",
+    excerpt:
+      "JS 객체의 프로퍼티 플래그(writable, enumerable, configurable), 참조 타입과 힙 메모리 구조, 얕은/깊은 복사의 함정까지 객체를 깊게 파헤쳤다.",
+    tags: ["JavaScript", "Object", "메모리"],
+    read: "9 min",
+    href: "/posts/javascript-object-deep-dive",
+    content: jsObjectMd,
+  },
+  {
+    slug: "useeffect-vs-uselayouteffect",
+    date: "2023.02",
+    year: "2023",
+    cat: "Frontend",
+    title: "useEffect는 가끔 Paint 작업 이전에 실행된다고?",
+    excerpt:
+      "useEffect와 useLayoutEffect의 실행 시점 차이를 React 렌더링 파이프라인 관점에서 정리했다. useLayoutEffect에서 setState를 호출하면 Passive Effect가 Paint 이전에 실행되는 이유도 다룬다.",
+    tags: ["React", "useEffect", "useLayoutEffect"],
+    read: "9 min",
+    href: "/posts/useeffect-vs-uselayouteffect",
+    content: useEffectLayoutMd,
+  },
+  {
+    slug: "javascript-equality-comparison",
+    date: "2023.01",
+    year: "2023",
+    cat: "Frontend",
+    title: "JS에서는 동등 비교 연산을 어떻게 수행할까?",
+    excerpt:
+      "JS의 ===·==·Object.is 세 가지 동등 비교 방식의 차이와 NaN·+0/-0 처리 방식, Map과 Set에 쓰이는 SameValueZero 알고리즘을 정리했다.",
+    tags: ["JavaScript", "동등 비교", "NaN"],
+    read: "7 min",
+    href: "/posts/javascript-equality-comparison",
+    content: jsEqualityMd,
+  },
+  {
+    slug: "react-rendering",
+    date: "2023.01",
+    year: "2023",
+    cat: "Frontend",
+    title: "React 에서 렌더링이란 대체 무엇일까?",
+    excerpt:
+      "React에서 렌더링은 DOM 업데이트가 아니다. Render Phase·Commit Phase·Passive Effect 단계를 구분하고, 불필요한 렌더링이 발생하는 원인과 Concurrent Mode까지 정리했다.",
+    tags: ["React", "렌더링", "Virtual DOM"],
+    read: "10 min",
+    href: "/posts/react-rendering",
+    content: reactRenderingMd,
+  },
+  {
+    slug: "tdd-introduction",
+    date: "2023.01",
+    year: "2023",
+    cat: "Architecture",
+    title: "TDD 는 무엇이며 대체 왜 도입하는 걸까?",
+    excerpt:
+      "TDD가 무엇인지, Red-Green 사이클이 왜 중요한지, Unit Test·Integration Test·Functional Test·E2E Test의 차이와 BDD와의 관계를 정리했다.",
+    tags: ["TDD", "테스트", "BDD"],
+    read: "10 min",
+    href: "/posts/tdd-introduction",
+    content: tddMd,
+  },
+  {
+    slug: "jest-functional-test",
+    date: "2023.01",
+    year: "2023",
+    cat: "Architecture",
+    title: "Jest 직접 Functional Test Code를 작성해보자",
+    excerpt:
+      "버튼 색상 토글 기능을 예시로 TDD 사이클을 직접 따라가며 React Testing Library로 Functional Test Code를 작성하는 과정을 기록했다.",
+    tags: ["Jest", "Testing Library", "TDD"],
+    read: "7 min",
+    href: "/posts/jest-functional-test",
+    content: jestTestMd,
+  },
+  {
+    slug: "javascript-iterable",
+    date: "2023.01",
+    year: "2023",
+    cat: "Frontend",
+    title: "Iterable한 객체, 너가 대체 뭔지 알고 싶다",
+    excerpt:
+      "ES6 Iteration Protocol을 정리하고, Python의 range 함수를 JS로 구현하는 과정에서 Iterable·Iterator·Well-formed Iterable·Generator의 관계를 명확히 했다.",
+    tags: ["JavaScript", "Iterable", "Iterator", "Generator"],
+    read: "8 min",
+    href: "/posts/javascript-iterable",
+    content: jsIterableMd,
+  },
+  {
+    slug: "how-browser-works",
+    date: "2023.01",
+    year: "2023",
+    cat: "Frontend",
+    title: "브라우저는 어떻게 동작하는 걸까?",
+    excerpt:
+      "URL 입력부터 화면에 픽셀이 찍히기까지. DOM·CSSOM 생성, 렌더 트리 구성, Layout·Paint, Reflow·Repaint, 하드웨어 가속(Graphic Layer)을 순서대로 정리했다.",
+    tags: ["브라우저", "CRP", "렌더링"],
+    read: "12 min",
+    href: "/posts/how-browser-works",
+    content: howBrowserWorksMd,
+  },
+  {
+    slug: "server-state-react-query",
+    date: "2023.01",
+    year: "2023",
+    cat: "Frontend",
+    title: "Server State는 뭐고, React Query는 왜 쓰는가?",
+    excerpt:
+      "서버 상태가 클라이언트 상태와 다른 이유, Redux로는 왜 부족한지, React Query가 stale/fresh/inactive 상태와 캐시를 어떻게 관리하는지 기초부터 정리했다.",
+    tags: ["React Query", "Server State", "캐싱"],
+    read: "10 min",
+    href: "/posts/server-state-react-query",
+    content: serverStateReactQueryMd,
+  },
+  {
+    slug: "csr-ssr-spa-mpa",
+    date: "2023.01",
+    year: "2023",
+    cat: "Frontend",
+    title: "CSR? SSR? SPA? MPA? 이것들은 뭘까?",
+    excerpt:
+      "CSR·SSR·SSG·Universal Rendering의 차이와 각 렌더링 전략이 적합한 상황, SPA와 MPA의 구분까지 프론트엔드 렌더링 전략 전반을 정리했다.",
+    tags: ["CSR", "SSR", "SPA", "MPA"],
+    read: "9 min",
+    href: "/posts/csr-ssr-spa-mpa",
+    content: csrSsrMd,
+  },
+  {
+    slug: "retrospective-2022",
+    date: "2023.01",
+    year: "2023",
+    cat: "회고",
+    title: "2022년 회고록",
+    excerpt:
+      "프론트엔드 개발을 시작하고 첫 해를 마치며 정리한 기록. 스터디, 프로젝트, KB 공모전, 그리고 앞으로의 방향.",
+    tags: ["회고", "2022", "성장"],
+    read: "12 min",
+    href: "/posts/retrospective-2022",
+    content: retrospective2022Md,
+  },
+  // ── 2022 ──────────────────────────────────────────────────────────────────
+  {
+    slug: "mime-content-type",
+    date: "2022.12",
+    year: "2022",
+    cat: "Architecture",
+    title: "MIME type은 뭐고, Content-type은 뭔데?",
+    excerpt:
+      "Content-Type 헤더가 왜 필요한지, MIME Type의 구조와 대표적인 미디어 타입, Base64 인코딩과의 관계까지 정리했다.",
+    tags: ["HTTP", "MIME", "Content-Type"],
+    read: "6 min",
+    href: "/posts/mime-content-type",
+    content: mimeTypeMd,
+  },
+  {
+    slug: "git-hook-husky",
+    date: "2022.12",
+    year: "2022",
+    cat: "Architecture",
+    title: "Git Hook은 무엇이고, Husky는 왜 쓰는걸까?",
+    excerpt:
+      "Git Hook이 무엇인지, pre-commit·commit-msg 훅으로 코드 품질을 자동으로 지키는 방법, Husky와 lint-staged를 조합하는 설정까지 정리했다.",
+    tags: ["Git", "Husky", "lint-staged"],
+    read: "7 min",
+    href: "/posts/git-hook-husky",
+    content: gitHookMd,
+  },
+  {
+    slug: "eslint-prettier",
+    date: "2022.12",
+    year: "2022",
+    cat: "Architecture",
+    title: "ESLint, Prettier를 왜 써야 할까?",
+    excerpt:
+      "ESLint의 정적 분석 원리(AST 기반), Prettier와의 역할 분리, 두 도구를 함께 쓸 때 충돌을 피하는 설정 방법을 정리했다.",
+    tags: ["ESLint", "Prettier", "DX"],
+    read: "7 min",
+    href: "/posts/eslint-prettier",
+    content: eslintPrettierMd,
   },
 ];
 
