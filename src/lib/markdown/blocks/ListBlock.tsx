@@ -17,7 +17,7 @@ export function UnorderedListBlock({ items }: UlProps) {
             <span className="text-text-3 shrink-0 mt-[0.6em] text-[9px]">◇</span>
           );
         return (
-          <li key={j} className={`flex gap-3 font-sans text-[16px] leading-[1.75] text-text-2 ${ml}`}>
+          <li key={j} className={`flex gap-3 font-sans text-[16px] leading-[1.75] text-text ${ml}`}>
             {bullet}
             <span>{parseInline(item.text)}</span>
           </li>
@@ -33,26 +33,13 @@ interface OlProps {
 
 export function OrderedListBlock({ items }: OlProps) {
   return (
-    <ol className="mb-5 space-y-3 list-none">
+    <ol className="mb-5 space-y-2 list-none">
       {items.map((item, j) => (
-        <li key={j} className="flex flex-col gap-2 rounded-[8px] bg-surface px-4 py-3 border border-border font-sans text-[16px] leading-[1.75] text-text-2">
-          <div className="flex items-baseline gap-3">
-            {/* Number badge */}
-            <span className="inline-flex items-center justify-center shrink-0 w-[22px] h-[22px] rounded-full bg-accent/15 font-mono font-bold text-[11px] text-accent-bright translate-y-[1px]">
-              {item.num ?? j + 1}
-            </span>
-            <span className="font-medium text-text">{parseInline(item.text)}</span>
-          </div>
-          {item.subItems && item.subItems.length > 0 && (
-            <ul className="ml-[34px] space-y-1.5 border-l border-border pl-4">
-              {item.subItems.map((sub, k) => (
-                <li key={k} className="flex gap-2.5 font-sans text-[15px] leading-[1.75] text-text-2/80">
-                  <span className="text-text-3 shrink-0 mt-[0.6em] text-[9px]">◇</span>
-                  <span>{parseInline(sub.text)}</span>
-                </li>
-              ))}
-            </ul>
-          )}
+        <li key={j} className="flex gap-3 font-sans text-[16px] leading-[1.75] text-text">
+          <span className="font-mono text-[12px] text-accent-bright shrink-0 mt-[0.3em] w-5 text-right">
+            {item.num ?? j + 1}.
+          </span>
+          <span>{parseInline(item.text)}</span>
         </li>
       ))}
     </ol>
