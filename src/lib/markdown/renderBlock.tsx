@@ -173,14 +173,14 @@ export function renderBlock(block: Block, idx: number): ReactNode {
 
     case "table":
       return (
-        <div key={idx} className="my-6 w-full overflow-x-auto rounded-[10px] border border-border">
-          <table className="w-full text-left text-[14px]">
+        <div key={idx} className="my-7 w-full overflow-x-auto rounded-[10px] border border-border">
+          <table className="w-full text-left border-collapse">
             <thead>
-              <tr className="border-b border-border bg-surface-2">
+              <tr className="border-b border-border-strong">
                 {block.headers.map((h, j) => (
                   <th
                     key={j}
-                    className="px-4 py-2.5 font-sans font-semibold text-[13px] text-text-2 whitespace-nowrap"
+                    className="bg-surface-2 px-4 py-3 font-mono text-[11.5px] tracking-[0.06em] uppercase text-text-3 whitespace-nowrap first:rounded-tl-[9px] last:rounded-tr-[9px]"
                   >
                     {parseInline(h)}
                   </th>
@@ -189,9 +189,15 @@ export function renderBlock(block: Block, idx: number): ReactNode {
             </thead>
             <tbody>
               {block.rows.map((row, j) => (
-                <tr key={j} className="border-b border-border last:border-0 hover:bg-surface-2/50 transition-colors">
+                <tr
+                  key={j}
+                  className="border-b border-border last:border-0 transition-colors duration-100 hover:bg-surface-2/60"
+                >
                   {row.map((cell, k) => (
-                    <td key={k} className="px-4 py-2.5 font-sans text-[14px] leading-[1.7] text-text-2">
+                    <td
+                      key={k}
+                      className="px-4 py-3 font-sans text-[14px] leading-[1.75] text-text-2"
+                    >
                       {parseInline(cell)}
                     </td>
                   ))}
