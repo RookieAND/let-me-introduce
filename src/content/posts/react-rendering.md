@@ -123,6 +123,9 @@ return React.createElement(MyComponent, {a: 42, b: "testing"}, "Text Here")
 -   일례로 `console.log()` 의 경우 새로이 추가되었을 때 화면에 로그가 찍히는 효과가 추가로 발생하지만, 어떠한 상태도 건드리지 않는다.
 -   하지만 렌더링 과정에서 props 나 state를 의도적으로 수정한다면, 이전과 같은 작업을 수행할 수 없으며 무결점성 또한 크게 해치게 된다.
 
+> [!CAUTION]
+> Concurrent Mode에서는 렌더링 함수가 중단·재개되거나 여러 번 호출될 수 있다. 렌더링 중 Side Effect가 있으면 같은 부작용이 반복 실행되므로, 렌더링 함수는 반드시 순수 함수여야 한다.
+
 1. 렌더링 로직 과정에서 진행할 수 없는 작업
     - 컴포넌트 내에 존재하는 변수 혹은 Object를 수정하는 행위
     - `Math.random()`, `Date.now()` 같은 무작위한 값을 생성하는 행위

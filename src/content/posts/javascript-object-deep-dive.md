@@ -189,6 +189,9 @@ console.log(copied);
 - 따라서 사용자가 해당 플래그를 `false` 로 변환했다면, 다시 `true` 로 변환시키는 작업을 차단시킨다.
 - `Object.defineProperty` 메서드를 사용하여 해당 프로퍼티를 재정의하는 작업도 차단된다.
 
+> [!CAUTION]
+> `configurable: false`는 되돌릴 수 없는 단방향 변경이다. 이후 `Object.defineProperty`로 플래그를 수정하거나 프로퍼티를 삭제하려 하면 TypeError가 발생한다.
+
 ```javascript
 let user = { };
 

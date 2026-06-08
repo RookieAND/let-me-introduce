@@ -137,6 +137,9 @@ https://velog.io/@rookieand/React-18%EC%97%90%EC%84%9C-%EC%B6%94%EA%B0%80%EB%90%
 - 또한 React는 컴포넌트 내부의 props, 이벤트 핸들러, 지역 변수를 렌더링이 진행된 순간의 state를 활용하여 계산하고, 이를 최종적으로 반환하게 된다.
 - state는 컴포넌트 외부에서 Closure 형태로 관리되는 변수이다. React 는 컴포넌트 함수가 호출된 순간의 state 값 (스냅샷) 을 제공하며 이는 다음 렌더링 이전까지 변하지 않는다.
 
+> [!IMPORTANT]
+> 하나의 이벤트 핸들러 안에서 `setCount(count + 1)` 을 여러 번 호출해도 `count` 는 현재 렌더링의 스냅샷 값으로 고정되어 있어, 결과는 항상 동일하다. 이전 업데이트 결과를 누적하려면 `setCount(prev => prev + 1)` 처럼 updater function을 사용해야 한다.
+
 ```jsx
 import { useState } from "react";
 

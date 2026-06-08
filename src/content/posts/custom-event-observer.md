@@ -48,6 +48,9 @@ useEffect(() => {
 }, []);
 ```
 
+> [!WARNING]
+> cleanup 함수의 인라인 화살표 함수는 등록 시점의 함수와 다른 참조이므로 `removeEventListener`가 실제로 리스너를 제거하지 못한다. 이벤트 리스너는 반드시 동일한 함수 참조로 해제해야 한다.
+
 ### useEventListener 커스텀 훅 제작
 
 ```typescript

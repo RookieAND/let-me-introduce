@@ -140,3 +140,6 @@ pnpm --filter=@gem-server/accumulation deploy ./deploy/accumulation
 - 내부 패키지가 마치 외부 의존성인 것처럼 취급된다
 
 Docker 이미지를 만들 때 workspace 심볼릭 링크 없이 자급자족하는 의존성 구조가 필요한 경우에 유용하다.
+
+> [!IMPORTANT]
+> Docker 빌드 환경에서는 레이어 간 파일 시스템 경계를 하드 링크가 넘을 수 없다. `--mount=type=cache`로 pnpm store를 캐시하더라도 `package-import-method`가 기본값(`hardlink`)이면 파일 복사에 실패한다. `pnpm install` 시 `--config.package-import-method=copy`를 지정해야 한다.

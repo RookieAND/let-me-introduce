@@ -44,6 +44,9 @@ MF는 Webpack 5, Rspack, Rsbuild, Vite 등을 지원하나, 빌드 도구별로 
 
 `singleton: true`로 설정된 라이브러리(예: React)는 페이지에 단 하나의 인스턴스만 존재해야 한다. 버전 불일치 시 충돌이 발생할 수 있다. 여러 팀이 동일한 라이브러리의 서로 다른 버전을 사용할 경우, `requiredVersion`, `strictVersion` 같은 버전 협상 전략을 명확히 정의해야 한다.
 
+> [!WARNING]
+> `singleton: true` 라이브러리의 버전이 Producer와 Consumer 간에 불일치하면 런타임 에러가 발생한다. 빌드 타임에는 에러가 없으므로, 배포 후에야 문제가 드러난다.
+
 ### CSS 격리
 
 MF는 CSS 스타일 격리를 기본 제공하지 않는다. CSS Modules, BEM, CSS-in-JS 등 격리 전략을 팀 차원에서 사전에 합의해야 한다. Shadow DOM 방식은 컴포넌트 라이브러리와의 호환성 문제가 생길 수 있어 신중하게 검토해야 한다.

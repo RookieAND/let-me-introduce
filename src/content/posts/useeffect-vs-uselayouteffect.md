@@ -32,6 +32,9 @@
 
 ### ✏️ useEffect는 가끔 Paint 이전에 실행될 수 있다.
 
+> [!WARNING]
+> `useLayoutEffect` 에서 setState를 호출해 리렌더링이 발생하면, 이전 렌더링의 `useEffect` (Passive Effect) 가 Paint 이전에 실행된다. `useEffect` 가 항상 Paint 이후에 실행된다고 가정하면 예상치 못한 버그가 생길 수 있다.
+
 - 이상적인 케이스에서 React는 항상 `useEffect` 훅이 Paint 작업 이후에 실행되도록 보장한다.
 - 하지만 `useLayoutEffect` 에서 리렌더링이 발생할 경우, `useEffect` 의 작업인 Passive Effect가 Paint 작업 이전에 실행된다.
 ```jsx

@@ -238,6 +238,9 @@ private getHandler(type: EventType) {
 
 **URL 구성 문제.** `new URL(path, base)` 동작 방식의 오해로 `/api/v1`이 누락됐다. base에 trailing slash가 없고 path에 leading slash가 있으면 base의 경로 부분이 무시된다.
 
+> [!WARNING]
+> `new URL(path, base)`에서 `path`가 `/`로 시작하면 `base`의 경로 전체가 무시된다. `base`는 반드시 trailing slash로 끝내고, `path`의 leading slash는 제거해야 의도한 URL이 완성된다.
+
 ```typescript
 // ❌ 문제 상황
 new URL("/gatherings/123", "https://api.com/api/v1")

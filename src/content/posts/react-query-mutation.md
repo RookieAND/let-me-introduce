@@ -57,6 +57,9 @@ mutate(todo, {
 
 **useMutation**에 정의된 콜백이 먼저 실행되고, **mutate**에 정의된 콜백이 이후 실행된다. 컴포넌트가 중간에 unmount되면 callback이 더 이상 실행되지 않으므로 주의해야 한다.
 
+> [!IMPORTANT]
+> 페이지 이동이 잦은 플로우에서 라우팅·toast 같은 중요한 후속 처리를 `mutate` 호출 측 콜백에 두면, 컴포넌트가 먼저 언마운트될 경우 실행되지 않는다. 이런 로직은 `useMutation`의 `onSuccess`에 두는 것이 안전하다.
+
 - `variables`: mutate 함수 호출 시 넘긴 인자
 - `data`: mutationFn이 실행된 결과 값 (onSuccess, onSettled)
 - `context`: onMutate 콜백 함수가 반환한 값 (onError, onSettled)
