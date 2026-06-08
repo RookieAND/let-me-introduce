@@ -85,10 +85,10 @@ export function PostToc({ headings }: PostTocProps) {
 
           return (
             <li key={id} className="relative">
-              {/* Active indicator — overlays the border track */}
+              {/* Active indicator — short pip, vertically centered in the row */}
               <span
-                className={`absolute left-0 inset-y-0 w-[2px] rounded-full transition-all duration-200 ${
-                  isActive ? "bg-accent opacity-100" : "opacity-0"
+                className={`absolute left-0 top-1/2 -translate-y-1/2 w-[2px] h-4 rounded-full transition-opacity duration-200 ${
+                  isActive ? "bg-accent" : "bg-transparent"
                 }`}
               />
 
