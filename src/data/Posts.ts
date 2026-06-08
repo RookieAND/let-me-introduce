@@ -1,5 +1,6 @@
 import caslAbacMd from "#/content/posts/casl-abac-declarative-permissions.md?raw";
 import caslTsDeepDiveMd from "#/content/posts/casl-typescript-deep-dive.md?raw";
+import dockerKubernetesC1Md from "#/content/posts/docker-kubernetes-ch1.md?raw";
 import dockerKubernetesC2Md from "#/content/posts/docker-kubernetes-ch2.md?raw";
 import turborepoMd from "#/content/posts/turborepo-remote-cache-self-hosted.md?raw";
 import zustandSliceMd from "#/content/posts/zustand-slice-form-builder.md?raw";
@@ -148,6 +149,19 @@ export const POSTS: Post[] = [
     read: "8 min",
     href: "/posts/suites-nestjs-auto-mock",
     content: suitesNestjsMd,
+  },
+  {
+    slug: "docker-kubernetes-ch1",
+    date: "2026.06",
+    year: "2026",
+    cat: "Infra",
+    title: "도커란? — 가상 머신과 컨테이너의 차이",
+    excerpt:
+      "하이퍼바이저 기반 VM의 성능 손실·이미지 크기 문제와, 도커가 chroot·네임스페이스·cgroup으로 프로세스 단위 격리를 구현하는 원리. MSA 환경에서 컨테이너가 주목받는 이유를 정리했다.",
+    tags: ["Docker", "Container", "가상화"],
+    read: "3 min",
+    href: "/posts/docker-kubernetes-ch1",
+    content: dockerKubernetesC1Md,
   },
   {
     slug: "docker-kubernetes-ch2",
