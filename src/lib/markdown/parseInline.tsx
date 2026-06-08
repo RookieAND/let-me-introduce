@@ -19,13 +19,13 @@ export function parseInline(text: string): ReactNode {
     if (bold !== undefined) {
       parts.push(
         <strong key={key++} className="font-semibold text-text">
-          {bold}
+          {parseInline(bold)}
         </strong>,
       );
     } else if (italic !== undefined) {
       parts.push(
         <em key={key++} className="italic">
-          {italic}
+          {parseInline(italic)}
         </em>,
       );
     } else if (code !== undefined) {
@@ -52,7 +52,7 @@ export function parseInline(text: string): ReactNode {
     } else if (strike !== undefined) {
       parts.push(
         <del key={key++} className="line-through text-text-3">
-          {strike}
+          {parseInline(strike)}
         </del>,
       );
     }
