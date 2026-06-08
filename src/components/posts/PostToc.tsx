@@ -119,47 +119,41 @@ export function PostToc({ headings }: { headings: TocEntry[] }) {
             return (
               <li key={id} className="relative">
                 {/*
-                 * SVG diagonal connector — matches Vapor UI's approach.
-                 * A line from (1,0) → (10,12) inside a 16×16 viewBox
-                 * creates a gentle diagonal bend from the track into the item.
+                 * Cascading diagonal connectors — depth가 깊어질수록
+                 * 대각선이 누적되어 안쪽으로 파고드는 효과.
                  *
-                 * h2: branches from the main track (left-0)
-                 * h3: branches from the h2 continuation level (left=[10px])
+                 * h2: 메인 트랙(x=0)에서 대각선 1개
+                 * h3: h2 context(x=0) + h3 own(x=10) 대각선 2개 cascade
+                 *
+                 * 각 SVG는 16×16 viewBox, (1,0)→(10,12) 동일 각도.
+                 * 시작 left 위치만 10px씩 shift되어 깊이감을 표현.
                  */}
-                {level === 2 && (
+                {level >= 2 && (
                   <svg
                     viewBox="0 0 16 16"
                     className="pointer-events-none absolute -top-1.5 left-0 size-4"
                     aria-hidden
                   >
-                    <line
-                      x1="1" y1="0" x2="10" y2="12"
-                      strokeWidth="1"
-                      className="stroke-border"
-                    />
+                    <line x1="1" y1="0" x2="10" y2="12" strokeWidth="1" className="stroke-border" />
                   </svg>
                 )}
-                {level === 3 && (
+                {level >= 3 && (
                   <svg
                     viewBox="0 0 16 16"
                     className="pointer-events-none absolute -top-1.5 size-4"
                     style={{ left: "10px" }}
                     aria-hidden
                   >
-                    <line
-                      x1="1" y1="0" x2="10" y2="12"
-                      strokeWidth="1"
-                      className="stroke-border"
-                    />
+                    <line x1="1" y1="0" x2="10" y2="12" strokeWidth="1" className="stroke-border" />
                   </svg>
                 )}
 
-                {/* Continuation vertical line for h2 — connects sibling h2 items */}
+                {/* Continuation vertical lines — sibling 항목 연결 */}
                 {level === 2 && (
-                  <div
-                    className="absolute w-px bg-border"
-                    style={{ left: "10px", top: "6px", bottom: 0 }}
-                  />
+                  <div className="absolute w-px bg-border" style={{ left: "10px", top: "6px", bottom: 0 }} />
+                )}
+                {level === 3 && (
+                  <div className="absolute w-px bg-border" style={{ left: "20px", top: "6px", bottom: 0 }} />
                 )}
 
                 <a
