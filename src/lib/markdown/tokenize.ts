@@ -77,11 +77,11 @@ export function tokenize(md: string): Block[] {
       continue;
     }
 
-    // Unordered list
-    if (/^[-*+]\s/.test(line)) {
+    // Unordered list (including indented sub-bullets)
+    if (/^[ \t]*[-*+]\s/.test(line)) {
       const items: string[] = [];
-      while (i < lines.length && /^[-*+]\s/.test(lines[i])) {
-        items.push(lines[i].replace(/^[-*+]\s+/, ""));
+      while (i < lines.length && /^[ \t]*[-*+]\s/.test(lines[i])) {
+        items.push(lines[i].replace(/^[ \t]*[-*+]\s+/, ""));
         i++;
       }
       blocks.push({ kind: "ul", items });
@@ -108,7 +108,7 @@ export function tokenize(md: string): Block[] {
       !lines[i].startsWith("```") &&
       !lines[i].startsWith("> ") &&
       !lines[i].startsWith("!") &&
-      !/^[-*+]\s/.test(lines[i]) &&
+      !/^[ \t]*[-*+]\s/.test(lines[i]) &&
       !/^\d+\.\s/.test(lines[i]) &&
       !/^[-*_]{3,}\s*$/.test(lines[i])
     ) {
