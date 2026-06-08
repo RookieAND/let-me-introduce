@@ -116,11 +116,12 @@ export function tokenize(md: string): Block[] {
       continue;
     }
 
-    // Ordered list
+    // Ordered list — preserve original numbers for non-contiguous lists
     if (/^\d+\.\s/.test(line)) {
       const items: ListItem[] = [];
       while (i < lines.length && /^\d+\.\s/.test(lines[i])) {
-        items.push({ text: lines[i].replace(/^\d+\.\s+/, ""), depth: 0 });
+        const m = lines[i].match(/^(\d+)\.\s+(.*)/);
+        items.push({ text: m?.[2] ?? lines[i], depth: 0, num: m ? parseInt(m[1], 10) : items.length + 1 });
         i++;
       }
       blocks.push({ kind: "ol", items });

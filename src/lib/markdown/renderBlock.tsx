@@ -163,7 +163,7 @@ export function renderBlock(block: Block, idx: number): ReactNode {
           {block.items.map((item, j) => (
             <li key={j} className="flex gap-3 font-sans text-[16px] leading-[1.75] text-text-2">
               <span className="font-mono text-[12px] text-accent-bright shrink-0 mt-[0.3em] w-5 text-right">
-                {j + 1}.
+                {item.num ?? j + 1}.
               </span>
               <span>{parseInline(item.text)}</span>
             </li>
