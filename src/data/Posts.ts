@@ -66,6 +66,13 @@ import hardLinkMd from "#/content/posts/hard-link-symbolic-link.md?raw";
 import plopMd from "#/content/posts/plop-code-generator.md?raw";
 import suitesNestjsMd from "#/content/posts/suites-nestjs-auto-mock.md?raw";
 
+// TIL 추가분
+import jsExecutionContextMd from "#/content/posts/javascript-execution-context.md?raw";
+import reactWindowingMd from "#/content/posts/react-windowing.md?raw";
+import reactUseSuspensedQueryMd from "#/content/posts/react-use-suspensed-query.md?raw";
+import webServerVsWasMd from "#/content/posts/web-server-vs-was.md?raw";
+import browserParsingMd from "#/content/posts/browser-parsing.md?raw";
+
 // 회고
 import retrospective2025HMd from "#/content/posts/retrospective-2025-1h.md?raw";
 import retrospective2024Md from "#/content/posts/retrospective-2024.md?raw";
@@ -489,6 +496,19 @@ export const POSTS: Post[] = [
     content: dockerComposeMd,
   },
   {
+    slug: "react-use-suspensed-query",
+    date: "2024.09",
+    year: "2024",
+    cat: "Frontend",
+    title: "useSuspensedQuery 훅 제작일지",
+    excerpt:
+      "Suspense를 써도 data 타입이 T | undefined로 추론되는 문제를 해결하기 위해 useSuspensedQuery 훅을 직접 만든 과정. enabled 옵션과 ErrorBoundary 조합으로 타입 무결성을 보장하는 방법을 정리했다.",
+    tags: ["React Query", "TypeScript", "Suspense"],
+    read: "8 min",
+    href: "/posts/react-use-suspensed-query",
+    content: reactUseSuspensedQueryMd,
+  },
+  {
     slug: "react-query-mutation",
     date: "2024.09",
     year: "2024",
@@ -764,6 +784,19 @@ export const POSTS: Post[] = [
     content: theoSprint15thMd,
   },
   {
+    slug: "react-windowing",
+    date: "2023.05",
+    year: "2023",
+    cat: "Frontend",
+    title: "windowing 기법이란 무엇이고, 어떻게 최적화를 하는 걸까?",
+    excerpt:
+      "무한 스크롤로 쌓인 DOM 노드가 TBT·INP를 어떻게 망치는지 수치로 확인하고, react-virtualized가 뷰포트 밖 요소를 렌더링하지 않는 원리를 정리했다.",
+    tags: ["React", "Windowing", "성능 최적화", "Virtual Scroll"],
+    read: "9 min",
+    href: "/posts/react-windowing",
+    content: reactWindowingMd,
+  },
+  {
     slug: "react-state-usestate",
     date: "2023.04",
     year: "2023",
@@ -920,6 +953,19 @@ export const POSTS: Post[] = [
     content: useEffectLayoutMd,
   },
   {
+    slug: "javascript-execution-context",
+    date: "2023.02",
+    year: "2023",
+    cat: "Frontend",
+    title: "실행 컨텍스트란 무엇인가?",
+    excerpt:
+      "JS 코드가 실행되기 전 엔진이 수집하는 환경 정보 객체, 실행 컨텍스트. VariableEnvironment·LexicalEnvironment·ThisBinding의 구조와 호이스팅이 일어나는 원리를 Call Stack 흐름으로 정리했다.",
+    tags: ["JavaScript", "실행 컨텍스트", "호이스팅", "스코프"],
+    read: "9 min",
+    href: "/posts/javascript-execution-context",
+    content: jsExecutionContextMd,
+  },
+  {
     slug: "javascript-equality-comparison",
     date: "2023.01",
     year: "2023",
@@ -985,6 +1031,19 @@ export const POSTS: Post[] = [
     content: jsIterableMd,
   },
   {
+    slug: "browser-parsing",
+    date: "2023.01",
+    year: "2023",
+    cat: "Frontend",
+    title: "브라우저 파싱 원리에 대한 고찰",
+    excerpt:
+      "브라우저가 HTML을 DOM 트리로 변환하는 Tokenizer·Tree Constructor 단계와 에러 허용(Error Tolerance) 파싱의 동작 방식을 정리했다. how-browser-works와 달리 파싱 과정 자체에 집중한다.",
+    tags: ["브라우저", "파싱", "DOM", "HTML"],
+    read: "7 min",
+    href: "/posts/browser-parsing",
+    content: browserParsingMd,
+  },
+  {
     slug: "how-browser-works",
     date: "2023.01",
     year: "2023",
@@ -1037,6 +1096,19 @@ export const POSTS: Post[] = [
     content: retrospective2022Md,
   },
   // ── 2022 ──────────────────────────────────────────────────────────────────
+  {
+    slug: "web-server-vs-was",
+    date: "2023.01",
+    year: "2023",
+    cat: "Architecture",
+    title: "Web Server 와 Web Application Server 간의 차이",
+    excerpt:
+      "웹 서버와 WAS의 역할 분리, CGI의 한계, fail over·fail back으로 무중단 운영을 구현하는 이유까지. 왜 둘을 함께 써야 하는지 구조적으로 정리했다.",
+    tags: ["Web", "WAS", "Nginx", "아키텍처"],
+    read: "6 min",
+    href: "/posts/web-server-vs-was",
+    content: webServerVsWasMd,
+  },
   {
     slug: "mime-content-type",
     date: "2022.12",

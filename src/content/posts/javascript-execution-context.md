@@ -1,0 +1,48 @@
+# 📖 Introduction
+
+# ✒️ Execution Context
+
+### ✏️ 실행 컨텍스트란?
+
+- JS 엔진은 코드를 실행하기 전에 필요한 정보를 수집하여 별도의 환경에 보관하고, 런타임 과정에서 이를 활용한다.
+- 실행 컨텍스트 (Execution Context) 란 코드 실행에 필요한 여러 환경 정보들을 모아놓은 객체이다.
+- 생성된 실행 컨텍스트들은 Call Stack, 즉 스택 자료구조에 push 되고 pop 되어 전체 코드의 환경 및 실행 순서를 보장한다.
+
+### ✏️ 실행 컨텍스트의 종류
+
+- Global Execution Context (전역 실행 컨텍스트)
+
+  - 코드가 처음 실행될 시 생성되는 유일한 컨텍스트로, 함수 외부에 있는 코드는 전역 실행 컨텍스트에 포함된다.
+  - 브라우저에서는 `window`, Node.js 에서는 `global` 이 전역 실행 컨텍스트가 된다.
+
+- Function Execution Context (함수 실행 컨텍스트)
+
+  - 함수가 실행될 때마다 JS 엔진에서는 함수 실행 컨텍스트를 생성하며, 함수 내부에 위치한 코드를 평가하고 실행시키는 역할을 한다.
+
+- Eval Execution Context
+  - `eval()` 함수가 실행될 때마다 생성되는 실행 컨텍스트이며, 현재는 `eval()` 함수의 사용을 지양하는 추세기에 더 이상 언급하지 않으려 한다.
+
+# ✒️ How are Execution Contexts Created?
+
+### ✏️ 실행 컨텍스트의 생성 단계
+
+- 실행 컨텍스트의 생성 과정은 크게 생성 단계 (Creation Phase) 와 실행 단계 (Execution Phase) 로 나뉜다.
+
+### ✏️ Creation Phase
+
+- 생성 단계에서 실행 컨텍스트는 실행 컨텍스트 객체 (Execution Context Object) 와 연결된다. `ECO` 는 런타임 과정에서 실행 컨텍스트가 사용하는 중요한 데이터를 보관한다.
+- Creation Phase는 크게 총 3가지 단계로 나뉘는데, ECO의 속성이 정의되고 설정되는 과정에서 일어나게 된다.
+  - Variable Object (VO) 의 생성
+  - Scope Chain 의 생성
+  - this 바인딩
+
+1. Variable Object 생성
+
+- Variable Object (VO) 란, 실행 컨텍스트 내에서 생성되는 객체와 유사한 컨테이너다. 내부에는 실행 컨텍스트 내부에서 정의된 변수와 함수의 선언부를 담고 있다.
+- 전역 실행 컨텍스트에서, `var` 키워드로 정의된 변수들마다 Variable Object에 해당 변수를 가리키는 속성이 추가되며 속성 값은 `undefined` 로 지정된다. (let, const는 값을 추가하지 않는다.)
+- 또한 전역 실행 컨텍스트에서 함수 선언문으로 생성된 함수들 또한 Variable Object의 속성에 추가되며 메모리에 저장된다.
+- 따라서 함수 선언문으로 생성된 함수들은 코드 실행 전에 이미 VO에 추가된 상태이기에, 해당 함수가 선언된 장소 이전에도 사용이 가능하다. 이러한 현상을 **호이스팅** 이라고 한다.
+
+# 📒 References
+
+- https://www.freecodecamp.org/news/execution-context-how-javascript-works-behind-the-scenes/
