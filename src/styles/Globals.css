@@ -5,9 +5,9 @@
 
 @theme {
   /* ── Fonts ── */
-  --font-sans: "Pretendard Variable", Pretendard, -apple-system, system-ui, sans-serif;
-  --font-display: "Space Grotesk", "Pretendard Variable", sans-serif;
-  --font-mono: "JetBrains Mono", ui-monospace, monospace;
+  --font-sans: "Pretendard Variable", Pretendard, "Tossface", -apple-system, system-ui, sans-serif;
+  --font-display: "Space Grotesk", "Pretendard Variable", "Tossface", sans-serif;
+  --font-mono: "JetBrains Mono", "Tossface", ui-monospace, monospace;
 
   /* ── Colors ── */
   --color-bg: #0a0a0b;
