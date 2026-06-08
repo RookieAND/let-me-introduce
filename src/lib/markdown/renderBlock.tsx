@@ -2,6 +2,7 @@ import type { ReactNode } from "react";
 import { MermaidBlock } from "./MermaidBlock";
 import { highlight } from "./highlight";
 import { parseInline } from "./parseInline";
+import { slugify } from "./slugify";
 import type { Block, CalloutType } from "./types";
 
 const H_CLASS: Record<number, string> = {
@@ -64,7 +65,7 @@ export function renderBlock(block: Block, idx: number): ReactNode {
     case "h": {
       const Tag = `h${block.level}` as "h1" | "h2" | "h3" | "h4" | "h5" | "h6";
       return (
-        <Tag key={idx} className={H_CLASS[block.level]}>
+        <Tag key={idx} id={slugify(block.text)} className={H_CLASS[block.level]}>
           {parseInline(block.text)}
         </Tag>
       );
