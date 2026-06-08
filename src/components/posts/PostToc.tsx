@@ -59,14 +59,33 @@ export function PostToc({ headings }: { headings: TocEntry[] }) {
     return () => window.removeEventListener("scroll", handleScroll);
   }, [headings]);
 
-  // Slide indicator to the active item — top & height transition like Vapor UI
+  // Slide indicator + keep active item visible in the TOC container
   useEffect(() => {
     if (!activeId || !listRef.current) return;
     const item = listRef.current.querySelector(
       `[data-toc-id="${activeId}"]`,
     ) as HTMLElement | null;
-    if (item) {
-      setIndicator({ top: item.offsetTop, height: item.offsetHeight });
+    if (!item) return;
+
+    setIndicator({ top: item.offsetTop, height: item.offsetHeight });
+
+    // Find the nearest overflow-y scrollable ancestor (the sticky wrapper in PostDetailPage)
+    let container: HTMLElement | null = item.parentElement;
+    while (container) {
+      const overflow = getComputedStyle(container).overflowY;
+      if (overflow === "auto" || overflow === "scroll") break;
+      container = container.parentElement;
+    }
+    if (!container) return;
+
+    const pad = 24;
+    const { top: itemTop, bottom: itemBottom } = item.getBoundingClientRect();
+    const { top: cTop, bottom: cBottom } = container.getBoundingClientRect();
+
+    if (itemTop < cTop + pad) {
+      container.scrollBy({ top: itemTop - cTop - pad, behavior: "smooth" });
+    } else if (itemBottom > cBottom - pad) {
+      container.scrollBy({ top: itemBottom - cBottom + pad, behavior: "smooth" });
     }
   }, [activeId]);
 
