@@ -17,7 +17,7 @@ export function UnorderedListBlock({ items }: UlProps) {
             <span className="text-text-3 shrink-0 mt-[0.6em] text-[9px]">◇</span>
           );
         return (
-          <li key={j} className={`flex gap-3 font-sans text-[16px] leading-[1.75] text-text ${ml}`}>
+          <li key={j} className={`flex gap-3 font-sans text-[16px] leading-[1.75] text-text-2 ${ml}`}>
             {bullet}
             <span>{parseInline(item.text)}</span>
           </li>
@@ -35,11 +35,26 @@ export function OrderedListBlock({ items }: OlProps) {
   return (
     <ol className="mb-5 space-y-2 list-none">
       {items.map((item, j) => (
-        <li key={j} className="flex gap-3 font-sans text-[16px] leading-[1.75] text-text">
-          <span className="font-mono text-[12px] text-accent-bright shrink-0 mt-[0.3em] w-5 text-right">
-            {item.num ?? j + 1}.
-          </span>
-          <span>{parseInline(item.text)}</span>
+        <li key={j} className="font-sans text-[16px] leading-[1.75]">
+          <div className="flex gap-3 text-text">
+            <span className="font-mono text-[12px] text-accent-bright shrink-0 mt-[0.3em] w-5 text-right">
+              {item.num ?? j + 1}.
+            </span>
+            <span>{parseInline(item.text)}</span>
+          </div>
+          {item.subItems && item.subItems.length > 0 && (
+            <ul className="mt-1.5 ml-8 space-y-1">
+              {item.subItems.map((sub, k) => {
+                const ml = sub.depth >= 2 ? "ml-5" : "";
+                return (
+                  <li key={k} className={`flex gap-3 text-text-2 ${ml}`}>
+                    <span className="text-accent shrink-0 mt-[0.55em] text-[10px]">◆</span>
+                    <span>{parseInline(sub.text)}</span>
+                  </li>
+                );
+              })}
+            </ul>
+          )}
         </li>
       ))}
     </ol>

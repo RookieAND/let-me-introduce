@@ -119,7 +119,11 @@ export function tokenize(md: string): Block[] {
     // Ordered list — preserve original numbers, collect indented sub-bullets
     if (/^\d+\.\s/.test(line)) {
       const items: ListItem[] = [];
-      while (i < lines.length && /^\d+\.\s/.test(lines[i])) {
+      while (i < lines.length) {
+        // skip blank lines between ol items
+        while (i < lines.length && !lines[i].trim()) i++;
+        if (i >= lines.length || !/^\d+\.\s/.test(lines[i])) break;
+
         const m = lines[i].match(/^(\d+)\.\s+(.*)/);
         const item: ListItem = {
           text: m?.[2] ?? lines[i],
@@ -127,16 +131,24 @@ export function tokenize(md: string): Block[] {
           num: m ? parseInt(m[1], 10) : items.length + 1,
         };
         i++;
-        // collect following bullet sub-items — indented OR non-indented (no blank line separator)
-        while (i < lines.length && /^[ \t]*[-*+]\s/.test(lines[i])) {
-          const subM = lines[i].match(/^[ \t]*[-*+]\s+(.*)/);
-          if (!item.subItems) item.subItems = [];
-          item.subItems.push({ text: subM?.[1] ?? "", depth: bulletDepth(lines[i]) });
-          i++;
+
+        // collect following bullet sub-items, allowing a blank line gap between item and sub-bullets
+        const savedI = i;
+        while (i < lines.length && !lines[i].trim()) i++;
+        if (i < lines.length && /^[ \t]*[-*+]\s/.test(lines[i])) {
+          while (i < lines.length && /^[ \t]*[-*+]\s/.test(lines[i])) {
+            const subM = lines[i].match(/^[ \t]*[-*+]\s+(.*)/);
+            if (!item.subItems) item.subItems = [];
+            item.subItems.push({ text: subM?.[1] ?? "", depth: bulletDepth(lines[i]) });
+            i++;
+          }
+        } else {
+          i = savedI;
         }
+
         items.push(item);
       }
-      blocks.push({ kind: "ol", items });
+      if (items.length > 0) blocks.push({ kind: "ol", items });
       continue;
     }
 
