@@ -35,14 +35,33 @@ export function PostToc({ headings }: PostTocProps) {
   useEffect(() => {
     if (headings.length === 0) return;
 
+    const NAV_HEIGHT = 68; // h-17 = 68px
+
     const handleScroll = () => {
-      const scrollY = window.scrollY + 100; // matches scroll-mt-24 (96px) + small buffer
-      let current = headings[0].id;
+      const inViewport: { id: string; top: number }[] = [];
+      let lastAbove: string | null = null;
+
       for (const { id } of headings) {
         const el = document.getElementById(id);
-        if (el && el.offsetTop <= scrollY) current = id;
+        if (!el) continue;
+        const { top } = el.getBoundingClientRect();
+
+        if (top >= NAV_HEIGHT && top < window.innerHeight) {
+          // heading is visible below the nav
+          inViewport.push({ id, top });
+        } else if (top < NAV_HEIGHT) {
+          // heading is above the visible area (scrolled past)
+          lastAbove = id;
+        }
       }
-      setActiveId(current);
+
+      if (inViewport.length > 0) {
+        // topmost heading currently visible in viewport
+        setActiveId(inViewport.reduce((a, b) => (a.top < b.top ? a : b)).id);
+      } else if (lastAbove) {
+        // between headings — highlight the last one scrolled past
+        setActiveId(lastAbove);
+      }
     };
 
     handleScroll();
