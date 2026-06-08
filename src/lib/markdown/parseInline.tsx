@@ -1,4 +1,5 @@
 import type { ReactNode } from "react";
+import { highlight } from "./highlight";
 
 const INLINE_RE = /\*\*(.+?)\*\*|\*(.+?)\*|`([^`]+)`|\[(.+?)\]\((.+?)\)|~~(.+?)~~/g;
 
@@ -32,10 +33,9 @@ export function parseInline(text: string): ReactNode {
       parts.push(
         <code
           key={key++}
-          className="font-mono text-[0.875em] bg-surface border border-border rounded-[5px] px-1.5 py-0.5 text-accent-bright"
-        >
-          {code}
-        </code>,
+          className="font-mono text-[0.875em] bg-surface border border-border rounded-[5px] px-1.5 py-0.5 text-[#c9d1d9]"
+          dangerouslySetInnerHTML={{ __html: highlight(code, "typescript") }}
+        />,
       );
     } else if (linkText !== undefined) {
       parts.push(
