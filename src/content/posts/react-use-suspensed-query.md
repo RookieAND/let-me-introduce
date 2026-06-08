@@ -29,7 +29,8 @@ const ProjectApplyTemplate = () => {
 
 물론 fetching 이 실패했을 경우에 대한 대비라던가, enabled 옵션이 꺼졌다거나 하는 케이스로 인해서 데이터가 항상 원하는 타입으로 반환될 것이라는 보장이 없으므로 undefined 가 나올 수도 있다는 가능성은 늘 존재하지만, 적어도 이 부분은 ErrorBoundary 와 Suspense 의 조합으로 다르게 해결할 수 있다고 생각한다.
 
-다행이도 머지않아 릴리즈 될 v5 의 경우에는 Suspense 옵션이 켜졌을 경우 항상 data 의 타입을 올바르게 추론하는 useSuspensedQuery 훅을 추가할 예정이라고 한다. 추가로 `@suspensive/react-query` 라는 라이브러리에서도 `useSuspenseQuery` 훅을 지원한다.
+다행이도 머지않아 릴리즈 될 v5 의 경우에는 Suspense 옵션이 켜졌을 경우 항상 data 의 타입을 올바르게 추론하는 useSuspensedQuery 훅을 추가할 예정이라고 한다.  
+추가로 `@suspensive/react-query` 라는 라이브러리에서도 `useSuspenseQuery` 훅을 지원한다.
 
 - https://suspensive.org/docs/react-query/src/useSuspenseQuery.i18n
 - https://tanstack.com/query/v5/docs/react/guides/migrating-to-v5
@@ -183,7 +184,8 @@ export function useSuspendedQuery<
 
 이렇게 하니 코드 상에서 data 가 존재하는지를 한번 더 체크하지 않아도 되었기에 불필요한 유효성 검사를 진행했던 코드를 많이 줄일 수 있었다.
 
-중요한 점은 해당 훅은 `useQuery` 훅에 들어갈 인자를 **객체로 넣는 케이스에만** 통용된다는 점이다. 만약 훅을 아래와 같이 사용한다면 타입 에러가 100% 날 것이다.
+중요한 점은 해당 훅은 `useQuery` 훅에 들어갈 인자를 **객체로 넣는 케이스에만** 통용된다는 점이다.  
+만약 훅을 아래와 같이 사용한다면 타입 에러가 100% 날 것이다.
 
 ```ts
 // 요런 케이스는 된다.
@@ -217,6 +219,8 @@ export const useGetProjectList = ({
 
 ## 3. 결론
 
-`useSuspensedQuery` 도입 이후 react-query 를 사용하기가 한결 더 편해졌다고 생각한다. 타입 체커가 의도한대로 데이터 타입을 추론하는 것만으로도 솔직히 이 훅의 존재 의의는 달성했다고 생각한다.
+`useSuspensedQuery` 도입 이후 react-query 를 사용하기가 한결 더 편해졌다고 생각한다.  
+타입 체커가 의도한대로 데이터 타입을 추론하는 것만으로도 솔직히 이 훅의 존재 의의는 달성했다고 생각한다.
 
-만약 `TData | undefined` 로 인해 react-query 에 고통받는 분이 있다면
+만약 `TData | undefined` 로 인해 react-query 에 고통받는 분이 있다면, 위 코드를 참고하거나 직접 변형하여 적용해보는 것을 추천한다.  
+물론 현재는 react-query v5와 `@suspensive/react-query` 라이브러리 모두 공식적으로 `useSuspenseQuery` 를 지원하고 있으니, 가능하다면 공식 지원 훅으로 마이그레이션하는 것이 장기적으로 더 좋은 선택이다.
