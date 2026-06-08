@@ -2,6 +2,7 @@ import type { ReactNode } from "react";
 import type { Block, CalloutType } from "./types";
 import { parseInline } from "./parseInline";
 import { MermaidBlock } from "./MermaidBlock";
+import { highlight } from "./highlight";
 
 const H_CLASS: Record<number, string> = {
   1: "font-display font-semibold text-[clamp(26px,3.5vw,36px)] leading-[1.2] tracking-[-0.02em] text-text mt-14 mb-5 first:mt-0",
@@ -53,9 +54,10 @@ export function renderBlock(block: Block, idx: number): ReactNode {
             </div>
           )}
           <pre className="p-5 bg-surface overflow-x-auto">
-            <code className="font-mono text-[13px] leading-[1.75] text-[#c9d1d9] block">
-              {block.body}
-            </code>
+            <code
+              className="font-mono text-[13px] leading-[1.75] text-[#c9d1d9] block"
+              dangerouslySetInnerHTML={{ __html: highlight(block.body, block.lang) }}
+            />
           </pre>
         </div>
       );

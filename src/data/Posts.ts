@@ -234,7 +234,7 @@ export const POSTS: Post[] = [
     title: "TypeScript satisfies 를 알아보자",
     excerpt:
       ": Type 지정은 타입을 고정시키고, as는 타입을 무시한다. satisfies는 조건만 검사하고 실제 타입 추론을 건드리지 않는다. 세 가지 방식의 차이와 각각을 써야 할 상황을 정리했다.",
-    tags: ["TypeScript", "satisfies"],
+    tags: ["TypeScript", "satisfies", "타입 안전성"],
     read: "5 min",
     href: "/posts/typescript-satisfies",
     content: tsSatisfiesMd,
@@ -324,7 +324,7 @@ export const POSTS: Post[] = [
     title: "2025년 상반기 회고록",
     excerpt:
       "격변의 반년. 처음으로 소규모 팀을 리딩하고, 체중 16kg 감량, 스마일라식, 일본어 학원까지. 개발에만 집중하던 나에서 삶의 여러 측면을 다루는 나로 변화하려 애썼던 2025년 상반기 기록.",
-    tags: ["회고", "2025", "성장"],
+    tags: ["회고", "2025", "성장", "리더십"],
     read: "18 min",
     href: "/posts/retrospective-2025-1h",
     content: retrospective2025HMd,
@@ -337,7 +337,7 @@ export const POSTS: Post[] = [
     title: "CSS Custom Properties로 리렌더링 없는 런타임 테마 만들기",
     excerpt:
       "기수마다 바뀌는 랜딩 테마를, JS 상태가 아닌 CSS 변수로 즉시 전환하도록 구현해 운영팀이 직접 테마를 바꾸게 한 이야기.",
-    tags: ["CSS", "Theme", "DX"],
+    tags: ["CSS", "CSS Variables", "Theme", "DX"],
     read: "7 min",
     href: "https://velog.io/@rookieand/posts",
   },
@@ -349,7 +349,7 @@ export const POSTS: Post[] = [
     title: "Turborepo Remote Cache, 클라우드 대신 직접 구축한 이유",
     excerpt:
       "추가 비용 없이 CI 빌드 캐시를 쓰고 싶었다. AWS EFS + Jenkins로 원격 캐시 서버를 세워 팀 전체 빌드 속도를 끌어올린 과정.",
-    tags: ["Turborepo", "pnpm", "CI"],
+    tags: ["Turborepo", "pnpm", "CI", "빌드 캐시"],
     read: "11 min",
     href: "/posts/turborepo-remote-cache-self-hosted",
     content: turborepoMd,
@@ -362,7 +362,7 @@ export const POSTS: Post[] = [
     title: "Docker 멀티스테이지 빌드로 배포 시간 83% 줄이기",
     excerpt:
       "이미지 레이어 구조를 다시 짜고 멀티스테이지로 분리하니 배포가 눈에 띄게 빨라졌다. 무엇이 캐시를 깨고 있었는지 추적한 기록.",
-    tags: ["Docker", "최적화"],
+    tags: ["Docker", "멀티스테이지", "CI/CD", "최적화"],
     read: "8 min",
     href: "https://velog.io/@rookieand/posts",
   },
@@ -388,7 +388,7 @@ export const POSTS: Post[] = [
     title: "서버 사이드 Google OAuth2로 안정적인 스프레드시트 연동",
     excerpt:
       "클라이언트 대신 서버에서 토큰을 갱신해 장기 세션에서도 끊기지 않는 연동을 만든 이유와, 시트 API를 추상화해 확장 여지를 남긴 설계.",
-    tags: ["OAuth2", "Google API"],
+    tags: ["OAuth2", "Google API", "인증", "NestJS"],
     read: "9 min",
     href: "https://velog.io/@rookieand/posts",
   },
@@ -478,7 +478,7 @@ export const POSTS: Post[] = [
     title: "Vitest로 0에서 79까지 — 레거시에 테스트 안전망 깔기",
     excerpt:
       "테스트가 한 줄도 없던 핵심 로직에 유닛 테스트를 도입하고, E2E 중복 시나리오 140곳을 걷어내 실행 시간과 유지보수 비용을 함께 줄인 과정.",
-    tags: ["Vitest", "Testing", "TDD"],
+    tags: ["Vitest", "Testing", "TDD", "레거시"],
     read: "10 min",
     href: "https://velog.io/@rookieand/posts",
   },
@@ -542,7 +542,7 @@ export const POSTS: Post[] = [
     title: "마침내, 데브말싸미 프로젝트 릴리즈를 마치며",
     excerpt:
       "2전 3기 끝에 드디어 데브말싸미 사이드 프로젝트를 세상에 내놓았다. 팀 빌딩부터 배포까지, 좌충우돌 협업의 모든 과정을 담은 기록.",
-    tags: ["회고", "사이드 프로젝트", "협업"],
+    tags: ["회고", "사이드 프로젝트", "협업", "릴리즈"],
     read: "10 min",
     href: "/posts/devmalsami-release",
     content: devmalsamiReleaseMd,
@@ -817,7 +817,7 @@ export const POSTS: Post[] = [
     title: "React 18에서 추가된 Auto Batching 은 무엇인가?",
     excerpt:
       "React 18 이전에는 이벤트 핸들러 안에서만 배치됐던 상태 업데이트가, 이제는 Promise·setTimeout 안에서도 자동 배치된다. 무엇이 바뀌었는지 정리했다.",
-    tags: ["React", "React 18", "Batching"],
+    tags: ["React", "React 18", "Batching", "성능"],
     read: "6 min",
     href: "/posts/react-18-auto-batching",
     content: reactAutoBatchingMd,
