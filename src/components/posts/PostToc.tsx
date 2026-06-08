@@ -76,7 +76,9 @@ export function PostToc({ headings }: { headings: TocEntry[] }) {
     if (!item) return;
 
     const level = headings.find((h) => h.id === activeId)?.level ?? 1;
-    setIndicator({ top: item.offsetTop, height: item.offsetHeight, left: DEPTH_LEFT[level] ?? 0 });
+    // a.offsetParent = li(relative) → a.offsetTop은 항상 0. li 기준으로 측정해야 함.
+    const li = item.parentElement as HTMLElement;
+    setIndicator({ top: li.offsetTop, height: li.offsetHeight, left: DEPTH_LEFT[level] ?? 0 });
 
     const container = findScrollContainer(item);
     if (!container) return;
