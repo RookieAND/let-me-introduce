@@ -11,4 +11,5 @@ export type Block =
   | { kind: "ul"; items: ListItem[] }
   | { kind: "ol"; items: ListItem[] }
   | { kind: "hr" }
-  | { kind: "img"; alt: string; src: string };
+  | { kind: "img"; alt: string; src: string }
+  | { kind: "table"; headers: string[]; rows: string[][] };

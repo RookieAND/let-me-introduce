@@ -171,6 +171,37 @@ export function renderBlock(block: Block, idx: number): ReactNode {
         </ol>
       );
 
+    case "table":
+      return (
+        <div key={idx} className="my-6 w-full overflow-x-auto rounded-[10px] border border-border">
+          <table className="w-full text-left text-[14px]">
+            <thead>
+              <tr className="border-b border-border bg-surface-2">
+                {block.headers.map((h, j) => (
+                  <th
+                    key={j}
+                    className="px-4 py-2.5 font-sans font-semibold text-[13px] text-text-2 whitespace-nowrap"
+                  >
+                    {parseInline(h)}
+                  </th>
+                ))}
+              </tr>
+            </thead>
+            <tbody>
+              {block.rows.map((row, j) => (
+                <tr key={j} className="border-b border-border last:border-0 hover:bg-surface-2/50 transition-colors">
+                  {row.map((cell, k) => (
+                    <td key={k} className="px-4 py-2.5 font-sans text-[14px] leading-[1.7] text-text-2">
+                      {parseInline(cell)}
+                    </td>
+                  ))}
+                </tr>
+              ))}
+            </tbody>
+          </table>
+        </div>
+      );
+
     case "hr":
       return <hr key={idx} className="border-0 border-t border-border my-10" />;
 

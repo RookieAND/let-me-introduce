@@ -86,6 +86,25 @@ export function tokenize(md: string): Block[] {
       continue;
     }
 
+    // GFM table: header row | ... | followed by separator row |---|---|
+    if (line.startsWith("|") && i + 1 < lines.length && /^\|[-: |]+\|$/.test(lines[i + 1].trim())) {
+      const parseRow = (row: string) =>
+        row
+          .split("|")
+          .slice(1, -1)
+          .map((cell) => cell.trim());
+
+      const headers = parseRow(line);
+      i += 2; // skip header + separator
+      const rows: string[][] = [];
+      while (i < lines.length && lines[i].startsWith("|")) {
+        rows.push(parseRow(lines[i]));
+        i++;
+      }
+      blocks.push({ kind: "table", headers, rows });
+      continue;
+    }
+
     // Unordered list (including indented sub-bullets)
     if (/^[ \t]*[-*+]\s/.test(line)) {
       const items: ListItem[] = [];

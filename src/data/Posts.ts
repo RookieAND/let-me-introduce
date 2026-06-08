@@ -1,5 +1,6 @@
 import caslAbacMd from "#/content/posts/casl-abac-declarative-permissions.md?raw";
 import caslTsDeepDiveMd from "#/content/posts/casl-typescript-deep-dive.md?raw";
+import dockerKubernetesC2Md from "#/content/posts/docker-kubernetes-ch2.md?raw";
 import turborepoMd from "#/content/posts/turborepo-remote-cache-self-hosted.md?raw";
 import zustandSliceMd from "#/content/posts/zustand-slice-form-builder.md?raw";
 
@@ -147,6 +148,19 @@ export const POSTS: Post[] = [
     read: "8 min",
     href: "/posts/suites-nestjs-auto-mock",
     content: suitesNestjsMd,
+  },
+  {
+    slug: "docker-kubernetes-ch2",
+    date: "2026.06",
+    year: "2026",
+    cat: "Infra",
+    title: "도커 엔진 — 이미지·컨테이너·볼륨·네트워크 완전 정리",
+    excerpt:
+      "컨테이너 생성·삭제·포트 포워딩부터 호스트 볼륨 공유, 브리지·호스트·컨테이너 네트워크 드라이버, json-file·syslog·fluentd 로깅 전략, CPU·메모리 자원 제한, 이미지 레이어 구조와 save/export 차이까지. 도커 엔진 2장 전체를 정리했다.",
+    tags: ["Docker", "Container", "Network", "Volume"],
+    read: "15 min",
+    href: "/posts/docker-kubernetes-ch2",
+    content: dockerKubernetesC2Md,
   },
   {
     slug: "module-federation",
