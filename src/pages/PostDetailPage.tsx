@@ -30,7 +30,7 @@ export function PostDetailPage() {
 
   if (!post?.content) return <Navigate to="/posts" replace />;
 
-  const [monthStr, yearStr] = post.date.split(".");
+  const [yearStr, monthStr] = post.date.split("-");
   const monthNum = monthStr.replace(/^0/, "");
 
   const headings = extractHeadings(tokenize(post.content));

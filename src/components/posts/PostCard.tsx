@@ -10,7 +10,7 @@ const CARD_CLASS =
   "group grid grid-cols-[120px_1fr_auto] gap-7 items-start px-2 py-7.5 border-t border-border transition-[background] duration-250 hover:bg-surface max-[760px]:grid-cols-1 max-[760px]:gap-2.5";
 
 function CardInner({ post }: { post: Post }) {
-  const [monthStr, yearStr] = post.date.split(".");
+  const [yearStr, monthStr] = post.date.split("-");
   const month = `${monthStr.replace(/^0/, "")}월`;
 
   return (

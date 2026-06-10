@@ -15,7 +15,7 @@ function FeaturedCardInner() {
       <div className="flex gap-3.5 items-center font-mono text-[12px] text-text-3 mt-5.5 mb-3 flex-wrap">
         <span className="text-accent">{FEATURED_POST.cat}</span>
         <span>·</span>
-        <span>{FEATURED_POST.date}</span>
+        <span>{FEATURED_POST.date.slice(0, 7).replace("-", ".")}</span>
         <span>·</span>
         <span>{FEATURED_POST.read}</span>
       </div>
