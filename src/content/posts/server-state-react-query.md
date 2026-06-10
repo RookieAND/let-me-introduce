@@ -1,4 +1,3 @@
-# 📖 Introduction
 
 > **react-query** 를 쓰라고 해서 쓰긴 쓰는데.. 이걸 왜 써야 하는 걸까?
 
@@ -8,30 +7,30 @@
 
 하지만 이 고마운 친구가 정확히 어떤 일을 하는 건지, 그리고 나는 이걸 왜 써야 하는지에 대한 심도 있는 고찰이 필요한 시점이 바로 지금이라고 생각하여, 리액트 쿼리가 어쩌다 만들어졌고 이걸 써야 하는 이유와, 리액트 쿼리를 사용함에 있어 필요한 기본 지식을 정리하고자 한다.
 
-# ✒️ Server State
+## Server State
 
-### ✏️ state (상태)
+### state (상태)
 
 -   React에서는 렌더링에 영향을 미치는 자바스크립트 Object 라고 정의.
 -   Global State (전역 상태) 는 어플리케이션 어디에서든 접근이 가능함.
 -   또한 전역 상태의 변화는 곧 애플리케이션의 렌더링에 전반적으로 영향을 미침.
 
-### ✏️ Client State
+### Client State
 
 -   UI 테마, 사이드바, 폼 입력 등과 같이 **클라이언트가 소유하고 제어하는** 데이터를 의미.
 -   클라이언트에서 항상 제어가 가능하기에 항상 동기적인 상태를 가짐.
     -   local client state : 폼 입력, 사이드바 같이 하나 또는 인접한 컴포넌트에서 사용하는 state.
     -   global client state : 언어, UI 테마 (다크 모드) 와 같이 어플리케이션에 전반적으로 사용되는 state.
 
-### ✏️ Server State
+### Server State
 
 -   유저 DB 정보 등과 같이 클라이언트가 **서버로부터 받아오는 모든 데이터** 를 의미함.
 -   클라이언트가 제어하고 관리할 수 없기에 **특정 시점**으로부터 받아온 데이터를 사용함. 이로 인해 비동기적인 상태를 가짐.
 -   서버와 클라이언트 간의 state가 항상 일치한다는 보장이 없으며, 클라이언트에서 더 이상 **유효하지 않은 데이터**를 소유할 가능성이 있음.
 
-# ✒️ Why React Query?
+## Why React Query?
 
-### ✏️ React Query 가 대체 뭔가?
+### React Query 가 대체 뭔가?
 
 > **fetching, caching, synchronizing and updating server state** in your React applications - tanstack
 
@@ -39,7 +38,7 @@
 -   서버로부터 받아온 데이터를 별도의 키를 통해 관리하고, **캐싱**하는 역할도 한다.
 -   사용자의 로직에 따라 필요한 데이터를 서버 쪽에서 받아와 백그라운드에서 업데이트 (refetch) 하는 기능을 한다.
 
-### ✏️ 이걸 왜 써야 하는가?
+### 이걸 왜 써야 하는가?
 
 1. React 에서는 데이터를 fetching 하거나 update 하는 방법을 제공하지 않는다.
 
@@ -70,9 +69,9 @@
 4. 데이터가 현재 오래된 (stale) 상태로 변했는지를 확인.
 5. 서버로부터 받은 데이터를 관리하고, GC에 의해 소거되는 과정도 관찰.
 
-# ✒️ What is Query?
+## What is Query?
 
-### ✏️ React Query 에서 쿼리는 무엇을 의미하는가?
+### React Query 에서 쿼리는 무엇을 의미하는가?
 
 > A query is a declarative dependency on an asynchronous source of data that is tied to a unique key
 
@@ -80,7 +79,7 @@
 -   서버로부터 데이터를 가져올 경우에는 `useQuery`, `useInfiniteQuery` Hook을 쓴다.
 -   단, 서버의 데이터를 수정할 경우에는 `useMutation` Hook을 사용해야 한다.
 
-### ✏️ queryKey와 queryFn에 대하여.
+### queryKey와 queryFn에 대하여.
 
 ```javascript
 function Todos() {
@@ -113,12 +112,12 @@ function Todos() {
 -   `queryKey` 는 refetch, caching 등과 같은 작업을 할때 쓰이는 고유한 키다. v4 부터는 배열로만 key를 선언해야 한다.
 -   `queryFn` 의 경우 서버로부터 데이터를 가져오기 위해 쓰이는 비동기 함수를 의미하며 반드시 Promise를 리턴해야 한다.
 
-### ✏️ 쿼리가 데이터를 가져오는데 실패했다면?
+### 쿼리가 데이터를 가져오는데 실패했다면?
 
 -   만약 쿼리가 데이터를 가져오는 데 실패했다면, react query의 경우 기본적으로 세 차례 재요청을 진행한다.
 -   만약 재요청 횟수와 인터벌을 수정하고 싶다면, `retry` 옵션과 `retryDelay` 옵션을 별도로 설정하자.
 
-### ✏️ 쿼리의 상태는 어떻게 구분짓는가?
+### 쿼리의 상태는 어떻게 구분짓는가?
 
 -   `useQuery` 가 리턴한 결과 객체의 `state` 프로퍼티로 쿼리의 상태를 파악한다.
 -   `state` 속성의 경우 현재 mount 된 쿼리 인스턴스의 상태를 파악할 때 쓰인다.
@@ -135,7 +134,7 @@ function Todos() {
 
 -   따라서 `state` 와 `fetchState` 를 모두 확인하여 쿼리의 상태를 유추할 수 있다.
 
-### ✏️ 쿼리가 참조하는 데이터의 상태는 어떻게 구분하는가?
+### 쿼리가 참조하는 데이터의 상태는 어떻게 구분하는가?
 
 1. fresh
     - 해당 쿼리가 보관한 데이터가 아직 **유효**함을 의미.
@@ -149,7 +148,7 @@ function Todos() {
     - 기본적으로 `inactive` 한 상태가 된 후 5분이 지나면 해당 쿼리는 자동으로 GC에 수집됨.
     - `cacheTime` 옵션을 통해 inactive 된 쿼리 데이터가 GC에게 수집되기까지 걸리는 시간을 지정할 수 있음.
 
-### ✏️ React-Query에서 캐싱된 데이터는 어떻게 관리되는가?
+### React-Query에서 캐싱된 데이터는 어떻게 관리되는가?
 
 -   `useQuery` 혹은 `useInfiniteQuery` 로 생성된 쿼리 인스턴스는 기본적으로 캐싱된 데이터를 `stale` 상태로 둔다.
 -   단, `staleTime` 속성을 통해 해당 쿼리에 종속된 데이터의 유효 시간을 설정할 수 있다. (단위 : ms)

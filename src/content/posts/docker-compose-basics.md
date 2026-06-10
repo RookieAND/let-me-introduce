@@ -1,3 +1,7 @@
+> 데브말싸미 사이드 프로젝트에서 NestJS + Redis + Nginx를 한 번에 띄워야 했다. docker run을 개별로 실행하다가 docker-compose로 넘어온 과정에서 정리한 내용이다.
+
+---
+
 ## Docker Compose란?
 
 > Docker Compose is a tool for defining and running multi-container applications.
@@ -106,6 +110,74 @@ services:
 - `COMPOSE_PROJECT_NAME` 환경 변수
 - Compose 파일 내 최상위 `name` 섹션
 - 현재 디렉토리 이름
+
+---
+
+## 서비스 간 의존 관계 — depends_on
+
+`depends_on`은 컨테이너 시작 순서를 제어한다.
+
+```yaml
+services:
+  backend:
+    image: my-backend:latest
+    depends_on:
+      - redis
+      - db
+
+  redis:
+    image: redis:alpine
+
+  db:
+    image: postgres:14
+```
+
+단, `depends_on`은 **컨테이너가 시작되었는지**만 확인한다. DB가 실제로 준비됐는지(healthy 상태)는 보장하지 않는다. 서비스가 완전히 준비된 후에 의존 컨테이너를 시작하려면 `healthcheck`와 함께 써야 한다.
+
+```yaml
+services:
+  backend:
+    depends_on:
+      db:
+        condition: service_healthy  # db가 healthy 상태일 때만 시작
+
+  db:
+    image: postgres:14
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U postgres"]
+      interval: 5s
+      timeout: 5s
+      retries: 5
+```
+
+---
+
+## 네트워크 설정
+
+Docker Compose는 기본적으로 모든 서비스를 **하나의 브리지 네트워크**에 연결한다. 같은 Compose 파일 내 서비스끼리는 서비스 이름으로 바로 통신할 수 있다.
+
+```yaml
+# backend 서비스에서 redis 서비스에 연결할 때
+const client = createClient({ url: 'redis://redis:6379' });
+```
+
+서비스 격리가 필요하면 명시적으로 네트워크를 정의한다.
+
+```yaml
+services:
+  backend:
+    networks:
+      - app-network
+      - db-network
+
+  db:
+    networks:
+      - db-network
+
+networks:
+  app-network:
+  db-network:
+```
 
 ---
 

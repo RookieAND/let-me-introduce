@@ -1,13 +1,12 @@
-# 📖 Introduction
 
 > setState를 많이 실행시켜도 리렌더링이 **한번만** 일어나는 이유는 무엇인가?
 
 React를 사용하다 보면 필연적으로 state를 다룰 수밖에 없게 되고, 이를 사용하다 보면 문득 드는 한 가지 의문이 존재한다. 분명 setState 함수는 리렌더링을 유발한다고 했는데 왜 여러번 실행을 해도 한 번만 리렌더링이 진행되는 걸까? 
 지금은 React 에서 이를 Batching 처리하여 일괄적으로 처리함을 알고 있었지만, React 18에서 소개하는 Automatic Batching은 기존의 Batching 작업을 개선했다고 말하길래 어떤 부분을 개선했는지가 굉장히 궁금하였다. 따라서 공식 문서와 React의 메인테이너 분께서 작성한 글을 토대로 React 에서는 state update 작업을 어떻게 처리하는지 파헤쳐보고자 한다.
 
-# ✒️ Automatic Batching
+## Automatic Batching
 
-### ✏️ Batching 이란?
+### Batching 이란?
 
 - `state` 값이 변경되었을 경우 React 에서는 해당 컴포넌트를 리렌더링 하며, 불필요한 리렌더링을 방지하기 위해 state를 변경하는 작업을 **일괄적으로 처리**한다.
 - 이렇게 `state` 의 업데이트 작업을 모아 일괄 처리하는 방식을 **Batching** 이라고 하며, 이 덕에 React 에서는 불필요한 리렌더링을 방지할 수 있게 되었다.
@@ -39,7 +38,7 @@ export default Counter;
 - 상단의 코드는 setter 함수를 **세 차례 실행**시켰기 때문에 리렌더링도 세 번 발생할 것 같지만, 실제로 코드를 실행해보면 **리렌더링은 한번만 발생한다**.
 - React 는 여러 번의 state update 작업을 Queue에 몰아넣고 일정 주기마다 Queue에 등록된 작업을 순차적으로 일괄 시행하면서 불필요한 리렌더링을 방지한다.
 
-### ✏️ React 18에서 추가된 Automatic Batching 이란?
+### React 18에서 추가된 Automatic Batching 이란?
 
 - React 18 버전 이하에서는 오직 React 의 **이벤트 핸들러 내부의** state update 작업에 대해서만 Batching 이 가능했다. 하지만 Promise나 setTimeout, Native Event Handler 내부의 작업은 불가능했다.
 - 왜냐하면 이전에는 **브라우저의 이벤트가 실행되는 중에만** Batching 작업을 수행했기 때문이다. 따라서 이벤트가 종료된 후에 실행되는 경우는 Batching 작업이 불가능했다.
@@ -109,7 +108,7 @@ const rootElement = document.getElementById("root");
 ReactDOM.createRoot(rootElement).render(<App />);
 ```
 
-### ✏️ 중요한 것은 각각의 작업이 batching 된다는 것
+### 중요한 것은 각각의 작업이 batching 된다는 것
 
 ```js
 import { useLayoutEffect, useRef, useState } from 'react';
@@ -171,7 +170,7 @@ export default App;
 - 중요한 것은 위 작업이 하나의 queue 에 batching 되지 않는다는 점이다. 이벤트 핸들러에서 실행된 setState 와 setTimeout 을 기반으로 실행된 setState 는 서로 batching 되지 않고 독립적으로 실행된다.
 - 한 가지 신기한 점은 이벤트 핸들러에서 실행되었고 딜레이가 같은 두 개의 setTimeout 내 update function 도 하나로 batching 되었다는 점이다.
 
-### ✏️ ReactDOM.flushSync() 란?
+### ReactDOM.flushSync() 란?
 
 - react-dom 라이브러리에 추가된 `ReactDOM.flushSync()` 메서드는 **Auto Batching 을 무시하고** 즉시 DOM을 렌더링해준다.
 - React 에서는 공식적으로 해당 메서드의 사용을 추천하진 않으며 (de-opt case), 필요한 상황이 있을 경우에만 사용할 것을 강조했다.

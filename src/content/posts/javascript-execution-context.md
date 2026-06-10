@@ -1,18 +1,17 @@
-# 📖 Introduction
 
 JS 엔진은 코드 실행을 위해 실행 컨텍스트 (Execution Context) 라는 추상적인 개념을 사용한다.  
 실행 컨텍스트는 코드가 실행되는 환경을 정의하며, 변수의 범위, 호이스팅, this 바인딩 등 JavaScript 의 핵심 동작 원리를 이해하는 데 있어 가장 기초적인 개념이다.  
 이 글에서는 실행 컨텍스트의 종류와 생성 과정을 단계별로 살펴본다.
 
-# ✒️ Execution Context
+## Execution Context
 
-### ✏️ 실행 컨텍스트란?
+### 실행 컨텍스트란?
 
 - JS 엔진은 코드를 실행하기 전에 필요한 정보를 수집하여 별도의 환경에 보관하고, 런타임 과정에서 이를 활용한다.
 - 실행 컨텍스트 (Execution Context) 란 코드 실행에 필요한 여러 환경 정보들을 모아놓은 객체이다.
 - 생성된 실행 컨텍스트들은 Call Stack, 즉 스택 자료구조에 push 되고 pop 되어 전체 코드의 환경 및 실행 순서를 보장한다.
 
-### ✏️ 실행 컨텍스트의 종류
+### 실행 컨텍스트의 종류
 
 - Global Execution Context (전역 실행 컨텍스트)
 
@@ -26,13 +25,13 @@ JS 엔진은 코드 실행을 위해 실행 컨텍스트 (Execution Context) 라
 - Eval Execution Context
   - `eval()` 함수가 실행될 때마다 생성되는 실행 컨텍스트이며, 현재는 `eval()` 함수의 사용을 지양하는 추세기에 더 이상 언급하지 않으려 한다.
 
-# ✒️ How are Execution Contexts Created?
+## How are Execution Contexts Created?
 
-### ✏️ 실행 컨텍스트의 생성 단계
+### 실행 컨텍스트의 생성 단계
 
 - 실행 컨텍스트의 생성 과정은 크게 생성 단계 (Creation Phase) 와 실행 단계 (Execution Phase) 로 나뉜다.
 
-### ✏️ Creation Phase
+### Creation Phase
 
 - 생성 단계에서 실행 컨텍스트는 실행 컨텍스트 객체 (Execution Context Object) 와 연결된다.  
   `ECO` 는 런타임 과정에서 실행 컨텍스트가 사용하는 중요한 데이터를 보관한다.

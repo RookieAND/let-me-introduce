@@ -11,7 +11,7 @@
 - https://github.com/tc39/proposal-promise-with-resolvers
 
 
-## ✒️ 왜 나왔는가?
+## 왜 나왔는가?
 
 Promise 를 다루기 위해서 사용자는 반드시 Resolve 함수와 Reject 함수를 인자로 받는 Callback 을 **Promise 생성자에 넘겨야 했습니다.**
 
@@ -37,7 +37,7 @@ promise
 
 보통은 Callback 의 외부 컨텍스트에서 식별자를 정의하고, Callback 내부에서 식별자에 인자로 받은 `resolve`, `reject` 함수를 넘기는 편입니다.
 
-## ✒️ 위와 관련한 예제 코드
+## 위와 관련한 예제 코드
 
 - 예시) Axios 내 **CancelToken** 구현체
     - https://github.com/axios/axios/blob/bdf493cf8b84eb3e3440e72d5725ba0f138e0451/lib/cancel/CancelToken.js#L20
@@ -117,7 +117,7 @@ class CancelToken {
 
 이렇듯 Resolve, Reject 함수를 받기 위한 식별자를 사전에 생성하는 코드는 프로덕션 레벨의 라이브러리에서 심심찮게 보이는 패턴입니다.
 
-## ✒️ Deferred Promise
+## Deferred Promise
 
 Promise 가 생성되는 레벨에서 이행 여부가 결정되지 않고, 이후의 단계에서 결정되기 때문에 이러한 패턴을 **Deferred Promise** 라고 불리며, 실제 jQuery 에서도 이러한 패턴을 돕는 유틸 함수가 존재합니다.
 
@@ -151,7 +151,7 @@ _deferred(false)
 
 ```
 
-## ✒️ Usage
+## Usage
 
 **Promise.withResolver** 함수는 `promise`, `resolve`, `reject` 속성이 담긴 객체를 반환합니다.
 
@@ -174,7 +174,7 @@ const promise = new Promise((res, rej) => {
 
 ```
 
-## ✒️ Example
+## Example
 
 1.  파일을 삭제하는 과정
 

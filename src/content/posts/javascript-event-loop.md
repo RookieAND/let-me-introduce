@@ -1,23 +1,23 @@
-# ✒️ JS Engine use Single Thread
+## JS Engine use Single Thread
 
-### ✏️ JS는 단일 스레드 기반의 언어
+### JS는 단일 스레드 기반의 언어
 
 -   JS는 단일 스레드 기반의 언어이다. 여러 개의 작업이 있더라도 하나의 작업만을 처리할 수 있다. 하지만 JS가 사용되는 환경에서는 여러 개의 작업이 동시에 처리되는 모습을 쉽게 볼 수 있다.
 -   하지만 동기적 작업은 선행 작업의 시간이 오래 걸릴 경우 그 사이에 사용자는 작업이 완료될 때까지 기다려야 한다는 단점을 내포한다. 이를 타파하기 위해 비동기 처리 방식을 사용한다.
 -   브라우저나 Node.js 에서는 **이벤트 루프 기반의 비동기 방식으로 Non-Blocking I/O를 지원** 한다고 하는데, 이때 나오는 **이벤트 루프** 를 활용한 비동기 방식으로 JS는 동시성을 지원한다.
 
-### ✏️ 단일 스레드는 오직 JS 엔진에만 국한된다.
+### 단일 스레드는 오직 JS 엔진에만 국한된다.
 
 -   JS 엔진 자체는 단일 스레드지만 이를 구동하는 환경 (브라우저, Node.js) 의 경우에는 **여러 개의 스레드를 사용** 한다.
 -   이러한 구동 환경과 단일 호출 스택을 사용하는 JS 엔진 간의 **상호 연동을 위해 쓰이는** 장치가 바로 **이벤트 루프** 인 것이다.
 
-### ✏️ 비동기 관련 로직은 JS 엔진 외부에 있다.
+### 비동기 관련 로직은 JS 엔진 외부에 있다.
 
 -   JS 엔진인 V8 의 경우 단일 호출 스택 (Call Stack) 을 통해 순차적으로 들어온 요청을 스택에 담아 하나씩 처리한다.
 -   허나 비동기 호출을 위해 쓰이는 `setTimeout` 이나 `XMLHttpRequest` 같은 Web API는 JS 엔진이 아닌 외부에 정의되어 있다. 태스크 큐 같은 장치 또한 JS 엔진 외부에 구현되어 있다.
 -   Node.js는 비동기 I/O를 지원하기 위해 C++ 기반의 `libuv` 라이브러리를 사용하며, 여기서 이벤트 루프를 제공한다.
 
-### ✏️ Web API
+### Web API
 
 -   Web API란 브라우저에게 제공하는 API 이며, 비동기 작업을 처리하기 위한 `setTimeout`, `Promise` 등과 같은 기능을 제공한다.
 -   Call Stack 에서 실행된 비동기 함수들은 모두 Web API를 호출하며, 이후 Web API는 인계 받은 콜백 함수를 Task Queue 에 넣는다.
@@ -38,7 +38,7 @@ console.log(3);
     - 이벤트 루프에서 Call Stack이 비워졌음을 인지하고, Task Queue에 있던 Task를 가져온다.
     - 이후 Call Stack에 `console.log(2)` 함수가 추가되고 실행된다.
 
-### ✏️ Run-to-Completion
+### Run-to-Completion
 
 -   JS의 함수가 실행되는 방식을 보통 **Run to Completion** 방식이라 하는데, 이는 하나의 함수가 실행되면 해당 함수가 종료되기 전까지 다른 작업이 중간에 실행되지 않음을 의미한다.
 -   JS 엔진은 단일 호출 스택을 사용하며, 현재 스택에 쌓인 함수들이 모두 실행되어 스택에서 제거되기 전까지는 다른 함수가 실행될 수 없다.
@@ -82,16 +82,16 @@ foo();
 > [!WARNING]
 > `setTimeout(fn, 0)`이라도 콜 스택이 비워지기 전까지 콜백은 실행되지 않는다. 긴 동기 작업 뒤에 타이머를 걸면 실제 지연은 지정 시간보다 훨씬 길어질 수 있다.
 
-# ✒️ Event Loop
+## Event Loop
 
-### ✏️ What is Event Loop?
+### What is Event Loop?
 
 -   브라우저는 변경된 화면을 렌더링하거나 DOM의 이벤트를 관리하고, Promise와 setTimeout 같은 비동기 함수를 적절히 처리하는 일들을 관리한다.
 -   이런 작업들은 모두 Task라고 하며, 이는 순서대로 Task Queue에 담겨서 **가장 오래된 순으로, 실행 가능한 Task 부터** 순차적으로 꺼내진다.
 -   즉, 브라우저에서의 이벤트 루프란 Task Queue와 Call Stack을 모니터링하고 지속적으로 Task를 실행하는 하나의 프로세스이다.
 -   Call Stack 이 차있다면 이벤트 루프는 스택이 빌 때까지 대기하다 Task Queue에서 Task를 꺼내와 Call Stack에 넣어 이를 실행시켜준다.
 
-### ✏️ Sequence of Event Loop?
+### Sequence of Event Loop?
 
 1. Task Queue 에서 **실행 가능하며 (runnable) 가장 오래된 Task**를 하나 꺼내 실행한다.
 2. Micro Task Queue 가 **전부 비워질 때까지** 안의 Micro Task 들을 모두 꺼내 실행한다.
@@ -102,7 +102,7 @@ foo();
     - 렌더링을 통한 화면 업데이트
 4. Task Queue 에 새로운 Task 가 나타날 때까지 대기한다.
 
-### ✏️ (Macro) Task Queue
+### (Macro) Task Queue
 
 > Task queues are sets, not queues, because the event loop processing model grabs the first runnable task from the chosen queue, instead of dequeuing the first task.
 
@@ -118,7 +118,7 @@ foo();
 -   `XMLHttpRequest` 기반 Ajax 요청의 콜백 등 일부 구형 비동기 API의 콜백 작업 (단, `fetch().then()` 과 같이 Promise 기반의 비동기 작업은 Microtask Queue 로 처리됩니다)
 -   document 에 새로운 element 를 삽입하는 등의 DOM 조작 작업.
 
-### ✏️ Micro Task Queue
+### Micro Task Queue
 
 -   Micro Task 란, 현재 실행 중인 Task 가 끝난 직후, 다음 Task 가 실행되기 전에 처리되는 고우선순위 비동기 작업입니다.
     -   `Promise.then` / `Promise.catch` / `Promise.finally` 콜백, `async/await` 의 재개 지점, `queueMicrotask()`, `MutationObserver`, `process.nextTick` (Node.js) 이 이에 속한다.
@@ -139,7 +139,7 @@ foo();
     - 만약 실행 중인 Micro Task가 콜백을 실행하는 경우 Microtask Checkpoint 가 실행된다.
     - 이 때에는 `perfoming a microtask checkpoint` 플래그가 true 이기 때문에, 해당 작업이 이중으로 실행되는 것을 막는다. (false 일 경우에만 체크하기에)
 
-### ✏️ Async / Await 관련 처리 순서의 차이
+### Async / Await 관련 처리 순서의 차이
 
 ```js
 function a() {
@@ -248,7 +248,7 @@ a();
 - 결국 await 키워드를 만나면, async 함수는 **중단되며** 이후의 작업은 Micro Task Queue 로 넘어간다.
 - 하지만 await 키워드를 사용하지 않으면 async 함수는 중단되지 않아 이후의 작업을 Call Stack에 넣게 된다.
 
-### ✏️ Animation Frame Queue
+### Animation Frame Queue
 
 - Task의 실행과 렌더링은 별개로 진행되기에, Task가 5번 진행되었다고 해서 렌더링도 5번 진행되지는 않는다.
 - 일반적으로는 Task가 빨리 실행되는 것을 가장 큰 목표로 하지만, 애니메이션 같은 화면 효과와 관련된 코드는 화면의 렌더링되는 시점에 맞춰 실행되어야 한다.

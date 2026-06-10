@@ -1,4 +1,4 @@
-# ✒️ Cookie
+## Cookie
 
 - HTTP 쿠키란, 서버가 사용자의 브라우저에 전송하는 작은 데이터 조각이다. 하나에 최대 4KB 까지 저장할 수 있다.
 - 하나의 클라이언트에 최대 300개까지 저장이 가능하고, 하나의 도메인당 최대 20개의 값만 가질 수 있다.
@@ -49,7 +49,7 @@ Set-Cookie: id=a3fWa; Domain=localhost:3000 Path=/docs
 - 쿠키에 설정된 도메인을 기준으로 **퍼스트 파티 쿠키**와 **서드 파티 쿠키**로 기준을 정할 수 있는데, 이는 현재 **사용자와 접속한 페이지와 쿠키에 설정된 도메인이 일치하는지**에 따라서 달라진다.
 - 예를 들어 [localhost:3000](http://localhost:3000) 에 접속한 사용자가 서버로부터 응답을 받아 [localhost:8080](http://localhost:8080) 에서 보낸 쿠키를 인계 받았다면, **두 도메인이 서로 다르므로 서드 파티 쿠키로 분류**된다.
 
-# ✒️ Security of Cookie
+## Security of Cookie
 
 ### 📒 Cookie with CSRF
 

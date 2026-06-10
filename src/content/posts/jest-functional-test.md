@@ -1,4 +1,4 @@
-# ✒️ Functional Test Code를 작성해보자.
+## Functional Test Code를 작성해보자.
 
 ### 1. 내가 어떤 기능을 구현할 것인지를 설계한다.
 

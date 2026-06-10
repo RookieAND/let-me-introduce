@@ -6,13 +6,13 @@
 
 하지만 정작 이 ErrorBoundary 가 어떤 목적과 구조를 가지고 동작하는지 잘 몰랐기 때문에, 이번 사내 개발자 스크럼에서 에러 바운더리의 구조와 설계를 분석하고 이를 공유하기 위해 해당 포스트를 작성하게 되었다.
 
-## ✒️ ErrorBoundary 란?
+## ErrorBoundary 란?
 
 - Errorboundary 컴포넌트는 하위 컴포넌트에서 throw 된 Error 를 일괄적으로 catch 하여 fallback UI를 렌더링 해준다.
 - 즉, 하위 컴포넌트에서 에러가 발생했을 경우 이를 지역적으로 각각 처리하는 로직을 작성하지 않고, 가장 근접한 Errorboundary 에게 이를 인계하여 선언적으로 에러를 처리하도록 하는 방식이다.
 - 단순 Axios 요청을 보내는 케이스도 있고, React Query 를 사용하여 Server State 를 인계 받는 케이스도 있으므로 두 개의 케이스에서 발생하는 에러를 모두 정상적으로 처리할 수 있어야 한다.
 
-## ✒️ ErrorBoundary 구조 파악하기
+## ErrorBoundary 구조 파악하기
 
 1. state
     - **ErrorBoundary** 컴포넌트는 didCatch, error 속성을 가진 객체를 state 로 담고 있다.
@@ -135,7 +135,7 @@ componentDidCatch(error: Error, info: ErrorInfo) {
 }
 ```
        
-## ✒️ 현재 개인적으로 사용 중인 모습
+## 현재 개인적으로 사용 중인 모습
 
 ```tsx
 import {

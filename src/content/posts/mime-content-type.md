@@ -1,4 +1,3 @@
-# 📖 Introduction
 
 > 내가 아는 **MIME** 이라고는 인터넷에서 나도는 그 밈밖에 몰랐는데...
 
@@ -6,7 +5,7 @@
 
 따라서 기왕 이렇게 된거 아주 끝을 보자는 마인드로 관련된 자료를 쭉 찾아보았다. 항상 무언가를 탐구하고 이해하는 과정에서 많은 피로감과 어려움을 느끼지만 그래도 이걸 왜 쓰는지를 비로소 알게 되면 눈이 맑게 개이는 느낌이 아주 좋다. 이렇게 말을 하니까 나도 참 정상인은 아닌가보다. 사서 고생한다는 게 딱 이럴때 쓰는 말인가.
 
-# ✒️ MIME Type
+## MIME Type
 
 #### 1. MIME (Multipurpose Internet Mail Extensions) 이란?
 
@@ -45,7 +44,7 @@
 -   base64에서는 이런 문제를 막기 위해 끝을 알리는 특수 문자인 `=` 을 사용.
 -   더 자세한 조사가 필요해보임. 아직 궁금증이 해결되지 않았다..
 
-# ✒️ MIME Type & Content-types
+## MIME Type & Content-types
 
 #### 1. MIME Type (Media Type) 은 대체 뭘까?
 
@@ -99,7 +98,7 @@ text/plain;charset=us-ascii
 -   HTTP Request의 Header 필드인`Content-type` 에 `multipart` 타입이 들어왔다면, 이는 Body에 여러 종류의 단일 데이터가 결합된 형태의 데이터가 존재한다는 의미다.
 -   추가적인 자료 조사가 필요해보인다. 추후 이어서 준비해보자.
 
-# ✒️ Encoding
+## Encoding
 
 #### 1. Encoding 이란?
 

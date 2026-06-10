@@ -69,6 +69,72 @@ palette.green.toUpperCase(); // ✅ string — 문자열임을 TypeScript가 알
 
 ---
 
+## 실무에서 유용한 패턴
+
+### Pattern 1: config 객체의 타입 검증
+
+```typescript
+type AppConfig = {
+  apiUrl: string;
+  timeout: number;
+  maxRetries: number;
+};
+
+// ✅ 필수 필드 누락 시 컴파일 에러 + 실제 추론 유지
+const config = {
+  apiUrl: 'https://api.example.com',
+  timeout: 5000,
+  maxRetries: 3,
+} satisfies AppConfig;
+
+config.apiUrl;  // string (추론 유지)
+config.timeout; // number (추론 유지)
+
+// ❌ 필드 누락 시 컴파일 에러
+const badConfig = { apiUrl: '...' } satisfies AppConfig; // Error: 'timeout' is missing
+```
+
+### Pattern 2: 유니온 타입을 가진 객체에서 타입 좁히기
+
+```typescript
+type Color = { hex: string } | { rgb: [number, number, number] };
+
+const colors = {
+  red: { rgb: [255, 0, 0] },
+  green: { hex: '#00ff00' },
+} satisfies Record<string, Color>;
+
+colors.red.rgb[0];  // ✅ number — 정확한 추론
+colors.green.hex;   // ✅ string — 정확한 추론
+
+// ❌ ': Record<string, Color>' 어노테이션이었다면?
+// colors.red → Color (타입 좁히기 실패)
+```
+
+### Pattern 3: as const satisfies 조합
+
+```typescript
+// 리터럴 타입 유지 + 타입 조건 검증을 동시에
+const ROUTE_MAP = {
+  home: '/',
+  about: '/about',
+  profile: '/profile',
+} as const satisfies Record<string, string>;
+
+ROUTE_MAP.home; // '/' (리터럴 타입, not string)
+// string이 아닌 값을 추가하면 컴파일 에러
+```
+
+---
+
+## 언제 satisfies를 쓸까
+
+- **`as`를 쓰고 싶어질 때 먼저 고려한다.** `as`는 타입 체커를 우회하지만 `satisfies`는 컴파일 에러를 보장한다.
+- **타입 어노테이션으로 추론이 너무 넓어질 때.** `: Type`으로 선언하면 개별 속성의 좁은 타입 정보를 잃어버린다. `satisfies`는 검증만 하고 추론을 유지한다.
+- **`as const`와 함께 상수 객체를 정의할 때.** `as const satisfies Record<...>` 조합으로 리터럴 타입 유지와 타입 검증을 동시에 달성한다.
+
+---
+
 ## 결론
 
 `satisfies`는 특정 값이 개발자가 의도한 타입을 만족하는지를 컴파일 타임에 검사할 뿐, 해당 값의 **실제 타입 추론에는 개입하지 않는다.** Upcasting과 유사한 검증 효과를 제공하면서도 타입이 넓어지는 문제를 피할 수 있다.

@@ -1,4 +1,3 @@
-# 📖 Introduction
 > 지금까지 나는 무지성으로 **ESLint**를 사용해 온 것인가... 라는 생각이 들었다.
 
 처음 프론트엔드 개발을 시작했을 때, 내가 알고 지내던 풀스택 개발자 친구에게서 ESLint와 Prettier를 꼭 설정하라는 조언을 들었다. 하지만 그때 당시 웹 개발에 무지했던 나로서는 그게 도대체 뭔지 알 길이 없었고, 그 후 지금까지도 이것들에 대한 필요성을 크게 느끼지 못했다.
@@ -7,7 +6,7 @@
 
 따라서 오늘부터 개인적인 시간을 내어 이것들이 대체 뭐고, 어떻게 쓰는 것인지를 공부하고자 한다.
 
-# ✒️ ESLint
+## ESLint
 
 #### 1. ESLint란? (ECMAScript + Lint)
 
@@ -30,7 +29,7 @@
 - 그리고 Linter란 이러한 Lint 작업을 도와주는 툴을 의미한다.
 - C 언어 소스 코드를 검사하는 유닉스 유틸리티에서 기원하였다.
 
-# ✒️ How does it Work?
+## How does it Work?
 
 #### 1. ESLint는 어떻게 동작하는가?
 > ESLint는 크게 5가지 과정을 거쳐 동작한다.
@@ -119,7 +118,7 @@ const a = 1 + "foo"
     - 이 과정에서 구조적 또는 언어적으로 문제가 발생할 경우 에러를 발생시킨다.
     - 트리 빌딩 과정에서, 일부 parser의 경우 불필요한 토큰을 생략하기도 한다.
 
-# ✒️ ESLint's Config
+## ESLint's Config
 
 #### 1. .eslintrc.json (ESLint Run Command)
 
@@ -297,7 +296,7 @@ module.exports = {
     - eslint-plugin-jsx-a11y 
 
 
-# ✒️ Prettier
+## Prettier
 
 #### 1. Prettier란?
 

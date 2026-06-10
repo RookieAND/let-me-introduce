@@ -10,7 +10,7 @@
 - 어떤 글에는 내부적으로 `setTimeout` 을 둬서 렌더링 이후의 실행을 보장한다고 하는데… 과연 그 말이 맞는지에 대한 의문이 들었다.
 - Paint 작업이 만약 지연된다 해도 `setTimeout` 이 유효한지에 대한 의문이 들어서 개인적으로 `useEffect` 의 구현체에 대한 탐구를 시작했다.
 
-## ✒️ Logic of Commit Phase
+## Logic of Commit Phase
 
 - useEffect 는 브라우저가 화면을 그리고 난 이후, 즉 **Paint 이후에 실행되는 Effect** 이다. (항상 그렇지는 않으나 대체로 그렇다)
 - 그렇다면 브라우저가 **Paint 된 시점을 정확히 찾아** Effect 를 실행하는 방법은 무엇일까?
@@ -85,7 +85,7 @@ function commitRootImpl(
 }
 ```
 
-## ✒️ ScheduleCallback in React
+## ScheduleCallback in React
 
 - `scheduleCallback` 함수의 구현체를 살펴보면 Scheduler 모듈의 **unstable_scheduleCallback** 을 사용함을 알 수 있다.
 - 해당 구현체는 여기서 확인할 수 있다 (https://github.com/facebook/react/blob/v18.2.0/packages/scheduler/src/forks/Scheduler.js#L308)
@@ -252,7 +252,7 @@ const performWorkUntilDeadline = () => {
 };
 ```
 
-## ✒️ MessageChannel
+## MessageChannel
 
 
 > ❓ 왜 Paint 이후에 Schedule 된 작업을 실행하기 위해서 **MessageChannel API** 를 사용했을까?
@@ -295,7 +295,7 @@ const performWorkUntilDeadline = () => {
 
 - 해당 Effect 가 실행되기 전에 리렌더링이 발생하는 경우 (useLayoutEffect) 에는 Paint 이전에 해당 Effect 를 소비할 가능성도 있다.
 
-## 📒 Reference
+## Reference
 
 - https://html.spec.whatwg.org/multipage/web-messaging.html
     - whatwg 에 기술된 MessageChannel 스펙 문서

@@ -1,11 +1,10 @@
-# 📖 Introduction
 > **Git Hook** 이라는 것도 처음 들어보는데, **Husky**는 왜 또 쓰는 걸까?
 
 어제 ESLint 관련 학습을 마치고 나서 Husky와 관련된 학습을 추가적으로 진행하려는데, Git hooks 이 무엇인지 묻는 질문에서 이미 내 정신은 턱 막혀버렸다. 도대체가 이놈의 공부는 하나를 좀 하려 하면 연쇄적으로 모르는 게 어디서 터져나온다. 아주 사람을 환장하게 만드는데는 도가 텄다.
 
 결국 울며 겨자먹기로, 어차피 알아야 했을 내용이라 생각하며 Git hook에 대한 내용부터 먼저 학습했는데.. 어랍쇼 이거 봐라. 생각보다 유용하다. 따라서 오늘은 5시간 동안 여러 삽질과 정리를 통해 내가 어떻게 Husky를 적용하였고 자체적인 Git Hooks Script는 어떤 방식으로 작성했는지, 그리고 근본적으로 **왜** Husky를 사용해야 하는지에 대한 고찰과 답변을 작성하고자 한다.
 
-# ✒️ Git Hook
+## Git Hook
 
 #### 1. Git Hook 이란?
 
@@ -89,7 +88,7 @@ fi
 exit 0
 ```
 
-# ✒️ Husky
+## Husky
 
 #### 1. husky란?
 
@@ -162,7 +161,7 @@ yarn husky install
     └─ 내가 추가할 script...
 ```
 
-# ✒️ Use Husky with..
+## Use Husky with..
 
 #### 1. ESLint + lint-staged + Husky 조합으로 lint 적용
 

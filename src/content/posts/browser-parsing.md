@@ -1,4 +1,4 @@
-# ✒️ Parsing
+## Parsing
 
 ### 1. Parsing이란 무엇인가?
 
