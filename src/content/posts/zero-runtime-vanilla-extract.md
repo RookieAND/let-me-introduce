@@ -141,6 +141,7 @@ const Button = ({ color, size, ...props }: ButtonProps) => (
 
 **단점:**
 - 빌드 타임에 CSS 변환이 필요해 별도의 플러그인 설정이 필요하다
-- 동적인 스타일링에 제한이 있다. Vanilla Extract에서는 `dynamic` 모듈로 런타임 CSS Variable 생성이 가능하지만, 번들 크기가 아주 작다(1.3kb)
+- 동적인 스타일링에 제한이 있다.  
+  Vanilla Extract에서는 `dynamic` 모듈로 런타임 CSS Variable 생성이 가능하지만, 번들 크기가 아주 작다(1.3kb)
 
 개발 중인 프로젝트의 상황에 따라 적절한 것을 도입하는 것이 중요하다. 복잡한 인터랙션이 많고 성능이 중요한 프로젝트라면 Zero Runtime이 유리하고, 빠른 개발 속도와 동적 스타일링이 필요하다면 Runtime CSS-in-JS가 나을 수 있다.

@@ -108,4 +108,8 @@ codeSplitting: {
 - `minSize: 30KB`: 4~8KB짜리 tiny chunk들이 인접 chunk와 병합되어 요청 수가 줄어든다
 - `maxSize: 800KB`: vapor를 12개 → 5개로 줄이되, 단일 덩어리가 되는 것을 방지한다
 
-총 번들 크기(disk 위의 파일 크기)와 초기 로드 크기(브라우저가 실제로 받는 크기)는 다른 지표다. `maxSize`를 제거하면 전자는 줄지만 후자는 악화된다. `minSize: 30 + maxSize: 800` 조합이 HTTP 요청 수 감소와 on-demand preload 효율을 함께 달성하는 최적점이다.
+총 번들 크기(disk 위의 파일 크기)와 초기 로드 크기(브라우저가 실제로 받는 크기)는 다른 지표다.
+
+`maxSize`를 제거하면 전자는 줄지만 후자는 악화된다.
+
+`minSize: 30 + maxSize: 800` 조합이 HTTP 요청 수 감소와 on-demand preload 효율을 함께 달성하는 최적점이다.

@@ -34,7 +34,9 @@ ability.can('update', subject('Course', { id: 'course-8' }));   // false
 
 ### can / cannot — 권한 확인
 
-`can(action, subject)` 은 특정 Action이 허용되는지 확인한다. `cannot` 은 반대다.
+`can(action, subject)` 은 특정 Action이 허용되는지 확인한다.
+
+`cannot` 은 반대다.
 
 - 규칙이 없으면 기본적으로 `cannot` 이다.
 - **Deny 규칙은 Allow 규칙보다 항상 우선한다.**
