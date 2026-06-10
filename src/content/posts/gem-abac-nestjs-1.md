@@ -71,19 +71,87 @@ ABAC(Attribute-Based Access Control)는 사용자·리소스·환경의 **속성
 
 ---
 
+## 새 시스템의 핵심 개념
+
+설계 이야기로 들어가기 전에, 이 시스템을 이루는 핵심 개념들을 먼저 잡아두자. 코드가 나오기 전에 이 개념들이 머릿속에 잡혀있어야 흐름이 끊기지 않는다.
+
+### Level — 권한 등급 프리셋
+
+운영자가 사용자에게 부여하는 권한의 등급이다. 네 가지 고정값을 가진다.
+
+| Level | 등급 | 의미 |
+|-------|------|------|
+| ADMIN | 4 | 모든 Action + 멤버 초대·설정 관리. 소유자 수준 |
+| EDITOR | 3 | CRUD 전반 가능. 설정·초대 불가 |
+| MEMBER | 2 | 조회 + 제한적 기능. Subject별로 허용 범위가 다르다 |
+| VIEWER | 1 | 읽기 전용 |
+
+포함 관계는 `ADMIN ⊃ EDITOR ⊃ MEMBER ⊃ VIEWER`다.
+
+중요한 건, 같은 Level이라도 Subject마다 허용되는 Action이 다르다. Course EDITOR와 Unit EDITOR가 할 수 있는 행동이 완전히 같지 않다. 이 매핑은 코드 상수 `LEVEL_POLICY_MAP`에서 관리한다.
+
+DB에는 이 Level 값만 저장된다. 실제 허용 Action 목록은 런타임에 코드 상수에서 확장한다.
+
+### PolicyRule — 권한의 최소 단위
+
+"어떤 Subject의, 어떤 Resource에, 어떤 Action을, 허용/거부한다"를 표현하는 단위다. CASL이 실제로 평가하는 게 이 구조다.
+
+```json
+{
+  "effect": "Allow",
+  "subject": "Course",
+  "actions": ["Read", "Update", "Clone", "CreateUnit"],
+  "resources": ["course-7"]
+}
+```
+
+DB에는 저장되지 않는다. Level이 DB에 저장되고, 런타임에 이 PolicyRule 배열로 확장된다. 이 확장을 처리하는 `expandLevelToRules` 구현은 2편에서 다룬다.
+
+### ResourcePermission — Level 기반 권한의 저장소
+
+"누가, 어떤 Resource에, 어떤 Level을 가지는가"를 저장하는 컬렉션이다. 대부분의 권한이 이 경로로 부여된다.
+
+```json
+{
+  "userId": "user-a",
+  "subject": "Course",
+  "resourceId": "course-7",
+  "spaceId": "space-1",
+  "level": "EDITOR"
+}
+```
+
+| 필드 | 설명 |
+|------|------|
+| `userId` | 권한을 부여받은 사용자 |
+| `subject` | 어떤 종류의 Resource인지 (Course, Unit, ...) |
+| `resourceId` | 어떤 구체적 Resource인지 (course-7, ...) |
+| `spaceId` | 어떤 Space 내에서의 권한인지 (범위 조회용) |
+| `level` | 어떤 등급인지 (VIEWER ~ ADMIN) |
+
+`userId + subject + resourceId` 조합이 고유 키다. 한 사람이 Course A는 EDITOR, Course B는 VIEWER이면 ResourcePermission이 2건 존재하고, 런타임에 각각의 PolicyRule[]로 합산된다.
+
+### PolicyOverride — Level로 표현할 수 없는 예외
+
+Level 체계가 커버하지 못하는 비즈니스 예외에만 쓰는 커스텀 규칙이다. 상세 내용은 아래 PolicyOverride 섹션에서 다룬다.
+
+---
+
+흐름 요약: 운영자는 **Level** 하나만 선택한다 → **ResourcePermission**에 저장된다 → 런타임에 **PolicyRule[]** 로 확장된다 → CASL이 평가한다. 예외는 **PolicyOverride**로 처리한다.
+
+---
+
 ## 핵심 설계 원칙
 
 1. **DB에는 Level만 저장한다.** 실제 허용 Action 목록은 코드 상수(`LEVEL_POLICY_MAP`)에서 관리한다. Level 체계가 바뀌어도 DB 마이그레이션 없이 코드 수정만으로 전체에 반영된다.
 2. **권한 부여 경로는 두 가지다.** ResourcePermission(Level 기반)과 PolicyOverride(비즈니스 예외).
-3. **API 요청은 2단계로 검증한다.** (2편에서 상세 설명)
+3. **API 요청은 2단계로 검증한다.** Guard에서 규칙 존재 여부를, Service에서 실제 리소스 Condition을 검증한다. (2편에서 상세 구현 설명)
 
 ---
 
 ## Subject / Action 상수 설계
 
 `enum` 대신 `as const` 패턴을 선택했다.
-
-> `enum` 대신 `as const` 패턴을 선택했다.
 
 - TypeScript의 `enum`은 양방향 매핑으로 인한 Tree-Shaking 문제, 명목적 타이핑으로 인한 호환성 문제가 있다.
 - `as const`는 string literal union 타입으로 추론되어 타입 안전하면서도 가볍다.
@@ -166,6 +234,27 @@ Level 체계로 처리하기 어려운 케이스가 있다.
 ```
 
 이 부분만큼은 진짜 ABAC다. PolicyOverride는 개발자가 직접 제어하는 것으로 정책을 결정했다. 일반 UI에서는 생성/수정이 불가하다.
+
+---
+
+## AbilityFactory — 두 경로가 만나는 곳
+
+ResourcePermission에서 오는 Level 기반 권한과 PolicyOverride에서 오는 커스텀 규칙, 이 두 경로가 합쳐지는 지점이 `AbilityFactory`다.
+
+```typescript
+class AbilityFactory {
+  buildAbility({
+    permissions,  // ResourcePermission[] — Level 기반
+    overrides,    // PolicyOverride — 커스텀 규칙
+  }): AppAbility {
+    const levelRules    = this.expandLevelToRules(permissions);
+    const overrideRules = overrides?.rules ?? [];
+    return this.createFromRules([...levelRules, ...overrideRules]);
+  }
+}
+```
+
+`expandLevelToRules`가 각 ResourcePermission을 받아서 Level에 맞는 PolicyRule 배열로 변환한다. 이 구현의 세부 내용은 2편에서 다룬다.
 
 ---
 

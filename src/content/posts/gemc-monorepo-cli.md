@@ -1,38 +1,42 @@
 > 어느 디렉토리에서 실행해도 되어야 하는데, 루트에서만 돌아가는 CLI는 절반짜리다.
 
-## gemc 가 뭔가
+## 모노레포 빌드 명령어가 왜 이렇게 복잡해졌는가
 
 gem-server는 여러 NestJS 애플리케이션이 공존하는 모노레포다.
 
-각 앱을 빌드하거나 실행하려면 `turbo run build:prod --filter=@gem-server/api` 같은 명령어를 매번 타이핑해야 한다. 앱 이름이나 플래그를 틀리기 쉽고, 새로 합류한 팀원은 어떤 명령어가 있는지부터 파악해야 한다.
+초기에는 팀 내에서 앱을 빌드하거나 실행하는 방식이 두 갈래로 나뉘었다.
 
-이 불편함을 줄이기 위해 만든 내부 CLI가 `gemc` (`@gem-server/cli` 패키지)다.
+- **루트에서 turbo**: `turbo run build:prod --filter=@gem-server/accumulation` 처럼 filter 플래그를 붙여 실행
+- **앱 디렉토리에서 pnpm**: `cd apps/form && pnpm run build:prod`
+
+둘 다 동작하긴 했다. 문제는 실제로 매일 쓰는 명령어를 나열해보면 이랬다는 것이다.
 
 ```bash
-gemc build:prod api          # API 앱 프로덕션 빌드
-gemc start:dev api --watch   # 하위 패키지 변경 감지 포함 개발 서버
-gemc test api                # 테스트 실행
+# 하위 패키지 변경 감지하면서 개발 서버 실행
+turbo watch start:dev -F="@gem-server/accumulation..." --continue
+
+# 특정 패키지 두 개만 타입 빌드
+turbo run build:type -F="@gem-server/database" -F="@gem-server/configuration" --force
+
+# form 앱 + 특정 패키지들만 포맷
+turbo run format:fix -F="@gem-site/form" -F={"./packages/{ky|msw|ui}"} --only
+
+# 앱 디렉토리로 직접 이동 후 빌드
+cd /apps/form; pnpm run build:prod
 ```
 
----
+두 앱을 동시에 실행해야 할 때는 터미널을 여러 개 열어야 했다. filter 문법을 정확히 외워야 했고, 새로 합류한 팀원은 이 명령어 조합을 파악하는 데만 시간이 걸렸다.
 
-## 제공하는 커맨드
+위 네 줄을 이렇게 바꾸는 게 목표였다.
 
-[Commander.js](https://github.com/tj/commander.js) 기반으로 7개 커맨드를 제공한다.
+```bash
+gemc start:dev accumulation --watch --continue
+gemc build:type --package=database,configuration --force
+gemc format --app=form --package=ky,msw,ui --fix --only
+gemc build:prod form
+```
 
-| 커맨드 | 설명 | 주요 옵션 |
-|--------|------|-----------|
-| `build:prod <app>` | 프로덕션 빌드 | `--force`, `--continue` |
-| `build:dev <app>` | 개발 빌드 | `--force`, `--continue` |
-| `build:type <app>` | 타입 체크 빌드 | `--force`, `--continue` |
-| `start:dev <app>` | 개발 서버 실행 | `--watch`, `--debug`, `--force` |
-| `lint <app>` | ESLint 실행 | `--force` |
-| `format <app>` | 포맷 실행 | `--force` |
-| `test <app>` | 테스트 실행 | `--force` |
-
-`<app>` 자리에는 `APPLICATION_LIST`로 수집한 실제 앱 이름만 올 수 있어 Commander의 `.choices()` 검증을 통과해야 한다. 존재하지 않는 앱 이름을 입력하면 바로 에러 메시지가 출력된다.
-
-내부적으로는 turbo를 그대로 호출한다.
+이렇게 만든 내부 CLI가 `gemc` (`@gem-server/cli` 패키지)다. [Commander.js](https://github.com/tj/commander.js) 기반으로 빌드·실행·린트·테스트 7개 커맨드를 제공하고, 내부적으로는 turbo를 그대로 호출한다.
 
 ```javascript
 const executeCommand = [
@@ -49,7 +53,7 @@ execSync(executeCommand, {
 });
 ```
 
-gemc는 결국 turbo의 얇은 래퍼다. turbo 명령어를 외울 필요 없이 gemc가 대신 조합해준다.
+gemc는 결국 turbo의 얇은 래퍼다. 복잡한 filter 조합과 플래그를 외울 필요 없이 gemc가 대신 조합해준다.
 
 ---
 

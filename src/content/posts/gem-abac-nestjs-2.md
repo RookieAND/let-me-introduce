@@ -26,6 +26,31 @@ Service (2차): "이 특정 리소스에 대해 실제로 접근이 가능한가
 
 ---
 
+## 데이터 레이어 설계
+
+### ResourcePermission
+
+사용자와 리소스 간의 권한 관계를 저장하는 컬렉션이다.
+
+```typescript
+@Schema()
+class ResourcePermission {
+  @Prop() userId: string;
+  @Prop() subject: Subject;     // 'Course', 'Unit', ...
+  @Prop() resourceId: string;   // 'course-7', 'unit-3', ...
+  @Prop() spaceId: string;      // 빌드 범위 제한에 사용
+  @Prop() level: Level;
+}
+```
+
+`userId + subject + resourceId` 조합이 고유 키다. upsert로 처리한다.
+
+### PolicyOverride
+
+유저별 예외 규칙을 저장한다. `rules` 배열 안에 CASL PolicyRule이 직접 담긴다. 이걸 생성하거나 수정하는 건 개발자가 직접 한다. 일반 UI에 노출되지 않는다.
+
+---
+
 ## expandLevelToRules — Level을 실제 권한 규칙으로 변환
 
 `AbilityFactory`를 실제로 채우는 함수가 `expandLevelToRules`다. ResourcePermission 배열을 받아서 각각을 PolicyRule로 변환한다.
@@ -53,28 +78,41 @@ Space ADMIN 정적 상속도 여기서 처리한다. Space ADMIN이면 하위 Co
 
 ---
 
-## 데이터 레이어 설계
+## AbilityFactory — Allow 먼저, Deny는 나중에
 
-### ResourcePermission
-
-사용자와 리소스 간의 권한 관계를 저장하는 컬렉션이다.
+CASL은 뒤에 등록된 Rule이 우선한다. PolicyOverride Deny가 Level Allow보다 항상 이겨야 하므로, 등록 순서를 전략적으로 설계했다.
 
 ```typescript
-@Schema()
-class ResourcePermission {
-  @Prop() userId: string;
-  @Prop() subject: Subject;     // 'Course', 'Unit', ...
-  @Prop() resourceId: string;   // 'course-7', 'unit-3', ...
-  @Prop() spaceId: string;      // 빌드 범위 제한에 사용
-  @Prop() level: Level;
+private createFromRules({ rules }: { rules: PolicyRule[] }): AppAbility {
+  const builder = new AbilityBuilder<AppAbility>(createMongoAbility);
+
+  // Allow 전부 먼저
+  for (const rule of rules.filter(r => r.effect === 'Allow')) {
+    builder.can(rule.actions, rule.subject, this.buildConditions({ rule }));
+  }
+  // Deny 나중 → 최우선 적용
+  for (const rule of rules.filter(r => r.effect === 'Deny')) {
+    builder.cannot(rule.actions, rule.subject, this.buildConditions({ rule }));
+  }
+
+  return builder.build();
 }
 ```
 
-`userId + subject + resourceId` 조합이 고유 키다. upsert로 처리한다.
+Allow를 먼저 전부 등록하고 Deny를 나중에 등록한다. PolicyOverride Deny가 마지막에 등록되므로 어떤 Allow 규칙도 덮어쓴다.
 
-### PolicyOverride
+`resources: ['course-7']`는 그대로 CASL에 전달할 수 없다. MongoDB 조건 형식으로 변환이 필요하다.
 
-유저별 예외 규칙을 저장한다. `rules` 배열 안에 CASL PolicyRule이 직접 담긴다. 이걸 생성하거나 수정하는 건 개발자가 직접 한다. 일반 UI에 노출되지 않는다.
+```typescript
+private buildConditions({ rule }: { rule: PolicyRule }): CaslCondition | undefined {
+  if (!rule.resources || rule.resources.includes('*')) {
+    return rule.conditions;  // 와일드카드면 조건 없이
+  }
+  return { id: { $in: rule.resources } };  // ID 목록 → MongoDB $in 조건
+}
+```
+
+이 변환이 1차/2차 검증의 차이를 만든다. Guard 1차에서 `ability.can('Update', 'Course')` (문자열)를 넘기면 id 조건 매칭이 일어나지 않는다. Service 2차에서 `ability.can('Update', subject('Course', { id: 'course-7' }))` 처럼 실제 객체를 넘겨야 `$in` 조건이 평가된다.
 
 ---
 
@@ -102,6 +140,13 @@ class AbilityBuildService {
 
 `buildForSpace`를 별도로 둔 이유가 있다. 특정 Space 내 요청이면 굳이 다른 Space의 권한까지 모두 로드할 필요가 없다.
 
+매 요청마다 DB에서 ResourcePermission을 조회한다. 캐싱을 검토했는데 결국 지금은 캐싱 없이 매 요청마다 빌드하는 방식으로 갔다. 이유가 있다.
+
+- 외부 관리자의 권한이 수동으로 회수될 수 있는 케이스가 있어서 캐시 무효화 전략이 복잡해진다.
+- 현재 사용자 규모에서는 DB 조회 비용이 허용 범위 안이었다.
+
+규모가 커지면 Redis 캐싱이 자연스러운 다음 단계다.
+
 Guard에서 빌드한 Ability를 Service까지 전달하는 데 `nestjs-cls` (AsyncLocalStorage 기반)를 사용했다. 요청마다 독립된 저장소가 생기므로 요청 간 오염이 없다.
 
 ```typescript
@@ -122,26 +167,43 @@ class AbilityClsService {
 
 ---
 
-## AccessControlGuard (1차 검증) — @CheckAbility 데코레이터
+## Guard (1차 검증) — @WithCourseAccess 데코레이터
+
+실제 컨트롤러에서는 Guard를 직접 등록하지 않는다. Subject별 전용 데코레이터가 Guard 3개를 한 번에 적용한다.
 
 ```typescript
-@Controller('courses')
-class CourseController {
-  @Get(':id')
-  @CheckAbility(CourseAction.Read, Subject.Course)
-  async getCourse(@Param('id') id: string) { ... }
+@Get(':id')
+@WithCourseAccess({ action: CourseAction.Read, source: 'params', key: 'id' })
+async getCourse(@Param('id') id: string) { ... }
 
-  @Delete(':id')
-  @CheckAbility(CourseAction.Delete, Subject.Course)
-  async deleteCourse(@Param('id') id: string) { ... }
+@Delete(':id')
+@WithCourseAccess({ action: CourseAction.Delete, source: 'params', key: 'id' })
+async deleteCourse(@Param('id') id: string) { ... }
+```
+
+`@WithCourseAccess` 하나가 `ResolveUserGuard → LoadAbilityGuard → WithCourseAccessGuard` 순으로 3개 Guard를 묶어서 적용한다.
+
+```typescript
+export function WithCourseAccess(options: WithCourseAccessOptions) {
+  return applyDecorators(
+    SetMetadata(RESOLVE_USER_KEY, { allowGuest: false }),
+    SetMetadata(LOAD_ABILITY_KEY, true),
+    SetMetadata(WITH_COURSE_ACCESS_KEY, options),
+    UseGuards(ResolveUserGuard, LoadAbilityGuard, WithCourseAccessGuard),
+  );
 }
 ```
 
-Guard 내부에서는 이 메타데이터를 읽어서 `ability.can(action, subject)` 를 확인한다. 이 시점에서 중요한 건 **리소스 ID가 없다**는 것이다.
+`WithCourseAccessGuard` 내부에서는 request에서 courseId를 추출하고, Course를 DB에서 조회한 뒤 `assertCan`을 호출한다. 즉 Guard에서 이미 리소스를 로드하고 Condition 매칭까지 처리한다.
 
-"이 사람에게 Course Delete 규칙이 존재하는가"만 본다. 어떤 Course인지는 아직 모른다.
+타입 안전성도 챙겼다. `SubjectActionMap` 타입 덕분에 잘못된 action-subject 조합은 컴파일 에러가 난다.
 
-Deny 규칙 처리도 1차에서 한다. PolicyOverride로 특정 Action에 Deny가 걸린 사용자라면 규칙이 존재하더라도 Guard에서 차단한다.
+```typescript
+// 컴파일 에러 — UnitAction.Clone은 CourseAccess에 쓸 수 없다
+@WithCourseAccess({ action: UnitAction.Clone, source: 'params', key: 'id' })
+```
+
+Deny 규칙도 여기서 처리한다. `assertCan`이 false이면 `ForbiddenException`이 자동으로 발생한다.
 
 ---
 
@@ -193,18 +255,33 @@ class CourseService {
 }
 ```
 
-`filterAccessible`은 목록 조회에서 유용하다. 여러 Course를 가져온 후 이 사용자가 볼 수 있는 것만 필터링할 때 쓴다.
+`getAccessConditions`는 목록 조회에 더 적합하다. `filterAccessible`이 "이미 로드한 리소스를 필터링"하는 것과 달리, CASL 조건을 MongoDB 필터 쿼리로 변환해서 DB에서부터 접근 가능한 것만 가져온다.
 
----
+```typescript
+async findAll(spaceId: string) {
+  const filter = this.abilityCheck.getAccessConditions({
+    action: CourseAction.Read,
+    subject: Subject.Course,
+  });
+  return this.courseRepo.findAll({
+    $and: [{ spaceId }, filter ?? {}],
+  });
+}
+```
 
-## 설계 과정에서 고민했던 점
+전체를 로드한 뒤 필터링하면 접근 불가한 문서도 DB에서 읽는다. 외부 관리자처럼 접근 가능한 리소스가 제한적인 케이스에서 이 차이가 크다.
 
-매 요청마다 DB에서 ResourcePermission을 조회한다. 캐싱을 검토했는데 결국 지금은 캐싱 없이 매 요청마다 빌드하는 방식으로 갔다. 이유가 있다.
+한 가지 주의사항이 있다. `assertCan`에 Mongoose Document를 직접 넘기면 안 된다.
 
-- 외부 관리자의 권한이 수동으로 회수될 수 있는 케이스가 있어서 캐시 무효화 전략이 복잡해진다.
-- 현재 사용자 규모에서는 DB 조회 비용이 허용 범위 안이었다.
+```typescript
+// ❌ Mongoose Document 직접 전달
+this.abilityCheck.assertCan({ resource: course });
 
-규모가 커지면 Redis 캐싱이 자연스러운 다음 단계다.
+// ✅ plain object로 변환 후 전달
+this.abilityCheck.assertCan({ resource: course.toObject() });
+```
+
+Mongoose Document를 그대로 넘기면 getter/virtual이 CASL의 `$in` 조건 매칭에 간섭할 수 있다. `.toObject()` 후 plain object 변환이 필수다.
 
 ---
 
