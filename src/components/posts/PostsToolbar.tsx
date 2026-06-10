@@ -1,15 +1,9 @@
 import * as ToggleGroupPrimitive from "@radix-ui/react-toggle-group";
-import { groupBy } from "es-toolkit";
-import { type ChangeEvent, useId } from "react";
+import { debounce, groupBy } from "es-toolkit";
+import { type ChangeEvent, useEffect, useId, useMemo, useState } from "react";
 import { CATEGORIES, type Category, POSTS } from "#/data/Posts";
+import { usePostsParams } from "#/hooks/UsePostsParams";
 import { cn } from "#/lib/Utils";
-
-interface PostsToolbarProps {
-  activeCat: Category | "all";
-  query: string;
-  onCatChange: (cat: Category | "all") => void;
-  onQueryChange: (q: string) => void;
-}
 
 const grouped = groupBy(POSTS, (p) => p.cat);
 const counts: Record<string, number> = {
@@ -26,15 +20,30 @@ const CATEGORY_LABELS: Record<string, string> = {
   Retrospective: "Retrospective",
 };
 
-export function PostsToolbar({ activeCat, query, onCatChange, onQueryChange }: PostsToolbarProps) {
+export function PostsToolbar() {
   const searchId = useId();
+  const { activeCat, query, setActiveCat, setQuery } = usePostsParams();
+  const [inputValue, setInputValue] = useState(query);
 
-  const handleSearch = (e: ChangeEvent<HTMLInputElement>) => {
-    onQueryChange(e.target.value);
+  useEffect(() => {
+    setInputValue(query);
+  }, [query]);
+
+  const handleSearch = useMemo(
+    () =>
+      debounce((q: string) => {
+        setQuery(q);
+      }, 120),
+    [setQuery],
+  );
+
+  const handleChange = (e: ChangeEvent<HTMLInputElement>) => {
+    setInputValue(e.target.value);
+    handleSearch(e.target.value);
   };
 
   const handleCatChange = (val: string) => {
-    if (val) onCatChange(val as Category | "all");
+    if (val) setActiveCat(val as Category | "all");
   };
 
   return (
@@ -72,8 +81,8 @@ export function PostsToolbar({ activeCat, query, onCatChange, onQueryChange }: P
           id={searchId}
           type="text"
           placeholder="search posts…"
-          value={query}
-          onChange={handleSearch}
+          value={inputValue}
+          onChange={handleChange}
           className="font-mono text-[13px] text-text bg-surface border border-border rounded-[9px] py-2.25 pl-9 pr-3.5 w-52.5 transition-[border-color,width] duration-200 outline-none placeholder:text-text-3 focus:border-accent focus:w-62.5 max-[640px]:w-full max-[640px]:focus:w-full"
         />
       </div>

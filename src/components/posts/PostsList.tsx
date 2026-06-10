@@ -1,22 +1,13 @@
-import { useEffect, useState } from "react";
 import { Pagination } from "#/components/ui/pagination";
 import { Text } from "#/components/ui/text";
-import { type Category, POSTS } from "#/data/Posts";
+import { POSTS } from "#/data/Posts";
+import { usePostsParams } from "#/hooks/UsePostsParams";
 import { PostCard } from "./PostCard";
 
 const PAGE_SIZE = 10;
 
-interface PostsListProps {
-  activeCat: Category | "all";
-  query: string;
-}
-
-export function PostsList({ activeCat, query }: PostsListProps) {
-  const [page, setPage] = useState(1);
-
-  useEffect(() => {
-    setPage(1);
-  }, [activeCat, query]);
+export function PostsList() {
+  const { activeCat, query, page, setPage } = usePostsParams();
 
   const q = query.trim().toLowerCase();
 
