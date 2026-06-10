@@ -142,7 +142,7 @@ text/plain;charset=us-ascii
 
     ![](https://velog.velcdn.com/images/rookieand/post/c3d3b8a0-b164-418b-9bf2-fb98ab65706d/image.PNG)
 
-# 📖 References
+## References
 
 -   https://developer.mozilla.org/en-US/docs/Web/HTTP/Basics_of_HTTP/MIME_types
 -   http://www.vishaldeshmukh.in/2019/10/difference-between-content-type-and.html

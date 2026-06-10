@@ -122,6 +122,6 @@ return (
 - React에서는 `useEffect` 훅을 통해 컴포넌트 내부에서 이러한 Side Effect를 처리하도록 한다.
 - 왜냐하면 Side Effect는 렌더링 과정에서 영향을 주면 안되므로, 렌더링 이후에 실행되는 `useEffect` 가 적합하기 때문이다.
 
-# 📖 References
+## References
 - https://blog.thoughtspile.tech/2021/11/15/unintentional-layout-effect/
 - https://github.com/facebook/react/issues/17334

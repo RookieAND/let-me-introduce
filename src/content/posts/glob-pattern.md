@@ -100,6 +100,6 @@ Glob Pattern, 처음엔 익숙치 않았지만 이번 기회에 확실히 정리
 - `*.ts?(x)` 패턴은 `ts` 혹은 `tsx` 확장자 파일과 매칭이 된다.
 - `*.(ts|tsx)` 패턴은 `.tsts`, `.tstsx`, `.tsxtsx` 등 두 패턴을 혼합한 문자열과도 매칭이 가능하다.
 
-# 📖 References
+## References
 
 - https://www.daleseo.com/glob-patterns/

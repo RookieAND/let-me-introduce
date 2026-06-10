@@ -4,7 +4,7 @@
 **useEffect** 가 **Message Channel API** 를 기반으로 실행되는 과정을 중점으로 서술합니다.
 만약 틀린 점이 있다면 부디 React Fiber 장인 분들의 많은 의견과 질책 부탁드립니다.
 
-## 📖 Introduction
+## Introduction
 
 - 어떻게 useEffect 는 컴포넌트가 **브라우저에서 완전히 렌더링 된 이후의 시점**에 실행될까?
 - 어떤 글에는 내부적으로 `setTimeout` 을 둬서 렌더링 이후의 실행을 보장한다고 하는데… 과연 그 말이 맞는지에 대한 의문이 들었다.

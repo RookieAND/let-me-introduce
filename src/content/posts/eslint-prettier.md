@@ -322,7 +322,7 @@ module.exports = {
 - 보통 ESLint와 Prettier를 동시에 사용할 경우, ESLint의 style rule을 전부 Disabled 한다.
 - `eslint-config-prettier` 패키지의 경우, Prettier와 충돌 가능성이 있는 옵션을 전부 Off 해준다.
 
-# 📖 References
+## References
 - https://tech.kakao.com/2019/12/05/make-better-use-of-eslint/
 - https://eslint.org/docs/latest/user-guide/configuring/
 - https://yceffort.kr/2021/05/ast-for-javascript

@@ -78,7 +78,7 @@ export default App;
 ![](https://velog.velcdn.com/images/rookieand/post/2cbc1484-10d5-4e63-acec-fcbb891961a5/image.PNG)
 
 
-# Reference
+## References
 
 -   https://github.com/bonnie/udemy-TESTING-LIBRARY/tree/main/react-code
 -   https://github.com/testing-library/jest-dom

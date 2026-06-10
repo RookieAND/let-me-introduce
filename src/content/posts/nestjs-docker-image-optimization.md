@@ -1,4 +1,4 @@
-## 📖 Introduction
+## Introduction
 > 급한 마음에 일단 대충 만들었던 **Dockerfile**, 처음에는 이게 그렇게 큰 문제가 될 줄 몰랐는데...
 
 최근 NestJS 에 익숙해질 겸 작은 사이드 프로젝트를 진행하고 있는데, Backend 를 NestJS 로 구축하고 이를 컨테이너 기반으로 운용하기 위해 Dockerfile 을 작성했다.

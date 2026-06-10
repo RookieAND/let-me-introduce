@@ -374,7 +374,7 @@ export default MyApp;
 - 하지만 다음과 같이 콜백 함수로서 인자를 넣어주게 되면, React에서는 초기 렌더링 시에만 해당 함수를 호출하고 반환된 값을 **별도로 저장한다**. 이후의 렌더링에 대해서는 저장된 값을 꺼내와 적용하는 방식으로 비용을 절약할 수 있다.
 - 만약 state 의 초기 값을 생성하기 위한 함수의 비용이 크다면, useState 훅의 `initialValue` 에 함수를 실행시키지 말고 함수 자체를 인자로 넣어보자. 초기 렌더링 시에만 함수가 호출되고 이후에는 반환된 값을 저장하여 활용하니 훨씬 좋다.
 
-# 📒 References
+## References
 
 - https://beta.reactjs.org/learn/state-a-components-memory
 - https://beta.reactjs.org/learn/state-as-a-snapshot#rendering-takes-a-snapshot-in-time

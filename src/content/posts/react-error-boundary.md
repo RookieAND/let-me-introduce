@@ -1,6 +1,6 @@
 > ErrorBoundary 는 어떻게 하위 컴포넌트의 에러를 Catch 할 수 있는 걸까?
 
-## 📖 Introduction
+## Introduction
 
 사내 프로젝트와 개인 프로젝트에서 요즘 내가 잘 사용하려고 하는 친구가 바로 Suspense 와 ErrorBoundary 다, API 통신이 아직 마무리 되지 않았거나 중간에 문제가 생겼을 경우 사용자에게 이를 즉각적으로 알릴 수 있는 좋은 수단이라고 생각하기 때문이다.
 

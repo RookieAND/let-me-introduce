@@ -191,7 +191,7 @@ function handleClick() {
 }
 ```
 
-# 📒 References
+## References
 
 - https://beta.reactjs.org/blog/2022/03/08/react-18-upgrade-guide#automatic-batching
 - https://github.com/reactwg/react-18/discussions/21

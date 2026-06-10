@@ -324,7 +324,7 @@ tableNode.addEventListener("click", function (event) {
 - `event.target` 이 `<td>` 태그 내에 있지 않을 경우, 그리고 현재 id가 table 인 `<table>` 태그 내에 해당 태그가 위치하지 않을 경우 핸들러를 종료한다.
 - `event.target.closest()` 메서드는 이벤트가 발동된 대상 주변에 특정 요소가 존재하는지를 체크할 수 있기에 효율적이다.
 
-# 📒 References
+## References
 
 - https://joshua1988.github.io/web-development/javascript/event-propagation-delegation/
 - https://ko.javascript.info/event-delegation

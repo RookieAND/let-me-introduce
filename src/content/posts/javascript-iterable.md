@@ -1,4 +1,4 @@
-# Introduce
+## Iterable 이란?
 
 > **Iterable** 하다는 건 결국 **반복 가능하다는 소리** 아닌가?
 

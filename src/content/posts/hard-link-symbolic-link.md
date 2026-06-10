@@ -1,4 +1,4 @@
-## 📖 Introduction
+## Introduction
 > **pnpm** 을 공부하면서 계속 나오는 Hard Link, Symbolic Link 가 너무 헷갈린다. 
 
 최근 사내에서 pnpm 을 적극적으로 도입하는 과정에서 pnpm 에 대한 분석을 진행 중이었는데, Hard Link 와 Symbolic Link 가 계속 헷갈리는 내 자신을 발견하고선 이대로 안되겠다 싶어 이 참에 두 개념을 깔끔하게 정리하겠다는 생각이 들었다.

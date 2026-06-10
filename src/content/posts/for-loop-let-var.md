@@ -91,7 +91,7 @@ const data = [0, 1, 2, 3, 4, 5];
 - 왜냐하면 for 문의 경우 매 반복마다 새로운 스코프를 생성하지만 해당 코드의 경우 그렇지 않으므로, `setTimeout` 내의 콜백 함수들이 **동일한 스코프 내의** `i` 값을 참조하기 때문이다.
 - 따라서 콜 스택이 비워진 후 콜백 함수가 순차적으로 출력되더라도 **동일한 스코프 내의** `i` 값을 참조하고 있으니 최종 연산 결과인 5를 인계 받고, 이로 인해 `data[5]` 의 값인 **5** 가 6번 출력된다.
 
-# 📒 References
+## References
 
 - https://developer.mozilla.org/ko/docs/Glossary/Hoisting
 - https://discuss.codecademy.com/t/var-and-let-in-a-loop-working-differently/550468/4

@@ -68,6 +68,6 @@ JS 엔진은 코드 실행을 위해 실행 컨텍스트 (Execution Context) 라
   - `new` 키워드 사용 시 새로 생성된 인스턴스
   - `call`, `apply`, `bind` 사용 시 명시적으로 지정된 객체
 
-# 📒 References
+## References
 
 - https://www.freecodecamp.org/news/execution-context-how-javascript-works-behind-the-scenes/

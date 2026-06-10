@@ -1,4 +1,4 @@
-## 📖 Introduction
+## Introduction
 > `Promise.withResolver` 는 2024년에 새롭게 등장한 **Promise Static Method** 입니다.
 
 사내 개발자 스크럼에서 공유할 내용을 찾던 도중에 작지만 재밌는 메서드가 이번에 새로 추가되어 간단하게 조사를 진행해보았습니다.
