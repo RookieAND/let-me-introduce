@@ -1,5 +1,8 @@
-import caslAbacMd from "#/content/posts/casl-abac-declarative-permissions.md?raw";
+import caslLibraryIntroMd from "#/content/posts/casl-library-intro.md?raw";
 import caslTsDeepDiveMd from "#/content/posts/casl-typescript-deep-dive.md?raw";
+import gemAbacNestjs1Md from "#/content/posts/gem-abac-nestjs-1.md?raw";
+import gemAbacNestjs2Md from "#/content/posts/gem-abac-nestjs-2.md?raw";
+import gemAbacNestjs3Md from "#/content/posts/gem-abac-nestjs-3.md?raw";
 import dockerKubernetesC1Md from "#/content/posts/docker-kubernetes-ch1.md?raw";
 import dockerKubernetesC2Md from "#/content/posts/docker-kubernetes-ch2.md?raw";
 import turborepoMd from "#/content/posts/turborepo-remote-cache-self-hosted.md?raw";
@@ -59,6 +62,8 @@ import dockerComposeMd from "#/content/posts/docker-compose-basics.md?raw";
 import githubActionsDockerMd from "#/content/posts/github-actions-docker-deploy.md?raw";
 import hardLinkMd from "#/content/posts/hard-link-symbolic-link.md?raw";
 import nestjsDockerMd from "#/content/posts/nestjs-docker-image-optimization.md?raw";
+import changesetsMd from "#/content/posts/changesets-monorepo-versioning.md?raw";
+import gemcCliMd from "#/content/posts/gemc-monorepo-cli.md?raw";
 import pnpmCatalogMd from "#/content/posts/pnpm-catalog.md?raw";
 // Infra / Monorepo
 import pnpmDependencyMd from "#/content/posts/pnpm-dependency-deep-dive.md?raw";
@@ -66,6 +71,7 @@ import turboPruneMd from "#/content/posts/turbo-prune-monorepo.md?raw";
 
 // Other
 import plopMd from "#/content/posts/plop-code-generator.md?raw";
+import queueDelayedJobMd from "#/content/posts/queue-delayed-job-bullmq-fix.md?raw";
 import suitesNestjsMd from "#/content/posts/suites-nestjs-auto-mock.md?raw";
 
 import browserParsingMd from "#/content/posts/browser-parsing.md?raw";
@@ -109,21 +115,73 @@ export interface Post {
 }
 
 export const FEATURED_POST: Post = {
-  slug: "casl-abac-declarative-permissions",
+  slug: "gem-abac-nestjs-1",
   cat: "Architecture",
-  date: "2026.02",
+  date: "2026.06",
   year: "2026",
-  read: "12 min",
-  title: "수동 DB 제어를 걷어내고 CASL/ABAC로 권한을 선언형으로 다시 설계하기",
+  read: "10 min",
+  title: "GEM에 리소스 권한 체계를 도입한 이야기 (1편) — 왜 기존 시스템으로는 안 됐는가",
   excerpt:
-    "CS가 반복되고 개발 의존도가 커지던 권한 관리를, 역할·리소스·액션 기반 ABAC 모델로 옮긴 과정. 미들웨어에서 만든 Ability 객체를 nestjs-cls로 요청 컨텍스트에 전파해, 어디서든 추가 의존성 주입 없이 권한을 검사하는 구조를 만든 이야기.",
-  tags: ["CASL", "ABAC", "NestJS", "권한"],
-  href: "/posts/casl-abac-declarative-permissions",
-  content: caslAbacMd,
+    "외부 관리자 요구사항 하나로 RBAC의 한계가 드러났다. 역할 기반으로는 표현 자체가 불가능한 케이스에서, CASL + Level 추상화로 리소스 단위 권한 체계를 설계한 과정.",
+  tags: ["CASL", "ABAC", "NestJS", "권한", "아키텍처"],
+  href: "/posts/gem-abac-nestjs-1",
+  content: gemAbacNestjs1Md,
 };
 
 export const POSTS: Post[] = [
   // ── 2026 ──────────────────────────────────────────────────────────────────
+  {
+    slug: "gem-abac-nestjs-2",
+    date: "2026.06",
+    year: "2026",
+    cat: "Architecture",
+    title: "GEM에 리소스 권한 체계를 도입한 이야기 (2편) — 1차·2차 검증을 나눈 이유",
+    excerpt:
+      "Guard 시점에는 리소스 객체가 없어서 검증을 두 단계로 나눴다. expandLevelToRules·AbilityBuildService·AbilityClsService·Guard·CheckService 구현까지.",
+    tags: ["CASL", "NestJS", "Guard", "권한"],
+    read: "10 min",
+    href: "/posts/gem-abac-nestjs-2",
+    content: gemAbacNestjs2Md,
+  },
+  {
+    slug: "gem-abac-nestjs-3",
+    date: "2026.06",
+    year: "2026",
+    cat: "Architecture",
+    title: "GEM에 리소스 권한 체계를 도입한 이야기 (3편) — 기존 시스템을 안전하게 전환하기",
+    excerpt:
+      "설계는 끝났다, 이제 운영 중인 시스템을 바꿔야 한다. CQRS 자동 권한 부여, SpaceUser 마이그레이션, 40개 테스트, 그리고 솔직한 회고.",
+    tags: ["CASL", "NestJS", "마이그레이션", "테스트"],
+    read: "12 min",
+    href: "/posts/gem-abac-nestjs-3",
+    content: gemAbacNestjs3Md,
+  },
+  {
+    slug: "casl-library-intro",
+    date: "2026.06",
+    year: "2026",
+    cat: "Architecture",
+    title: "CASL 라이브러리 — TypeScript 권한 관리",
+    excerpt:
+      "Ability, can/cannot, subject(), Condition 기반 평가, Allow/Deny 규칙 병합까지. CASL의 핵심 개념과 TypeScript 통합, NestJS 사용 패턴을 정리했다.",
+    tags: ["CASL", "TypeScript", "NestJS", "권한"],
+    read: "7 min",
+    href: "/posts/casl-library-intro",
+    content: caslLibraryIntroMd,
+  },
+  {
+    slug: "queue-delayed-job-bullmq-fix",
+    date: "2026.06",
+    year: "2026",
+    cat: "Backend",
+    title: "Queue 기반 지연 실행의 함정 — 자동 퇴장 유실 버그 해결기",
+    excerpt:
+      "BullMQ 인메모리 모드로 운영하다가 서버 재시작 시 delayed job이 전부 사라지는 버그를 만났다. setTimeout + onModuleInit 재등록 로직으로 전환하면서 깨달은 것 — Queue를 믿는 게 아니라 DB를 믿어야 한다.",
+    tags: ["NestJS", "BullMQ", "Queue", "버그"],
+    read: "8 min",
+    href: "/posts/queue-delayed-job-bullmq-fix",
+    content: queueDelayedJobMd,
+  },
   {
     slug: "vite-code-splitting-bundle",
     date: "2026.06",
@@ -170,7 +228,7 @@ export const POSTS: Post[] = [
     cat: "Infra",
     title: "도커 엔진 — 이미지·컨테이너·볼륨·네트워크 완전 정리",
     excerpt:
-      "컨테이너 생성·삭제·포트 포워딩부터 호스트 볼륨 공유, 브리지·호스트·컨테이너 네트워크 드라이버, json-file·syslog·fluentd 로깅 전략, CPU·메모리 자원 제한, 이미지 레이어 구조와 save/export 차이까지. 도커 엔진 2장 전체를 정리했다.",
+      "컨테이너 생성·볼륨·네트워크·로깅·자원 제한·이미지 레이어까지. 도커 엔진 핵심 기능 전체 정리.",
     tags: ["Docker", "Container", "Network", "Volume"],
     read: "15 min",
     href: "/posts/docker-kubernetes-ch2",
@@ -183,7 +241,7 @@ export const POSTS: Post[] = [
     cat: "Frontend",
     title: "Module Federation",
     excerpt:
-      "하나의 빌드에서 다른 빌드의 코드를 런타임에 동적으로 로드하는 MF 아키텍처. Producer/Consumer 개념부터 Shared 의존성 전략, Bridge 패턴, 도입 시 고려할 CSS 격리·타입 안전성·운영 복잡도까지 정리한 내용.",
+      "런타임에 다른 앱의 코드를 동적으로 로드하는 MF 아키텍처. Producer/Consumer 구조와 도입 전 반드시 짚어야 할 트레이드오프.",
     tags: ["Module Federation", "Micro Frontend", "Webpack"],
     read: "8 min",
     href: "/posts/module-federation",
@@ -196,7 +254,7 @@ export const POSTS: Post[] = [
     cat: "Frontend",
     title: "TypeScript Module Resolution 전략을 알아보자",
     excerpt:
-      "node, node16, bundler 세 전략의 차이를 비교하고, Vite 기반 프로젝트에서 bundler가 사실상 표준인 이유를 exports 필드 인식·확장자 생략·paths 별칭 측면에서 정리한 내용.",
+      "node, node16, bundler 세 전략의 차이와 Vite 기반 프로젝트에서 bundler가 표준인 이유.",
     tags: ["TypeScript", "Vite", "모듈"],
     read: "7 min",
     href: "/posts/typescript-module-resolution",
@@ -235,7 +293,7 @@ export const POSTS: Post[] = [
     cat: "Frontend",
     title: "React displayName 을 알아보자",
     excerpt:
-      "HOC·memo·forwardRef·Context에서 DevTools가 Anonymous로 표시되는 이유와 displayName이 해결하는 방식. ES6 Function.name 추론의 한계와 React 19에서 forwardRef 제거로 달라지는 부분까지 정리했다.",
+      "HOC·memo·forwardRef·Context에서 Anonymous가 뜨는 이유와 displayName이 해결하는 방식. React 19 변화도 포함.",
     tags: ["React", "DevTools", "디버깅"],
     read: "8 min",
     href: "/posts/react-display-name",
@@ -248,7 +306,7 @@ export const POSTS: Post[] = [
     cat: "Frontend",
     title: "TypeScript Enum 을 알아보자",
     excerpt:
-      "Numeric enum의 양방향 매핑과 타입 안전성 부재, String enum의 명목적 타이핑 문제, IIFE 컴파일로 인한 트리쉐이킹 불가까지. TypeScript 팀도 닫지 못한 버그가 71개 이상인 enum을 피해야 하는 이유.",
+      "양방향 매핑, 타입 안전성 부재, Tree-shaking 불가. TS팀도 닫지 못한 버그가 71개 이상인 enum을 피해야 하는 이유.",
     tags: ["TypeScript", "Enum", "as const"],
     read: "7 min",
     href: "/posts/typescript-enum",
@@ -261,7 +319,7 @@ export const POSTS: Post[] = [
     cat: "Frontend",
     title: "TypeScript satisfies 를 알아보자",
     excerpt:
-      ": Type 지정은 타입을 고정시키고, as는 타입을 무시한다. satisfies는 조건만 검사하고 실제 타입 추론을 건드리지 않는다. 세 가지 방식의 차이와 각각을 써야 할 상황을 정리했다.",
+      "`satisfies`는 타입을 고정하지 않고 조건만 검사한다. `: Type`·`as`와의 차이와 쓰는 상황.",
     tags: ["TypeScript", "satisfies", "타입 안전성"],
     read: "5 min",
     href: "/posts/typescript-satisfies",
@@ -299,7 +357,7 @@ export const POSTS: Post[] = [
     cat: "Frontend",
     title: "Partial Pre-rendering",
     excerpt:
-      "Streaming SSR과 달리 정적 영역을 Build Time에 분리하는 PPR의 Partial First Page 개념, B/S/P placeholder가 Transfer-Encoding: chunked 기반으로 교체되는 원리를 HTML 직접 분석하며 파악한 내용.",
+      "HTML 소스를 직접 뜯어보며 파악한 PPR 동작 원리. Partial First Page와 B/S/P placeholder가 Streaming을 통해 교체되는 메커니즘.",
     tags: ["Next.js", "PPR", "Streaming SSR"],
     read: "10 min",
     href: "/posts/partial-pre-rendering",
@@ -325,7 +383,7 @@ export const POSTS: Post[] = [
     cat: "Frontend",
     title: "프론트엔드 테스트 코드에 대한 고찰",
     excerpt:
-      "Human Driven Development를 반성하며 정리한 프론트엔드 테스트 도입 이유. 피드백 사이클 단축, 테스트 코드를 테크스펙으로 바라보는 관점, 의존성 분리가 곧 테스트 가능한 코드임을 설명한다.",
+      "테스트 코드를 왜 써야 하는지 뒤늦게 납득한 과정. 피드백 사이클 단축부터 테크스펙으로서의 테스트까지.",
     tags: ["Testing", "프론트엔드", "TDD"],
     read: "12 min",
     href: "/posts/frontend-test-thoughts",
@@ -351,7 +409,7 @@ export const POSTS: Post[] = [
     cat: "회고",
     title: "2025년 상반기 회고록",
     excerpt:
-      "격변의 반년. 처음으로 소규모 팀을 리딩하고, 체중 16kg 감량, 스마일라식, 일본어 학원까지. 개발에만 집중하던 나에서 삶의 여러 측면을 다루는 나로 변화하려 애썼던 2025년 상반기 기록.",
+      "처음으로 팀 리더를 맡고, 체중 16kg 감량, 스마일라식까지. 개발 외 삶의 여러 측면을 다루려 애썼던 2025년 상반기.",
     tags: ["회고", "2025", "성장", "리더십"],
     read: "18 min",
     href: "/posts/retrospective-2025-1h",
@@ -427,7 +485,7 @@ export const POSTS: Post[] = [
     cat: "Infra",
     title: "pnpm 의존성 파일을 관리 Deep Dive",
     excerpt:
-      "CAS의 하드링크·심볼릭링크 구조부터 피어 의존성이 버전 조합별로 폴더를 분리하는 원리, workspace 심링크 동작, pnpm deploy까지. node_modules 안을 제대로 들여다본 기록.",
+      "CAS·하드링크·심볼릭링크 구조와 피어 의존성 처리 방식. pnpm이 node_modules를 만드는 원리 전체.",
     tags: ["pnpm", "node_modules", "패키지 관리"],
     read: "15 min",
     href: "/posts/pnpm-dependency-deep-dive",
@@ -486,13 +544,39 @@ export const POSTS: Post[] = [
     content: hardLinkMd,
   },
   {
+    slug: "changesets-monorepo-versioning",
+    date: "2026.06",
+    year: "2026",
+    cat: "Infra",
+    title: "gem 모노레포에 Changesets를 도입한 이야기",
+    excerpt:
+      "PR마다 .changeset 파일로 버전 범프 의도를 선언하고 CI가 CHANGELOG와 버전을 자동 관리하는 Changesets. 커밋 컨벤션에 의존하지 않고 PR 단위로 명시성을 확보한 게 선택 이유였다. snapshot 버전, major 범프 연쇄 문제, 파일 본문을 비우면 CHANGELOG가 비는 함정까지.",
+    tags: ["Changesets", "pnpm", "Monorepo", "CI/CD", "버전 관리"],
+    read: "8 min",
+    href: "/posts/changesets-monorepo-versioning",
+    content: changesetsMd,
+  },
+  {
+    slug: "gemc-monorepo-cli",
+    date: "2026.06",
+    year: "2026",
+    cat: "Infra",
+    title: "gemc — gem-server 모노레포를 위한 내부 CLI 개선기",
+    excerpt:
+      "gem-server 모노레포 명령어를 감싸는 내부 CLI gemc. process.cwd() 의존성을 끊어 루트 밖에서도 동작하게 하고, NVM PATH를 자식 프로세스에 주입하는 두 가지 개선으로 실행 환경 의존성을 제거했다.",
+    tags: ["CLI", "Monorepo", "NestJS", "DX", "Node.js"],
+    read: "7 min",
+    href: "/posts/gemc-monorepo-cli",
+    content: gemcCliMd,
+  },
+  {
     slug: "turbo-prune-monorepo",
     date: "2024.11",
     year: "2024",
     cat: "Infra",
     title: "Turbo prune 으로 모노레포 앱 빌드하기",
     excerpt:
-      "--docker 옵션으로 /full과 /json을 분리해 관련 없는 패키지 변경이 Cache Miss를 유발하는 문제를 차단한 과정. pnpm store Cache Mount를 함께 적용한 멀티스테이지 Dockerfile 구성까지.",
+      "--docker 옵션으로 관련 없는 패키지 변경이 Cache Miss를 유발하는 문제를 잡았다. pnpm Cache Mount를 조합한 멀티스테이지 Dockerfile까지.",
     tags: ["Turborepo", "Docker", "Monorepo"],
     read: "8 min",
     href: "/posts/turbo-prune-monorepo",
@@ -727,7 +811,7 @@ export const POSTS: Post[] = [
     cat: "Frontend",
     title: "번들러란 무엇이며, 어떻게 동작하는 걸까?",
     excerpt:
-      "Webpack, Rollup, esbuild가 소스코드를 어떻게 단일 번들로 만드는지 단계별로 정리했다. 각 번들러의 설계 철학과 장단점 비교. Rollup의 정적 분석 기반 Tree-shaking이 Dynamic import와 어떻게 관계되는지도 다룬다.",
+      "직접 번들러를 만들어보며 파악한 동작 원리. AST 의존성 트리 구축부터 Webpack과 Rollup의 번들링 방식 차이까지.",
     tags: ["Webpack", "Rollup", "esbuild", "번들러"],
     read: "10 min",
     href: "/posts/how-bundler-works",
