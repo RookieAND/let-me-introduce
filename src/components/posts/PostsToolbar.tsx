@@ -23,7 +23,7 @@ const CATEGORY_LABELS: Record<string, string> = {
   Backend: "Backend",
   Architecture: "Architecture",
   Infra: "Infra",
-  회고: "회고",
+  Retrospective: "Retrospective",
 };
 
 export function PostsToolbar({ activeCat, query, onCatChange, onQueryChange }: PostsToolbarProps) {
