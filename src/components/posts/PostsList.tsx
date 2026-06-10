@@ -22,7 +22,7 @@ export function PostsList({ activeCat, query }: PostsListProps) {
 
   const filtered = POSTS.filter((p) => {
     const matchCat = activeCat === "all" || p.cat === activeCat;
-    const hay = [p.title, p.excerpt, ...p.tags, p.cat].join(" ").toLowerCase();
+    const hay = [p.title, ...p.excerpt, ...p.tags, p.cat].join(" ").toLowerCase();
     const matchQ = !q || hay.includes(q);
     return matchCat && matchQ;
   });

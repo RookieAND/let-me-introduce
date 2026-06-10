@@ -84,9 +84,13 @@ export function PostDetailPage() {
               <h1 className="font-display font-semibold text-[clamp(26px,4vw,44px)] leading-[1.15] tracking-[-0.02em] text-text mb-5">
                 {post.title}
               </h1>
-              <p className="font-sans text-[16px] leading-[1.75] text-text-2 mb-6 max-w-[58ch]">
-                {post.excerpt}
-              </p>
+              <div className="mb-6 max-w-[58ch] flex flex-col gap-1.5">
+                {post.excerpt.map((line) => (
+                  <p key={line} className="font-sans text-[16px] leading-[1.75] text-text-2">
+                    {line}
+                  </p>
+                ))}
+              </div>
               <div className="flex items-center gap-3.5 font-mono text-[12.5px] text-text-3 flex-wrap">
                 <span>
                   {yearStr}년 {monthNum}월

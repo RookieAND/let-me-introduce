@@ -19,12 +19,16 @@ function FeaturedCardInner() {
         <span>·</span>
         <span>{FEATURED_POST.read}</span>
       </div>
-      <Text variant="heading4" className="text-[clamp(24px,3.2vw,36px)] mb-3.5 max-w-[22ch]">
+      <Text variant="heading4" className="text-[clamp(24px,3.2vw,36px)] mb-3.5 max-w-[30ch]">
         {FEATURED_POST.title}
       </Text>
-      <Text variant="body1" color="muted" className="max-w-[60ch] mb-5.5">
-        {FEATURED_POST.excerpt}
-      </Text>
+      <div className="max-w-[60ch] mb-5.5 flex flex-col gap-1.5">
+        {FEATURED_POST.excerpt.map((line) => (
+          <Text key={line} variant="body1" color="muted">
+            {line}
+          </Text>
+        ))}
+      </div>
       <span className="font-mono text-[13px] text-accent-bright inline-flex items-center gap-2 transition-[gap] duration-200 group-hover:gap-3.25">
         자세히 읽기 {FEATURED_POST.content ? "→" : "↗"}
       </span>

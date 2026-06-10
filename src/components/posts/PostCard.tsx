@@ -32,9 +32,13 @@ function CardInner({ post }: { post: Post }) {
         >
           {post.title}
         </Text>
-        <Text variant="body2" color="muted" className="max-w-[64ch] mb-3.5">
-          {post.excerpt}
-        </Text>
+        <div className="max-w-[64ch] mb-3.5 flex flex-col gap-1">
+          {post.excerpt.map((line) => (
+            <Text key={line} variant="body2" color="muted">
+              {line}
+            </Text>
+          ))}
+        </div>
         <div className="flex flex-wrap gap-1.75">
           {post.tags.map((tag) => (
             <span
