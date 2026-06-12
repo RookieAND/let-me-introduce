@@ -70,6 +70,7 @@ import pnpmDependencyMd from "#/content/posts/pnpm-dependency-deep-dive.md?raw";
 import turboPruneMd from "#/content/posts/turbo-prune-monorepo.md?raw";
 
 // Other
+import cjsRequireMd from "#/content/posts/cjs-require-module-resolution.md?raw";
 import plopMd from "#/content/posts/plop-code-generator.md?raw";
 import queueDelayedJobMd from "#/content/posts/queue-delayed-job-bullmq-fix.md?raw";
 import suitesNestjsMd from "#/content/posts/suites-nestjs-auto-mock.md?raw";
@@ -188,6 +189,19 @@ export const POSTS: Post[] = [
     read: "10 min",
     href: "/posts/vite-code-splitting-bundle",
     content: viteBundleMd,
+  },
+  {
+    slug: "cjs-require-module-resolution",
+    date: "2026-06-12",
+    cat: "Backend",
+    title: "CJS : require 의 모듈 탐색 알고리즘",
+    excerpt: [
+      "require('./foo') 한 줄 뒤에서 Node.js 가 하는 일. Module 클래스, Module Wrapper, exports/module.exports 참조 관계, 캐싱 구조, 그리고 Core → 상대경로 → node_modules 순서로 진행되는 탐색 알고리즘까지.",
+    ],
+    tags: ["Node.js", "CJS", "JavaScript", "Module"],
+    read: "12 min",
+    href: "/posts/cjs-require-module-resolution",
+    content: cjsRequireMd,
   },
   {
     slug: "suites-nestjs-auto-mock",
