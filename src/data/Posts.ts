@@ -95,6 +95,18 @@ export const POSTS: Post[] = [
     href: "/posts/vite-code-splitting-bundle",
   },
   {
+    slug: "cjs-module-evaluation-pipeline",
+    date: "2026-06-13",
+    cat: "Backend",
+    title: "CJS : string 에서 exports 까지, 모듈 평가 파이프라인",
+    excerpt: [
+      "require() 가 파일을 불러온 뒤 실제로 무슨 일이 벌어지는가. loadSource 로 파일을 읽고, Module.wrap 으로 감싸고, wrapSafe 가 V8 에 컴파일하고, FunctionPrototypeCall 로 실행되기까지 — module.exports 에 값이 채워지는 전 과정을 Node.js 소스로 따라간다.",
+    ],
+    tags: ["Node.js", "CJS", "JavaScript", "Module"],
+    read: "13 min",
+    href: "/posts/cjs-module-evaluation-pipeline",
+  },
+  {
     slug: "cjs-require-module-resolution",
     date: "2026-06-12",
     cat: "Backend",
