@@ -54,7 +54,7 @@ function CardInner({ post }: { post: Post }) {
       <div className="font-mono text-[12px] text-text-3 whitespace-nowrap pt-1 flex items-center gap-1.75 max-[760px]:hidden">
         {post.read}
         <span className="text-accent opacity-0 -translate-x-1.5 transition-all duration-250 group-hover:opacity-100 group-hover:translate-x-0">
-          {post.content ? "→" : "↗"}
+          {post.href.startsWith("/") ? "→" : "↗"}
         </span>
       </div>
     </>
@@ -62,7 +62,7 @@ function CardInner({ post }: { post: Post }) {
 }
 
 export function PostCard({ post }: PostCardProps) {
-  if (post.content) {
+  if (post.href.startsWith("/")) {
     return (
       <Link to={`/posts/${post.slug}`} className={CARD_CLASS}>
         <CardInner post={post} />

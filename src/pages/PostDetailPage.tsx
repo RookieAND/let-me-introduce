@@ -3,7 +3,7 @@ import { Link, Navigate, useParams } from "react-router-dom";
 import { Footer } from "#/components/Footer";
 import { Nav } from "#/components/Nav";
 import { PostToc } from "#/components/posts/PostToc";
-import { ALL_POSTS } from "#/data/Posts";
+import { ALL_POSTS, CONTENT_LOADERS } from "#/data/Posts";
 import { MarkdownRenderer } from "#/lib/Markdown";
 import { extractHeadings } from "#/lib/markdown/slugify";
 import { tokenize } from "#/lib/markdown/tokenize";
@@ -11,8 +11,10 @@ import { tokenize } from "#/lib/markdown/tokenize";
 export function PostDetailPage() {
   const { slug } = useParams<{ slug: string }>();
   const [progress, setProgress] = useState(0);
+  const [content, setContent] = useState<string | null>(null);
 
   const post = ALL_POSTS.find((p) => p.slug === slug);
+  const loader = slug ? CONTENT_LOADERS[slug] : undefined;
 
   useEffect(() => {
     window.scrollTo({ top: 0, behavior: "instant" });
@@ -28,12 +30,19 @@ export function PostDetailPage() {
     return () => window.removeEventListener("scroll", onScroll);
   }, []);
 
-  if (!post?.content) return <Navigate to="/posts" replace />;
+  useEffect(() => {
+    if (!loader) return;
+    setContent(null);
+    loader().then(setContent);
+  }, [loader]);
+
+  if (!post || !loader) return <Navigate to="/posts" replace />;
+  if (!content) return null;
 
   const [yearStr, monthStr] = post.date.split("-");
   const monthNum = monthStr.replace(/^0/, "");
 
-  const headings = extractHeadings(tokenize(post.content));
+  const headings = extractHeadings(tokenize(content));
 
   return (
     <>
@@ -114,7 +123,7 @@ export function PostDetailPage() {
 
             <hr className="border-0 border-t border-border mb-12" />
 
-            <MarkdownRenderer content={post.content} />
+            <MarkdownRenderer content={content} />
 
             <div className="mt-16 pt-8 border-t border-border">
               <Link

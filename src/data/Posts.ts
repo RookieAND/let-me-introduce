@@ -1,106 +1,3 @@
-import caslLibraryIntroMd from "#/content/posts/casl-library-intro.md?raw";
-import caslTsDeepDiveMd from "#/content/posts/casl-typescript-deep-dive.md?raw";
-import gemAbacNestjs1Md from "#/content/posts/gem-abac-nestjs-1.md?raw";
-import gemAbacNestjs2Md from "#/content/posts/gem-abac-nestjs-2.md?raw";
-import gemAbacNestjs3Md from "#/content/posts/gem-abac-nestjs-3.md?raw";
-import dockerKubernetesC1Md from "#/content/posts/docker-kubernetes-ch1.md?raw";
-import dockerKubernetesC2Md from "#/content/posts/docker-kubernetes-ch2.md?raw";
-import turborepoMd from "#/content/posts/turborepo-remote-cache-self-hosted.md?raw";
-import zustandSliceMd from "#/content/posts/zustand-slice-form-builder.md?raw";
-
-import tsEnumMd from "#/content/posts/typescript-enum.md?raw";
-import tsModuleResolutionMd from "#/content/posts/typescript-module-resolution.md?raw";
-import tsSatisfiesMd from "#/content/posts/typescript-satisfies.md?raw";
-// TypeScript
-import tsUnionContravarianceMd from "#/content/posts/typescript-union-contravariance.md?raw";
-
-import customEventMd from "#/content/posts/custom-event-observer.md?raw";
-import edgeRuntimeMd from "#/content/posts/edge-runtime-internals.md?raw";
-import frontendTestMd from "#/content/posts/frontend-test-thoughts.md?raw";
-import moduleFederationMd from "#/content/posts/module-federation.md?raw";
-import nextjsImageMd from "#/content/posts/nextjs-image-optimization.md?raw";
-import nextjsPprMd from "#/content/posts/nextjs-partial-pre-rendering.md?raw";
-import reactDisplayNameMd from "#/content/posts/react-display-name.md?raw";
-import reactQueryMutationMd from "#/content/posts/react-query-mutation.md?raw";
-// Frontend — 최신
-import sseReactMd from "#/content/posts/sse-react-event-registry.md?raw";
-import viteBundleMd from "#/content/posts/vite-code-splitting-bundle.md?raw";
-import zeroRuntimeMd from "#/content/posts/zero-runtime-vanilla-extract.md?raw";
-
-import howBundlerWorksMd from "#/content/posts/how-bundler-works.md?raw";
-import promiseWithResolverMd from "#/content/posts/promise-with-resolver.md?raw";
-// Frontend — 2024
-import reactErrorBoundaryMd from "#/content/posts/react-error-boundary.md?raw";
-import useEffectAfterPaintMd from "#/content/posts/useeffect-after-paint.md?raw";
-
-import csrSsrMd from "#/content/posts/csr-ssr-spa-mpa.md?raw";
-import eventBubblingMd from "#/content/posts/event-bubbling-capturing-delegation.md?raw";
-import forLoopLetVarMd from "#/content/posts/for-loop-let-var.md?raw";
-import globPatternMd from "#/content/posts/glob-pattern.md?raw";
-import howBrowserWorksMd from "#/content/posts/how-browser-works.md?raw";
-import jsEqualityMd from "#/content/posts/javascript-equality-comparison.md?raw";
-import eventLoopMd from "#/content/posts/javascript-event-loop.md?raw";
-import jsIterableMd from "#/content/posts/javascript-iterable.md?raw";
-import jsObjectMd from "#/content/posts/javascript-object-deep-dive.md?raw";
-import reactAutoBatchingMd from "#/content/posts/react-18-auto-batching.md?raw";
-// Frontend — 2023
-import reactRenderingMd from "#/content/posts/react-rendering.md?raw";
-import reactStateMd from "#/content/posts/react-state-usestate.md?raw";
-import serverStateReactQueryMd from "#/content/posts/server-state-react-query.md?raw";
-import useEffectLayoutMd from "#/content/posts/useeffect-vs-uselayouteffect.md?raw";
-
-import corsMd from "#/content/posts/cors-deep-dive.md?raw";
-import eslintPrettierMd from "#/content/posts/eslint-prettier.md?raw";
-import gitHookMd from "#/content/posts/git-hook-husky.md?raw";
-// Architecture
-import httpCookieMd from "#/content/posts/http-cookie-samesite.md?raw";
-import jestTestMd from "#/content/posts/jest-functional-test.md?raw";
-import mimeTypeMd from "#/content/posts/mime-content-type.md?raw";
-import tddMd from "#/content/posts/tdd-introduction.md?raw";
-
-import dockerComposeMd from "#/content/posts/docker-compose-basics.md?raw";
-import githubActionsDockerMd from "#/content/posts/github-actions-docker-deploy.md?raw";
-import hardLinkMd from "#/content/posts/hard-link-symbolic-link.md?raw";
-import nestjsDockerMd from "#/content/posts/nestjs-docker-image-optimization.md?raw";
-import changesetsMd from "#/content/posts/changesets-monorepo-versioning.md?raw";
-import gemcCliMd from "#/content/posts/gemc-monorepo-cli.md?raw";
-import pnpmCatalogMd from "#/content/posts/pnpm-catalog.md?raw";
-// Infra / Monorepo
-import pnpmDependencyMd from "#/content/posts/pnpm-dependency-deep-dive.md?raw";
-import turboPruneMd from "#/content/posts/turbo-prune-monorepo.md?raw";
-
-// Other
-import cjsRequireMd from "#/content/posts/cjs-require-module-resolution.md?raw";
-import plopMd from "#/content/posts/plop-code-generator.md?raw";
-import queueDelayedJobMd from "#/content/posts/queue-delayed-job-bullmq-fix.md?raw";
-import suitesNestjsMd from "#/content/posts/suites-nestjs-auto-mock.md?raw";
-import tsJestToSwcJestMd from "#/content/posts/tsjest-to-swcjest-migration.md?raw";
-
-import browserParsingMd from "#/content/posts/browser-parsing.md?raw";
-// TIL 추가분
-import jsExecutionContextMd from "#/content/posts/javascript-execution-context.md?raw";
-import reactUseSuspensedQueryMd from "#/content/posts/react-use-suspensed-query.md?raw";
-import reactWindowingMd from "#/content/posts/react-windowing.md?raw";
-import webServerVsWasMd from "#/content/posts/web-server-vs-was.md?raw";
-
-import devmalsamiReleaseMd from "#/content/posts/devmalsami-release.md?raw";
-import ictInternshipMd from "#/content/posts/ict-internship-2023.md?raw";
-import joiningCompany2WeeksMd from "#/content/posts/joining-company-2weeks.md?raw";
-import joiningCompany4MonthsMd from "#/content/posts/joining-company-4months.md?raw";
-import kbCompetitionMd from "#/content/posts/kb-software-competition.md?raw";
-import nexters24thMd from "#/content/posts/nexters-24th.md?raw";
-import retrospective2022Md from "#/content/posts/retrospective-2022.md?raw";
-import retrospective2023HMd from "#/content/posts/retrospective-2023-1h.md?raw";
-import retrospective2023Md from "#/content/posts/retrospective-2023.md?raw";
-import retrospective2024HMd from "#/content/posts/retrospective-2024-1h.md?raw";
-import retrospective2024Md from "#/content/posts/retrospective-2024.md?raw";
-// 회고
-import retrospective2025HMd from "#/content/posts/retrospective-2025-1h.md?raw";
-import theoConference3rdMd from "#/content/posts/theo-conference-3rd.md?raw";
-import theoSprint14thMd from "#/content/posts/theo-sprint-14th.md?raw";
-import theoSprint15thMd from "#/content/posts/theo-sprint-15th.md?raw";
-import theoSprint17thMd from "#/content/posts/theo-sprint-17th.md?raw";
-
 export type Category = "Frontend" | "Backend" | "Architecture" | "Infra" | "Retrospective";
 
 export interface Post {
@@ -112,8 +9,21 @@ export interface Post {
   tags: string[];
   read: string;
   href: string;
-  content?: string;
 }
+
+const contentModules = import.meta.glob("../content/posts/*.md", {
+  query: "?raw",
+  import: "default",
+  eager: false,
+});
+
+export const CONTENT_LOADERS: Record<string, () => Promise<string>> =
+  Object.fromEntries(
+    Object.entries(contentModules).map(([path, loader]) => [
+      path.slice("../content/posts/".length, -".md".length),
+      loader as () => Promise<string>,
+    ]),
+  );
 
 export const FEATURED_POST: Post = {
   slug: "gem-abac-nestjs-1",
@@ -125,7 +35,6 @@ export const FEATURED_POST: Post = {
     ["외부 관리자 요구사항 하나로 RBAC의 한계가 드러났다. 역할 기반으로는 표현 자체가 불가능한 케이스에서, CASL + Level 추상화로 리소스 단위 권한 체계를 설계한 과정."],
   tags: ["CASL", "ABAC", "NestJS", "권한", "아키텍처"],
   href: "/posts/gem-abac-nestjs-1",
-  content: gemAbacNestjs1Md,
 };
 
 export const POSTS: Post[] = [
@@ -140,7 +49,6 @@ export const POSTS: Post[] = [
     tags: ["CASL", "NestJS", "Guard", "권한"],
     read: "10 min",
     href: "/posts/gem-abac-nestjs-2",
-    content: gemAbacNestjs2Md,
   },
   {
     slug: "gem-abac-nestjs-3",
@@ -152,7 +60,6 @@ export const POSTS: Post[] = [
     tags: ["CASL", "NestJS", "마이그레이션", "테스트"],
     read: "12 min",
     href: "/posts/gem-abac-nestjs-3",
-    content: gemAbacNestjs3Md,
   },
   {
     slug: "casl-library-intro",
@@ -164,7 +71,6 @@ export const POSTS: Post[] = [
     tags: ["CASL", "TypeScript", "NestJS", "권한"],
     read: "7 min",
     href: "/posts/casl-library-intro",
-    content: caslLibraryIntroMd,
   },
   {
     slug: "queue-delayed-job-bullmq-fix",
@@ -176,7 +82,6 @@ export const POSTS: Post[] = [
     tags: ["NestJS", "BullMQ", "Queue", "버그"],
     read: "8 min",
     href: "/posts/queue-delayed-job-bullmq-fix",
-    content: queueDelayedJobMd,
   },
   {
     slug: "vite-code-splitting-bundle",
@@ -188,7 +93,6 @@ export const POSTS: Post[] = [
     tags: ["Vite", "Bundle", "최적화"],
     read: "10 min",
     href: "/posts/vite-code-splitting-bundle",
-    content: viteBundleMd,
   },
   {
     slug: "cjs-require-module-resolution",
@@ -201,7 +105,6 @@ export const POSTS: Post[] = [
     tags: ["Node.js", "CJS", "JavaScript", "Module"],
     read: "12 min",
     href: "/posts/cjs-require-module-resolution",
-    content: cjsRequireMd,
   },
   {
     slug: "suites-nestjs-auto-mock",
@@ -213,7 +116,6 @@ export const POSTS: Post[] = [
     tags: ["NestJS", "Testing", "Jest", "Auto-Mock"],
     read: "8 min",
     href: "/posts/suites-nestjs-auto-mock",
-    content: suitesNestjsMd,
   },
   {
     slug: "tsjest-to-swcjest-migration",
@@ -225,7 +127,6 @@ export const POSTS: Post[] = [
     tags: ["NestJS", "Jest", "swc", "Testing", "Coverage"],
     read: "8 min",
     href: "/posts/tsjest-to-swcjest-migration",
-    content: tsJestToSwcJestMd,
   },
   {
     slug: "docker-kubernetes-ch1",
@@ -237,7 +138,6 @@ export const POSTS: Post[] = [
     tags: ["Docker", "Container", "가상화"],
     read: "3 min",
     href: "/posts/docker-kubernetes-ch1",
-    content: dockerKubernetesC1Md,
   },
   {
     slug: "docker-kubernetes-ch2",
@@ -249,7 +149,6 @@ export const POSTS: Post[] = [
     tags: ["Docker", "Container", "Network", "Volume"],
     read: "15 min",
     href: "/posts/docker-kubernetes-ch2",
-    content: dockerKubernetesC2Md,
   },
   {
     slug: "module-federation",
@@ -261,7 +160,6 @@ export const POSTS: Post[] = [
     tags: ["Module Federation", "Micro Frontend", "Webpack"],
     read: "8 min",
     href: "/posts/module-federation",
-    content: moduleFederationMd,
   },
   {
     slug: "typescript-module-resolution",
@@ -273,7 +171,6 @@ export const POSTS: Post[] = [
     tags: ["TypeScript", "Vite", "모듈"],
     read: "7 min",
     href: "/posts/typescript-module-resolution",
-    content: tsModuleResolutionMd,
   },
   {
     slug: "typescript-union-contravariance",
@@ -285,7 +182,6 @@ export const POSTS: Post[] = [
     tags: ["TypeScript", "반공변성", "제네릭"],
     read: "12 min",
     href: "/posts/typescript-union-contravariance",
-    content: tsUnionContravarianceMd,
   },
   {
     slug: "sse-react-event-registry",
@@ -297,7 +193,6 @@ export const POSTS: Post[] = [
     tags: ["React", "SSE", "EventSource"],
     read: "12 min",
     href: "/posts/sse-react-event-registry",
-    content: sseReactMd,
   },
   {
     slug: "react-display-name",
@@ -309,7 +204,6 @@ export const POSTS: Post[] = [
     tags: ["React", "DevTools", "디버깅"],
     read: "8 min",
     href: "/posts/react-display-name",
-    content: reactDisplayNameMd,
   },
   {
     slug: "typescript-enum",
@@ -321,7 +215,6 @@ export const POSTS: Post[] = [
     tags: ["TypeScript", "Enum", "as const"],
     read: "7 min",
     href: "/posts/typescript-enum",
-    content: tsEnumMd,
   },
   {
     slug: "typescript-satisfies",
@@ -333,7 +226,6 @@ export const POSTS: Post[] = [
     tags: ["TypeScript", "satisfies", "타입 안전성"],
     read: "5 min",
     href: "/posts/typescript-satisfies",
-    content: tsSatisfiesMd,
   },
   {
     slug: "casl-typescript-deep-dive",
@@ -345,7 +237,6 @@ export const POSTS: Post[] = [
     tags: ["CASL", "TypeScript", "NestJS", "권한"],
     read: "8 min",
     href: "/posts/casl-typescript-deep-dive",
-    content: caslTsDeepDiveMd,
   },
   {
     slug: "squad-leader-retrospective",
@@ -368,7 +259,6 @@ export const POSTS: Post[] = [
     tags: ["Next.js", "PPR", "Streaming SSR"],
     read: "10 min",
     href: "/posts/partial-pre-rendering",
-    content: nextjsPprMd,
   },
   // ── 2025 ──────────────────────────────────────────────────────────────────
   {
@@ -392,7 +282,6 @@ export const POSTS: Post[] = [
     tags: ["Testing", "프론트엔드", "TDD"],
     read: "12 min",
     href: "/posts/frontend-test-thoughts",
-    content: frontendTestMd,
   },
   {
     slug: "zustand-slice-form-builder",
@@ -404,7 +293,6 @@ export const POSTS: Post[] = [
     tags: ["React", "Zustand", "Form"],
     read: "10 min",
     href: "/posts/zustand-slice-form-builder",
-    content: zustandSliceMd,
   },
   {
     slug: "retrospective-2025-1h",
@@ -416,7 +304,6 @@ export const POSTS: Post[] = [
     tags: ["회고", "2025", "성장", "리더십"],
     read: "18 min",
     href: "/posts/retrospective-2025-1h",
-    content: retrospective2025HMd,
   },
   {
     slug: "css-custom-properties-runtime-theme",
@@ -439,7 +326,6 @@ export const POSTS: Post[] = [
     tags: ["Turborepo", "pnpm", "CI", "빌드 캐시"],
     read: "11 min",
     href: "/posts/turborepo-remote-cache-self-hosted",
-    content: turborepoMd,
   },
   {
     slug: "docker-multistage-build-optimization",
@@ -463,7 +349,6 @@ export const POSTS: Post[] = [
     tags: ["회고", "2024", "성장"],
     read: "16 min",
     href: "/posts/retrospective-2024",
-    content: retrospective2024Md,
   },
   {
     slug: "google-oauth2-server-side-sheets",
@@ -486,7 +371,6 @@ export const POSTS: Post[] = [
     tags: ["pnpm", "node_modules", "패키지 관리"],
     read: "15 min",
     href: "/posts/pnpm-dependency-deep-dive",
-    content: pnpmDependencyMd,
   },
   {
     slug: "pnpm-catalog",
@@ -498,7 +382,6 @@ export const POSTS: Post[] = [
     tags: ["pnpm", "Monorepo", "패키지 관리"],
     read: "5 min",
     href: "/posts/pnpm-catalog",
-    content: pnpmCatalogMd,
   },
   {
     slug: "plop-code-generator",
@@ -510,7 +393,6 @@ export const POSTS: Post[] = [
     tags: ["PlopJS", "DX", "코드 자동화"],
     read: "10 min",
     href: "/posts/plop-code-generator",
-    content: plopMd,
   },
   {
     slug: "theo-conference-3rd",
@@ -522,7 +404,6 @@ export const POSTS: Post[] = [
     tags: ["회고", "커뮤니티", "테오"],
     read: "8 min",
     href: "/posts/theo-conference-3rd",
-    content: theoConference3rdMd,
   },
   {
     slug: "hard-link-symbolic-link",
@@ -534,7 +415,6 @@ export const POSTS: Post[] = [
     tags: ["pnpm", "Linux", "파일 시스템"],
     read: "7 min",
     href: "/posts/hard-link-symbolic-link",
-    content: hardLinkMd,
   },
   {
     slug: "changesets-monorepo-versioning",
@@ -546,7 +426,6 @@ export const POSTS: Post[] = [
     tags: ["Changesets", "pnpm", "Monorepo", "CI/CD", "버전 관리"],
     read: "8 min",
     href: "/posts/changesets-monorepo-versioning",
-    content: changesetsMd,
   },
   {
     slug: "gemc-monorepo-cli",
@@ -558,7 +437,6 @@ export const POSTS: Post[] = [
     tags: ["CLI", "Monorepo", "NestJS", "DX", "Node.js"],
     read: "7 min",
     href: "/posts/gemc-monorepo-cli",
-    content: gemcCliMd,
   },
   {
     slug: "turbo-prune-monorepo",
@@ -570,7 +448,6 @@ export const POSTS: Post[] = [
     tags: ["Turborepo", "Docker", "Monorepo"],
     read: "8 min",
     href: "/posts/turbo-prune-monorepo",
-    content: turboPruneMd,
   },
   {
     slug: "vitest-legacy-test-coverage",
@@ -593,7 +470,6 @@ export const POSTS: Post[] = [
     tags: ["Docker", "Docker Compose", "Infra"],
     read: "6 min",
     href: "/posts/docker-compose-basics",
-    content: dockerComposeMd,
   },
   {
     slug: "react-use-suspensed-query",
@@ -605,7 +481,6 @@ export const POSTS: Post[] = [
     tags: ["React Query", "TypeScript", "Suspense"],
     read: "8 min",
     href: "/posts/react-use-suspensed-query",
-    content: reactUseSuspensedQueryMd,
   },
   {
     slug: "react-query-mutation",
@@ -617,7 +492,6 @@ export const POSTS: Post[] = [
     tags: ["React Query", "TanStack Query", "Mutation"],
     read: "8 min",
     href: "/posts/react-query-mutation",
-    content: reactQueryMutationMd,
   },
   {
     slug: "retrospective-2024-1h",
@@ -629,7 +503,6 @@ export const POSTS: Post[] = [
     tags: ["회고", "2024", "성장"],
     read: "14 min",
     href: "/posts/retrospective-2024-1h",
-    content: retrospective2024HMd,
   },
   {
     slug: "devmalsami-release",
@@ -641,7 +514,6 @@ export const POSTS: Post[] = [
     tags: ["회고", "사이드 프로젝트", "협업", "릴리즈"],
     read: "10 min",
     href: "/posts/devmalsami-release",
-    content: devmalsamiReleaseMd,
   },
   {
     slug: "nestjs-docker-image-optimization",
@@ -653,7 +525,6 @@ export const POSTS: Post[] = [
     tags: ["NestJS", "Docker", "pnpm", "최적화"],
     read: "8 min",
     href: "/posts/nestjs-docker-image-optimization",
-    content: nestjsDockerMd,
   },
   {
     slug: "nextjs-image-optimization",
@@ -665,7 +536,6 @@ export const POSTS: Post[] = [
     tags: ["Next.js", "이미지 최적화", "CDN"],
     read: "8 min",
     href: "/posts/nextjs-image-optimization",
-    content: nextjsImageMd,
   },
   {
     slug: "github-actions-docker-deploy",
@@ -677,7 +547,6 @@ export const POSTS: Post[] = [
     tags: ["GitHub Actions", "Docker", "CI/CD"],
     read: "7 min",
     href: "/posts/github-actions-docker-deploy",
-    content: githubActionsDockerMd,
   },
   {
     slug: "theo-sprint-17th",
@@ -689,7 +558,6 @@ export const POSTS: Post[] = [
     tags: ["회고", "커뮤니티", "테오"],
     read: "8 min",
     href: "/posts/theo-sprint-17th",
-    content: theoSprint17thMd,
   },
   {
     slug: "promise-with-resolver",
@@ -701,7 +569,6 @@ export const POSTS: Post[] = [
     tags: ["JavaScript", "Promise", "ES2024"],
     read: "4 min",
     href: "/posts/promise-with-resolver",
-    content: promiseWithResolverMd,
   },
   {
     slug: "useeffect-after-paint",
@@ -713,7 +580,6 @@ export const POSTS: Post[] = [
     tags: ["React", "useEffect", "브라우저"],
     read: "7 min",
     href: "/posts/useeffect-after-paint",
-    content: useEffectAfterPaintMd,
   },
   {
     slug: "react-error-boundary",
@@ -725,7 +591,6 @@ export const POSTS: Post[] = [
     tags: ["React", "ErrorBoundary", "에러 처리"],
     read: "8 min",
     href: "/posts/react-error-boundary",
-    content: reactErrorBoundaryMd,
   },
   {
     slug: "edge-runtime-internals",
@@ -737,7 +602,6 @@ export const POSTS: Post[] = [
     tags: ["Next.js", "Edge Runtime", "Node.js"],
     read: "10 min",
     href: "/posts/edge-runtime-internals",
-    content: edgeRuntimeMd,
   },
   {
     slug: "custom-event-observer",
@@ -749,7 +613,6 @@ export const POSTS: Post[] = [
     tags: ["CustomEvent", "Observer Pattern", "TypeScript"],
     read: "5 min",
     href: "/posts/custom-event-observer",
-    content: customEventMd,
   },
   {
     slug: "zero-runtime-vanilla-extract",
@@ -761,7 +624,6 @@ export const POSTS: Post[] = [
     tags: ["CSS-in-JS", "Vanilla Extract", "Zero Runtime"],
     read: "8 min",
     href: "/posts/zero-runtime-vanilla-extract",
-    content: zeroRuntimeMd,
   },
   // ── 2024.01 ───────────────────────────────────────────────────────────────
   {
@@ -774,7 +636,6 @@ export const POSTS: Post[] = [
     tags: ["회고", "2023", "성장"],
     read: "16 min",
     href: "/posts/retrospective-2023",
-    content: retrospective2023Md,
   },
   // ── 2023 ──────────────────────────────────────────────────────────────────
   {
@@ -787,7 +648,6 @@ export const POSTS: Post[] = [
     tags: ["Webpack", "Rollup", "esbuild", "번들러"],
     read: "10 min",
     href: "/posts/how-bundler-works",
-    content: howBundlerWorksMd,
   },
   {
     slug: "nexters-24th",
@@ -799,7 +659,6 @@ export const POSTS: Post[] = [
     tags: ["회고", "Nexters", "동아리"],
     read: "8 min",
     href: "/posts/nexters-24th",
-    content: nexters24thMd,
   },
   {
     slug: "retrospective-2023-1h",
@@ -811,7 +670,6 @@ export const POSTS: Post[] = [
     tags: ["회고", "2023", "성장"],
     read: "12 min",
     href: "/posts/retrospective-2023-1h",
-    content: retrospective2023HMd,
   },
   {
     slug: "joining-company-4months",
@@ -823,7 +681,6 @@ export const POSTS: Post[] = [
     tags: ["회고", "인턴십", "성장"],
     read: "8 min",
     href: "/posts/joining-company-4months",
-    content: joiningCompany4MonthsMd,
   },
   {
     slug: "http-cookie-samesite",
@@ -835,7 +692,6 @@ export const POSTS: Post[] = [
     tags: ["HTTP", "Cookie", "SameSite", "CSRF"],
     read: "8 min",
     href: "/posts/http-cookie-samesite",
-    content: httpCookieMd,
   },
   {
     slug: "cors-deep-dive",
@@ -847,7 +703,6 @@ export const POSTS: Post[] = [
     tags: ["CORS", "HTTP", "보안"],
     read: "10 min",
     href: "/posts/cors-deep-dive",
-    content: corsMd,
   },
   {
     slug: "theo-sprint-15th",
@@ -859,7 +714,6 @@ export const POSTS: Post[] = [
     tags: ["회고", "커뮤니티", "테오"],
     read: "7 min",
     href: "/posts/theo-sprint-15th",
-    content: theoSprint15thMd,
   },
   {
     slug: "react-windowing",
@@ -871,7 +725,6 @@ export const POSTS: Post[] = [
     tags: ["React", "Windowing", "성능 최적화", "Virtual Scroll"],
     read: "9 min",
     href: "/posts/react-windowing",
-    content: reactWindowingMd,
   },
   {
     slug: "react-state-usestate",
@@ -883,7 +736,6 @@ export const POSTS: Post[] = [
     tags: ["React", "useState", "렌더링"],
     read: "9 min",
     href: "/posts/react-state-usestate",
-    content: reactStateMd,
   },
   {
     slug: "react-18-auto-batching",
@@ -895,7 +747,6 @@ export const POSTS: Post[] = [
     tags: ["React", "React 18", "Batching", "성능"],
     read: "6 min",
     href: "/posts/react-18-auto-batching",
-    content: reactAutoBatchingMd,
   },
   {
     slug: "event-bubbling-capturing-delegation",
@@ -907,7 +758,6 @@ export const POSTS: Post[] = [
     tags: ["JavaScript", "이벤트", "DOM"],
     read: "7 min",
     href: "/posts/event-bubbling-capturing-delegation",
-    content: eventBubblingMd,
   },
   {
     slug: "kb-software-competition",
@@ -919,7 +769,6 @@ export const POSTS: Post[] = [
     tags: ["회고", "대회", "프로젝트"],
     read: "6 min",
     href: "/posts/kb-software-competition",
-    content: kbCompetitionMd,
   },
   {
     slug: "theo-sprint-14th",
@@ -931,7 +780,6 @@ export const POSTS: Post[] = [
     tags: ["회고", "커뮤니티", "테오"],
     read: "7 min",
     href: "/posts/theo-sprint-14th",
-    content: theoSprint14thMd,
   },
   {
     slug: "ict-internship-2023",
@@ -943,7 +791,6 @@ export const POSTS: Post[] = [
     tags: ["회고", "인턴십", "ICT"],
     read: "7 min",
     href: "/posts/ict-internship-2023",
-    content: ictInternshipMd,
   },
   {
     slug: "joining-company-2weeks",
@@ -955,7 +802,6 @@ export const POSTS: Post[] = [
     tags: ["회고", "인턴십", "성장"],
     read: "6 min",
     href: "/posts/joining-company-2weeks",
-    content: joiningCompany2WeeksMd,
   },
   {
     slug: "glob-pattern",
@@ -967,7 +813,6 @@ export const POSTS: Post[] = [
     tags: ["Glob", "파일 시스템", "CLI"],
     read: "6 min",
     href: "/posts/glob-pattern",
-    content: globPatternMd,
   },
   {
     slug: "for-loop-let-var",
@@ -979,7 +824,6 @@ export const POSTS: Post[] = [
     tags: ["JavaScript", "let", "var", "클로저"],
     read: "5 min",
     href: "/posts/for-loop-let-var",
-    content: forLoopLetVarMd,
   },
   {
     slug: "javascript-event-loop",
@@ -991,7 +835,6 @@ export const POSTS: Post[] = [
     tags: ["JavaScript", "이벤트 루프", "비동기"],
     read: "10 min",
     href: "/posts/javascript-event-loop",
-    content: eventLoopMd,
   },
   {
     slug: "javascript-object-deep-dive",
@@ -1003,7 +846,6 @@ export const POSTS: Post[] = [
     tags: ["JavaScript", "Object", "메모리"],
     read: "9 min",
     href: "/posts/javascript-object-deep-dive",
-    content: jsObjectMd,
   },
   {
     slug: "useeffect-vs-uselayouteffect",
@@ -1015,7 +857,6 @@ export const POSTS: Post[] = [
     tags: ["React", "useEffect", "useLayoutEffect"],
     read: "9 min",
     href: "/posts/useeffect-vs-uselayouteffect",
-    content: useEffectLayoutMd,
   },
   {
     slug: "javascript-execution-context",
@@ -1027,7 +868,6 @@ export const POSTS: Post[] = [
     tags: ["JavaScript", "실행 컨텍스트", "호이스팅", "스코프"],
     read: "9 min",
     href: "/posts/javascript-execution-context",
-    content: jsExecutionContextMd,
   },
   {
     slug: "javascript-equality-comparison",
@@ -1039,7 +879,6 @@ export const POSTS: Post[] = [
     tags: ["JavaScript", "동등 비교", "NaN"],
     read: "7 min",
     href: "/posts/javascript-equality-comparison",
-    content: jsEqualityMd,
   },
   {
     slug: "react-rendering",
@@ -1051,7 +890,6 @@ export const POSTS: Post[] = [
     tags: ["React", "렌더링", "Virtual DOM"],
     read: "10 min",
     href: "/posts/react-rendering",
-    content: reactRenderingMd,
   },
   {
     slug: "tdd-introduction",
@@ -1063,7 +901,6 @@ export const POSTS: Post[] = [
     tags: ["TDD", "테스트", "BDD"],
     read: "10 min",
     href: "/posts/tdd-introduction",
-    content: tddMd,
   },
   {
     slug: "jest-functional-test",
@@ -1075,7 +912,6 @@ export const POSTS: Post[] = [
     tags: ["Jest", "Testing Library", "TDD"],
     read: "7 min",
     href: "/posts/jest-functional-test",
-    content: jestTestMd,
   },
   {
     slug: "javascript-iterable",
@@ -1087,7 +923,6 @@ export const POSTS: Post[] = [
     tags: ["JavaScript", "Iterable", "Iterator", "Generator"],
     read: "8 min",
     href: "/posts/javascript-iterable",
-    content: jsIterableMd,
   },
   {
     slug: "browser-parsing",
@@ -1099,7 +934,6 @@ export const POSTS: Post[] = [
     tags: ["브라우저", "파싱", "DOM", "HTML"],
     read: "7 min",
     href: "/posts/browser-parsing",
-    content: browserParsingMd,
   },
   {
     slug: "how-browser-works",
@@ -1111,7 +945,6 @@ export const POSTS: Post[] = [
     tags: ["브라우저", "CRP", "렌더링"],
     read: "12 min",
     href: "/posts/how-browser-works",
-    content: howBrowserWorksMd,
   },
   {
     slug: "server-state-react-query",
@@ -1123,7 +956,6 @@ export const POSTS: Post[] = [
     tags: ["React Query", "Server State", "캐싱"],
     read: "10 min",
     href: "/posts/server-state-react-query",
-    content: serverStateReactQueryMd,
   },
   {
     slug: "csr-ssr-spa-mpa",
@@ -1135,7 +967,6 @@ export const POSTS: Post[] = [
     tags: ["CSR", "SSR", "SPA", "MPA"],
     read: "9 min",
     href: "/posts/csr-ssr-spa-mpa",
-    content: csrSsrMd,
   },
   {
     slug: "retrospective-2022",
@@ -1147,7 +978,6 @@ export const POSTS: Post[] = [
     tags: ["회고", "2022", "성장"],
     read: "12 min",
     href: "/posts/retrospective-2022",
-    content: retrospective2022Md,
   },
   // ── 2022 ──────────────────────────────────────────────────────────────────
   {
@@ -1160,7 +990,6 @@ export const POSTS: Post[] = [
     tags: ["Web", "WAS", "Nginx", "아키텍처"],
     read: "6 min",
     href: "/posts/web-server-vs-was",
-    content: webServerVsWasMd,
   },
   {
     slug: "mime-content-type",
@@ -1172,7 +1001,6 @@ export const POSTS: Post[] = [
     tags: ["HTTP", "MIME", "Content-Type"],
     read: "6 min",
     href: "/posts/mime-content-type",
-    content: mimeTypeMd,
   },
   {
     slug: "git-hook-husky",
@@ -1184,7 +1012,6 @@ export const POSTS: Post[] = [
     tags: ["Git", "Husky", "lint-staged"],
     read: "7 min",
     href: "/posts/git-hook-husky",
-    content: gitHookMd,
   },
   {
     slug: "eslint-prettier",
@@ -1196,7 +1023,6 @@ export const POSTS: Post[] = [
     tags: ["ESLint", "Prettier", "DX"],
     read: "7 min",
     href: "/posts/eslint-prettier",
-    content: eslintPrettierMd,
   },
 ];
 

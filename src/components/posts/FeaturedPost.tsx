@@ -30,7 +30,7 @@ function FeaturedCardInner() {
         ))}
       </div>
       <span className="font-mono text-[13px] text-accent-bright inline-flex items-center gap-2 transition-[gap] duration-200 group-hover:gap-3.25">
-        자세히 읽기 {FEATURED_POST.content ? "→" : "↗"}
+        자세히 읽기 {FEATURED_POST.href.startsWith("/") ? "→" : "↗"}
       </span>
     </div>
   );
@@ -40,7 +40,7 @@ export function FeaturedPost() {
   return (
     <section className="pt-11 pb-10">
       <Reveal as="div">
-        {FEATURED_POST.content ? (
+        {FEATURED_POST.href.startsWith("/") ? (
           <Link to={`/posts/${FEATURED_POST.slug}`} className={CARD_CLASS}>
             <FeaturedCardInner />
           </Link>
