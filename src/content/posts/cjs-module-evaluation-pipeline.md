@@ -1,20 +1,20 @@
 ## 들어가며
 
-이전 글에서는 `require()` 를 이해하기 위한 개념들을 정리했다.
-Module 클래스, module/exports 의 출처, Module Wrapper, 탐색 알고리즘, require.cache 까지 설명했다.
+이전 글에서는 `require()` 를 이해하기 위한 개념들을 정리했다.  
+Module 클래스, module/exports 의 출처, Module Wrapper, 탐색 알고리즘, require.cache 까지 설명했다.  
 
-그런데 정작 핵심이 되는 한 부분은 설명 없이 넘어갔다.
+그런데 정작 핵심이 되는 한 부분은 설명 없이 넘어갔다.  
 
 > 파일 코드가 실행되며 module.exports 에 값이 채워진다.
 
-이 한 줄이 이전 글에서 블랙박스로 남긴 부분이다.
-파일이 어떻게 읽히는지, 어떻게 컴파일되는지, 어떻게 실행되는지.
-그리고 실행 결과가 어떻게 `module.exports` 에 담기는지는 설명하지 않았다.
+이 한 줄이 이전 글에서 블랙박스로 남긴 부분이다.  
+파일이 어떻게 읽히는지, 어떻게 컴파일되는지, 어떻게 실행되는지.  
+그리고 실행 결과가 어떻게 `module.exports` 에 담기는지는 설명하지 않았다.  
 
-이번 글에서는 그 블랙박스를 열어본다.
-`require()` 호출부터 `module.exports` 반환까지, 실제 Node.js 소스를 단계별로 따라가며 파이프라인 전체를 분석한다.
+그 블랙박스를 열어본다.  
+`require()` 호출부터 `module.exports` 반환까지, 실제 Node.js 소스를 단계별로 따라가며 파이프라인 전체를 분석한다.  
 
-전체 흐름을 먼저 보자.
+전체 흐름을 먼저 보자.  
 
 ```mermaid
 flowchart TD
@@ -29,21 +29,43 @@ flowchart TD
     G --> H["Module.prototype.load()"]
     H --> I["Module._extensions['.js']()"]
     I --> J["loadSource() → string"]
-    J --> K["Module.wrap() → 래퍼 감싸기"]
-    K --> L["wrapSafe() → V8 컴파일"]
-    L --> M["compiledWrapper (Function 객체, 미실행)"]
-    M --> N["FunctionPrototypeCall() → 실행"]
-    N --> O["module.loaded = true"]
-    O --> P["return module.exports"]
+    J --> K["wrapSafe() → 래퍼 감싸기 + V8 컴파일"]
+    K --> L["compiledWrapper (Function 객체, 미실행)"]
+    L --> M["FunctionPrototypeCall() → 실행"]
+    M --> N["module.loaded = true"]
+    N --> O["return module.exports"]
 ```
 
-각 단계를 실제 Node.js 소스 발췌와 함께 분석한다.
+각 단계를 실제 Node.js 소스 발췌와 함께 분석한다.  
 
 ---
 
 ## Step 1 — Module._load: 진입점
 
-`require('foo')` 를 호출하면 실제로는 `Module._load` 가 실행된다.
+`require('foo')` 를 호출하면 실제로는 `Module._load` 가 실행된다.  
+그런데 왜 `require()` 가 `Module._load` 로 이어지는지는 짚고 넘어갈 필요가 있다.  
+
+이전 글에서 설명했듯, 파일 코드는 Module Wrapper 의 매개변수로 `require` 를 주입받는다.  
+이 `require` 는 `makeRequireFunction` 이 만든 클로저로, 내부에서 `Module.prototype.require` 를 거쳐 `Module._load` 를 호출한다.  
+
+```javascript
+// lib/internal/modules/cjs/loader.js
+function makeRequireFunction(mod) {
+  function require(id) {
+    return mod.require(id); // mod = 현재 파일의 Module 인스턴스
+  }
+  // require.cache, require.resolve 등 프로퍼티 바인딩
+  return require;
+}
+
+Module.prototype.require = function(id) {
+  return Module._load(id, this, /* isMain */ false);
+};
+```
+
+즉 `require('foo')` 는 전역 함수가 아니다.  
+파일마다 해당 파일의 Module 인스턴스에 묶인 클로저이고, 최종적으로 `Module._load` 를 호출한다.  
+탐색 알고리즘이 파일마다 호출한 위치를 기준으로 동작하는 이유가 여기에 있다.  
 
 ```javascript
 // lib/internal/modules/cjs/loader.js
@@ -83,7 +105,7 @@ Module._load = function(request, parent, isMain) {
 };
 ```
 
-눈에 띄는 게 두 가지 있다.
+눈에 띄는 게 두 가지 있다.  
 
 ### 캐시를 실행 전에 미리 저장하는 이유
 
@@ -103,29 +125,29 @@ console.log(a.x);          // 1         ← exports.x 는 이미 할당됨
 console.log(a.y);          // undefined ← exports.y 는 아직 실행되지 않음
 ```
 
-`a.js` 실행 중에 `b.js` 가 `require('./a')` 를 호출하면, 캐시에 `a.js` 의 `Module` 인스턴스가 이미 있다.
-`module.exports` 가 아직 완전히 채워지지 않은 상태(`loaded = false`)이지만,
-무한 루프를 막기 위해 그 시점까지 채워진 `exports` 를 그대로 반환한다.
+`a.js` 실행 중에 `b.js` 가 `require('./a')` 를 호출하면, 캐시에 `a.js` 의 `Module` 인스턴스가 이미 있다.  
+`module.exports` 가 아직 완전히 채워지지 않은 상태(`loaded = false`)이지만,  
+무한 루프를 막기 위해 그 시점까지 채워진 `exports` 를 그대로 반환한다.  
 
-즉 **"부분적인 exports"** 란, `a.js` 가 `require('./b')` 를 호출한 시점까지 `module.exports` 에 할당된 값들이다.
-그 아래 코드는 아직 실행되지 않았으므로 해당 값들은 `undefined` 로 보인다.
+즉 **"부분적인 exports"** 란, `a.js` 가 `require('./b')` 를 호출한 시점까지 `module.exports` 에 할당된 값들이다.  
+그 아래 코드는 아직 실행되지 않았으므로 해당 값들은 `undefined` 로 보인다.  
 
-순환 참조가 생기면 어느 쪽을 먼저 require 하느냐에 따라 받는 값이 달라진다.
-Node.js 공식 문서도 순환 의존이 생길 경우 늦게 참조(Lazy)하거나 구조를 재설계하길 권장하는 이유가 여기에 있다.
+순환 참조가 생기면 어느 쪽을 먼저 require 하느냐에 따라 받는 값이 달라진다.  
+Node.js 공식 문서도 순환 의존이 생길 경우 늦게 참조(Lazy)하거나 구조를 재설계하길 권장하는 이유가 여기에 있다.  
 
 ### try/finally 로 로드 실패 시 캐시를 정리하는 이유
 
-파일 파싱 에러, 런타임 에러 등으로 로드가 실패했을 때 캐시에 불완전한 항목이 남을 수 있다.
-이렇게 되면 이후 `require()` 호출이 에러 없이 잘못된 값을 반환할 수 있다.
+파일 파싱 에러, 런타임 에러 등으로 로드가 실패했을 때 캐시에 불완전한 항목이 남을 수 있다.  
+이렇게 되면 이후 `require()` 호출이 에러 없이 잘못된 값을 반환할 수 있다.  
 
-그래서 `threw === true` 일 때 캐시를 지워 다음 `require()` 가 처음부터 다시 코드를 불러올 수 있게 한다.
+그래서 `threw === true` 일 때 캐시를 지워 다음 `require()` 가 처음부터 다시 코드를 불러올 수 있게 한다.  
 
 ---
 
 ## Step 2 — Module.prototype.load: 확장자 기반 로더 선택
 
-Step 1 에서 `module.load(filename)` 을 호출하면 이 함수가 실행된다.
-파일의 확장자를 보고 적절한 로더를 선택한다.
+Step 1 에서 `module.load(filename)` 을 호출하면 이 함수가 실행된다.  
+파일의 확장자를 보고 적절한 로더를 선택한다.  
 
 ```javascript
 // lib/internal/modules/cjs/loader.js
@@ -142,8 +164,8 @@ Module.prototype.load = function(filename) {
 };
 ```
 
-로더(loader)는 파일을 읽어서 그 내용을 `module.exports` 에 채우는 함수다.
-`Module._extensions` 는 확장자를 키로, 로더를 값으로 갖는 Map 으로 볼 수 있다.
+로더(loader)는 파일을 읽어서 그 내용을 `module.exports` 에 채우는 함수다.  
+`Module._extensions` 는 확장자를 키로, 로더를 값으로 갖는 Map 으로 볼 수 있다.  
 
 ```javascript
 Module._extensions['.js']   = function(module, filename) { /* 포맷 감지 + loadSource + _compile */ };
@@ -151,24 +173,24 @@ Module._extensions['.json'] = function(module, filename) { /* loadSource + JSON.
 Module._extensions['.node'] = function(module, filename) { /* process.dlopen */ };
 ```
 
-각 로더마다 `module.exports` 를 채우는 방식이 다르다.
+각 로더마다 `module.exports` 를 채우는 방식이 다르다.  
 
-- `.js` — 파일 코드 전체를 컴파일 후 실행. 실행 중 발생한 side effect 는 모두 적용되지만, `require()` 가 반환하는 것은 `module.exports` 에 할당된 값뿐이다.
-- `.json` — 파일을 읽고 `JSON.parse` 한 뒤 `module.exports` 에 직접 할당
-- `.node` — C++ 네이티브 바이너리를 `process.dlopen` 으로 로드
+- `.js` — 파일 코드 전체를 컴파일 후 실행. 실행 중 발생한 side effect 는 모두 적용되지만, `require()` 가 반환하는 것은 `module.exports` 에 할당된 값뿐이다.  
+- `.json` — 파일을 읽고 `JSON.parse` 한 뒤 `module.exports` 에 직접 할당  
+- `.node` — C++ 네이티브 바이너리를 `process.dlopen` 으로 로드  
 
-여기서 눈여겨 볼 점은 `this.loaded = true` 의 위치다.
-`Module._extensions[extension](this, filename)` 이 반환된 뒤에야 `true` 가 된다.
-즉, 파일 코드가 완전히 실행되기 전까지 `module.loaded` 는 항상 `false` 다.
+여기서 눈여겨 볼 점은 `this.loaded = true` 의 위치다.  
+`Module._extensions[extension](this, filename)` 이 반환된 뒤에야 `true` 가 된다.  
+즉, 파일 코드가 완전히 실행되기 전까지 `module.loaded` 는 항상 `false` 다.  
 
-순환 참조 감지가 `loaded === false` 를 기준으로 동작하는 이유가 여기에 있다.
+순환 참조 감지가 `loaded === false` 를 기준으로 동작하는 이유가 여기에 있다.  
 
 ---
 
-## Step 3 — Module._extensions['.js']: 포맷 결정과 파일 읽기
+## Step 3 — Module._extensions['.js']: 포맷 결정, 파일 읽기, 평가
 
-`.js` 로더는 두 가지 일을 담당한다.
-**CJS/ESM 포맷 결정**과 **파일 읽기 후 평가**다.
+`.js` 로더는 세 가지 일을 순서대로 담당한다.  
+**CJS/ESM 포맷 결정**, **파일 읽기(loadSource)**, **평가(_compile)** 다.  
 
 ```javascript
 // lib/internal/modules/cjs/loader.js
@@ -190,10 +212,36 @@ Module._extensions['.js'] = function(module, filename) {
 };
 ```
 
-`loadSource` 는 단순한 `fs.readFileSync` 가 아니다.
-컴파일 캐시(`--compile-cache`) 확인, 로드 훅(load hook) 실행, 결과를 string 으로 정규화하는 과정까지 포함한다.
+코드를 보면 `loadSource` 와 `_compile` 이 연달아 호출된다.  
+이 중 `loadSource` 는 단순한 `fs.readFileSync` 가 아니다.  
+내부를 단순화하면 세 단계로 구성된다.  
 
-`.json` 로더는 다르게 동작한다.
+```javascript
+// lib/internal/modules/cjs/loader.js (simplified)
+function loadSource(mod, filename, format) {
+  // 1. 컴파일 캐시 확인 (--compile-cache 플래그 활성화 시)
+  //    이전 실행에서 V8 이 컴파일한 바이트코드를 디스크에 캐싱해두면
+  //    이후 실행에서는 파싱 + 컴파일 단계를 건너뛸 수 있다
+  const cached = getCompileCacheEntry(filename);
+  if (cached) return { source: cached };
+
+  // 2. load hook 실행 (module.register() 로 등록된 경우)
+  //    ESM 스타일의 커스텀 로더가 CJS 로드 흐름을 가로챌 수 있는 지점
+  if (hasRegisteredHooks) {
+    return runLoadHooks(mod, filename, format);
+  }
+
+  // 3. 파일 읽기 + string 정규화
+  const source = fs.readFileSync(filename, 'utf8');
+  return { source };
+}
+```
+
+세 단계 중 실제로 항상 실행되는 건 3번뿐이다.  
+1번은 `--compile-cache` 플래그를 켰을 때만, 2번은 `module.register()` 로 훅을 등록했을 때만 동작한다.  
+
+이렇게 얻은 string 을 `_compile` 이 받아 Step 4 → 5 → 6 의 과정으로 실행한다.  
+`.json` 로더와 비교하면 `_compile` 의 역할이 더 명확해진다.  
 
 ```javascript
 // lib/internal/modules/cjs/loader.js
@@ -209,17 +257,17 @@ Module._extensions['.json'] = function(module, filename) {
 };
 ```
 
-`_compile` 을 거치지 않고 `module.exports` 를 직접 채운다.
-Module Wrapper 감싸기, vm 컴파일, FunctionPrototypeCall 이 모두 생략된다.
+`_compile` 을 거치지 않고 `module.exports` 를 직접 채운다.  
+Module Wrapper 감싸기, V8 컴파일, FunctionPrototypeCall 이 모두 생략된다.  
 
 ---
 
 ## Step 4 — Module.wrap: string 결합
 
-`module._compile(source, filename, format)` 이 호출되면 내부에서 `wrapSafe` 가 실행된다.
-`wrapSafe` 는 `Module.wrap` 을 통해 파일 코드를 래퍼 함수 문자열로 감싼다.
+`module._compile(source, filename, format)` 이 호출되면 내부에서 `wrapSafe` 가 실행된다.  
+`wrapSafe` 가 하는 일은 두 가지다. 파일 코드를 래퍼로 감싸고, V8 로 컴파일하는 것.  
 
-구현 자체는 단순하다.
+먼저 감싸는 단계를 보자. 이 부분을 담당하는 게 `Module.wrap` 이다.  
 
 ```javascript
 // lib/internal/modules/cjs/loader.js
@@ -233,27 +281,31 @@ let wrap = function(script) {
 };
 ```
 
-`foo.js` 내용이 `module.exports = { value: 10 }` 한 줄이라면 결과는 이렇다.
+`foo.js` 내용이 `module.exports = { value: 10 }` 한 줄이라면 결과는 이렇다.  
 
 ```javascript
 // wrap() 의 반환값 — 이 시점에서는 아직 그냥 문자열이다
 '(function (exports, require, module, __filename, __dirname) { \nmodule.exports = { value: 10 }\n});'
 ```
 
-왜 래퍼로 감싸는가, 이유는 두 가지다.
+왜 래퍼로 감싸는가, 이유는 두 가지다.  
 
-- **전역 오염 방지** — `var x = 1` 같은 최상위 변수가 `global` 에 붙지 않도록 파일 스코프를 격리한다.
-- **변수 주입** — `exports`, `require`, `module`, `__filename`, `__dirname` 을 각 파일 고유의 지역 변수로 주입하기 위해 매개변수로 선언한다.
+- **전역 오염 방지** — `var x = 1` 같은 최상위 변수가 `global` 에 붙지 않도록 파일 스코프를 격리한다.  
+- **변수 주입** — `exports`, `require`, `module`, `__filename`, `__dirname` 을 각 파일 고유의 지역 변수로 주입하기 위해 매개변수로 선언한다.  
 
-`Module.wrap` 은 사용자가 직접 교체할 수 있다.
-`patched` 플래그가 이를 감지해 다음 단계(`wrapSafe`)의 내부 경로를 결정한다.
+`Module.wrap` 은 사용자가 직접 교체할 수 있다.  
+교체 여부를 `patched` 플래그로 감지하고, 이 값이 다음 단계(`wrapSafe`)의 내부 경로를 결정한다.  
+
+한 가지 주의할 점이 있다.  
+`Module.wrap` 이 실제로 호출되는 것은 사용자가 이 함수를 직접 교체한 경우뿐이다.  
+일반적인 상황에서는 Step 5 에서 `Module.wrap` 을 아예 우회하는 경로를 탄다.  
 
 ---
 
 ## Step 5 — wrapSafe: string → Function
 
-감싼 문자열을 실제 **Function 객체**로 컴파일한다.
-내부에 두 가지 경로가 있다.
+`_compile` 이 `wrapSafe` 를 호출하면 파일 코드는 실제 **Function 객체**로 컴파일되는 단계로 넘어간다.  
+그런데 내부를 보면 경로가 두 개로 갈린다.  
 
 ```javascript
 // lib/internal/modules/cjs/loader.js
@@ -273,11 +325,12 @@ function wrapSafe(filename, content, cjsModuleInstance, format) {
 }
 ```
 
-`compileFunctionForCJSLoader` 는 V8 의 네이티브 바인딩으로,
-`Module.wrap` 의 문자열 결합 없이 직접 래퍼 함수를 컴파일한다.
-`patched` 가 아닌 일반 경우에 사용되는 더 빠른 경로다.
+`compileFunctionForCJSLoader` 는 V8 의 네이티브 바인딩으로,  
+`Module.wrap` 의 문자열 결합 없이 직접 래퍼 함수를 컴파일한다.  
+`patched` 가 아닌 일반 경우에 사용되는 더 빠른 경로다.  
+사용자가 `Module.wrap` 을 건드리지 않는 한 대부분은 이쪽을 탄다.  
 
-**이 시점에서 코드는 아직 실행되지 않았다.**
+어느 경로를 타든 결과는 같다. **이 시점에서 코드는 아직 실행되지 않았다.**  
 
 ```javascript
 typeof compiledWrapper // 'function'
@@ -285,7 +338,8 @@ typeof compiledWrapper // 'function'
 // 정의만 완료, 호출 대기 중
 ```
 
-`eval` 과 비슷하지만 현재 스코프의 지역 변수에 접근할 수 없어 격리된다.
+컴파일된 `compiledWrapper` 는 현재 스코프의 지역 변수에 접근할 수 없다.  
+`eval` 과 달리 격리된 컨텍스트에서 실행되기 때문이다.  
 
 ```javascript
 const x = 1;
@@ -297,10 +351,10 @@ vm.runInThisContext('console.log(x)'); // ReferenceError — 격리됨
 
 ## Step 6 — FunctionPrototypeCall: 5개 변수 주입 후 실행
 
-`wrapSafe` 가 컴파일한 `compiledWrapper` 는 아직 호출 대기 상태의 Function 객체다.
-`Module.prototype._compile` 이 이를 실제로 실행한다.
+`wrapSafe` 가 컴파일한 `compiledWrapper` 는 아직 호출 대기 상태의 Function 객체다.  
+`Module.prototype._compile` 이 이를 실제로 실행한다.  
 
-실행 전에 5개 변수를 계산하고, `kIsExecuting` 플래그로 실행 상태를 추적한다.
+실행 전에 5개 변수를 계산하고, `kIsExecuting` 플래그로 실행 상태를 추적한다.  
 
 ```javascript
 // lib/internal/modules/cjs/loader.js — _compile 내부
@@ -324,11 +378,11 @@ result = FunctionPrototypeCall(
 this[kIsExecuting] = false;
 ```
 
-`FunctionPrototypeCall` 은 `fn.call()` 과 동작은 같다.
-다만 사용자 코드가 `Function.prototype.call` 을 덮어써도 영향받지 않는다.
-Node.js 내부에서 primordials 패턴으로 표준 내장 메서드를 시작 시점에 저장해두고 사용하는 방식이다.
+`FunctionPrototypeCall` 은 `fn.call()` 과 동작은 같다.  
+다만 사용자 코드가 `Function.prototype.call` 을 덮어써도 영향받지 않는다.  
+Node.js 내부에서 primordials 패턴으로 표준 내장 메서드를 시작 시점에 저장해두고 사용하는 방식이다.  
 
-`FunctionPrototypeCall` 이 실행되는 순간 파일 코드가 평가된다.
+`FunctionPrototypeCall` 이 실행되는 순간 파일 코드가 평가된다.  
 
 ```javascript
 // foo.js 의 코드가 실행됨
@@ -339,20 +393,20 @@ module.exports = { value: 10 };
 
 ### kIsExecuting 플래그
 
-Node.js 내부에서 "이 모듈이 현재 실행 중인가"를 추적하는 심볼이다.
-`true` 인 동안은 파일 코드가 평가되고 있는 상태이며, `false` 가 되면 실행이 완료된 것이다.
+Node.js 내부에서 "이 모듈이 현재 실행 중인가"를 추적하는 심볼이다.  
+`true` 인 동안은 파일 코드가 평가되고 있는 상태이며, `false` 가 되면 실행이 완료된 것이다.  
 
-`module.loaded` 는 상위 `Module.prototype.load` 에서 설정되므로,
-`kIsExecuting === false` 이지만 아직 `loaded === false` 인 순간이 존재한다.
+`module.loaded` 는 상위 `Module.prototype.load` 에서 설정되므로,  
+`kIsExecuting === false` 이지만 아직 `loaded === false` 인 순간이 존재한다.  
 
 ---
 
 ## module.exports vs exports
 
-`FunctionPrototypeCall` 실행 시 `exports` 와 `module.exports` 가 동시에 래퍼에 주입된다.
-두 변수의 관계를 짚어두지 않으면 실행 결과가 예상과 다를 수 있다.
+코드를 보면 `exports` 와 `module` (즉 `module.exports`) 을 둘 다 래퍼에 주입한다.  
+이전 글에서 한 번 다뤘지만, 실제 주입 시점 코드를 직접 보고 나면 왜 재할당이 문제인지가 더 명확하게 보인다.  
 
-래퍼가 실행되기 전 초기 상태는 이렇다.
+래퍼가 실행되기 전 초기 상태는 이렇다.  
 
 ```javascript
 const module  = new Module(filename); // module.exports = {}
@@ -367,7 +421,7 @@ module.exports ──┐
 exports ─────────┘
 ```
 
-두 변수가 동일한 객체를 가리킨 채로 시작한다.
+두 변수가 동일한 객체를 가리킨 채로 시작한다.  
 
 **`exports.foo = 1` 이 동작하는 이유**
 
@@ -403,7 +457,7 @@ module.exports = { foo: 1 };
 
 ## Step 7 — loaded 플래그와 module.exports 반환
 
-`_compile` 이 반환되면 `Module.prototype.load` 에서 `this.loaded = true` 를 설정한다.
+`_compile` 이 반환되면 `Module.prototype.load` 에서 `this.loaded = true` 를 설정한다.  
 
 ```javascript
 // Module.prototype.load 마지막
@@ -411,7 +465,7 @@ Module._extensions[extension](this, filename); // _compile 내부 FunctionProtot
 this.loaded = true;
 ```
 
-그리고 `Module._load` 로 돌아와 `module.exports` 를 반환한다.
+그리고 `Module._load` 로 돌아와 `module.exports` 를 반환한다.  
 
 ```javascript
 // Module._load 마지막
@@ -419,7 +473,7 @@ module.load(filename);
 return module.exports;
 ```
 
-각 시점의 `module` 상태를 정리하면 이렇다.
+각 시점의 `module` 상태를 정리하면 이렇다.  
 
 | 시점 | `module.loaded` | `module[kIsExecuting]` |
 |---|---|---|
@@ -428,7 +482,7 @@ return module.exports;
 | `_compile` 반환 후 | `false` | `false` |
 | `Module.prototype.load` 에서 `loaded` 설정 후 | `true` | `false` |
 
-`require.cache` 에서 캐시 항목을 확인하면 `Module` 인스턴스가 통째로 저장되어 있다.
+`require.cache` 에서 캐시 항목을 확인하면 `Module` 인스턴스가 통째로 저장되어 있다.  
 
 ```javascript
 require('./foo');
@@ -443,7 +497,7 @@ const entry = require.cache[require.resolve('./foo')];
 // }
 ```
 
-`require` 의 반환값과 `cache.exports` 는 동일한 메모리 참조다.
+`require` 의 반환값과 `cache.exports` 는 동일한 메모리 참조다.  
 
 ```javascript
 const foo = require('./foo');
@@ -454,15 +508,17 @@ foo === require.cache[require.resolve('./foo')].exports // true
 
 ## delete require.cache[key] 의 정확한 의미
 
+캐시 구조를 이해하고 나면, 직접 조작하면 어떤 일이 벌어지는지도 짚어둘 수 있다.  
+
 ```javascript
 delete require.cache[filename];
 ```
 
-하는 일은 딱 하나다. **캐시 항목의 참조를 끊는 것.**
+하는 일은 딱 하나다. **캐시 항목의 참조를 끊는 것.**  
 
-이미 다른 변수가 들고 있는 객체에는 영향이 없다.
-JS GC 는 참조가 하나도 없을 때만 메모리를 수거한다.
-`foo` 변수가 여전히 객체를 참조하고 있다면 캐시에서 지워도 객체는 살아있다.
+이미 다른 변수가 들고 있는 객체에는 영향이 없다.  
+JS GC 는 참조가 하나도 없을 때만 메모리를 수거한다.  
+`foo` 변수가 여전히 객체를 참조하고 있다면 캐시에서 지워도 객체는 살아있다.  
 
 ```
 delete 전:
@@ -476,24 +532,28 @@ delete 후:
   foo 변수 ───────────→ 힙: { value: 10 }  (여전히 살아있음)
 ```
 
-다음에 `require(filename)` 을 호출하면 캐시 miss 가 발생해 Step 1 부터 다시 실행된다.
+다음에 `require(filename)` 을 호출하면 캐시 miss 가 발생해 Step 1 부터 다시 실행된다.  
 
 ```javascript
 delete require.cache[filename]; // cache miss 강제 유발
 const fresh = require(filename); // Step 1 부터 다시 실행
 ```
 
-이것이 **Hot Reload 의 핵심 원리**다.
+이것이 **Hot Reload 의 핵심 원리**다.  
 
-단, `app.use(router)` 처럼 이미 참조를 넘긴 곳은 여전히 구버전 객체를 들고 있다.
-캐시를 지운다고 그 참조가 자동으로 교체되지 않는다.
+단, `app.use(router)` 처럼 이미 참조를 넘긴 곳은 여전히 구버전 객체를 들고 있다.  
+캐시를 지운다고 그 참조가 자동으로 교체되지 않는다.  
 
 ---
 
 ## 마치며
 
-이전 글에서 블랙박스로 남겼던 "파일이 어떻게 실행되어 module.exports 에 값이 담기는가"를 이번에 단계별로 파헤쳤다.
+이전 글에서 블랙박스로 남겼던 부분을 단계별로 파헤쳤다.  
 
-파일이 string 으로 읽히고, Module Wrapper 로 감싸이고, V8 이 Function 객체로 컴파일하고, FunctionPrototypeCall 로 실행되는 일련의 과정이 생각보다 훨씬 체계적으로 설계되어 있었다.
+파일이 string 으로 읽힌다.  
+Module Wrapper 로 감싸이고, V8 이 Function 객체로 컴파일한다.  
+FunctionPrototypeCall 로 실행되는 순간 비로소 `module.exports` 가 채워진다.  
+생각보다 훨씬 체계적으로 설계된 구조였다.  
 
-특히 순환 참조를 막기 위해 캐시를 실행 전에 선등록하는 구조, `loaded` 플래그가 파이프라인 마지막에 설정되는 이유, `delete require.cache` 가 GC 와 어떻게 관계되는지를 실제 소스 흐름으로 확인하니 이전까지 직관으로만 알던 것들이 구체화된 느낌이었다.
+특히 캐시를 실행 전에 선등록하는 순환 참조 방어 로직, `loaded` 플래그가 파이프라인 마지막에 설정되는 이유, `delete require.cache` 와 GC 의 관계.  
+실제 소스 흐름으로 확인하니 이전까지 직관으로만 알던 것들이 구체화됐다.  

@@ -10,6 +10,9 @@ export default defineConfig({
       "#": path.resolve(__dirname, "./src"),
     },
   },
+  optimizeDeps: {
+    exclude: ["mermaid"],
+  },
   build: {
     chunkSizeWarningLimit: 800,
     rolldownOptions: {
