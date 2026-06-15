@@ -95,6 +95,18 @@ export const POSTS: Post[] = [
     href: "/posts/vite-code-splitting-bundle",
   },
   {
+    slug: "react-use-sync-external-store",
+    date: "2026-06-15",
+    cat: "Frontend",
+    title: "useSyncExternalStore 기반으로 복잡한 트리 상태 풀어내기",
+    excerpt: [
+      "3 Depth 학습맵 Tree View에서 연쇄 선택·최소 선택 제약·리포트 타입별 분기가 useState 콜백 안에 뭉쳐버렸다. Class를 외부 스토어로 만들고 useSyncExternalStore로 연결해 비즈니스 로직을 캡슐화한 과정. Shim 코드로 Tearing 방지와 inst 객체 설계까지.",
+    ],
+    tags: ["React", "useSyncExternalStore", "외부 스토어", "상태 관리"],
+    read: "12 min",
+    href: "/posts/react-use-sync-external-store",
+  },
+  {
     slug: "cjs-module-evaluation-pipeline",
     date: "2026-06-13",
     cat: "Backend",
