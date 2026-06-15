@@ -40,6 +40,30 @@ export const FEATURED_POST: Post = {
 export const POSTS: Post[] = [
   // ── 2026 ──────────────────────────────────────────────────────────────────
   {
+    slug: "valkey-hash-key-expiration",
+    date: "2026-06-16",
+    cat: "Backend",
+    title: "Valkey Hash Key Expiration — 필드 단위 TTL 설정",
+    excerpt: [
+      "Redis, Valkey 는 원래 Key 단위로만 TTL 을 지원했다. Hash 필드마다 만료 시간이 달라야 할 때 기존에는 개별 Key 로 분리하거나 Lua Script 로 우회하는 수밖에 없었다. Valkey 9.0 에서 추가된 HEXPIRE, HPEXPIRE, HEXPIREAT, HTTL, HPERSIST 등 9개 명령어와 Active Expiration 동작 방식을 정리했다.",
+    ],
+    tags: ["Valkey", "Redis", "Cache", "TTL", "Hash"],
+    read: "8 min",
+    href: "/posts/valkey-hash-key-expiration",
+  },
+  {
+    slug: "turborepo-task-configuration",
+    date: "2026-06-16",
+    cat: "Infra",
+    title: "Turborepo v2 Task 설정 완전 정복",
+    excerpt: [
+      "turbo.json의 tasks 옵션 전체를 v2 기준으로 정리했다. dependsOn 세 가지 변형부터 캐시 해시에 포함되는 env, v2에서 새로 생긴 passThroughEnv, globalEnv/globalPassThroughEnv, outputLogs까지. Strict Mode가 기본이 된 v2에서 환경 변수를 잘못 설정하면 CI 캐시가 매번 통째로 날아간다.",
+    ],
+    tags: ["Turborepo", "Monorepo", "CI/CD", "빌드 캐시"],
+    read: "12 min",
+    href: "/posts/turborepo-task-configuration",
+  },
+  {
     slug: "gem-abac-nestjs-2",
     date: "2026-06-01",
     cat: "Architecture",
