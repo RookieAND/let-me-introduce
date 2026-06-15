@@ -630,6 +630,18 @@ export const POSTS: Post[] = [
     href: "/posts/retrospective-2023-1h",
   },
   {
+    slug: "mongoose-connection-internals",
+    date: "2023-06-01",
+    cat: "Backend",
+    title: "Mongoose Connection 내부 동작 — 싱글톤, Default Connection, Hot Reload 메모리 누수",
+    excerpt: [
+      "require('mongoose') 한 줄이 실행되는 순간 이미 connections 배열에는 빈 Connection이 하나 들어간다. 생성자 내부에서 createConnection()을 호출하기 때문이다. connect()와 createConnection()의 슬롯 차이, 그리고 Hot Reload마다 Connection이 쌓이는 메모리 누수까지.",
+    ],
+    tags: ["Node.js", "Mongoose", "MongoDB", "메모리 누수"],
+    read: "8 min",
+    href: "/posts/mongoose-connection-internals",
+  },
+  {
     slug: "joining-company-4months",
     date: "2023-06-01",
     cat: "Retrospective",
