@@ -71,7 +71,7 @@ export function PostDetailPage() {
 
           {/* Left col: TOC (xl only) */}
           <div className="hidden xl:flex justify-end pr-10 items-start">
-            <div className="sticky top-28 w-[200px] max-h-[calc(100vh-140px)] overflow-y-auto">
+            <div className="sticky top-28 w-[200px] max-h-[calc(100vh-140px)] overflow-y-auto scrollbar-hide">
               <PostToc headings={headings} />
             </div>
           </div>

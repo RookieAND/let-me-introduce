@@ -78,6 +78,13 @@
 
 /* ── Scroll Reveal ── */
 @layer utilities {
+  .scrollbar-hide {
+    scrollbar-width: none;
+  }
+  .scrollbar-hide::-webkit-scrollbar {
+    display: none;
+  }
+
   .reveal {
     opacity: 0;
     transform: translateY(28px);
