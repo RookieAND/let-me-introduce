@@ -263,17 +263,6 @@ export const POSTS: Post[] = [
     href: "/posts/casl-typescript-deep-dive",
   },
   {
-    slug: "squad-leader-retrospective",
-    date: "2026-01-01",
-    cat: "Retrospective",
-    title: "스쿼드 리더로 보낸 1년 — 비전·OKR·회고를 직접 굴려본 기록",
-    excerpt:
-      ["6~7명 팀의 방향을 세우고 격주 회고로 프로세스를 다듬으며, 개인의 기술력만큼 같은 방향을 보는 일이 중요하다는 걸 배운 과정."],
-    tags: ["팀 운영", "OKR", "회고"],
-    read: "9 min",
-    href: "https://velog.io/@rookieand/posts",
-  },
-  {
     slug: "partial-pre-rendering",
     date: "2026-01-01",
     cat: "Frontend",
@@ -285,17 +274,6 @@ export const POSTS: Post[] = [
     href: "/posts/partial-pre-rendering",
   },
   // ── 2025 ──────────────────────────────────────────────────────────────────
-  {
-    slug: "nestjs-cls-ability-context",
-    date: "2025-11-01",
-    cat: "Backend",
-    title: "nestjs-cls로 요청 컨텍스트에 Ability 전파하기",
-    excerpt:
-      ["컨트롤러·서비스 어디서든 의존성 주입 없이 권한을 검사하려면? AsyncLocalStorage 기반 CLS로 요청 단위 컨텍스트를 흘려보낸 방법."],
-    tags: ["NestJS", "CLS", "ABAC"],
-    read: "8 min",
-    href: "https://velog.io/@rookieand/posts",
-  },
   {
     slug: "frontend-test-thoughts",
     date: "2025-10-01",
@@ -330,17 +308,6 @@ export const POSTS: Post[] = [
     href: "/posts/retrospective-2025-1h",
   },
   {
-    slug: "css-custom-properties-runtime-theme",
-    date: "2025-07-01",
-    cat: "Frontend",
-    title: "CSS Custom Properties로 리렌더링 없는 런타임 테마 만들기",
-    excerpt:
-      ["기수마다 바뀌는 랜딩 테마를, JS 상태가 아닌 CSS 변수로 즉시 전환하도록 구현해 운영팀이 직접 테마를 바꾸게 한 이야기."],
-    tags: ["CSS", "CSS Variables", "Theme", "DX"],
-    read: "7 min",
-    href: "https://velog.io/@rookieand/posts",
-  },
-  {
     slug: "turborepo-remote-cache-self-hosted",
     date: "2025-05-01",
     cat: "Infra",
@@ -350,17 +317,6 @@ export const POSTS: Post[] = [
     tags: ["Turborepo", "pnpm", "CI", "빌드 캐시"],
     read: "11 min",
     href: "/posts/turborepo-remote-cache-self-hosted",
-  },
-  {
-    slug: "docker-multistage-build-optimization",
-    date: "2025-03-01",
-    cat: "Infra",
-    title: "Docker 멀티스테이지 빌드로 배포 시간 83% 줄이기",
-    excerpt:
-      ["이미지 레이어 구조를 다시 짜고 멀티스테이지로 분리하니 배포가 눈에 띄게 빨라졌다. 무엇이 캐시를 깨고 있었는지 추적한 기록."],
-    tags: ["Docker", "멀티스테이지", "CI/CD", "최적화"],
-    read: "8 min",
-    href: "https://velog.io/@rookieand/posts",
   },
   // ── 2024 ──────────────────────────────────────────────────────────────────
   {
@@ -373,17 +329,6 @@ export const POSTS: Post[] = [
     tags: ["회고", "2024", "성장"],
     read: "16 min",
     href: "/posts/retrospective-2024",
-  },
-  {
-    slug: "google-oauth2-server-side-sheets",
-    date: "2024-12-01",
-    cat: "Backend",
-    title: "서버 사이드 Google OAuth2로 안정적인 스프레드시트 연동",
-    excerpt:
-      ["클라이언트 대신 서버에서 토큰을 갱신해 장기 세션에서도 끊기지 않는 연동을 만든 이유와, 시트 API를 추상화해 확장 여지를 남긴 설계."],
-    tags: ["OAuth2", "Google API", "인증", "NestJS"],
-    read: "9 min",
-    href: "https://velog.io/@rookieand/posts",
   },
   {
     slug: "pnpm-dependency-deep-dive",
@@ -472,17 +417,6 @@ export const POSTS: Post[] = [
     tags: ["Turborepo", "Docker", "Monorepo"],
     read: "8 min",
     href: "/posts/turbo-prune-monorepo",
-  },
-  {
-    slug: "vitest-legacy-test-coverage",
-    date: "2024-10-01",
-    cat: "Architecture",
-    title: "Vitest로 0에서 79까지 — 레거시에 테스트 안전망 깔기",
-    excerpt:
-      ["테스트가 한 줄도 없던 핵심 로직에 유닛 테스트를 도입하고, E2E 중복 시나리오 140곳을 걷어내 실행 시간과 유지보수 비용을 함께 줄인 과정."],
-    tags: ["Vitest", "Testing", "TDD", "레거시"],
-    read: "10 min",
-    href: "https://velog.io/@rookieand/posts",
   },
   {
     slug: "docker-compose-basics",
