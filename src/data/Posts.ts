@@ -740,6 +740,17 @@ export const POSTS: Post[] = [
     href: "/posts/theo-sprint-15th",
   },
   {
+    slug: "react-key-props",
+    date: "2023-05-01",
+    cat: "Frontend",
+    title: "React Key Props 를 제대로 이해해보자",
+    excerpt:
+      ["재조정 알고리즘이 O(n)으로 동작하는 두 가지 가정 중 하나가 key props 다. key 없이 index를 쓸 때 React.memo가 왜 무효화되는지, State Leakage 버그가 왜 생기는지 코드로 짚어봤다."],
+    tags: ["React", "Key Props", "재조정", "성능"],
+    read: "6 min",
+    href: "/posts/react-key-props",
+  },
+  {
     slug: "react-windowing",
     date: "2023-05-01",
     cat: "Frontend",
