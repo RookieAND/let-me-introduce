@@ -128,7 +128,7 @@ export function tokenize(md: string): Block[] {
         const item: ListItem = {
           text: m?.[2] ?? lines[i],
           depth: 0,
-          num: m ? parseInt(m[1], 10) : items.length + 1,
+          num: m ? Number.parseInt(m[1], 10) : items.length + 1,
         };
         i++;
 

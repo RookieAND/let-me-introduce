@@ -1,5 +1,5 @@
-import { useEffect, useRef, useState, type ReactNode } from "react";
 import { minBy } from "es-toolkit";
+import { type ReactNode, useEffect, useRef, useState } from "react";
 import type { TocEntry } from "#/lib/markdown/slugify";
 
 const NAV_HEIGHT = 68;
@@ -13,10 +13,15 @@ function renderTocText(raw: string): ReactNode {
     <>
       {parts.map((part, i) =>
         part.startsWith("`") && part.endsWith("`") ? (
-          <code key={i} className="font-mono text-[11px] bg-surface-2 border border-border px-1 py-px rounded text-text-2 leading-none">
+          <code
+            key={i}
+            className="font-mono text-[11px] bg-surface-2 border border-border px-1 py-px rounded text-text-2 leading-none"
+          >
             {part.slice(1, -1)}
           </code>
-        ) : part,
+        ) : (
+          part
+        ),
       )}
     </>
   );
@@ -114,19 +119,38 @@ export function PostToc({ headings }: { headings: TocEntry[] }) {
             <li key={id} className="relative">
               {/* depth별 cascade 대각선 — level >= 2마다 10px씩 안쪽으로 */}
               {level >= 2 && (
-                <svg viewBox="0 0 16 16" className="pointer-events-none absolute -top-1.5 left-0 size-4" aria-hidden>
+                <svg
+                  viewBox="0 0 16 16"
+                  className="pointer-events-none absolute -top-1.5 left-0 size-4"
+                  aria-hidden
+                >
                   <line x1="1" y1="0" x2="10" y2="12" strokeWidth="1" className="stroke-border" />
                 </svg>
               )}
               {level >= 3 && (
-                <svg viewBox="0 0 16 16" className="pointer-events-none absolute -top-1.5 size-4" style={{ left: "10px" }} aria-hidden>
+                <svg
+                  viewBox="0 0 16 16"
+                  className="pointer-events-none absolute -top-1.5 size-4"
+                  style={{ left: "10px" }}
+                  aria-hidden
+                >
                   <line x1="1" y1="0" x2="10" y2="12" strokeWidth="1" className="stroke-border" />
                 </svg>
               )}
 
               {/* sibling 연결 continuation line */}
-              {level === 2 && <div className="absolute w-px bg-border" style={{ left: "10px", top: "6px", bottom: 0 }} />}
-              {level === 3 && <div className="absolute w-px bg-border" style={{ left: "20px", top: "6px", bottom: 0 }} />}
+              {level === 2 && (
+                <div
+                  className="absolute w-px bg-border"
+                  style={{ left: "10px", top: "6px", bottom: 0 }}
+                />
+              )}
+              {level === 3 && (
+                <div
+                  className="absolute w-px bg-border"
+                  style={{ left: "20px", top: "6px", bottom: 0 }}
+                />
+              )}
 
               <a
                 href={`#${id}`}
@@ -136,7 +160,9 @@ export function PostToc({ headings }: { headings: TocEntry[] }) {
                 }`}
                 onClick={(e) => {
                   e.preventDefault();
-                  document.getElementById(id)?.scrollIntoView({ behavior: "smooth", block: "start" });
+                  document
+                    .getElementById(id)
+                    ?.scrollIntoView({ behavior: "smooth", block: "start" });
                   setActiveId(id);
                 }}
               >

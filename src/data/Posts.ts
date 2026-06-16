@@ -2,9 +2,18 @@ import { ARCHITECTURE_POSTS } from "#/data/posts/ArchitecturePosts";
 import { BACKEND_POSTS } from "#/data/posts/BackendPosts";
 import { FRONTEND_POSTS } from "#/data/posts/FrontendPosts";
 import { INFRA_POSTS } from "#/data/posts/InfraPosts";
+import { JAVASCRIPT_POSTS } from "#/data/posts/JavaScriptPosts";
 import { RETROSPECTIVE_POSTS } from "#/data/posts/RetrospectivePosts";
+import { TOOLING_POSTS } from "#/data/posts/ToolingPosts";
 
-export type Category = "Frontend" | "Backend" | "Architecture" | "Infra" | "Retrospective";
+export type Category =
+  | "Frontend"
+  | "Backend"
+  | "JavaScript"
+  | "Architecture"
+  | "Tooling"
+  | "Infra"
+  | "Retrospective";
 
 export interface Post {
   slug: string;
@@ -45,8 +54,10 @@ export const FEATURED_POST: Post = {
 
 export const POSTS: Post[] = [
   ...FRONTEND_POSTS,
+  ...JAVASCRIPT_POSTS,
   ...BACKEND_POSTS,
   ...ARCHITECTURE_POSTS,
+  ...TOOLING_POSTS,
   ...INFRA_POSTS,
   ...RETROSPECTIVE_POSTS,
 ];
@@ -56,8 +67,10 @@ export const ALL_POSTS: Post[] = [FEATURED_POST, ...POSTS];
 export const CATEGORIES: (Category | "all")[] = [
   "all",
   "Frontend",
+  "JavaScript",
   "Backend",
   "Architecture",
+  "Tooling",
   "Infra",
   "Retrospective",
 ];

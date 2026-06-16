@@ -17,7 +17,10 @@ export function UnorderedListBlock({ items }: UlProps) {
             <span className="text-text-3 shrink-0 mt-[0.6em] text-[9px]">◇</span>
           );
         return (
-          <li key={j} className={`flex gap-3 font-sans text-[16px] leading-[1.75] text-text-2 ${ml}`}>
+          <li
+            key={j}
+            className={`flex gap-3 font-sans text-[16px] leading-[1.75] text-text-2 ${ml}`}
+          >
             {bullet}
             <span>{parseInline(item.text)}</span>
           </li>

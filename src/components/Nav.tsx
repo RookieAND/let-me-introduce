@@ -1,5 +1,5 @@
-import type { ReactNode } from "react";
 import * as NavigationMenuPrimitive from "@radix-ui/react-navigation-menu";
+import type { ReactNode } from "react";
 import { Link } from "react-router-dom";
 import { useNavScroll } from "#/hooks/UseNavScroll";
 import { cn } from "#/lib/Utils";

@@ -68,7 +68,6 @@ export function PostDetailPage() {
       */}
       <div className="pt-32 pb-28">
         <div className="grid grid-cols-1 xl:grid-cols-[1fr_min(740px,100%)_1fr] max-w-[740px] xl:max-w-none mx-auto">
-
           {/* Left col: TOC (xl only) */}
           <div className="hidden xl:flex justify-end pr-10 items-start">
             <div className="sticky top-28 w-[200px] max-h-[calc(100vh-140px)] overflow-y-auto scrollbar-hide">
@@ -82,7 +81,9 @@ export function PostDetailPage() {
               to="/posts"
               className="group inline-flex items-center gap-2 font-mono text-[12.5px] text-text-3 hover:text-text mb-10 transition-colors duration-150"
             >
-              <span className="transition-transform duration-200 group-hover:-translate-x-1">←</span>
+              <span className="transition-transform duration-200 group-hover:-translate-x-1">
+                ←
+              </span>
               글 목록으로
             </Link>
 
@@ -130,7 +131,9 @@ export function PostDetailPage() {
                 to="/posts"
                 className="group inline-flex items-center gap-2 font-mono text-[12.5px] text-text-3 hover:text-text transition-colors duration-150"
               >
-                <span className="transition-transform duration-200 group-hover:-translate-x-1">←</span>
+                <span className="transition-transform duration-200 group-hover:-translate-x-1">
+                  ←
+                </span>
                 모든 글 보기
               </Link>
             </div>
