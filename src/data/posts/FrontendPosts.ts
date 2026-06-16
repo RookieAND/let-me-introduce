@@ -18,8 +18,9 @@ export const FRONTEND_POSTS: Post[] = [
     date: "2026-06-01",
     cat: "Frontend",
     title: "Vite codeSplitting 번들 최적화 전략",
-    excerpt:
-      ["minSize·maxSize 7가지 시나리오를 Playwright 실측으로 비교했다. maxSize를 없애면 총 번들은 줄지만 초기 로드는 최악이 되는 이유와, modulepreload manifest가 초기 로드에 미치는 영향."],
+    excerpt: [
+      "minSize·maxSize 7가지 시나리오를 Playwright 실측으로 비교했다. maxSize를 없애면 총 번들은 줄지만 초기 로드는 최악이 되는 이유와, modulepreload manifest가 초기 로드에 미치는 영향.",
+    ],
     tags: ["Vite", "Bundle", "최적화"],
     read: "10 min",
     href: "/posts/vite-code-splitting-bundle",
@@ -29,8 +30,9 @@ export const FRONTEND_POSTS: Post[] = [
     date: "2026-05-01",
     cat: "Frontend",
     title: "Module Federation",
-    excerpt:
-      ["런타임에 다른 앱의 코드를 동적으로 로드하는 MF 아키텍처. Producer/Consumer 구조와 도입 전 반드시 짚어야 할 트레이드오프."],
+    excerpt: [
+      "런타임에 다른 앱의 코드를 동적으로 로드하는 MF 아키텍처. Producer/Consumer 구조와 도입 전 반드시 짚어야 할 트레이드오프.",
+    ],
     tags: ["Module Federation", "Micro Frontend", "Webpack"],
     read: "8 min",
     href: "/posts/module-federation",
@@ -40,8 +42,9 @@ export const FRONTEND_POSTS: Post[] = [
     date: "2026-05-01",
     cat: "Frontend",
     title: "TypeScript Module Resolution 전략을 알아보자",
-    excerpt:
-      ["node, node16, bundler 세 전략의 차이와 Vite 기반 프로젝트에서 bundler가 표준인 이유."],
+    excerpt: [
+      "node, node16, bundler 세 전략의 차이와 Vite 기반 프로젝트에서 bundler가 표준인 이유.",
+    ],
     tags: ["TypeScript", "Vite", "모듈"],
     read: "7 min",
     href: "/posts/typescript-module-resolution",
@@ -51,8 +54,9 @@ export const FRONTEND_POSTS: Post[] = [
     date: "2026-03-01",
     cat: "Frontend",
     title: "유니온이 함수 인자에서 교차 타입으로 변했다",
-    excerpt:
-      ["이벤트 시스템에서 유니온 핸들러를 호출하자 교차 타입이 요구되는 현상을 맞닥뜨렸다. 함수 반공변성의 원리와 비분산 조건부 타입으로 as 없이 타입을 정확히 추론시킨 과정."],
+    excerpt: [
+      "이벤트 시스템에서 유니온 핸들러를 호출하자 교차 타입이 요구되는 현상을 맞닥뜨렸다. 함수 반공변성의 원리와 비분산 조건부 타입으로 as 없이 타입을 정확히 추론시킨 과정.",
+    ],
     tags: ["TypeScript", "반공변성", "제네릭"],
     read: "12 min",
     href: "/posts/typescript-union-contravariance",
@@ -62,8 +66,9 @@ export const FRONTEND_POSTS: Post[] = [
     date: "2026-03-01",
     cat: "Frontend",
     title: "SSE in React, 유연하게 다루기",
-    excerpt:
-      ["매 렌더마다 재연결되고 중복 EventSource가 생기는 기존 훅의 문제를, EventRegistry + Singleton Provider 구조로 재설계해 컴포넌트 어디서든 이벤트를 자유롭게 구독할 수 있게 만든 이야기."],
+    excerpt: [
+      "매 렌더마다 재연결되고 중복 EventSource가 생기는 기존 훅의 문제를, EventRegistry + Singleton Provider 구조로 재설계해 컴포넌트 어디서든 이벤트를 자유롭게 구독할 수 있게 만든 이야기.",
+    ],
     tags: ["React", "SSE", "EventSource"],
     read: "12 min",
     href: "/posts/sse-react-event-registry",
@@ -73,8 +78,9 @@ export const FRONTEND_POSTS: Post[] = [
     date: "2026-02-01",
     cat: "Frontend",
     title: "React displayName 을 알아보자",
-    excerpt:
-      ["HOC·memo·forwardRef·Context에서 Anonymous가 뜨는 이유와 displayName이 해결하는 방식. React 19 변화도 포함."],
+    excerpt: [
+      "HOC·memo·forwardRef·Context에서 Anonymous가 뜨는 이유와 displayName이 해결하는 방식. React 19 변화도 포함.",
+    ],
     tags: ["React", "DevTools", "디버깅"],
     read: "8 min",
     href: "/posts/react-display-name",
@@ -84,8 +90,9 @@ export const FRONTEND_POSTS: Post[] = [
     date: "2026-02-01",
     cat: "Frontend",
     title: "TypeScript Enum 을 알아보자",
-    excerpt:
-      ["양방향 매핑, 타입 안전성 부재, Tree-shaking 불가. TS팀도 닫지 못한 버그가 71개 이상인 enum을 피해야 하는 이유."],
+    excerpt: [
+      "양방향 매핑, 타입 안전성 부재, Tree-shaking 불가. TS팀도 닫지 못한 버그가 71개 이상인 enum을 피해야 하는 이유.",
+    ],
     tags: ["TypeScript", "Enum", "as const"],
     read: "7 min",
     href: "/posts/typescript-enum",
@@ -95,8 +102,9 @@ export const FRONTEND_POSTS: Post[] = [
     date: "2026-02-01",
     cat: "Frontend",
     title: "TypeScript satisfies 를 알아보자",
-    excerpt:
-      ["`satisfies`는 타입을 고정하지 않고 조건만 검사한다. `: Type`·`as`와의 차이와 쓰는 상황."],
+    excerpt: [
+      "`satisfies`는 타입을 고정하지 않고 조건만 검사한다. `: Type`·`as`와의 차이와 쓰는 상황.",
+    ],
     tags: ["TypeScript", "satisfies", "타입 안전성"],
     read: "5 min",
     href: "/posts/typescript-satisfies",
@@ -106,8 +114,9 @@ export const FRONTEND_POSTS: Post[] = [
     date: "2026-01-01",
     cat: "Frontend",
     title: "Partial Pre-rendering",
-    excerpt:
-      ["HTML 소스를 직접 뜯어보며 파악한 PPR 동작 원리. Partial First Page와 B/S/P placeholder가 Streaming을 통해 교체되는 메커니즘."],
+    excerpt: [
+      "HTML 소스를 직접 뜯어보며 파악한 PPR 동작 원리. Partial First Page와 B/S/P placeholder가 Streaming을 통해 교체되는 메커니즘.",
+    ],
     tags: ["Next.js", "PPR", "Streaming SSR"],
     read: "10 min",
     href: "/posts/partial-pre-rendering",
@@ -117,8 +126,9 @@ export const FRONTEND_POSTS: Post[] = [
     date: "2025-10-01",
     cat: "Frontend",
     title: "프론트엔드 테스트 코드에 대한 고찰",
-    excerpt:
-      ["테스트 코드를 왜 써야 하는지 뒤늦게 납득한 과정. 피드백 사이클 단축부터 테크스펙으로서의 테스트까지."],
+    excerpt: [
+      "테스트 코드를 왜 써야 하는지 뒤늦게 납득한 과정. 피드백 사이클 단축부터 테크스펙으로서의 테스트까지.",
+    ],
     tags: ["Testing", "프론트엔드", "TDD"],
     read: "12 min",
     href: "/posts/frontend-test-thoughts",
@@ -128,8 +138,9 @@ export const FRONTEND_POSTS: Post[] = [
     date: "2025-09-01",
     cat: "Frontend",
     title: "Zustand 슬라이스 패턴으로 계층형 폼 빌더 상태 관리하기",
-    excerpt:
-      ["문항이 수십 개로 늘어도 전체 리렌더링 없이 개별 수정이 가능해야 했다. 슬라이스로 상태를 쪼개 독립적으로 다룬 설계 기록."],
+    excerpt: [
+      "문항이 수십 개로 늘어도 전체 리렌더링 없이 개별 수정이 가능해야 했다. 슬라이스로 상태를 쪼개 독립적으로 다룬 설계 기록.",
+    ],
     tags: ["React", "Zustand", "Form"],
     read: "10 min",
     href: "/posts/zustand-slice-form-builder",
@@ -139,8 +150,9 @@ export const FRONTEND_POSTS: Post[] = [
     date: "2024-09-01",
     cat: "Frontend",
     title: "useSuspensedQuery 훅 제작일지",
-    excerpt:
-      ["Suspense를 써도 data 타입이 T | undefined로 추론되는 문제를 해결하기 위해 useSuspensedQuery 훅을 직접 만든 과정. enabled 옵션과 ErrorBoundary 조합으로 타입 무결성을 보장하는 방법을 정리했다."],
+    excerpt: [
+      "Suspense를 써도 data 타입이 T | undefined로 추론되는 문제를 해결하기 위해 useSuspensedQuery 훅을 직접 만든 과정. enabled 옵션과 ErrorBoundary 조합으로 타입 무결성을 보장하는 방법을 정리했다.",
+    ],
     tags: ["React Query", "TypeScript", "Suspense"],
     read: "8 min",
     href: "/posts/react-use-suspensed-query",
@@ -150,8 +162,9 @@ export const FRONTEND_POSTS: Post[] = [
     date: "2024-09-01",
     cat: "Frontend",
     title: "React Query Mutation",
-    excerpt:
-      ["useMutation의 콜백 실행 순서, Query Invalidation·setQueryData·Optimistic Update 세 가지 결과 업데이트 전략을 코드 예시와 함께 정리했다."],
+    excerpt: [
+      "useMutation의 콜백 실행 순서, Query Invalidation·setQueryData·Optimistic Update 세 가지 결과 업데이트 전략을 코드 예시와 함께 정리했다.",
+    ],
     tags: ["React Query", "TanStack Query", "Mutation"],
     read: "8 min",
     href: "/posts/react-query-mutation",
@@ -161,8 +174,9 @@ export const FRONTEND_POSTS: Post[] = [
     date: "2024-06-01",
     cat: "Frontend",
     title: "next/Image 최적화 — 왜 느리고 어떻게 해결하나",
-    excerpt:
-      ["캐시 MISS가 반복되는 next/image의 구조적 문제를 파악하고, Squoosh→sharp 교체와 On-The-Fly(CDN + Lambda@Edge) 방식을 비교해 해결 방향을 찾은 기록."],
+    excerpt: [
+      "캐시 MISS가 반복되는 next/image의 구조적 문제를 파악하고, Squoosh→sharp 교체와 On-The-Fly(CDN + Lambda@Edge) 방식을 비교해 해결 방향을 찾은 기록.",
+    ],
     tags: ["Next.js", "이미지 최적화", "CDN"],
     read: "8 min",
     href: "/posts/nextjs-image-optimization",
@@ -172,8 +186,9 @@ export const FRONTEND_POSTS: Post[] = [
     date: "2024-04-01",
     cat: "Frontend",
     title: "Promise.withResolvers 라는 친구가 새로 나왔다",
-    excerpt:
-      ["2024년에 새롭게 등장한 Promise.withResolvers(). 기존 Promise 생성자의 한계와 비교해 어떤 상황에서 유용한지 살펴봤다."],
+    excerpt: [
+      "2024년에 새롭게 등장한 Promise.withResolvers(). 기존 Promise 생성자의 한계와 비교해 어떤 상황에서 유용한지 살펴봤다.",
+    ],
     tags: ["JavaScript", "Promise", "ES2024"],
     read: "4 min",
     href: "/posts/promise-with-resolver",
@@ -183,8 +198,9 @@ export const FRONTEND_POSTS: Post[] = [
     date: "2024-03-01",
     cat: "Frontend",
     title: "useEffect는 어떻게 Paint 이후에 정확히 실행될 수 있을까?",
-    excerpt:
-      ["MessageChannel API를 통해 useEffect가 Paint 이후에 실행되는 원리를 파헤쳤다. 스케줄러 내부 코드를 통해 Passive Effect가 언제 큐에 쌓이는지 직접 추적한 기록."],
+    excerpt: [
+      "MessageChannel API를 통해 useEffect가 Paint 이후에 실행되는 원리를 파헤쳤다. 스케줄러 내부 코드를 통해 Passive Effect가 언제 큐에 쌓이는지 직접 추적한 기록.",
+    ],
     tags: ["React", "useEffect", "브라우저"],
     read: "7 min",
     href: "/posts/useeffect-after-paint",
@@ -194,8 +210,9 @@ export const FRONTEND_POSTS: Post[] = [
     date: "2024-03-01",
     cat: "Frontend",
     title: "Zero Runtime CSS-in-JS (with Vanilla Extract)",
-    excerpt:
-      ["런타임에 스타일을 생성하는 Emotion/styled-components의 성능 비용과, Vanilla Extract가 빌드 타임 CSS 변환으로 이를 해결하는 방식. sprinkles와 recipe를 활용한 실제 사용법까지."],
+    excerpt: [
+      "런타임에 스타일을 생성하는 Emotion/styled-components의 성능 비용과, Vanilla Extract가 빌드 타임 CSS 변환으로 이를 해결하는 방식. sprinkles와 recipe를 활용한 실제 사용법까지.",
+    ],
     tags: ["CSS-in-JS", "Vanilla Extract", "Zero Runtime"],
     read: "8 min",
     href: "/posts/zero-runtime-vanilla-extract",
@@ -205,8 +222,9 @@ export const FRONTEND_POSTS: Post[] = [
     date: "2024-02-01",
     cat: "Frontend",
     title: "ErrorBoundary 의 구조를 파헤쳐보자",
-    excerpt:
-      ["React 공식 문서에서 ErrorBoundary 구현체를 직접 살펴보며 componentDidCatch·getDerivedStateFromError의 역할과 Suspense와의 조합을 정리했다."],
+    excerpt: [
+      "React 공식 문서에서 ErrorBoundary 구현체를 직접 살펴보며 componentDidCatch·getDerivedStateFromError의 역할과 Suspense와의 조합을 정리했다.",
+    ],
     tags: ["React", "ErrorBoundary", "에러 처리"],
     read: "8 min",
     href: "/posts/react-error-boundary",
@@ -216,8 +234,9 @@ export const FRONTEND_POSTS: Post[] = [
     date: "2024-02-01",
     cat: "Frontend",
     title: "Edge Runtime 내부 동작 분석",
-    excerpt:
-      ["Next.js 미들웨어가 항상 Edge Runtime으로 실행되는 이유를 Node.js vm 모듈과 @edge-runtime/vm 소스코드를 통해 파악했다. Context 생성, Web API 주입, 코드 실행 흐름까지 정리한 내용."],
+    excerpt: [
+      "Next.js 미들웨어가 항상 Edge Runtime으로 실행되는 이유를 Node.js vm 모듈과 @edge-runtime/vm 소스코드를 통해 파악했다. Context 생성, Web API 주입, 코드 실행 흐름까지 정리한 내용.",
+    ],
     tags: ["Next.js", "Edge Runtime", "Node.js"],
     read: "10 min",
     href: "/posts/edge-runtime-internals",
@@ -227,8 +246,9 @@ export const FRONTEND_POSTS: Post[] = [
     date: "2024-02-01",
     cat: "Frontend",
     title: "CustomEvent로 Observer Pattern 구현하기",
-    excerpt:
-      ["Class 내부 변화를 컴포넌트에 전달할 방법이 없어 CustomEvent를 사용했다. dispatchEvent로 이벤트를 발행하고, TypeScript에서 WindowEventMap을 확장해 타입 안전하게 구독하는 방법을 정리했다."],
+    excerpt: [
+      "Class 내부 변화를 컴포넌트에 전달할 방법이 없어 CustomEvent를 사용했다. dispatchEvent로 이벤트를 발행하고, TypeScript에서 WindowEventMap을 확장해 타입 안전하게 구독하는 방법을 정리했다.",
+    ],
     tags: ["CustomEvent", "Observer Pattern", "TypeScript"],
     read: "5 min",
     href: "/posts/custom-event-observer",
@@ -238,8 +258,9 @@ export const FRONTEND_POSTS: Post[] = [
     date: "2023-05-01",
     cat: "Frontend",
     title: "React Key Props 를 제대로 이해해보자",
-    excerpt:
-      ["재조정 알고리즘이 O(n)으로 동작하는 두 가지 가정 중 하나가 key props 다. key 없이 index를 쓸 때 React.memo가 왜 무효화되는지, State Leakage 버그가 왜 생기는지 코드로 짚어봤다."],
+    excerpt: [
+      "재조정 알고리즘이 O(n)으로 동작하는 두 가지 가정 중 하나가 key props 다. key 없이 index를 쓸 때 React.memo가 왜 무효화되는지, State Leakage 버그가 왜 생기는지 코드로 짚어봤다.",
+    ],
     tags: ["React", "Key Props", "재조정", "성능"],
     read: "6 min",
     href: "/posts/react-key-props",
@@ -249,8 +270,9 @@ export const FRONTEND_POSTS: Post[] = [
     date: "2023-05-01",
     cat: "Frontend",
     title: "windowing 기법이란 무엇이고, 어떻게 최적화를 하는 걸까?",
-    excerpt:
-      ["무한 스크롤로 쌓인 DOM 노드가 TBT·INP를 어떻게 망치는지 수치로 확인하고, react-virtualized가 뷰포트 밖 요소를 렌더링하지 않는 원리를 정리했다."],
+    excerpt: [
+      "무한 스크롤로 쌓인 DOM 노드가 TBT·INP를 어떻게 망치는지 수치로 확인하고, react-virtualized가 뷰포트 밖 요소를 렌더링하지 않는 원리를 정리했다.",
+    ],
     tags: ["React", "Windowing", "성능 최적화", "Virtual Scroll"],
     read: "9 min",
     href: "/posts/react-windowing",
@@ -260,8 +282,9 @@ export const FRONTEND_POSTS: Post[] = [
     date: "2023-04-01",
     cat: "Frontend",
     title: "React의 state, 그리고 useState에 대해 더 알고 싶어졌다",
-    excerpt:
-      ["useState의 setter가 렌더링을 어떻게 예약하는지, 클로저와 stale state 문제, batch update가 작동하는 원리를 파헤쳤다."],
+    excerpt: [
+      "useState의 setter가 렌더링을 어떻게 예약하는지, 클로저와 stale state 문제, batch update가 작동하는 원리를 파헤쳤다.",
+    ],
     tags: ["React", "useState", "렌더링"],
     read: "9 min",
     href: "/posts/react-state-usestate",
@@ -271,8 +294,9 @@ export const FRONTEND_POSTS: Post[] = [
     date: "2023-04-01",
     cat: "Frontend",
     title: "React 18에서 추가된 Auto Batching 은 무엇인가?",
-    excerpt:
-      ["React 18 이전에는 이벤트 핸들러 안에서만 배치됐던 상태 업데이트가, 이제는 Promise·setTimeout 안에서도 자동 배치된다. 무엇이 바뀌었는지 정리했다."],
+    excerpt: [
+      "React 18 이전에는 이벤트 핸들러 안에서만 배치됐던 상태 업데이트가, 이제는 Promise·setTimeout 안에서도 자동 배치된다. 무엇이 바뀌었는지 정리했다.",
+    ],
     tags: ["React", "React 18", "Batching", "성능"],
     read: "6 min",
     href: "/posts/react-18-auto-batching",
@@ -282,8 +306,9 @@ export const FRONTEND_POSTS: Post[] = [
     date: "2023-02-01",
     cat: "Frontend",
     title: "useEffect는 가끔 Paint 작업 이전에 실행된다고?",
-    excerpt:
-      ["useEffect와 useLayoutEffect의 실행 시점 차이를 React 렌더링 파이프라인 관점에서 정리했다. useLayoutEffect에서 setState를 호출하면 Passive Effect가 Paint 이전에 실행되는 이유도 다룬다."],
+    excerpt: [
+      "useEffect와 useLayoutEffect의 실행 시점 차이를 React 렌더링 파이프라인 관점에서 정리했다. useLayoutEffect에서 setState를 호출하면 Passive Effect가 Paint 이전에 실행되는 이유도 다룬다.",
+    ],
     tags: ["React", "useEffect", "useLayoutEffect"],
     read: "9 min",
     href: "/posts/useeffect-vs-uselayouteffect",
@@ -293,8 +318,9 @@ export const FRONTEND_POSTS: Post[] = [
     date: "2023-01-01",
     cat: "Frontend",
     title: "React 에서 렌더링이란 대체 무엇일까?",
-    excerpt:
-      ["React에서 렌더링은 DOM 업데이트가 아니다. Render Phase·Commit Phase·Passive Effect 단계를 구분하고, 불필요한 렌더링이 발생하는 원인과 Concurrent Mode까지 정리했다."],
+    excerpt: [
+      "React에서 렌더링은 DOM 업데이트가 아니다. Render Phase·Commit Phase·Passive Effect 단계를 구분하고, 불필요한 렌더링이 발생하는 원인과 Concurrent Mode까지 정리했다.",
+    ],
     tags: ["React", "렌더링", "Virtual DOM"],
     read: "10 min",
     href: "/posts/react-rendering",
@@ -304,8 +330,9 @@ export const FRONTEND_POSTS: Post[] = [
     date: "2023-01-01",
     cat: "Frontend",
     title: "브라우저 파싱 원리에 대한 고찰",
-    excerpt:
-      ["브라우저가 HTML을 DOM 트리로 변환하는 Tokenizer·Tree Constructor 단계와 에러 허용(Error Tolerance) 파싱의 동작 방식을 정리했다. how-browser-works와 달리 파싱 과정 자체에 집중한다."],
+    excerpt: [
+      "브라우저가 HTML을 DOM 트리로 변환하는 Tokenizer·Tree Constructor 단계와 에러 허용(Error Tolerance) 파싱의 동작 방식을 정리했다. how-browser-works와 달리 파싱 과정 자체에 집중한다.",
+    ],
     tags: ["브라우저", "파싱", "DOM", "HTML"],
     read: "7 min",
     href: "/posts/browser-parsing",
@@ -315,8 +342,9 @@ export const FRONTEND_POSTS: Post[] = [
     date: "2023-01-01",
     cat: "Frontend",
     title: "브라우저는 어떻게 동작하는 걸까?",
-    excerpt:
-      ["URL 입력부터 화면에 픽셀이 찍히기까지. DOM·CSSOM 생성, 렌더 트리 구성, Layout·Paint, Reflow·Repaint, 하드웨어 가속(Graphic Layer)을 순서대로 정리했다."],
+    excerpt: [
+      "URL 입력부터 화면에 픽셀이 찍히기까지. DOM·CSSOM 생성, 렌더 트리 구성, Layout·Paint, Reflow·Repaint, 하드웨어 가속(Graphic Layer)을 순서대로 정리했다.",
+    ],
     tags: ["브라우저", "CRP", "렌더링"],
     read: "12 min",
     href: "/posts/how-browser-works",
@@ -326,8 +354,9 @@ export const FRONTEND_POSTS: Post[] = [
     date: "2023-01-01",
     cat: "Frontend",
     title: "Server State는 뭐고, React Query는 왜 쓰는가?",
-    excerpt:
-      ["서버 상태가 클라이언트 상태와 다른 이유, Redux로는 왜 부족한지, React Query가 stale/fresh/inactive 상태와 캐시를 어떻게 관리하는지 기초부터 정리했다."],
+    excerpt: [
+      "서버 상태가 클라이언트 상태와 다른 이유, Redux로는 왜 부족한지, React Query가 stale/fresh/inactive 상태와 캐시를 어떻게 관리하는지 기초부터 정리했다.",
+    ],
     tags: ["React Query", "Server State", "캐싱"],
     read: "10 min",
     href: "/posts/server-state-react-query",
@@ -337,8 +366,9 @@ export const FRONTEND_POSTS: Post[] = [
     date: "2023-01-01",
     cat: "Frontend",
     title: "CSR? SSR? SPA? MPA? 이것들은 뭘까?",
-    excerpt:
-      ["CSR·SSR·SSG·Universal Rendering의 차이와 각 렌더링 전략이 적합한 상황, SPA와 MPA의 구분까지 프론트엔드 렌더링 전략 전반을 정리했다."],
+    excerpt: [
+      "CSR·SSR·SSG·Universal Rendering의 차이와 각 렌더링 전략이 적합한 상황, SPA와 MPA의 구분까지 프론트엔드 렌더링 전략 전반을 정리했다.",
+    ],
     tags: ["CSR", "SSR", "SPA", "MPA"],
     read: "9 min",
     href: "/posts/csr-ssr-spa-mpa",
@@ -348,10 +378,83 @@ export const FRONTEND_POSTS: Post[] = [
     date: "2023-10-01",
     cat: "Frontend",
     title: "번들러란 무엇이며, 어떻게 동작하는 걸까?",
-    excerpt:
-      ["직접 번들러를 만들어보며 파악한 동작 원리. AST 의존성 트리 구축부터 Webpack과 Rollup의 번들링 방식 차이까지."],
+    excerpt: [
+      "직접 번들러를 만들어보며 파악한 동작 원리. AST 의존성 트리 구축부터 Webpack과 Rollup의 번들링 방식 차이까지.",
+    ],
     tags: ["Webpack", "Rollup", "esbuild", "번들러"],
     read: "10 min",
     href: "/posts/how-bundler-works",
+  },
+  {
+    slug: "effective-typescript-week-7",
+    date: "2023-04-18",
+    cat: "Frontend",
+    title: "이펙티브 타입스크립트 7주차 스터디",
+    excerpt: [
+      "상표 기법으로 구조적 타이핑의 허점을 막고, any의 사용 범위를 최소화하는 방법. any의 진화와 unknown이 any보다 안전한 이유까지 정리했다.",
+    ],
+    tags: ["TypeScript", "스터디", "any", "unknown"],
+    read: "6 min",
+    href: "/posts/effective-typescript-week-7",
+  },
+  {
+    slug: "effective-typescript-week-5",
+    date: "2023-03-19",
+    cat: "Frontend",
+    title: "이펙티브 타입스크립트 5주차 스터디",
+    excerpt: [
+      "별칭 남용이 타입 좁히기를 방해하는 이유, async/await로 동기-비동기 혼용을 막는 방법. 유효한 상태만 표현하는 타입 설계와 입력은 넓게 출력은 좁게 원칙을 정리했다.",
+    ],
+    tags: ["TypeScript", "스터디", "async", "타입 설계"],
+    read: "7 min",
+    href: "/posts/effective-typescript-week-5",
+  },
+  {
+    slug: "effective-typescript-week-4",
+    date: "2023-03-07",
+    cat: "Frontend",
+    title: "이펙티브 타입스크립트 4주차 스터디",
+    excerpt: [
+      "타입 추론을 믿고 불필요한 어노테이션을 줄이는 방법, 타입이 다르면 변수도 분리해야 하는 이유. 타입 넓히기·좁히기와 한꺼번에 객체를 생성해야 하는 이유를 정리했다.",
+    ],
+    tags: ["TypeScript", "스터디", "타입 추론", "타입 좁히기"],
+    read: "7 min",
+    href: "/posts/effective-typescript-week-4",
+  },
+  {
+    slug: "effective-typescript-week-3",
+    date: "2023-02-28",
+    cat: "Frontend",
+    title: "이펙티브 타입스크립트 3주차 스터디",
+    excerpt: [
+      "type vs interface 선택 기준과 선언 병합, keyof·Pick·ReturnType으로 반복을 줄이는 방법. 인덱스 시그니처의 한계와 readonly, 매핑된 타입으로 동기화하는 패턴을 정리했다.",
+    ],
+    tags: ["TypeScript", "스터디", "제네릭", "매핑된 타입"],
+    read: "7 min",
+    href: "/posts/effective-typescript-week-3",
+  },
+  {
+    slug: "effective-typescript-week-2",
+    date: "2023-02-21",
+    cat: "Frontend",
+    title: "이펙티브 타입스크립트 2주차 스터디",
+    excerpt: [
+      "타입을 집합으로 보는 관점과 keyof 교차 공식, 타입 공간과 값 공간의 심벌 구분. 타입 단언보다 타입 선언을 써야 하는 이유와 잉여 속성 체크의 한계를 정리했다.",
+    ],
+    tags: ["TypeScript", "스터디", "타입 시스템", "집합론"],
+    read: "6 min",
+    href: "/posts/effective-typescript-week-2",
+  },
+  {
+    slug: "effective-typescript-week-1",
+    date: "2023-02-07",
+    cat: "Frontend",
+    title: "이펙티브 타입스크립트 1주차 스터디",
+    excerpt: [
+      "TS와 JS의 관계, noImplicitAny·strictNullChecks 설정의 의미. 런타임에는 타입이 사라지는 이유와 구조적 타이핑의 특성, any를 피해야 하는 이유를 정리했다.",
+    ],
+    tags: ["TypeScript", "스터디", "구조적 타이핑", "any"],
+    read: "6 min",
+    href: "/posts/effective-typescript-week-1",
   },
 ];
