@@ -4,9 +4,9 @@ import { Contact } from "#/components/Contact";
 import { Footer } from "#/components/Footer";
 import { Hero } from "#/components/Hero";
 import { Nav } from "#/components/Nav";
+import { RecentPosts } from "#/components/RecentPosts";
 import { Stack } from "#/components/Stack";
 import { Stats } from "#/components/Stats";
-import { Work } from "#/components/Work";
 import { useNavScroll } from "#/hooks/UseNavScroll";
 import { cn } from "#/lib/Utils";
 
@@ -14,7 +14,7 @@ const PORTFOLIO_NAV = [
   { href: "#about", label: "About", idx: "01" },
   { href: "#stack", label: "Stack", idx: "02" },
   { href: "#career", label: "Career", idx: "03" },
-  { href: "#work", label: "Work", idx: "04" },
+  { href: "#study", label: "Study", idx: "04" },
   { href: "#contact", label: "Contact", idx: "05" },
 ] as const;
 
@@ -46,7 +46,7 @@ export function PortfolioPage() {
       <Stats />
       <Stack />
       <Career />
-      <Work />
+      <RecentPosts />
       <Contact />
       <Footer variant="portfolio" />
     </>
