@@ -263,7 +263,7 @@ export const FRONTEND_POSTS: Post[] = [
     ],
     tags: ["SVG", "React", "음악 플레이어", "삼각함수"],
     read: "7 min",
-    href: "https://velog.io/@rookieand/챌린지-원형-프로그레시브-바-구현",
+    href: "/posts/mz2mo-circular-progress-bar",
   },
   {
     slug: "react-key-props",
@@ -479,7 +479,7 @@ export const FRONTEND_POSTS: Post[] = [
     ],
     tags: ["성능", "Lighthouse", "Web Vitals", "React"],
     read: "10 min",
-    href: "https://velog.io/@rookieand/React-Deep-Dive-13강",
+    href: "/posts/react-deep-dive-13-performance-tools",
   },
   {
     slug: "react-deep-dive-12-core-web-vitals",
@@ -491,7 +491,7 @@ export const FRONTEND_POSTS: Post[] = [
     ],
     tags: ["성능", "Core Web Vitals", "LCP", "CLS"],
     read: "10 min",
-    href: "https://velog.io/@rookieand/React-Deep-Dive-12강",
+    href: "/posts/react-deep-dive-12-core-web-vitals",
   },
   {
     slug: "react-deep-dive-7-devtools",
@@ -503,7 +503,7 @@ export const FRONTEND_POSTS: Post[] = [
     ],
     tags: ["성능", "Chrome DevTools", "메모리 누수", "디버깅"],
     read: "9 min",
-    href: "https://velog.io/@rookieand/React-Deep-Dive-7강-g5520ps9",
+    href: "/posts/react-deep-dive-7-devtools",
   },
   {
     slug: "react-deep-dive-4-ssr-nextjs",
@@ -515,7 +515,7 @@ export const FRONTEND_POSTS: Post[] = [
     ],
     tags: ["React", "SSR", "Next.js", "hydration"],
     read: "12 min",
-    href: "https://velog.io/@rookieand/React-Deep-Dive-4강-0ze659vc",
+    href: "/posts/react-deep-dive-4-ssr-nextjs",
   },
   {
     slug: "react-deep-dive-3-hooks",
@@ -527,7 +527,7 @@ export const FRONTEND_POSTS: Post[] = [
     ],
     tags: ["React", "Hooks", "useState", "useEffect"],
     read: "14 min",
-    href: "https://velog.io/@rookieand/React-Deep-Dive-3강-tzng5b5u",
+    href: "/posts/react-deep-dive-3-hooks",
   },
   {
     slug: "react-deep-dive-2-2-lifecycle-memoization",
@@ -539,7 +539,7 @@ export const FRONTEND_POSTS: Post[] = [
     ],
     tags: ["React", "생명주기", "렌더링", "메모이제이션"],
     read: "11 min",
-    href: "https://velog.io/@rookieand/React-Deep-Dive-2강-2-byt7er2v",
+    href: "/posts/react-deep-dive-2-2-lifecycle-memoization",
   },
   {
     slug: "react-deep-dive-2-1-jsx-fiber",
@@ -551,7 +551,7 @@ export const FRONTEND_POSTS: Post[] = [
     ],
     tags: ["React", "JSX", "Virtual DOM", "Fiber"],
     read: "12 min",
-    href: "https://velog.io/@rookieand/React-Deep-Dive-2강",
+    href: "/posts/react-deep-dive-2-1-jsx-fiber",
   },
   {
     slug: "react-deep-dive-1-js-fundamentals",
@@ -563,7 +563,7 @@ export const FRONTEND_POSTS: Post[] = [
     ],
     tags: ["JavaScript", "React", "클로저", "이벤트 루프"],
     read: "11 min",
-    href: "https://velog.io/@rookieand/React-Deep-Dive-1강",
+    href: "/posts/react-deep-dive-1-js-fundamentals",
   },
   {
     slug: "covidkorea-status-project",
@@ -575,6 +575,6 @@ export const FRONTEND_POSTS: Post[] = [
     ],
     tags: ["React", "Chart.js", "styled-components", "사이드 프로젝트"],
     read: "4 min",
-    href: "https://velog.io/@rookieand/CovidKoreaStatus-토이-프로젝트-안내",
+    href: "/posts/covidkorea-status-project",
   },
 ];
