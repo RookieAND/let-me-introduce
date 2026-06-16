@@ -12,7 +12,7 @@ export type Category =
   | "JavaScript"
   | "Architecture"
   | "Tooling"
-  | "Infra"
+  | "DB / Infra"
   | "Retrospective";
 
 export interface Post {
@@ -71,6 +71,6 @@ export const CATEGORIES: (Category | "all")[] = [
   "Backend",
   "Architecture",
   "Tooling",
-  "Infra",
+  "DB / Infra",
   "Retrospective",
 ];

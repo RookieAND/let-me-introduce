@@ -2,18 +2,6 @@ import type { Post } from "#/data/Posts";
 
 export const BACKEND_POSTS: Post[] = [
   {
-    slug: "valkey-hash-key-expiration",
-    date: "2026-06-16",
-    cat: "Backend",
-    title: "Valkey Hash Key Expiration — 필드 단위 TTL 설정",
-    excerpt: [
-      "Redis, Valkey 는 원래 Key 단위로만 TTL 을 지원했다. Hash 필드마다 만료 시간이 달라야 할 때 기존에는 개별 Key 로 분리하거나 Lua Script 로 우회하는 수밖에 없었다. Valkey 9.0 에서 추가된 HEXPIRE, HPEXPIRE, HEXPIREAT, HTTL, HPERSIST 등 9개 명령어와 Active Expiration 동작 방식을 정리했다.",
-    ],
-    tags: ["Valkey", "Redis", "Cache", "TTL", "Hash"],
-    read: "8 min",
-    href: "/posts/valkey-hash-key-expiration",
-  },
-  {
     slug: "suites-nestjs-auto-mock",
     date: "2026-06-01",
     cat: "Backend",
