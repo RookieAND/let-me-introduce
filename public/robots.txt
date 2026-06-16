@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://rookieand.vercel.app/sitemap.xml

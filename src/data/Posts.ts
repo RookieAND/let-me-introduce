@@ -5,9 +5,11 @@ import { INFRA_POSTS } from "#/data/posts/InfraPosts";
 import { JAVASCRIPT_POSTS } from "#/data/posts/JavaScriptPosts";
 import { RETROSPECTIVE_POSTS } from "#/data/posts/RetrospectivePosts";
 import { TOOLING_POSTS } from "#/data/posts/ToolingPosts";
+import { TYPESCRIPT_POSTS } from "#/data/posts/TypescriptPosts";
 
 export type Category =
   | "Frontend"
+  | "TypeScript"
   | "Backend"
   | "JavaScript"
   | "Architecture"
@@ -54,6 +56,7 @@ export const FEATURED_POST: Post = {
 
 export const POSTS: Post[] = [
   ...FRONTEND_POSTS,
+  ...TYPESCRIPT_POSTS,
   ...JAVASCRIPT_POSTS,
   ...BACKEND_POSTS,
   ...ARCHITECTURE_POSTS,
@@ -67,6 +70,7 @@ export const ALL_POSTS: Post[] = [FEATURED_POST, ...POSTS];
 export const CATEGORIES: (Category | "all")[] = [
   "all",
   "Frontend",
+  "TypeScript",
   "JavaScript",
   "Backend",
   "Architecture",

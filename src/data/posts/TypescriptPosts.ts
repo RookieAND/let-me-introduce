@@ -1,0 +1,124 @@
+import type { Post } from "#/data/Posts";
+
+export const TYPESCRIPT_POSTS: Post[] = [
+  {
+    slug: "typescript-module-resolution",
+    date: "2026-05-01",
+    cat: "TypeScript",
+    title: "TypeScript Module Resolution 전략을 알아보자",
+    excerpt: [
+      "node, node16, bundler 세 전략의 차이와 Vite 기반 프로젝트에서 bundler가 표준인 이유.",
+    ],
+    tags: ["TypeScript", "Vite", "모듈"],
+    read: "7 min",
+    href: "/posts/typescript-module-resolution",
+  },
+  {
+    slug: "typescript-union-contravariance",
+    date: "2026-03-01",
+    cat: "TypeScript",
+    title: "유니온이 함수 인자에서 교차 타입으로 변했다",
+    excerpt: [
+      "이벤트 시스템에서 유니온 핸들러가 교차 타입을 요구하는 현상을 함수 반공변성으로 설명하고 비분산 조건부 타입으로 해결했다.",
+    ],
+    tags: ["TypeScript", "반공변성", "제네릭"],
+    read: "12 min",
+    href: "/posts/typescript-union-contravariance",
+  },
+  {
+    slug: "typescript-enum",
+    date: "2026-02-01",
+    cat: "TypeScript",
+    title: "TypeScript Enum 을 알아보자",
+    excerpt: [
+      "양방향 매핑, 타입 안전성 부재, Tree-shaking 불가 — TS팀도 못 닫은 버그가 71개 이상인 enum을 피해야 하는 이유.",
+    ],
+    tags: ["TypeScript", "Enum", "as const"],
+    read: "7 min",
+    href: "/posts/typescript-enum",
+  },
+  {
+    slug: "typescript-satisfies",
+    date: "2026-02-01",
+    cat: "TypeScript",
+    title: "TypeScript satisfies 를 알아보자",
+    excerpt: [
+      "`satisfies`는 타입을 고정하지 않고 조건만 검사한다 — `: Type`·`as`와의 차이와 쓰는 상황.",
+    ],
+    tags: ["TypeScript", "satisfies", "타입 안전성"],
+    read: "5 min",
+    href: "/posts/typescript-satisfies",
+  },
+  {
+    slug: "effective-typescript-week-7",
+    date: "2023-04-18",
+    cat: "TypeScript",
+    title: "이펙티브 타입스크립트 7주차 스터디",
+    excerpt: [
+      "상표 기법으로 구조적 타이핑의 허점을 막고 any를 최소화하는 방법, any의 진화와 unknown이 더 안전한 이유.",
+    ],
+    tags: ["TypeScript", "스터디", "any", "unknown"],
+    read: "6 min",
+    href: "/posts/effective-typescript-week-7",
+  },
+  {
+    slug: "effective-typescript-week-5",
+    date: "2023-03-19",
+    cat: "TypeScript",
+    title: "이펙티브 타입스크립트 5주차 스터디",
+    excerpt: [
+      "별칭 남용이 타입 좁히기를 방해하는 이유, 유효한 상태만 표현하는 타입 설계, 입력은 넓게 출력은 좁게 원칙.",
+    ],
+    tags: ["TypeScript", "스터디", "async", "타입 설계"],
+    read: "7 min",
+    href: "/posts/effective-typescript-week-5",
+  },
+  {
+    slug: "effective-typescript-week-4",
+    date: "2023-03-07",
+    cat: "TypeScript",
+    title: "이펙티브 타입스크립트 4주차 스터디",
+    excerpt: [
+      "타입 추론을 믿고 불필요한 어노테이션을 줄이는 방법과 타입 넓히기·좁히기를 정리했다.",
+    ],
+    tags: ["TypeScript", "스터디", "타입 추론", "타입 좁히기"],
+    read: "7 min",
+    href: "/posts/effective-typescript-week-4",
+  },
+  {
+    slug: "effective-typescript-week-3",
+    date: "2023-02-28",
+    cat: "TypeScript",
+    title: "이펙티브 타입스크립트 3주차 스터디",
+    excerpt: [
+      "type vs interface 선택 기준, keyof·Pick·ReturnType으로 반복을 줄이는 방법, 인덱스 시그니처의 한계와 매핑된 타입.",
+    ],
+    tags: ["TypeScript", "스터디", "제네릭", "매핑된 타입"],
+    read: "7 min",
+    href: "/posts/effective-typescript-week-3",
+  },
+  {
+    slug: "effective-typescript-week-2",
+    date: "2023-02-21",
+    cat: "TypeScript",
+    title: "이펙티브 타입스크립트 2주차 스터디",
+    excerpt: [
+      "타입을 집합으로 보는 관점, 타입 공간과 값 공간의 심벌 구분, 타입 단언보다 선언을 써야 하는 이유.",
+    ],
+    tags: ["TypeScript", "스터디", "타입 시스템", "집합론"],
+    read: "6 min",
+    href: "/posts/effective-typescript-week-2",
+  },
+  {
+    slug: "effective-typescript-week-1",
+    date: "2023-02-07",
+    cat: "TypeScript",
+    title: "이펙티브 타입스크립트 1주차 스터디",
+    excerpt: [
+      "TS와 JS의 관계, strictNullChecks 설정의 의미, 런타임에 타입이 사라지는 이유와 구조적 타이핑의 특성.",
+    ],
+    tags: ["TypeScript", "스터디", "구조적 타이핑", "any"],
+    read: "6 min",
+    href: "/posts/effective-typescript-week-1",
+  },
+];
