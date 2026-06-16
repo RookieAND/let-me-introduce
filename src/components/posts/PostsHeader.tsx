@@ -28,7 +28,7 @@ export function PostsHeader() {
           </Text>
         </Reveal>
         <Reveal delay={0.16}>
-          <Text variant="subtitle2" color="muted" className="max-w-[52ch]">
+          <Text variant="subtitle2" color="muted" className="max-w-[70ch]">
             배운 것을 설명할 수 있을 때 비로소 온전히 이해한 것이라 믿습니다.
             <br />
             개인적으로 공부하며 얻은 지식과 개발을 진행하며 부딪힌 문제와 그 해결 과정을 정리합니다.

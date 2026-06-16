@@ -2,6 +2,18 @@ import type { Post } from "#/data/Posts";
 
 export const TOOLING_POSTS: Post[] = [
   {
+    slug: "pnpm-v11-docker-deploy-optimization",
+    date: "2026-06-17",
+    cat: "Tooling",
+    title: "pnpm v11 업그레이드로 Docker 빌드 병목 82% 줄인 이야기",
+    excerpt: [
+      "reused 0이 찍히던 pnpm deploy --legacy 병목을 v11 native deploy로 대체 — allowBuilds map 전환, injectWorkspacePackages 적용, 트러블슈팅.",
+    ],
+    tags: ["pnpm", "Docker", "Monorepo", "CI/CD"],
+    read: "8 min",
+    href: "/posts/pnpm-v11-docker-deploy-optimization",
+  },
+  {
     slug: "turborepo-task-configuration",
     date: "2026-06-16",
     cat: "Tooling",
