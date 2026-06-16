@@ -7,7 +7,7 @@ export const JAVASCRIPT_POSTS: Post[] = [
     cat: "JavaScript",
     title: "CJS : string 에서 exports 까지, 모듈 평가 파이프라인",
     excerpt: [
-      "require() 가 파일을 불러온 뒤 실제로 무슨 일이 벌어지는가. loadSource 로 파일을 읽고, Module.wrap 으로 감싸고, wrapSafe 가 V8 에 컴파일하고, FunctionPrototypeCall 로 실행되기까지 — module.exports 에 값이 채워지는 전 과정을 Node.js 소스로 따라간다.",
+      "require()가 module.exports에 값을 채우기까지 — loadSource, Module.wrap, wrapSafe, V8 컴파일, FunctionPrototypeCall 전 과정을 Node.js 소스로 추적했다.",
     ],
     tags: ["Node.js", "CJS", "JavaScript", "Module"],
     read: "13 min",
@@ -19,7 +19,7 @@ export const JAVASCRIPT_POSTS: Post[] = [
     cat: "JavaScript",
     title: "CJS : require 의 모듈 탐색 알고리즘",
     excerpt: [
-      "require('./foo') 한 줄 뒤에서 Node.js 가 하는 일. Module 클래스, Module Wrapper, exports/module.exports 참조 관계, 캐싱 구조, 그리고 Core → 상대경로 → node_modules 순서로 진행되는 탐색 알고리즘까지.",
+      "require('./foo') 뒤에서 Node.js가 하는 일 — Module 클래스 구조, 캐싱, Core→상대경로→node_modules 탐색 알고리즘.",
     ],
     tags: ["Node.js", "CJS", "JavaScript", "Module"],
     read: "12 min",
@@ -31,7 +31,7 @@ export const JAVASCRIPT_POSTS: Post[] = [
     cat: "JavaScript",
     title: "이벤트 루프란 무엇이며, 어떻게 진행되는 건가?",
     excerpt: [
-      "JS 엔진은 단일 스레드지만 브라우저는 그렇지 않다. Task Queue와 Microtask Queue의 처리 순서, requestAnimationFrame과의 관계까지 이벤트 루프를 정확하게 정리했다.",
+      "Task Queue와 Microtask Queue의 처리 순서, requestAnimationFrame과의 관계까지 이벤트 루프를 정확하게 정리했다.",
     ],
     tags: ["JavaScript", "이벤트 루프", "비동기"],
     read: "10 min",
@@ -43,7 +43,7 @@ export const JAVASCRIPT_POSTS: Post[] = [
     cat: "JavaScript",
     title: "실행 컨텍스트란 무엇인가?",
     excerpt: [
-      "JS 코드가 실행되기 전 엔진이 수집하는 환경 정보 객체, 실행 컨텍스트. VariableEnvironment·LexicalEnvironment·ThisBinding의 구조와 호이스팅이 일어나는 원리를 Call Stack 흐름으로 정리했다.",
+      "실행 컨텍스트의 VariableEnvironment·LexicalEnvironment·ThisBinding 구조와 호이스팅이 일어나는 원리를 Call Stack 흐름으로 정리했다.",
     ],
     tags: ["JavaScript", "실행 컨텍스트", "호이스팅", "스코프"],
     read: "9 min",
@@ -55,7 +55,7 @@ export const JAVASCRIPT_POSTS: Post[] = [
     cat: "JavaScript",
     title: "JS의 Object를 조금 더 깊게 파헤쳐보자",
     excerpt: [
-      "JS 객체의 프로퍼티 플래그(writable, enumerable, configurable), 참조 타입과 힙 메모리 구조, 얕은/깊은 복사의 함정까지 객체를 깊게 파헤쳤다.",
+      "프로퍼티 플래그(writable, enumerable, configurable), 참조 타입과 힙 메모리 구조, 얕은/깊은 복사의 함정을 정리했다.",
     ],
     tags: ["JavaScript", "Object", "메모리"],
     read: "9 min",
@@ -67,7 +67,7 @@ export const JAVASCRIPT_POSTS: Post[] = [
     cat: "JavaScript",
     title: "이벤트 버블링, 캡처링, 위임을 알아보자",
     excerpt: [
-      "이벤트 흐름의 세 단계(캡처링 → 타깃 → 버블링)와 stopPropagation·stopImmediatePropagation의 차이, 그리고 이벤트 위임 패턴을 정리했다.",
+      "이벤트 흐름 세 단계, stopPropagation·stopImmediatePropagation의 차이, 그리고 이벤트 위임 패턴.",
     ],
     tags: ["JavaScript", "이벤트", "DOM"],
     read: "7 min",
@@ -79,7 +79,7 @@ export const JAVASCRIPT_POSTS: Post[] = [
     cat: "JavaScript",
     title: "for 문 안에 let 과 var를 넣으면 뭐가 달라지나?",
     excerpt: [
-      "for 루프 안에 var를 쓰면 클로저가 예상대로 작동하지 않는 이유, let이 블록 스코프로 이 문제를 해결하는 방식을 코드와 함께 설명했다.",
+      "for 루프 안에서 var와 let의 스코프 차이가 클로저 동작에 어떤 영향을 미치는지 코드로 설명했다.",
     ],
     tags: ["JavaScript", "let", "var", "클로저"],
     read: "5 min",
@@ -91,7 +91,7 @@ export const JAVASCRIPT_POSTS: Post[] = [
     cat: "JavaScript",
     title: "JS에서는 동등 비교 연산을 어떻게 수행할까?",
     excerpt: [
-      "JS의 ===·==·Object.is 세 가지 동등 비교 방식의 차이와 NaN·+0/-0 처리 방식, Map과 Set에 쓰이는 SameValueZero 알고리즘을 정리했다.",
+      "===·==·Object.is의 차이와 NaN·±0 처리 방식, Map·Set에 쓰이는 SameValueZero 알고리즘.",
     ],
     tags: ["JavaScript", "동등 비교", "NaN"],
     read: "7 min",
@@ -103,7 +103,7 @@ export const JAVASCRIPT_POSTS: Post[] = [
     cat: "JavaScript",
     title: "Iterable한 객체, 너가 대체 뭔지 알고 싶다",
     excerpt: [
-      "ES6 Iteration Protocol을 정리하고, Python의 range 함수를 JS로 구현하는 과정에서 Iterable·Iterator·Well-formed Iterable·Generator의 관계를 명확히 했다.",
+      "ES6 Iteration Protocol과 Iterable·Iterator·Well-formed Iterable·Generator의 관계를 Python range 구현으로 정리했다.",
     ],
     tags: ["JavaScript", "Iterable", "Iterator", "Generator"],
     read: "8 min",
@@ -115,7 +115,7 @@ export const JAVASCRIPT_POSTS: Post[] = [
     cat: "JavaScript",
     title: "[#JS] New Feature in ES2020",
     excerpt: [
-      "객체 Spread/Rest, 비동기 이터레이터와 제너레이터, Promise.finally(), 정규식 네임드 캡처 그룹과 후방 탐색까지 ES2020 신규 기능을 정리했다.",
+      "객체 Spread/Rest, 비동기 이터레이터, Promise.finally(), 정규식 네임드 캡처 그룹 — ES2020 주요 신기능 정리.",
     ],
     tags: ["JavaScript", "ES2020", "Promise", "정규식"],
     read: "4 min",
@@ -127,7 +127,7 @@ export const JAVASCRIPT_POSTS: Post[] = [
     cat: "JavaScript",
     title: "[#JS] Async/Await",
     excerpt: [
-      "async 함수가 항상 Promise를 반환하는 이유, await로 비동기 코드를 동기처럼 읽히게 만드는 방법. 에러 처리, 병렬 실행, top-level await까지 정리했다.",
+      "async 함수가 항상 Promise를 반환하는 이유와 에러 처리, 병렬 실행, top-level await까지.",
     ],
     tags: ["JavaScript", "async", "await", "Promise"],
     read: "4 min",
@@ -139,7 +139,7 @@ export const JAVASCRIPT_POSTS: Post[] = [
     cat: "JavaScript",
     title: "[#JS] New Feature in ES2016-17",
     excerpt: [
-      "Array.includes(), 지수 연산자(**)가 추가된 ES2016과 padStart/padEnd, Object.entries/values, 후행 쉼표, Atomics가 추가된 ES2017 신규 기능을 정리했다.",
+      "Array.includes(), 지수 연산자, padStart/padEnd, Object.entries/values, Atomics — ES2016·2017 신기능 정리.",
     ],
     tags: ["JavaScript", "ES2016", "ES2017"],
     read: "3 min",
@@ -151,7 +151,7 @@ export const JAVASCRIPT_POSTS: Post[] = [
     cat: "JavaScript",
     title: "[#JS] Set, Map, WeakSet, WeakMap",
     excerpt: [
-      "중복 없는 집합 Set, 모든 타입을 키로 쓸 수 있는 Map, 약한 참조로 메모리 누수를 막는 WeakSet과 WeakMap의 특성과 사용 방법을 정리했다.",
+      "Set, Map, 약한 참조로 메모리 누수를 막는 WeakSet·WeakMap의 특성과 사용 방법.",
     ],
     tags: ["JavaScript", "Set", "Map", "WeakMap"],
     read: "5 min",
@@ -163,7 +163,7 @@ export const JAVASCRIPT_POSTS: Post[] = [
     cat: "JavaScript",
     title: "[#JS] Promise",
     excerpt: [
-      "콜백 지옥을 해결하기 위해 등장한 Promise. pending/fulfilled/rejected 세 상태, then/catch 체이닝, Promise.all/race/allSettled 유틸리티 메서드를 정리했다.",
+      "pending/fulfilled/rejected 세 상태, then/catch 체이닝, Promise.all/race/allSettled 유틸리티 메서드.",
     ],
     tags: ["JavaScript", "Promise", "비동기"],
     read: "5 min",
@@ -175,7 +175,7 @@ export const JAVASCRIPT_POSTS: Post[] = [
     cat: "JavaScript",
     title: "[#JS] Class",
     excerpt: [
-      "프로토타입 기반 상속 위에 올라간 ES6 class 문법. constructor, 정적 메서드, getter/setter, extends와 super를 통한 상속까지 정리했다.",
+      "constructor, 정적 메서드, getter/setter, extends·super를 통한 상속까지 ES6 class 문법 정리.",
     ],
     tags: ["JavaScript", "Class", "상속", "프로토타입"],
     read: "5 min",
@@ -187,7 +187,7 @@ export const JAVASCRIPT_POSTS: Post[] = [
     cat: "JavaScript",
     title: "[#JS] Symbol",
     excerpt: [
-      "항상 고유한 원시 타입 Symbol. 프로퍼티 키 충돌 방지, for...in에서 제외되는 비열거성, Symbol.for()로 전역 레지스트리에 등록하는 방법을 정리했다.",
+      "항상 고유한 원시 타입 Symbol — 프로퍼티 키 충돌 방지, 비열거성, Symbol.for() 전역 레지스트리.",
     ],
     tags: ["JavaScript", "Symbol", "원시 타입"],
     read: "3 min",
@@ -199,7 +199,7 @@ export const JAVASCRIPT_POSTS: Post[] = [
     cat: "JavaScript",
     title: "[#JS] Enhanced Object Literal",
     excerpt: [
-      "단축 프로퍼티, 메서드 단축 표현, 계산된 프로퍼티 이름 — ES6에서 객체 리터럴을 더 간결하게 만든 세 가지 문법을 정리했다.",
+      "단축 프로퍼티, 메서드 단축 표현, 계산된 프로퍼티 이름 — ES6 객체 리터럴을 간결하게 만든 세 가지 문법.",
     ],
     tags: ["JavaScript", "Object", "ES6"],
     read: "3 min",
@@ -211,7 +211,7 @@ export const JAVASCRIPT_POSTS: Post[] = [
     cat: "JavaScript",
     title: "[#JS] Spread, Rest Operator",
     excerpt: [
-      "같은 ... 문법인데 쓰이는 위치에 따라 펼치기(Spread)와 모으기(Rest)로 역할이 달라진다. 배열 복사, 함수 인자 전달, 객체 병합, 가변 인자 처리까지 정리했다.",
+      "같은 ... 문법이지만 위치에 따라 Spread와 Rest로 역할이 달라지는 원리와 배열·객체·함수 인자 활용 패턴.",
     ],
     tags: ["JavaScript", "Spread", "Rest", "ES6"],
     read: "3 min",
@@ -223,7 +223,7 @@ export const JAVASCRIPT_POSTS: Post[] = [
     cat: "JavaScript",
     title: "[#JS] Array Method",
     excerpt: [
-      "ES6에서 추가된 배열 메서드 정리. Array.from/of, find/findIndex, fill, copyWithin, some/every — 각 메서드의 동작 방식과 차이를 코드와 함께 정리했다.",
+      "Array.from/of, find/findIndex, fill, copyWithin, some/every — ES6 신규 배열 메서드 정리.",
     ],
     tags: ["JavaScript", "Array", "ES6"],
     read: "4 min",
@@ -235,7 +235,7 @@ export const JAVASCRIPT_POSTS: Post[] = [
     cat: "JavaScript",
     title: "[#JS] Loop",
     excerpt: [
-      "for, forEach, for...of, for...in 네 가지 반복문의 차이. for...of는 이터러블을 순회하고, for...in은 프로토타입 체인까지 포함한다는 점에 주의해야 한다.",
+      "for, forEach, for...of, for...in의 차이 — for...in은 프로토타입 체인까지 포함한다는 점에 주의해야 한다.",
     ],
     tags: ["JavaScript", "Loop", "Iterable"],
     read: "3 min",
@@ -247,7 +247,7 @@ export const JAVASCRIPT_POSTS: Post[] = [
     cat: "JavaScript",
     title: "[#JS] Destructuring",
     excerpt: [
-      "객체와 배열의 구조 분해 할당 문법. 이름 변경, 기본값, 중첩 구조 분해, Rest 연산자 조합까지 — 함수 매개변수에서 활용하는 패턴도 함께 정리했다.",
+      "객체와 배열의 구조 분해 할당 — 이름 변경, 기본값, 중첩 구조 분해, Rest 연산자 조합까지.",
     ],
     tags: ["JavaScript", "Destructuring", "ES6"],
     read: "4 min",
@@ -259,7 +259,7 @@ export const JAVASCRIPT_POSTS: Post[] = [
     cat: "JavaScript",
     title: "[#JS] String Method",
     excerpt: [
-      "indexOf, slice, substring, includes, startsWith, replace, split 등 자주 쓰는 문자열 메서드 정리. 문자열 메서드는 원본을 변경하지 않는다는 점이 핵심이다.",
+      "indexOf, slice, includes, startsWith, replace, split 등 자주 쓰는 문자열 메서드 — 원본을 변경하지 않는다.",
     ],
     tags: ["JavaScript", "String", "메서드"],
     read: "4 min",
@@ -271,7 +271,7 @@ export const JAVASCRIPT_POSTS: Post[] = [
     cat: "JavaScript",
     title: "[#JS] Template Literal",
     excerpt: [
-      "백틱 문법으로 문자열 삽입, 멀티라인, 표현식 삽입을 간결하게 처리하는 방법. Tagged Template으로 styled-components 같은 라이브러리가 구현되는 원리까지 정리했다.",
+      "백틱으로 문자열 삽입·멀티라인을 처리하는 방법과 Tagged Template으로 styled-components가 구현되는 원리.",
     ],
     tags: ["JavaScript", "Template Literal", "ES6"],
     read: "3 min",
@@ -283,7 +283,7 @@ export const JAVASCRIPT_POSTS: Post[] = [
     cat: "JavaScript",
     title: "[#JS] Default Function Parameter",
     excerpt: [
-      "ES6에서 추가된 기본 매개변수 문법. 기본값이 있는 매개변수는 반드시 뒤에 와야 하는 규칙과 arguments 객체로 가변 인자를 처리하는 방법을 정리했다.",
+      "ES6 기본 매개변수 문법 — 기본값이 있는 매개변수는 반드시 뒤에 와야 하는 규칙과 가변 인자 처리.",
     ],
     tags: ["JavaScript", "함수", "ES6"],
     read: "2 min",
@@ -295,7 +295,7 @@ export const JAVASCRIPT_POSTS: Post[] = [
     cat: "JavaScript",
     title: "[#JS] Arrow Function",
     excerpt: [
-      "화살표 함수의 암묵적 반환과 this 렉시컬 바인딩. 객체 메서드, 이벤트 리스너, 생성자 함수에서 쓰면 안 되는 이유와 arguments 객체 대신 rest 파라미터를 써야 하는 이유를 정리했다.",
+      "화살표 함수의 암묵적 반환과 this 렉시컬 바인딩 — 객체 메서드·이벤트 리스너·생성자 함수에서 쓰면 안 되는 이유.",
     ],
     tags: ["JavaScript", "화살표 함수", "this"],
     read: "4 min",
@@ -307,7 +307,7 @@ export const JAVASCRIPT_POSTS: Post[] = [
     cat: "JavaScript",
     title: "[#JS] var, const, let",
     excerpt: [
-      "var의 함수 스코프와 재선언 문제, let과 const의 블록 스코프와 TDZ. const 객체에서 내부 프로퍼티 변경이 가능한 이유와 Object.freeze()를 정리했다.",
+      "var의 함수 스코프와 재선언 문제, let·const의 블록 스코프와 TDZ, const 객체 내부 변경이 가능한 이유.",
     ],
     tags: ["JavaScript", "변수", "TDZ", "스코프"],
     read: "3 min",
@@ -319,7 +319,7 @@ export const JAVASCRIPT_POSTS: Post[] = [
     cat: "JavaScript",
     title: "[#JS] Logical Operations",
     excerpt: [
-      "Boolean 타입과 논리 연산자, == vs === 차이, 삼항 연산자, 단락 평가(short-circuit evaluation)로 null 체크와 기본값을 간결하게 처리하는 방법을 정리했다.",
+      "Boolean 타입, 논리 연산자, == vs ===, 단락 평가(short-circuit evaluation)로 null 체크와 기본값을 처리하는 방법.",
     ],
     tags: ["JavaScript", "Boolean", "논리 연산"],
     read: "3 min",
@@ -331,7 +331,7 @@ export const JAVASCRIPT_POSTS: Post[] = [
     cat: "JavaScript",
     title: "[#JS] Variables and Data Types",
     excerpt: [
-      "let과 const의 차이, 원시 타입과 참조 타입의 메모리 구조 차이. JS 7가지 원시 타입 정리와 원시값이 불변인 이유 — TypeScript가 나온 배경이기도 하다.",
+      "let·const의 차이, 원시 타입과 참조 타입의 메모리 구조, JS 7가지 원시 타입과 원시값이 불변인 이유.",
     ],
     tags: ["JavaScript", "변수", "원시 타입"],
     read: "3 min",

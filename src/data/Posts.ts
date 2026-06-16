@@ -46,7 +46,7 @@ export const FEATURED_POST: Post = {
   read: "10 min",
   title: "GEM에 리소스 권한 체계를 도입한 이야기 (1편) — 왜 기존 시스템으로는 안 됐는가",
   excerpt: [
-    "외부 관리자 요구사항 하나로 RBAC의 한계가 드러났다. 역할 기반으로는 표현 자체가 불가능한 케이스에서, CASL + Level 추상화로 리소스 단위 권한 체계를 설계한 과정.",
+    "RBAC으로 표현 불가능한 요구사항에서 출발해 CASL + Level 추상화로 리소스 단위 권한 체계를 설계한 과정.",
   ],
   tags: ["CASL", "ABAC", "NestJS", "권한", "아키텍처"],
   href: "/posts/gem-abac-nestjs-1",

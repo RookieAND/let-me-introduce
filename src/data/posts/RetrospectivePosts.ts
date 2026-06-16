@@ -7,7 +7,7 @@ export const RETROSPECTIVE_POSTS: Post[] = [
     cat: "Retrospective",
     title: "2025년 상반기 회고록",
     excerpt: [
-      "처음으로 팀 리더를 맡고, 체중 16kg 감량, 스마일라식까지. 개발 외 삶의 여러 측면을 다루려 애썼던 2025년 상반기.",
+      "팀 리더 첫 경험, 체중 16kg 감량, 스마일라식까지 개발 밖 삶까지 담은 2025년 상반기 회고.",
     ],
     tags: ["회고", "2025", "성장", "리더십"],
     read: "18 min",
@@ -19,7 +19,7 @@ export const RETROSPECTIVE_POSTS: Post[] = [
     cat: "Retrospective",
     title: "테오의 컨퍼런스 3회차 MC 후기",
     excerpt: [
-      "400명 규모의 테오 컨퍼런스 3회차에서 처음으로 MC를 맡은 후기. 무대 뒤에서 진행을 이끌며 느낀 것들과, 행사 준비 과정에서 배운 점.",
+      "400명 규모 테오 컨퍼런스 3회차에서 처음으로 MC를 맡으며 무대 뒤에서 배운 것들.",
     ],
     tags: ["회고", "커뮤니티", "테오"],
     read: "8 min",
@@ -31,7 +31,7 @@ export const RETROSPECTIVE_POSTS: Post[] = [
     cat: "Retrospective",
     title: "2024년 상반기 회고록",
     excerpt: [
-      "goorm에서 보낸 첫 1년의 절반. 익힌 것들과 부족함을 솔직하게 정리한 2024년 상반기 회고. 모노레포 도입, 팀 스터디, 그리고 꾸준함에 대한 고민.",
+      "goorm 첫 1년의 절반 — 모노레포 도입, 팀 스터디, 꾸준함에 대한 고민을 솔직하게 정리했다.",
     ],
     tags: ["회고", "2024", "성장"],
     read: "14 min",
@@ -43,7 +43,7 @@ export const RETROSPECTIVE_POSTS: Post[] = [
     cat: "Retrospective",
     title: "마침내, 데브말싸미 프로젝트 릴리즈를 마치며",
     excerpt: [
-      "2전 3기 끝에 드디어 데브말싸미 사이드 프로젝트를 세상에 내놓았다. 팀 빌딩부터 배포까지, 좌충우돌 협업의 모든 과정을 담은 기록.",
+      "2전 3기 끝에 데브말싸미 사이드 프로젝트를 세상에 내놓기까지 팀 빌딩부터 배포까지 전 과정.",
     ],
     tags: ["회고", "사이드 프로젝트", "협업", "릴리즈"],
     read: "10 min",
@@ -55,7 +55,7 @@ export const RETROSPECTIVE_POSTS: Post[] = [
     cat: "Retrospective",
     title: "테오의 스프린트 17기 퍼실리테이터 후기",
     excerpt: [
-      "테오의 스프린트 17기 퍼실리테이터 경험기. 참여자에서 운영진으로 역할이 바뀌며 배운 협업과 공감의 방식.",
+      "참여자에서 운영진 퍼실리테이터로 역할이 바뀌며 배운 협업과 공감의 방식.",
     ],
     tags: ["회고", "커뮤니티", "테오"],
     read: "8 min",
@@ -67,7 +67,7 @@ export const RETROSPECTIVE_POSTS: Post[] = [
     cat: "Retrospective",
     title: "2024년 회고록",
     excerpt: [
-      "구름 1주년, 학사 졸업, Nexters 25기. 개발자 스크럼 67개 주제를 팀과 함께 나누고, 모노레포를 도입하고, 꾸준함의 부재를 반성하면서도 성장한 흔적을 되돌아본 2024년 연간 회고.",
+      "구름 1주년, 학사 졸업, Nexters 25기 — 모노레포 도입과 꾸준함의 부재를 반성하며 성장을 되돌아본 2024년 회고.",
     ],
     tags: ["회고", "2024", "성장"],
     read: "16 min",
@@ -79,7 +79,7 @@ export const RETROSPECTIVE_POSTS: Post[] = [
     cat: "Retrospective",
     title: "2023년 회고록",
     excerpt: [
-      "Nexters 24기 활동, 데브말싸미 사이드 프로젝트, goorm 입사. 개발자로 본격적으로 자리를 잡아가던 2023년을 돌아본 기록.",
+      "Nexters 24기 활동, 데브말싸미 프로젝트, goorm 입사 — 개발자로 자리 잡아가던 2023년 회고.",
     ],
     tags: ["회고", "2023", "성장"],
     read: "16 min",
@@ -91,7 +91,7 @@ export const RETROSPECTIVE_POSTS: Post[] = [
     cat: "Retrospective",
     title: "Nexters 24기 FE 합격 후기",
     excerpt: [
-      "IT 창업 동아리 Nexters 24기 FE 합격 후기. 포트폴리오 준비부터 면접까지 거친 과정과 합격 후 느낀 기대감.",
+      "IT 창업 동아리 Nexters 24기 FE 합격까지 포트폴리오 준비부터 면접 과정.",
     ],
     tags: ["회고", "Nexters", "동아리"],
     read: "8 min",
@@ -103,7 +103,7 @@ export const RETROSPECTIVE_POSTS: Post[] = [
     cat: "Retrospective",
     title: "2023년 상반기 회고록",
     excerpt: [
-      "ICT 학점연계 인턴십, 첫 사이드 프로젝트 경험, 성장에 대한 갈망. 개발자로서 첫 반년을 정리한 2023년 상반기 회고.",
+      "ICT 학점연계 인턴십, 첫 사이드 프로젝트, 성장에 대한 갈망 — 개발자로서 첫 반년 회고.",
     ],
     tags: ["회고", "2023", "성장"],
     read: "12 min",
@@ -115,7 +115,7 @@ export const RETROSPECTIVE_POSTS: Post[] = [
     cat: "Retrospective",
     title: "입사한 지 4개월이 지난 지금",
     excerpt: [
-      "ICT 학점연계 인턴십 4개월째, 6월 30일 종료를 앞두고 회사에서 무엇을 배웠고 무엇이 부족했는지 되짚은 글.",
+      "ICT 학점연계 인턴십 4개월째, 종료를 앞두고 회사에서 배운 것과 부족함을 되짚은 글.",
     ],
     tags: ["회고", "인턴십", "성장"],
     read: "8 min",
@@ -127,7 +127,7 @@ export const RETROSPECTIVE_POSTS: Post[] = [
     cat: "Retrospective",
     title: "테오의 스프린트 15기 후기",
     excerpt: [
-      "테오의 스프린트 15기 참여 후기. 낯선 사람들과 단기 프로젝트를 완성하며 협업과 방향성의 중요성을 다시 배운 과정.",
+      "낯선 사람들과 단기 프로젝트를 완성하며 협업과 방향성의 중요성을 다시 배운 테오의 스프린트 15기.",
     ],
     tags: ["회고", "커뮤니티", "테오"],
     read: "7 min",
@@ -139,7 +139,7 @@ export const RETROSPECTIVE_POSTS: Post[] = [
     cat: "Retrospective",
     title: "제 5회 KB 국민은행 소프트웨어 경진대회",
     excerpt: [
-      "제 5회 KB 국민은행 소프트웨어 경진대회 참가 후기. 팀 프로젝트를 준비하며 겪은 시행착오와 아쉬웠던 결과, 그리고 다음 도전의 다짐.",
+      "KB 국민은행 소프트웨어 경진대회 — 팀 프로젝트 시행착오와 아쉬운 결과, 다음 도전의 다짐.",
     ],
     tags: ["회고", "대회", "프로젝트"],
     read: "6 min",
@@ -151,7 +151,7 @@ export const RETROSPECTIVE_POSTS: Post[] = [
     cat: "Retrospective",
     title: "테오의 스프린트 14기 후기",
     excerpt: [
-      "처음 참여한 테오의 스프린트 14기 후기. 48시간 안에 아이디어를 프로덕트로 만드는 경험과 팀원들에게서 받은 자극.",
+      "48시간 안에 아이디어를 프로덕트로 만드는 경험 — 처음 참여한 테오의 스프린트 14기 후기.",
     ],
     tags: ["회고", "커뮤니티", "테오"],
     read: "7 min",
@@ -163,7 +163,7 @@ export const RETROSPECTIVE_POSTS: Post[] = [
     cat: "Retrospective",
     title: "2023 상반기 ICT 학점연계 인턴십 합격 후기",
     excerpt: [
-      "2023 상반기 ICT 학점연계 인턴십 합격 후기. 지원 동기부터 서류와 면접 준비 과정, 그리고 최종 합격까지.",
+      "2023 상반기 ICT 학점연계 인턴십 지원 동기부터 서류·면접 준비, 최종 합격까지.",
     ],
     tags: ["회고", "인턴십", "ICT"],
     read: "7 min",
@@ -175,7 +175,7 @@ export const RETROSPECTIVE_POSTS: Post[] = [
     cat: "Retrospective",
     title: "입사한 후 2주가 지난 지금",
     excerpt: [
-      "goorm 입사 2주 후 느낀 첫 인상과 적응기. 실무와 학교 공부의 차이, 코드 리뷰를 처음 받으며 느낀 것들을 정리했다.",
+      "goorm 입사 2주 후 첫 인상 — 실무와 학교 공부의 차이, 첫 코드 리뷰를 받으며 느낀 것들.",
     ],
     tags: ["회고", "인턴십", "성장"],
     read: "6 min",
@@ -187,7 +187,7 @@ export const RETROSPECTIVE_POSTS: Post[] = [
     cat: "Retrospective",
     title: "2022년 회고록",
     excerpt: [
-      "프론트엔드 개발을 시작하고 첫 해를 마치며 정리한 기록. 스터디, 프로젝트, KB 공모전, 그리고 앞으로의 방향.",
+      "프론트엔드 개발 첫 해를 마치며 — 스터디, 프로젝트, KB 공모전, 그리고 앞으로의 방향.",
     ],
     tags: ["회고", "2022", "성장"],
     read: "12 min",

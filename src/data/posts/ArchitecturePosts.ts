@@ -7,7 +7,7 @@ export const ARCHITECTURE_POSTS: Post[] = [
     cat: "Architecture",
     title: "GEM에 리소스 권한 체계를 도입한 이야기 (2편) — 1차·2차 검증을 나눈 이유",
     excerpt: [
-      "Guard 시점에는 리소스 객체가 없어서 검증을 두 단계로 나눴다. expandLevelToRules·AbilityBuildService·AbilityClsService·Guard·CheckService 구현까지.",
+      "Guard 시점에 리소스 객체가 없어 검증을 두 단계로 나눈 이유와 AbilityBuildService·Guard·CheckService 구현.",
     ],
     tags: ["CASL", "NestJS", "Guard", "권한"],
     read: "10 min",
@@ -19,7 +19,7 @@ export const ARCHITECTURE_POSTS: Post[] = [
     cat: "Architecture",
     title: "GEM에 리소스 권한 체계를 도입한 이야기 (3편) — 기존 시스템을 안전하게 전환하기",
     excerpt: [
-      "설계는 끝났다, 이제 운영 중인 시스템을 바꿔야 한다. CQRS 자동 권한 부여, SpaceUser 마이그레이션, 40개 테스트, 그리고 솔직한 회고.",
+      "설계 이후 운영 중인 시스템을 전환한 과정 — CQRS 자동 권한, SpaceUser 마이그레이션, 40개 테스트, 회고.",
     ],
     tags: ["CASL", "NestJS", "마이그레이션", "테스트"],
     read: "12 min",
@@ -31,7 +31,7 @@ export const ARCHITECTURE_POSTS: Post[] = [
     cat: "Architecture",
     title: "CASL 라이브러리 — TypeScript 권한 관리",
     excerpt: [
-      "Ability, can/cannot, subject(), Condition 기반 평가, Allow/Deny 규칙 병합까지. CASL의 핵심 개념과 TypeScript 통합, NestJS 사용 패턴을 정리했다.",
+      "Ability, can/cannot, Condition 기반 평가, Allow/Deny 규칙 병합까지 CASL 핵심 개념과 NestJS 패턴 정리.",
     ],
     tags: ["CASL", "TypeScript", "NestJS", "권한"],
     read: "7 min",
@@ -43,7 +43,7 @@ export const ARCHITECTURE_POSTS: Post[] = [
     cat: "Architecture",
     title: "CASL 타입 시스템과 두 단계 권한 체크",
     excerpt: [
-      "CASL/ABAC 포스트에서 미뤘던 두 가지. InferSubjects·MongoAbility·ForcedSubject가 타입 시스템에서 하는 역할과, Route Guard와 Service 두 단계에서 모두 권한을 검사해야 하는 이유를 정리했다.",
+      "InferSubjects·MongoAbility·ForcedSubject가 타입 시스템에서 하는 역할과 Route Guard·Service 두 단계 권한 검사 이유.",
     ],
     tags: ["CASL", "TypeScript", "NestJS", "권한"],
     read: "8 min",
@@ -55,7 +55,7 @@ export const ARCHITECTURE_POSTS: Post[] = [
     cat: "Architecture",
     title: "PlopJS 기반으로 Code Generator 제작하기",
     excerpt: [
-      "모노레포에서 패키지·MongoDB Collection 생성 시 반복되는 코드를 자동화하기 위해 PlopJS로 Code Generator를 만들었다. hygen과의 비교, Custom Action 구현, TypeScript 세팅까지 정리했다.",
+      "반복되는 모노레포 코드 생성을 PlopJS로 자동화한 과정 — hygen과의 비교, Custom Action, TypeScript 세팅.",
     ],
     tags: ["PlopJS", "DX", "코드 자동화"],
     read: "10 min",
@@ -67,7 +67,7 @@ export const ARCHITECTURE_POSTS: Post[] = [
     cat: "Architecture",
     title: "HTTP Cookie 와 SameSite 정책에 대해서",
     excerpt: [
-      "Set-Cookie 속성과 SameSite 정책(None·Strict·Lax)을 실제 사이드 프로젝트에서 겪은 CSRF 문제와 함께 정리했다. 서드 파티 쿠키가 차단되는 흐름도 설명한다.",
+      "Set-Cookie 속성과 SameSite 정책(None·Strict·Lax)을 실제 CSRF 문제와 함께 정리했다.",
     ],
     tags: ["HTTP", "Cookie", "SameSite", "CSRF"],
     read: "8 min",
@@ -79,7 +79,7 @@ export const ARCHITECTURE_POSTS: Post[] = [
     cat: "Architecture",
     title: "이번에야말로 CORS를 좀 확실하게 알아보자",
     excerpt: [
-      "Origin 개념부터 Preflight·Simple Request·Credentialed Request 세 시나리오까지, CORS가 작동하는 원리와 브라우저에서만 체크되는 이유를 설명했다.",
+      "Origin 개념부터 Preflight·Simple·Credentialed Request 세 시나리오까지 CORS 작동 원리와 브라우저 한정 이유.",
     ],
     tags: ["CORS", "HTTP", "보안"],
     read: "10 min",
@@ -91,7 +91,7 @@ export const ARCHITECTURE_POSTS: Post[] = [
     cat: "Architecture",
     title: "Glob Pattern을 완벽하게 정리해보자",
     excerpt: [
-      "*.js·**/*.ts·{a,b}·[!abc] 같은 Glob 패턴의 와일드카드와 대괄호 문법을 실제 파일 매칭 예시와 함께 완벽하게 정리했다.",
+      "*.js·**/*.ts·{a,b}·[!abc] 등 Glob 패턴의 와일드카드와 대괄호 문법을 예시와 함께 정리했다.",
     ],
     tags: ["Glob", "파일 시스템", "CLI"],
     read: "6 min",
@@ -103,7 +103,7 @@ export const ARCHITECTURE_POSTS: Post[] = [
     cat: "Architecture",
     title: "TDD 는 무엇이며 대체 왜 도입하는 걸까?",
     excerpt: [
-      "TDD가 무엇인지, Red-Green 사이클이 왜 중요한지, Unit Test·Integration Test·Functional Test·E2E Test의 차이와 BDD와의 관계를 정리했다.",
+      "Red-Green 사이클의 의미, Unit·Integration·Functional·E2E Test의 차이, BDD와의 관계.",
     ],
     tags: ["TDD", "테스트", "BDD"],
     read: "10 min",
@@ -115,7 +115,7 @@ export const ARCHITECTURE_POSTS: Post[] = [
     cat: "Architecture",
     title: "Jest 직접 Functional Test Code를 작성해보자",
     excerpt: [
-      "버튼 색상 토글 기능을 예시로 TDD 사이클을 직접 따라가며 React Testing Library로 Functional Test Code를 작성하는 과정을 기록했다.",
+      "버튼 색상 토글을 예시로 TDD 사이클을 따라가며 React Testing Library로 Functional Test를 작성한 과정.",
     ],
     tags: ["Jest", "Testing Library", "TDD"],
     read: "7 min",
@@ -127,7 +127,7 @@ export const ARCHITECTURE_POSTS: Post[] = [
     cat: "Architecture",
     title: "Web Server 와 Web Application Server 간의 차이",
     excerpt: [
-      "웹 서버와 WAS의 역할 분리, CGI의 한계, fail over·fail back으로 무중단 운영을 구현하는 이유까지. 왜 둘을 함께 써야 하는지 구조적으로 정리했다.",
+      "웹 서버와 WAS의 역할 분리, CGI의 한계, fail over·fail back으로 무중단 운영을 구현하는 이유.",
     ],
     tags: ["Web", "WAS", "Nginx", "아키텍처"],
     read: "6 min",
@@ -139,7 +139,7 @@ export const ARCHITECTURE_POSTS: Post[] = [
     cat: "Architecture",
     title: "MIME type은 뭐고, Content-type은 뭔데?",
     excerpt: [
-      "Content-Type 헤더가 왜 필요한지, MIME Type의 구조와 대표적인 미디어 타입, Base64 인코딩과의 관계까지 정리했다.",
+      "Content-Type 헤더가 왜 필요한지, MIME Type 구조, 대표 미디어 타입, Base64 인코딩과의 관계.",
     ],
     tags: ["HTTP", "MIME", "Content-Type"],
     read: "6 min",
@@ -151,7 +151,7 @@ export const ARCHITECTURE_POSTS: Post[] = [
     cat: "Architecture",
     title: "Git Hook은 무엇이고, Husky는 왜 쓰는걸까?",
     excerpt: [
-      "Git Hook이 무엇인지, pre-commit·commit-msg 훅으로 코드 품질을 자동으로 지키는 방법, Husky와 lint-staged를 조합하는 설정까지 정리했다.",
+      "pre-commit·commit-msg 훅으로 코드 품질을 자동 지키는 방법과 Husky + lint-staged 설정.",
     ],
     tags: ["Git", "Husky", "lint-staged"],
     read: "7 min",
@@ -163,7 +163,7 @@ export const ARCHITECTURE_POSTS: Post[] = [
     cat: "Architecture",
     title: "ESLint, Prettier를 왜 써야 할까?",
     excerpt: [
-      "ESLint의 정적 분석 원리(AST 기반), Prettier와의 역할 분리, 두 도구를 함께 쓸 때 충돌을 피하는 설정 방법을 정리했다.",
+      "ESLint의 AST 기반 정적 분석 원리, Prettier와의 역할 분리, 충돌을 피하는 설정.",
     ],
     tags: ["ESLint", "Prettier", "DX"],
     read: "7 min",
