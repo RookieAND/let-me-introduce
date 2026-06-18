@@ -25,15 +25,16 @@ const MAX_QUARTER_COUNT = Math.max(...QUARTER_DATA.map((d) => d.count));
 function PostsChart() {
   return (
     <div
-      className="absolute inset-0 flex items-end gap-0.75 px-1 opacity-[0.1] pointer-events-none"
+      className="absolute inset-0 flex gap-0.75 px-1 opacity-[0.1] pointer-events-none"
       aria-hidden={true}
     >
       {QUARTER_DATA.map(({ key, count }) => (
-        <div
-          key={key}
-          className="flex-1 min-w-0 bg-accent rounded-t-xs"
-          style={{ height: `${(count / MAX_QUARTER_COUNT) * 88}%` }}
-        />
+        <div key={key} className="flex-1 min-w-0 flex flex-col justify-end">
+          <div
+            className="w-full bg-accent rounded-t-xs"
+            style={{ height: `${(count / MAX_QUARTER_COUNT) * 88}%` }}
+          />
+        </div>
       ))}
     </div>
   );
