@@ -3,7 +3,7 @@ import type { Post } from "#/data/Posts";
 export const INFRA_POSTS: Post[] = [
   {
     slug: "valkey-hash-key-expiration",
-    date: "2026-06-16",
+    date: "2026-02-20",
     cat: "DB / Infra",
     title: "Valkey Hash Key Expiration — 필드 단위 TTL 설정",
     excerpt: [
@@ -27,7 +27,7 @@ export const INFRA_POSTS: Post[] = [
   },
   {
     slug: "docker-kubernetes-ch2",
-    date: "2026-06-01",
+    date: "2026-06-08",
     cat: "DB / Infra",
     title: "도커 엔진 — 이미지·컨테이너·볼륨·네트워크 완전 정리",
     excerpt: [
@@ -63,7 +63,7 @@ export const INFRA_POSTS: Post[] = [
   },
   {
     slug: "nestjs-docker-image-optimization",
-    date: "2024-06-01",
+    date: "2024-06-17",
     cat: "DB / Infra",
     title: "내겐 너무나 컸던 NestJS Docker Image, 이젠 좀 줄여보자",
     excerpt: [
@@ -75,7 +75,7 @@ export const INFRA_POSTS: Post[] = [
   },
   {
     slug: "github-actions-docker-deploy",
-    date: "2024-06-01",
+    date: "2024-06-10",
     cat: "DB / Infra",
     title: "Github Actions으로 Docker 배포 오답노트",
     excerpt: [
@@ -99,7 +99,7 @@ export const INFRA_POSTS: Post[] = [
   },
   {
     slug: "mongoose-connection-internals",
-    date: "2023-06-01",
+    date: "2023-06-17",
     cat: "DB / Infra",
     title: "Mongoose Connection 내부 동작 — 싱글톤, Default Connection, Hot Reload 메모리 누수",
     excerpt: [
@@ -111,7 +111,7 @@ export const INFRA_POSTS: Post[] = [
   },
   {
     slug: "web-server-vs-was",
-    date: "2023-01-01",
+    date: "2023-01-11",
     cat: "DB / Infra",
     title: "Web Server 와 Web Application Server 간의 차이",
     excerpt: [

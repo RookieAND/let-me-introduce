@@ -3,7 +3,7 @@ import type { Post } from "#/data/Posts";
 export const RETROSPECTIVE_POSTS: Post[] = [
   {
     slug: "retrospective-2025-1h",
-    date: "2025-07-01",
+    date: "2025-07-15",
     cat: "Retrospective",
     title: "2025년 상반기 회고록",
     excerpt: [
@@ -15,7 +15,7 @@ export const RETROSPECTIVE_POSTS: Post[] = [
   },
   {
     slug: "retrospective-2024",
-    date: "2025-01-01",
+    date: "2025-01-03",
     cat: "Retrospective",
     title: "2024년 회고록",
     excerpt: [
@@ -27,7 +27,7 @@ export const RETROSPECTIVE_POSTS: Post[] = [
   },
   {
     slug: "theo-conference-3rd",
-    date: "2024-11-01",
+    date: "2024-11-26",
     cat: "Retrospective",
     title: "테오의 컨퍼런스 3회차 MC 후기",
     excerpt: ["400명 규모 테오 컨퍼런스 3회차에서 처음으로 MC를 맡으며 무대 뒤에서 배운 것들."],
@@ -37,7 +37,7 @@ export const RETROSPECTIVE_POSTS: Post[] = [
   },
   {
     slug: "retrospective-2024-1h",
-    date: "2024-06-01",
+    date: "2024-06-30",
     cat: "Retrospective",
     title: "2024년 상반기 회고록",
     excerpt: [
@@ -49,7 +49,7 @@ export const RETROSPECTIVE_POSTS: Post[] = [
   },
   {
     slug: "devmalsami-release",
-    date: "2024-06-01",
+    date: "2024-06-22",
     cat: "Retrospective",
     title: "마침내, 데브말싸미 프로젝트 릴리즈를 마치며",
     excerpt: [
@@ -61,7 +61,7 @@ export const RETROSPECTIVE_POSTS: Post[] = [
   },
   {
     slug: "theo-sprint-17th",
-    date: "2024-04-01",
+    date: "2024-04-10",
     cat: "Retrospective",
     title: "테오의 스프린트 17기 퍼실리테이터 후기",
     excerpt: ["참여자에서 운영진 퍼실리테이터로 역할이 바뀌며 배운 협업과 공감의 방식."],
@@ -71,7 +71,7 @@ export const RETROSPECTIVE_POSTS: Post[] = [
   },
   {
     slug: "retrospective-2023",
-    date: "2024-01-01",
+    date: "2024-01-14",
     cat: "Retrospective",
     title: "2023년 회고록",
     excerpt: [
@@ -83,7 +83,7 @@ export const RETROSPECTIVE_POSTS: Post[] = [
   },
   {
     slug: "nexters-24th",
-    date: "2023-07-01",
+    date: "2023-12-10",
     cat: "Retrospective",
     title: "Nexters 24기 FE 합격 후기",
     excerpt: ["IT 창업 동아리 Nexters 24기 FE 합격까지 포트폴리오 준비부터 면접 과정."],
@@ -93,7 +93,7 @@ export const RETROSPECTIVE_POSTS: Post[] = [
   },
   {
     slug: "retrospective-2023-1h",
-    date: "2023-07-01",
+    date: "2023-07-09",
     cat: "Retrospective",
     title: "2023년 상반기 회고록",
     excerpt: [
@@ -105,7 +105,7 @@ export const RETROSPECTIVE_POSTS: Post[] = [
   },
   {
     slug: "joining-company-4months",
-    date: "2023-06-01",
+    date: "2023-06-29",
     cat: "Retrospective",
     title: "입사한 지 4개월이 지난 지금",
     excerpt: ["ICT 학점연계 인턴십 4개월째, 종료를 앞두고 회사에서 배운 것과 부족함을 되짚은 글."],
@@ -115,7 +115,7 @@ export const RETROSPECTIVE_POSTS: Post[] = [
   },
   {
     slug: "theo-sprint-15th",
-    date: "2023-04-01",
+    date: "2023-06-29",
     cat: "Retrospective",
     title: "테오의 스프린트 15기 후기",
     excerpt: [
@@ -127,7 +127,7 @@ export const RETROSPECTIVE_POSTS: Post[] = [
   },
   {
     slug: "kb-software-competition",
-    date: "2023-03-01",
+    date: "2023-02-14",
     cat: "Retrospective",
     title: "제 5회 KB 국민은행 소프트웨어 경진대회",
     excerpt: [
@@ -139,7 +139,7 @@ export const RETROSPECTIVE_POSTS: Post[] = [
   },
   {
     slug: "theo-sprint-14th",
-    date: "2023-03-01",
+    date: "2023-03-04",
     cat: "Retrospective",
     title: "테오의 스프린트 14기 후기",
     excerpt: [
@@ -151,7 +151,7 @@ export const RETROSPECTIVE_POSTS: Post[] = [
   },
   {
     slug: "ict-internship-2023",
-    date: "2023-03-01",
+    date: "2023-02-17",
     cat: "Retrospective",
     title: "2023 상반기 ICT 학점연계 인턴십 합격 후기",
     excerpt: ["2023 상반기 ICT 학점연계 인턴십 지원 동기부터 서류·면접 준비, 최종 합격까지."],
@@ -161,7 +161,7 @@ export const RETROSPECTIVE_POSTS: Post[] = [
   },
   {
     slug: "joining-company-2weeks",
-    date: "2023-03-01",
+    date: "2023-03-19",
     cat: "Retrospective",
     title: "입사한 후 2주가 지난 지금",
     excerpt: [

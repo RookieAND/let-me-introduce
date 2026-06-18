@@ -3,7 +3,7 @@ import type { Post } from "#/data/Posts";
 export const ARCHITECTURE_POSTS: Post[] = [
   {
     slug: "gem-abac-nestjs-2",
-    date: "2026-06-01",
+    date: "2026-04-17",
     cat: "Architecture",
     title: "GEM에 리소스 권한 체계를 도입한 이야기 (2편) — 1차·2차 검증을 나눈 이유",
     excerpt: [
@@ -15,7 +15,7 @@ export const ARCHITECTURE_POSTS: Post[] = [
   },
   {
     slug: "gem-abac-nestjs-3",
-    date: "2026-06-01",
+    date: "2026-04-21",
     cat: "Architecture",
     title: "GEM에 리소스 권한 체계를 도입한 이야기 (3편) — 기존 시스템을 안전하게 전환하기",
     excerpt: [
@@ -27,7 +27,7 @@ export const ARCHITECTURE_POSTS: Post[] = [
   },
   {
     slug: "casl-library-intro",
-    date: "2026-06-01",
+    date: "2026-04-01",
     cat: "Architecture",
     title: "CASL 라이브러리 — TypeScript 권한 관리",
     excerpt: [
@@ -39,7 +39,7 @@ export const ARCHITECTURE_POSTS: Post[] = [
   },
   {
     slug: "casl-typescript-deep-dive",
-    date: "2026-02-01",
+    date: "2026-04-01",
     cat: "Architecture",
     title: "CASL 타입 시스템과 두 단계 권한 체크",
     excerpt: [
@@ -51,7 +51,7 @@ export const ARCHITECTURE_POSTS: Post[] = [
   },
   {
     slug: "frontend-test-thoughts",
-    date: "2025-10-01",
+    date: "2024-12-11",
     cat: "Architecture",
     title: "프론트엔드 테스트 코드에 대한 고찰",
     excerpt: [
@@ -63,7 +63,7 @@ export const ARCHITECTURE_POSTS: Post[] = [
   },
   {
     slug: "http-cookie-samesite",
-    date: "2023-05-01",
+    date: "2023-05-11",
     cat: "Architecture",
     title: "HTTP Cookie 와 SameSite 정책에 대해서",
     excerpt: ["Set-Cookie 속성과 SameSite 정책(None·Strict·Lax)을 실제 CSRF 문제와 함께 정리했다."],
@@ -73,7 +73,7 @@ export const ARCHITECTURE_POSTS: Post[] = [
   },
   {
     slug: "cors-deep-dive",
-    date: "2023-05-01",
+    date: "2023-05-09",
     cat: "Architecture",
     title: "이번에야말로 CORS를 좀 확실하게 알아보자",
     excerpt: [
@@ -85,7 +85,7 @@ export const ARCHITECTURE_POSTS: Post[] = [
   },
   {
     slug: "tdd-introduction",
-    date: "2023-01-01",
+    date: "2023-01-24",
     cat: "Architecture",
     title: "TDD 는 무엇이며 대체 왜 도입하는 걸까?",
     excerpt: [
@@ -97,7 +97,7 @@ export const ARCHITECTURE_POSTS: Post[] = [
   },
   {
     slug: "jest-functional-test",
-    date: "2023-01-01",
+    date: "2023-01-24",
     cat: "Architecture",
     title: "Jest 직접 Functional Test Code를 작성해보자",
     excerpt: [
@@ -109,7 +109,7 @@ export const ARCHITECTURE_POSTS: Post[] = [
   },
   {
     slug: "mime-content-type",
-    date: "2022-12-01",
+    date: "2022-12-27",
     cat: "Architecture",
     title: "MIME type은 뭐고, Content-type은 뭔데?",
     excerpt: [

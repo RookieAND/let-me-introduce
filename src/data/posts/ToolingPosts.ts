@@ -99,7 +99,7 @@ export const TOOLING_POSTS: Post[] = [
   },
   {
     slug: "pnpm-catalog",
-    date: "2024-12-01",
+    date: "2024-12-06",
     cat: "Tooling",
     title: "pnpm Catalog 로 버전 관리 쉽게 하기",
     excerpt: [
@@ -123,7 +123,7 @@ export const TOOLING_POSTS: Post[] = [
   },
   {
     slug: "hard-link-symbolic-link",
-    date: "2024-11-01",
+    date: "2024-11-12",
     cat: "Tooling",
     title: "Hard Link, Symbolic Link 에 대해 알아보자",
     excerpt: [
@@ -135,7 +135,7 @@ export const TOOLING_POSTS: Post[] = [
   },
   {
     slug: "turbo-prune-monorepo",
-    date: "2024-11-01",
+    date: "2024-11-06",
     cat: "Tooling",
     title: "Turbo prune 으로 모노레포 앱 빌드하기",
     excerpt: [
@@ -147,7 +147,7 @@ export const TOOLING_POSTS: Post[] = [
   },
   {
     slug: "how-bundler-works",
-    date: "2023-10-01",
+    date: "2023-10-10",
     cat: "Tooling",
     title: "번들러란 무엇이며, 어떻게 동작하는 걸까?",
     excerpt: [
@@ -159,7 +159,7 @@ export const TOOLING_POSTS: Post[] = [
   },
   {
     slug: "glob-pattern",
-    date: "2023-02-01",
+    date: "2023-02-19",
     cat: "Tooling",
     title: "Glob Pattern을 완벽하게 정리해보자",
     excerpt: [
@@ -171,7 +171,7 @@ export const TOOLING_POSTS: Post[] = [
   },
   {
     slug: "git-hook-husky",
-    date: "2022-12-01",
+    date: "2022-12-25",
     cat: "Tooling",
     title: "Git Hook은 무엇이고, Husky는 왜 쓰는걸까?",
     excerpt: [
@@ -183,7 +183,7 @@ export const TOOLING_POSTS: Post[] = [
   },
   {
     slug: "eslint-prettier",
-    date: "2022-12-01",
+    date: "2022-12-23",
     cat: "Tooling",
     title: "ESLint, Prettier를 왜 써야 할까?",
     excerpt: ["ESLint의 AST 기반 정적 분석 원리, Prettier와의 역할 분리, 충돌을 피하는 설정."],

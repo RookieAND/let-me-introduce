@@ -44,7 +44,7 @@ export const CONTENT_LOADERS: Record<string, () => Promise<string>> = Object.fro
 export const FEATURED_POST: Post = {
   slug: "gem-abac-nestjs-1",
   cat: "Architecture",
-  date: "2026-06-01",
+  date: "2026-04-06",
   read: "10 min",
   title: "GEM에 리소스 권한 체계를 도입한 이야기 (1편) — 왜 기존 시스템으로는 안 됐는가",
   excerpt: [

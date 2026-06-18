@@ -3,7 +3,7 @@ import type { Post } from "#/data/Posts";
 export const TYPESCRIPT_POSTS: Post[] = [
   {
     slug: "typescript-module-resolution",
-    date: "2026-05-01",
+    date: "2026-05-26",
     cat: "TypeScript",
     title: "TypeScript Module Resolution 전략을 알아보자",
     excerpt: [
@@ -15,7 +15,7 @@ export const TYPESCRIPT_POSTS: Post[] = [
   },
   {
     slug: "typescript-union-contravariance",
-    date: "2026-03-01",
+    date: "2026-02-27",
     cat: "TypeScript",
     title: "유니온이 함수 인자에서 교차 타입으로 변했다",
     excerpt: [
@@ -27,7 +27,7 @@ export const TYPESCRIPT_POSTS: Post[] = [
   },
   {
     slug: "typescript-enum",
-    date: "2026-02-01",
+    date: "2026-02-24",
     cat: "TypeScript",
     title: "TypeScript Enum 을 알아보자",
     excerpt: [
@@ -39,7 +39,7 @@ export const TYPESCRIPT_POSTS: Post[] = [
   },
   {
     slug: "typescript-satisfies",
-    date: "2026-02-01",
+    date: "2026-01-07",
     cat: "TypeScript",
     title: "TypeScript satisfies 를 알아보자",
     excerpt: [
@@ -111,7 +111,7 @@ export const TYPESCRIPT_POSTS: Post[] = [
   },
   {
     slug: "effective-typescript-week-1",
-    date: "2023-02-07",
+    date: "2023-02-14",
     cat: "TypeScript",
     title: "이펙티브 타입스크립트 1주차 스터디",
     excerpt: [

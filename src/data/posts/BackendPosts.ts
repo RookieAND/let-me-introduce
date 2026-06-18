@@ -3,7 +3,7 @@ import type { Post } from "#/data/Posts";
 export const BACKEND_POSTS: Post[] = [
   {
     slug: "suites-nestjs-auto-mock-testing",
-    date: "2026-06-01",
+    date: "2026-01-12",
     cat: "Backend",
     title: "@suites로 NestJS 단위 테스트 작성하기 — Solitary·Sociable·Test Double",
     excerpt: [
@@ -15,7 +15,7 @@ export const BACKEND_POSTS: Post[] = [
   },
   {
     slug: "suites-nestjs-auto-mock",
-    date: "2026-06-01",
+    date: "2026-01-18",
     cat: "Backend",
     title: "@suites로 NestJS 단위 테스트 Auto-Mock 적용하기",
     excerpt: [
@@ -27,7 +27,7 @@ export const BACKEND_POSTS: Post[] = [
   },
   {
     slug: "tsjest-to-swcjest-migration",
-    date: "2026-06-01",
+    date: "2025-03-17",
     cat: "Backend",
     title: "ts-jest에서 @swc/jest로 — isolatedModules, 트레이드오프, V8 coverage",
     excerpt: [
@@ -39,7 +39,7 @@ export const BACKEND_POSTS: Post[] = [
   },
   {
     slug: "queue-delayed-job-bullmq-fix",
-    date: "2026-06-01",
+    date: "2024-06-19",
     cat: "Backend",
     title: "Queue 기반 지연 실행의 함정 — 자동 퇴장 유실 버그 해결기",
     excerpt: [

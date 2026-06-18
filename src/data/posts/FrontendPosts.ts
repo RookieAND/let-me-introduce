@@ -15,7 +15,7 @@ export const FRONTEND_POSTS: Post[] = [
   },
   {
     slug: "sse-react-event-registry",
-    date: "2026-03-01",
+    date: "2026-02-26",
     cat: "Frontend",
     title: "SSE in React, 유연하게 다루기",
     excerpt: [
@@ -27,7 +27,7 @@ export const FRONTEND_POSTS: Post[] = [
   },
   {
     slug: "react-display-name",
-    date: "2026-02-01",
+    date: "2024-09-25",
     cat: "Frontend",
     title: "React displayName 을 알아보자",
     excerpt: [
@@ -39,7 +39,7 @@ export const FRONTEND_POSTS: Post[] = [
   },
   {
     slug: "partial-pre-rendering",
-    date: "2026-01-01",
+    date: "2024-05-31",
     cat: "Frontend",
     title: "Partial Pre-rendering",
     excerpt: [
@@ -63,7 +63,7 @@ export const FRONTEND_POSTS: Post[] = [
   },
   {
     slug: "react-use-suspensed-query",
-    date: "2024-09-01",
+    date: "2023-10-12",
     cat: "Frontend",
     title: "useSuspensedQuery 훅 제작일지",
     excerpt: [
@@ -75,7 +75,7 @@ export const FRONTEND_POSTS: Post[] = [
   },
   {
     slug: "react-query-mutation",
-    date: "2024-09-01",
+    date: "2023-05-11",
     cat: "Frontend",
     title: "React Query Mutation",
     excerpt: [
@@ -87,7 +87,7 @@ export const FRONTEND_POSTS: Post[] = [
   },
   {
     slug: "nextjs-image-optimization",
-    date: "2024-06-01",
+    date: "2023-10-06",
     cat: "Frontend",
     title: "next/Image 최적화 — 왜 느리고 어떻게 해결하나",
     excerpt: [
@@ -99,7 +99,7 @@ export const FRONTEND_POSTS: Post[] = [
   },
   {
     slug: "useeffect-after-paint",
-    date: "2024-03-01",
+    date: "2024-03-14",
     cat: "Frontend",
     title: "useEffect는 어떻게 Paint 이후에 정확히 실행될 수 있을까?",
     excerpt: [
@@ -111,7 +111,7 @@ export const FRONTEND_POSTS: Post[] = [
   },
   {
     slug: "zero-runtime-vanilla-extract",
-    date: "2024-03-01",
+    date: "2024-01-18",
     cat: "Frontend",
     title: "Zero Runtime CSS-in-JS (with Vanilla Extract)",
     excerpt: [
@@ -135,7 +135,7 @@ export const FRONTEND_POSTS: Post[] = [
   },
   {
     slug: "react-deep-dive-13-performance-tools",
-    date: "2024-02-11",
+    date: "2024-04-21",
     cat: "Frontend",
     title: "[#RDD] 웹 성능 측정 도구 — Lighthouse·PerformanceObserver·WebPageTest",
     excerpt: [
@@ -147,7 +147,7 @@ export const FRONTEND_POSTS: Post[] = [
   },
   {
     slug: "react-error-boundary",
-    date: "2024-02-01",
+    date: "2024-02-22",
     cat: "Frontend",
     title: "ErrorBoundary 의 구조를 파헤쳐보자",
     excerpt: [
@@ -159,7 +159,7 @@ export const FRONTEND_POSTS: Post[] = [
   },
   {
     slug: "edge-runtime-internals",
-    date: "2024-02-01",
+    date: "2023-09-06",
     cat: "Frontend",
     title: "Edge Runtime 내부 동작 분석",
     excerpt: [
@@ -171,7 +171,7 @@ export const FRONTEND_POSTS: Post[] = [
   },
   {
     slug: "custom-event-observer",
-    date: "2024-02-01",
+    date: "2024-02-04",
     cat: "Frontend",
     title: "CustomEvent로 Observer Pattern 구현하기",
     excerpt: [
@@ -183,7 +183,7 @@ export const FRONTEND_POSTS: Post[] = [
   },
   {
     slug: "react-deep-dive-12-core-web-vitals",
-    date: "2024-01-28",
+    date: "2024-04-21",
     cat: "Frontend",
     title: "[#RDD] Core Web Vitals — LCP·FID·CLS 측정 기준과 최적화 전략",
     excerpt: [
@@ -207,7 +207,7 @@ export const FRONTEND_POSTS: Post[] = [
   },
   {
     slug: "react-deep-dive-7-devtools",
-    date: "2023-12-24",
+    date: "2024-03-24",
     cat: "Frontend",
     title: "[#RDD] 크롬 개발자 도구로 성능 분석·메모리 누수 진단하기",
     excerpt: [
@@ -219,7 +219,7 @@ export const FRONTEND_POSTS: Post[] = [
   },
   {
     slug: "react-deep-dive-4-ssr-nextjs",
-    date: "2023-12-03",
+    date: "2024-03-31",
     cat: "Frontend",
     title: "[#RDD] React SSR 구현 원리와 Next.js Pages Router 활용",
     excerpt: [
@@ -231,7 +231,7 @@ export const FRONTEND_POSTS: Post[] = [
   },
   {
     slug: "react-deep-dive-3-hooks",
-    date: "2023-11-26",
+    date: "2024-03-17",
     cat: "Frontend",
     title: "[#RDD] 리액트 훅 완전 정복 — useState·useEffect부터 커스텀 훅까지",
     excerpt: [
@@ -243,7 +243,7 @@ export const FRONTEND_POSTS: Post[] = [
   },
   {
     slug: "react-deep-dive-2-2-lifecycle-memoization",
-    date: "2023-11-19",
+    date: "2024-03-10",
     cat: "Frontend",
     title: "[#RDD] 클래스 컴포넌트 생명주기와 렌더링 3단계, 메모이제이션 비용",
     excerpt: [
@@ -255,7 +255,7 @@ export const FRONTEND_POSTS: Post[] = [
   },
   {
     slug: "react-deep-dive-2-1-jsx-fiber",
-    date: "2023-11-12",
+    date: "2024-03-10",
     cat: "Frontend",
     title: "[#RDD] JSX 변환 원리와 Virtual DOM, React Fiber 아키텍처",
     excerpt: [
@@ -267,7 +267,7 @@ export const FRONTEND_POSTS: Post[] = [
   },
   {
     slug: "react-deep-dive-1-js-fundamentals",
-    date: "2023-11-05",
+    date: "2024-03-10",
     cat: "Frontend",
     title: "[#RDD] 리액트를 위한 JS 핵심 — Object.is·클로저·이벤트 루프",
     excerpt: [
@@ -291,7 +291,7 @@ export const FRONTEND_POSTS: Post[] = [
   },
   {
     slug: "react-key-props",
-    date: "2023-05-01",
+    date: "2023-08-08",
     cat: "Frontend",
     title: "React Key Props 를 제대로 이해해보자",
     excerpt: [
@@ -303,7 +303,7 @@ export const FRONTEND_POSTS: Post[] = [
   },
   {
     slug: "react-windowing",
-    date: "2023-05-01",
+    date: "2023-03-09",
     cat: "Frontend",
     title: "windowing 기법이란 무엇이고, 어떻게 최적화를 하는 걸까?",
     excerpt: [
@@ -315,7 +315,7 @@ export const FRONTEND_POSTS: Post[] = [
   },
   {
     slug: "react-state-usestate",
-    date: "2023-04-01",
+    date: "2023-02-12",
     cat: "Frontend",
     title: "React의 state, 그리고 useState에 대해 더 알고 싶어졌다",
     excerpt: [
@@ -327,7 +327,7 @@ export const FRONTEND_POSTS: Post[] = [
   },
   {
     slug: "react-18-auto-batching",
-    date: "2023-04-01",
+    date: "2023-02-12",
     cat: "Frontend",
     title: "React 18에서 추가된 Auto Batching 은 무엇인가?",
     excerpt: [
@@ -339,7 +339,7 @@ export const FRONTEND_POSTS: Post[] = [
   },
   {
     slug: "useeffect-vs-uselayouteffect",
-    date: "2023-02-01",
+    date: "2023-02-04",
     cat: "Frontend",
     title: "useEffect는 가끔 Paint 작업 이전에 실행된다고?",
     excerpt: [
@@ -351,7 +351,7 @@ export const FRONTEND_POSTS: Post[] = [
   },
   {
     slug: "react-rendering",
-    date: "2023-01-01",
+    date: "2023-01-29",
     cat: "Frontend",
     title: "React 에서 렌더링이란 대체 무엇일까?",
     excerpt: [
@@ -375,7 +375,7 @@ export const FRONTEND_POSTS: Post[] = [
   },
   {
     slug: "how-browser-works",
-    date: "2023-01-01",
+    date: "2023-01-22",
     cat: "Frontend",
     title: "브라우저는 어떻게 동작하는 걸까?",
     excerpt: [
@@ -387,7 +387,7 @@ export const FRONTEND_POSTS: Post[] = [
   },
   {
     slug: "server-state-react-query",
-    date: "2023-01-01",
+    date: "2023-01-22",
     cat: "Frontend",
     title: "Server State는 뭐고, React Query는 왜 쓰는가?",
     excerpt: [
@@ -399,7 +399,7 @@ export const FRONTEND_POSTS: Post[] = [
   },
   {
     slug: "csr-ssr-spa-mpa",
-    date: "2023-01-01",
+    date: "2023-01-05",
     cat: "Frontend",
     title: "CSR? SSR? SPA? MPA? 이것들은 뭘까?",
     excerpt: [
