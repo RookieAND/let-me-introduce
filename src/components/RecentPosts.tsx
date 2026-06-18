@@ -8,55 +8,22 @@ import { useCountAnimation } from "#/hooks/UseCountAnimation";
 
 const recent = [...ALL_POSTS].sort((a, b) => b.date.localeCompare(a.date)).slice(0, 3);
 
-const QUARTER_DATA = (() => {
-  const map = new Map<string, number>();
-  for (const post of ALL_POSTS) {
-    const [year, month] = post.date.split("-").map(Number);
-    const q = Math.ceil(month / 3);
-    map.set(`${year}-Q${q}`, (map.get(`${year}-Q${q}`) ?? 0) + 1);
-  }
-  return [...map.entries()]
-    .sort(([a], [b]) => a.localeCompare(b))
-    .map(([key, count]) => ({ key, count }));
-})();
-
-const MAX_QUARTER_COUNT = Math.max(...QUARTER_DATA.map((d) => d.count));
-
-function PostsChart() {
-  return (
-    <div
-      className="absolute bottom-0 left-0 right-0 h-full flex gap-0.75 px-1 opacity-[0.1] pointer-events-none"
-      aria-hidden={true}
-    >
-      {QUARTER_DATA.map(({ key, count }) => (
-        <div key={key} className="flex-1 min-w-0 flex flex-col justify-end">
-          <div
-            className="w-full bg-accent rounded-t-xs"
-            style={{ height: `${(count / MAX_QUARTER_COUNT) * 88}%` }}
-          />
-        </div>
-      ))}
-    </div>
-  );
-}
-
 function PostCount() {
   const { rounded, ref } = useCountAnimation(ALL_POSTS.length);
   return (
-    <div className="relative mt-8 mb-8 pt-8 border-y border-border flex justify-between items-center overflow-hidden min-h-18">
-      <PostsChart />
-      <div className="relative flex items-baseline gap-2.5 z-1">
+    <div className="mt-8 mb-8 pt-8 border-y border-border flex justify-between items-center min-h-18">
+      <div className="flex items-baseline gap-2.5">
         <motion.span
           ref={ref}
           className="font-display text-[clamp(38px,5vw,58px)] font-semibold tracking-[-0.03em] leading-none tabular-nums"
         >
           {rounded}
         </motion.span>
-        <span className="font-mono text-accent text-[clamp(13px,1.5vw,17px)] tracking-[0.1em] uppercase leading-none">
+        <span className="font-mono text-accent text-[clamp(13px,1.5vw,17px)] tracking-widest uppercase leading-none">
           posts
         </span>
       </div>
-      <span className="relative font-mono text-text-3 text-[11.5px] tracking-[0.06em] z-1">
+      <span className="font-mono text-text-3 text-[11.5px] tracking-[0.06em]">
         2022.12 — 현재
       </span>
     </div>
