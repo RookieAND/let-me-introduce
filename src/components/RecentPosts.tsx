@@ -42,7 +42,7 @@ function PostsChart() {
 function PostCount() {
   const { rounded, ref } = useCountAnimation(ALL_POSTS.length);
   return (
-    <div className="relative mt-8 mb-8 pt-8 border-t border-border flex justify-between items-center overflow-hidden min-h-18">
+    <div className="relative mt-8 mb-8 pt-8 pb-0 border-y border-border flex justify-between items-center overflow-hidden min-h-18">
       <PostsChart />
       <div className="relative flex items-baseline gap-2.5 z-1">
         <motion.span
