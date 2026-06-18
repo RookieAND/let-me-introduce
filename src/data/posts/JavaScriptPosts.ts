@@ -26,6 +26,18 @@ export const JAVASCRIPT_POSTS: Post[] = [
     href: "/posts/cjs-require-module-resolution",
   },
   {
+    slug: "typescript-indexed-access-type",
+    date: "2025-03-12",
+    cat: "JavaScript",
+    title: "Indexed Access Type 은 런타임에 존재하지 않는다",
+    excerpt: [
+      "DTO에서 Submission['version']을 쓰다 터진 400 에러 — emitDecoratorMetadata의 design:type 직렬화 규칙과 class-transformer 변환 실패 원인 분석.",
+    ],
+    tags: ["TypeScript", "NestJS", "class-transformer", "emitDecoratorMetadata", "Indexed Access Type"],
+    read: "13 min",
+    href: "/posts/typescript-indexed-access-type",
+  },
+  {
     slug: "promise-with-resolver",
     date: "2024-04-01",
     cat: "JavaScript",

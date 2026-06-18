@@ -16,7 +16,7 @@ export function PostsList() {
     const hay = [p.title, ...p.excerpt, ...p.tags, p.cat].join(" ").toLowerCase();
     const matchQ = !q || hay.includes(q);
     return matchCat && matchQ;
-  });
+  }).sort((a, b) => b.date.localeCompare(a.date));
 
   if (filtered.length === 0) {
     return (
