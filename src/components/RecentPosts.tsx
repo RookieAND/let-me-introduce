@@ -1,10 +1,24 @@
+import { motion } from "framer-motion";
 import { Link } from "react-router-dom";
 import { PostCard } from "#/components/posts/PostCard";
 import { Reveal } from "#/components/ui/reveal";
 import { Text } from "#/components/ui/text";
 import { ALL_POSTS } from "#/data/Posts";
+import { useCountAnimation } from "#/hooks/UseCountAnimation";
 
 const recent = [...ALL_POSTS].sort((a, b) => b.date.localeCompare(a.date)).slice(0, 3);
+
+function PostCount() {
+  const { rounded, ref } = useCountAnimation(ALL_POSTS.length);
+  return (
+    <span className="inline-flex items-baseline gap-0.5 font-mono text-accent self-center">
+      <motion.span ref={ref} className="text-[15px] font-semibold tabular-nums">
+        {rounded}
+      </motion.span>
+      <span className="text-[11px] opacity-60">posts</span>
+    </span>
+  );
+}
 
 export function RecentPosts() {
   return (
@@ -15,6 +29,7 @@ export function RecentPosts() {
             04
           </Text>
           <Text variant="heading4">My Study</Text>
+          <PostCount />
           <Text variant="caption" color="subtle" className="ml-auto max-[600px]:hidden">
             {"// 배운 것들을 꾸준히 기록해왔습니다"}
           </Text>

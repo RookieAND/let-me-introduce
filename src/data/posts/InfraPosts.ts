@@ -14,18 +14,6 @@ export const INFRA_POSTS: Post[] = [
     href: "/posts/valkey-hash-key-expiration",
   },
   {
-    slug: "mongoose-connection-internals",
-    date: "2023-06-01",
-    cat: "DB / Infra",
-    title: "Mongoose Connection 내부 동작 — 싱글톤, Default Connection, Hot Reload 메모리 누수",
-    excerpt: [
-      "require('mongoose')가 실행되는 순간 생성되는 빈 Connection, connect()와 createConnection()의 차이, Hot Reload 메모리 누수.",
-    ],
-    tags: ["Node.js", "Mongoose", "MongoDB", "메모리 누수"],
-    read: "8 min",
-    href: "/posts/mongoose-connection-internals",
-  },
-  {
     slug: "docker-kubernetes-ch1",
     date: "2026-06-01",
     cat: "DB / Infra",
@@ -84,5 +72,29 @@ export const INFRA_POSTS: Post[] = [
     tags: ["GitHub Actions", "Docker", "CI/CD"],
     read: "7 min",
     href: "/posts/github-actions-docker-deploy",
+  },
+  {
+    slug: "mongoose-connection-internals",
+    date: "2023-06-01",
+    cat: "DB / Infra",
+    title: "Mongoose Connection 내부 동작 — 싱글톤, Default Connection, Hot Reload 메모리 누수",
+    excerpt: [
+      "require('mongoose')가 실행되는 순간 생성되는 빈 Connection, connect()와 createConnection()의 차이, Hot Reload 메모리 누수.",
+    ],
+    tags: ["Node.js", "Mongoose", "MongoDB", "메모리 누수"],
+    read: "8 min",
+    href: "/posts/mongoose-connection-internals",
+  },
+  {
+    slug: "web-server-vs-was",
+    date: "2023-01-01",
+    cat: "DB / Infra",
+    title: "Web Server 와 Web Application Server 간의 차이",
+    excerpt: [
+      "웹 서버와 WAS의 역할 분리, CGI의 한계, fail over·fail back으로 무중단 운영을 구현하는 이유.",
+    ],
+    tags: ["Web", "WAS", "Nginx", "아키텍처"],
+    read: "6 min",
+    href: "/posts/web-server-vs-was",
   },
 ];

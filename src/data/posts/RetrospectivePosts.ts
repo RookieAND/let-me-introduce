@@ -14,6 +14,18 @@ export const RETROSPECTIVE_POSTS: Post[] = [
     href: "/posts/retrospective-2025-1h",
   },
   {
+    slug: "retrospective-2024",
+    date: "2025-01-01",
+    cat: "Retrospective",
+    title: "2024년 회고록",
+    excerpt: [
+      "구름 1주년, 학사 졸업, Nexters 25기 — 모노레포 도입과 꾸준함의 부재를 반성하며 성장을 되돌아본 2024년 회고.",
+    ],
+    tags: ["회고", "2024", "성장"],
+    read: "16 min",
+    href: "/posts/retrospective-2024",
+  },
+  {
     slug: "theo-conference-3rd",
     date: "2024-11-01",
     cat: "Retrospective",
@@ -60,18 +72,6 @@ export const RETROSPECTIVE_POSTS: Post[] = [
     tags: ["회고", "커뮤니티", "테오"],
     read: "8 min",
     href: "/posts/theo-sprint-17th",
-  },
-  {
-    slug: "retrospective-2024",
-    date: "2025-01-01",
-    cat: "Retrospective",
-    title: "2024년 회고록",
-    excerpt: [
-      "구름 1주년, 학사 졸업, Nexters 25기 — 모노레포 도입과 꾸준함의 부재를 반성하며 성장을 되돌아본 2024년 회고.",
-    ],
-    tags: ["회고", "2024", "성장"],
-    read: "16 min",
-    href: "/posts/retrospective-2024",
   },
   {
     slug: "retrospective-2023",
@@ -192,5 +192,17 @@ export const RETROSPECTIVE_POSTS: Post[] = [
     tags: ["회고", "2022", "성장"],
     read: "12 min",
     href: "/posts/retrospective-2022",
+  },
+  {
+    slug: "covidkorea-status-project",
+    date: "2022-07-06",
+    cat: "Retrospective",
+    title: "[#CovidKoreaStatus] 토이 프로젝트 안내",
+    excerpt: [
+      "React 학습 후 공공 API 기반 코로나 통계 사이트를 첫 토이 프로젝트로 만든 기록 — Chart.js·styled-components·Node.js Express 조합.",
+    ],
+    tags: ["React", "Chart.js", "styled-components", "사이드 프로젝트"],
+    read: "4 min",
+    href: "/posts/covidkorea-status-project",
   },
 ];

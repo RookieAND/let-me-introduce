@@ -26,6 +26,30 @@ export const JAVASCRIPT_POSTS: Post[] = [
     href: "/posts/cjs-require-module-resolution",
   },
   {
+    slug: "promise-with-resolver",
+    date: "2024-04-01",
+    cat: "JavaScript",
+    title: "Promise.withResolvers 라는 친구가 새로 나왔다",
+    excerpt: [
+      "기존 Promise 생성자의 한계를 보완하는 Promise.withResolvers() — 등장 배경과 활용 상황.",
+    ],
+    tags: ["JavaScript", "Promise", "ES2024"],
+    read: "4 min",
+    href: "/posts/promise-with-resolver",
+  },
+  {
+    slug: "event-bubbling-capturing-delegation",
+    date: "2023-04-01",
+    cat: "JavaScript",
+    title: "이벤트 버블링, 캡처링, 위임을 알아보자",
+    excerpt: [
+      "이벤트 흐름 세 단계, stopPropagation·stopImmediatePropagation의 차이, 그리고 이벤트 위임 패턴.",
+    ],
+    tags: ["JavaScript", "이벤트", "DOM"],
+    read: "7 min",
+    href: "/posts/event-bubbling-capturing-delegation",
+  },
+  {
     slug: "javascript-event-loop",
     date: "2023-02-01",
     cat: "JavaScript",
@@ -60,18 +84,6 @@ export const JAVASCRIPT_POSTS: Post[] = [
     tags: ["JavaScript", "Object", "메모리"],
     read: "9 min",
     href: "/posts/javascript-object-deep-dive",
-  },
-  {
-    slug: "event-bubbling-capturing-delegation",
-    date: "2023-04-01",
-    cat: "JavaScript",
-    title: "이벤트 버블링, 캡처링, 위임을 알아보자",
-    excerpt: [
-      "이벤트 흐름 세 단계, stopPropagation·stopImmediatePropagation의 차이, 그리고 이벤트 위임 패턴.",
-    ],
-    tags: ["JavaScript", "이벤트", "DOM"],
-    read: "7 min",
-    href: "/posts/event-bubbling-capturing-delegation",
   },
   {
     slug: "for-loop-let-var",

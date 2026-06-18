@@ -50,16 +50,16 @@ export const ARCHITECTURE_POSTS: Post[] = [
     href: "/posts/casl-typescript-deep-dive",
   },
   {
-    slug: "plop-code-generator",
-    date: "2024-12-01",
+    slug: "frontend-test-thoughts",
+    date: "2025-10-01",
     cat: "Architecture",
-    title: "PlopJS 기반으로 Code Generator 제작하기",
+    title: "프론트엔드 테스트 코드에 대한 고찰",
     excerpt: [
-      "반복되는 모노레포 코드 생성을 PlopJS로 자동화한 과정 — hygen과의 비교, Custom Action, TypeScript 세팅.",
+      "테스트 코드를 왜 써야 하는지 뒤늦게 납득한 과정 — 피드백 사이클 단축부터 테크스펙으로서의 테스트까지.",
     ],
-    tags: ["PlopJS", "DX", "코드 자동화"],
-    read: "10 min",
-    href: "/posts/plop-code-generator",
+    tags: ["Testing", "프론트엔드", "TDD"],
+    read: "12 min",
+    href: "/posts/frontend-test-thoughts",
   },
   {
     slug: "http-cookie-samesite",
@@ -86,18 +86,6 @@ export const ARCHITECTURE_POSTS: Post[] = [
     href: "/posts/cors-deep-dive",
   },
   {
-    slug: "glob-pattern",
-    date: "2023-02-01",
-    cat: "Architecture",
-    title: "Glob Pattern을 완벽하게 정리해보자",
-    excerpt: [
-      "*.js·**/*.ts·{a,b}·[!abc] 등 Glob 패턴의 와일드카드와 대괄호 문법을 예시와 함께 정리했다.",
-    ],
-    tags: ["Glob", "파일 시스템", "CLI"],
-    read: "6 min",
-    href: "/posts/glob-pattern",
-  },
-  {
     slug: "tdd-introduction",
     date: "2023-01-01",
     cat: "Architecture",
@@ -122,18 +110,6 @@ export const ARCHITECTURE_POSTS: Post[] = [
     href: "/posts/jest-functional-test",
   },
   {
-    slug: "web-server-vs-was",
-    date: "2023-01-01",
-    cat: "Architecture",
-    title: "Web Server 와 Web Application Server 간의 차이",
-    excerpt: [
-      "웹 서버와 WAS의 역할 분리, CGI의 한계, fail over·fail back으로 무중단 운영을 구현하는 이유.",
-    ],
-    tags: ["Web", "WAS", "Nginx", "아키텍처"],
-    read: "6 min",
-    href: "/posts/web-server-vs-was",
-  },
-  {
     slug: "mime-content-type",
     date: "2022-12-01",
     cat: "Architecture",
@@ -144,29 +120,5 @@ export const ARCHITECTURE_POSTS: Post[] = [
     tags: ["HTTP", "MIME", "Content-Type"],
     read: "6 min",
     href: "/posts/mime-content-type",
-  },
-  {
-    slug: "git-hook-husky",
-    date: "2022-12-01",
-    cat: "Architecture",
-    title: "Git Hook은 무엇이고, Husky는 왜 쓰는걸까?",
-    excerpt: [
-      "pre-commit·commit-msg 훅으로 코드 품질을 자동 지키는 방법과 Husky + lint-staged 설정.",
-    ],
-    tags: ["Git", "Husky", "lint-staged"],
-    read: "7 min",
-    href: "/posts/git-hook-husky",
-  },
-  {
-    slug: "eslint-prettier",
-    date: "2022-12-01",
-    cat: "Architecture",
-    title: "ESLint, Prettier를 왜 써야 할까?",
-    excerpt: [
-      "ESLint의 AST 기반 정적 분석 원리, Prettier와의 역할 분리, 충돌을 피하는 설정.",
-    ],
-    tags: ["ESLint", "Prettier", "DX"],
-    read: "7 min",
-    href: "/posts/eslint-prettier",
   },
 ];

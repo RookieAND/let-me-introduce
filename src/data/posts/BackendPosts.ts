@@ -2,6 +2,18 @@ import type { Post } from "#/data/Posts";
 
 export const BACKEND_POSTS: Post[] = [
   {
+    slug: "suites-nestjs-auto-mock-testing",
+    date: "2026-06-01",
+    cat: "Backend",
+    title: "@suites로 NestJS 단위 테스트 작성하기 — Solitary·Sociable·Test Double",
+    excerpt: [
+      "jest.fn() 수동 작성에서 벗어나 @suites의 TestBed로 Auto-Mock을 구성하고, Solitary·Sociable 두 전략과 Test Double 4종을 실제 코드로 정리.",
+    ],
+    tags: ["NestJS", "Testing", "Jest", "Auto-Mock", "@suites"],
+    read: "7 min",
+    href: "/posts/suites-nestjs-auto-mock-testing",
+  },
+  {
     slug: "suites-nestjs-auto-mock",
     date: "2026-06-01",
     cat: "Backend",
