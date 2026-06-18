@@ -14,7 +14,8 @@ const counts: Record<string, number> = {
 const CATEGORY_LABELS: Record<string, string> = {
   all: "전체",
   Frontend: "Frontend",
-  JavaScript: "JS / TS",
+  JavaScript: "Javascript",
+  TypeScript: "Typescript",
   Backend: "Backend",
   Architecture: "Architecture",
   Tooling: "Build / Bundle",
