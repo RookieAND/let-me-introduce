@@ -158,7 +158,7 @@ export function Hero() {
       </div>
 
       {/* Scroll hint */}
-      <div className="absolute bottom-7.5 left-1/2 -translate-x-1/2 z-2 font-mono text-[11px] tracking-[0.2em] text-text-3 flex flex-col items-center gap-2.5 uppercase">
+      <div className="absolute bottom-7.5 left-1/2 -translate-x-1/2 z-2 font-mono text-[11px] tracking-[0.2em] text-text-3 flex flex-col items-center gap-2.5 uppercase max-[900px]:hidden">
         <span>SCROLL</span>
         <span className="w-px h-10 bg-linear-to-b from-accent to-transparent animate-scroll-line" />
       </div>

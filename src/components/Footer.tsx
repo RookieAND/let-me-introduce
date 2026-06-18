@@ -37,14 +37,6 @@ export function Footer({ variant = "portfolio" }: FooterProps) {
             >
               GitHub ↗
             </a>
-            <a
-              href="https://velog.io/@rookieand/posts"
-              target="_blank"
-              rel="noreferrer noopener"
-              className="font-mono text-[12px] text-text-3 hover:text-accent transition-colors duration-200"
-            >
-              velog ↗
-            </a>
           </div>
         )}
       </div>

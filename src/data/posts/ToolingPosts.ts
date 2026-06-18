@@ -74,18 +74,6 @@ export const TOOLING_POSTS: Post[] = [
     href: "/posts/module-federation",
   },
   {
-    slug: "typescript-module-resolution",
-    date: "2026-05-01",
-    cat: "Tooling",
-    title: "TypeScript Module Resolution 전략을 알아보자",
-    excerpt: [
-      "node, node16, bundler 세 전략의 차이와 Vite 기반 프로젝트에서 bundler가 표준인 이유.",
-    ],
-    tags: ["TypeScript", "Vite", "모듈"],
-    read: "7 min",
-    href: "/posts/typescript-module-resolution",
-  },
-  {
     slug: "turborepo-remote-cache-self-hosted",
     date: "2025-05-01",
     cat: "Tooling",
@@ -198,9 +186,7 @@ export const TOOLING_POSTS: Post[] = [
     date: "2022-12-01",
     cat: "Tooling",
     title: "ESLint, Prettier를 왜 써야 할까?",
-    excerpt: [
-      "ESLint의 AST 기반 정적 분석 원리, Prettier와의 역할 분리, 충돌을 피하는 설정.",
-    ],
+    excerpt: ["ESLint의 AST 기반 정적 분석 원리, Prettier와의 역할 분리, 충돌을 피하는 설정."],
     tags: ["ESLint", "Prettier", "DX"],
     read: "7 min",
     href: "/posts/eslint-prettier",

@@ -11,12 +11,22 @@ const recent = [...ALL_POSTS].sort((a, b) => b.date.localeCompare(a.date)).slice
 function PostCount() {
   const { rounded, ref } = useCountAnimation(ALL_POSTS.length);
   return (
-    <span className="inline-flex items-baseline gap-0.5 font-mono text-accent self-center">
-      <motion.span ref={ref} className="text-[15px] font-semibold tabular-nums">
-        {rounded}
-      </motion.span>
-      <span className="text-[11px] opacity-60">posts</span>
-    </span>
+    <div className="mt-8 mb-8 pt-8 border-t border-border flex justify-between items-center">
+      <div className="flex justify-between items-baseline gap-2.5">
+        <motion.span
+          ref={ref}
+          className="font-display text-[clamp(38px,5vw,58px)] font-semibold tracking-[-0.03em] leading-none tabular-nums"
+        >
+          {rounded}
+        </motion.span>
+        <span className="font-mono text-accent text-[clamp(13px,1.5vw,17px)] tracking-[0.1em] uppercase leading-none">
+          posts
+        </span>
+      </div>
+      <span className="font-mono text-text-3 text-[11.5px] tracking-[0.06em]">
+        2022.12 — 현재
+      </span>
+    </div>
   );
 }
 
@@ -24,15 +34,17 @@ export function RecentPosts() {
   return (
     <section className="relative py-30 max-[520px]:py-21" id="study">
       <div className="max-w-280 mx-auto px-8 w-full max-[520px]:px-5">
-        <Reveal className="flex items-baseline gap-4.5 mb-14">
+        <Reveal className="flex items-baseline gap-4.5">
           <Text variant="caption" color="accent">
             04
           </Text>
           <Text variant="heading4">My Study</Text>
-          <PostCount />
           <Text variant="caption" color="subtle" className="ml-auto max-[600px]:hidden">
             {"// 배운 것들을 꾸준히 기록해왔습니다"}
           </Text>
+        </Reveal>
+        <Reveal>
+          <PostCount />
         </Reveal>
 
         <div className="flex flex-col">

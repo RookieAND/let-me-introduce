@@ -66,9 +66,7 @@ export const ARCHITECTURE_POSTS: Post[] = [
     date: "2023-05-01",
     cat: "Architecture",
     title: "HTTP Cookie 와 SameSite 정책에 대해서",
-    excerpt: [
-      "Set-Cookie 속성과 SameSite 정책(None·Strict·Lax)을 실제 CSRF 문제와 함께 정리했다.",
-    ],
+    excerpt: ["Set-Cookie 속성과 SameSite 정책(None·Strict·Lax)을 실제 CSRF 문제와 함께 정리했다."],
     tags: ["HTTP", "Cookie", "SameSite", "CSRF"],
     read: "8 min",
     href: "/posts/http-cookie-samesite",

@@ -33,7 +33,13 @@ export const JAVASCRIPT_POSTS: Post[] = [
     excerpt: [
       "DTO에서 Submission['version']을 쓰다 터진 400 에러 — emitDecoratorMetadata의 design:type 직렬화 규칙과 class-transformer 변환 실패 원인 분석.",
     ],
-    tags: ["TypeScript", "NestJS", "class-transformer", "emitDecoratorMetadata", "Indexed Access Type"],
+    tags: [
+      "TypeScript",
+      "NestJS",
+      "class-transformer",
+      "emitDecoratorMetadata",
+      "Indexed Access Type",
+    ],
     read: "13 min",
     href: "/posts/typescript-indexed-access-type",
   },
@@ -174,9 +180,7 @@ export const JAVASCRIPT_POSTS: Post[] = [
     date: "2022-08-01",
     cat: "JavaScript",
     title: "[#JS] Set, Map, WeakSet, WeakMap",
-    excerpt: [
-      "Set, Map, 약한 참조로 메모리 누수를 막는 WeakSet·WeakMap의 특성과 사용 방법.",
-    ],
+    excerpt: ["Set, Map, 약한 참조로 메모리 누수를 막는 WeakSet·WeakMap의 특성과 사용 방법."],
     tags: ["JavaScript", "Set", "Map", "WeakMap"],
     read: "5 min",
     href: "/posts/js-set-map-weakset-weakmap",
