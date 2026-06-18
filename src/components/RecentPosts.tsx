@@ -25,7 +25,7 @@ const MAX_QUARTER_COUNT = Math.max(...QUARTER_DATA.map((d) => d.count));
 function PostsChart() {
   return (
     <div
-      className="absolute inset-0 flex gap-0.75 px-1 opacity-[0.1] pointer-events-none"
+      className="absolute bottom-0 left-0 right-0 h-full flex gap-0.75 px-1 opacity-[0.1] pointer-events-none"
       aria-hidden={true}
     >
       {QUARTER_DATA.map(({ key, count }) => (
