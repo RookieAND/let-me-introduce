@@ -158,6 +158,18 @@ export const FRONTEND_POSTS: Post[] = [
     href: "/posts/zero-runtime-vanilla-extract",
   },
   {
+    slug: "react-query-use-error-boundary",
+    date: "2024-02-14",
+    cat: "Frontend",
+    title: "useQuery 에서 왜 자꾸 에러를 던지는 걸까?",
+    excerpt: [
+      "useQuery 에러가 컴포넌트를 직접 덮친 이유 — useBaseQuery 소스로 추적한 throwOnError 조건과 전역 QueryClient 옵션의 함정.",
+    ],
+    tags: ["React Query", "TanStack Query", "useQuery", "ErrorBoundary", "throwOnError"],
+    read: "7 min",
+    href: "/posts/react-query-use-error-boundary",
+  },
+  {
     slug: "react-deep-dive-13-performance-tools",
     date: "2024-02-11",
     cat: "Frontend",
@@ -216,6 +228,18 @@ export const FRONTEND_POSTS: Post[] = [
     tags: ["성능", "Core Web Vitals", "LCP", "CLS"],
     read: "10 min",
     href: "/posts/react-deep-dive-12-core-web-vitals",
+  },
+  {
+    slug: "pointer-event",
+    date: "2024-01-12",
+    cat: "Frontend",
+    title: "PointerEvent — 태블릿 DnD 버그로 알게 된 포인터 추상화",
+    excerpt: [
+      "MouseEvent가 터치 환경에서 동작하지 않는 이유와 PointerEvent가 마우스·펜·터치를 하나로 추상화하는 방식, 그리고 framer-motion 적용기.",
+    ],
+    tags: ["PointerEvent", "MouseEvent", "TouchEvent", "Web API", "framer-motion"],
+    read: "6 min",
+    href: "/posts/pointer-event",
   },
   {
     slug: "react-deep-dive-7-devtools",

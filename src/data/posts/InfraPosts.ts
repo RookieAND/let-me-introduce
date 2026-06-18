@@ -50,6 +50,18 @@ export const INFRA_POSTS: Post[] = [
     href: "/posts/docker-compose-basics",
   },
   {
+    slug: "mongodb-primary-election",
+    date: "2024-08-27",
+    cat: "DB / Infra",
+    title: "MongoDB Replica Set — Primary 선출 과정과 Election Protocol",
+    excerpt: [
+      "OpLog 기반 데이터 동기화, Raft 컨센서스 알고리즘, Self-Election 전략, 그리고 v0의 스플릿 브레인 문제를 v1의 Primary Term으로 해결한 과정.",
+    ],
+    tags: ["MongoDB", "Replica Set", "분산 시스템", "Raft", "Election"],
+    read: "10 min",
+    href: "/posts/mongodb-primary-election",
+  },
+  {
     slug: "nestjs-docker-image-optimization",
     date: "2024-06-01",
     cat: "DB / Infra",
@@ -72,6 +84,18 @@ export const INFRA_POSTS: Post[] = [
     tags: ["GitHub Actions", "Docker", "CI/CD"],
     read: "7 min",
     href: "/posts/github-actions-docker-deploy",
+  },
+  {
+    slug: "mongodb-transaction-log",
+    date: "2024-03-13",
+    cat: "DB / Infra",
+    title: "MongoDB 에서는 Transaction 로그를 어떻게 관리할까?",
+    excerpt: [
+      "별도 로그 파일 없이 OpLog를 트랜잭션 로그로 재활용하는 MongoDB의 전략 — ACID 속성, Capped Collection, Replica Set 전용 트랜잭션의 이유.",
+    ],
+    tags: ["MongoDB", "Transaction", "ACID", "OpLog", "Capped Collection"],
+    read: "8 min",
+    href: "/posts/mongodb-transaction-log",
   },
   {
     slug: "mongoose-connection-internals",
