@@ -115,3 +115,10 @@ OpLog를 통해 어떤 Primary에서 발생한 작업인지 추적할 수 있다
 이로써 v0의 두 핵심 문제가 해결됐다.  
 Primary Term 기반 투표 체계로 **스플릿 브레인을 방지**하고,  
 시스템 시간에 의존하지 않아 30초의 공백 없이 신속하게 Primary를 선출할 수 있게 됐다.
+
+---
+
+## Reference
+
+- [Raft 컨센서스 알고리즘](https://seongjin.me/raft-consensus-algorithm/)
+- [Replica Set Elections - MongoDB Docs](https://www.mongodb.com/ko-kr/docs/manual/core/replica-set-elections/)

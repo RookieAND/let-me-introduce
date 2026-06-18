@@ -54,7 +54,8 @@ Transaction을 진행하면 데이터의 변경 사항을 별도의 공간에 Lo
 ## 그러면 MongoDB 의 Transaction 은 Replica Set 에서만 사용이 가능한가요?
 
 놀랍게도 그렇다. (일단 OpLog를 기반으로 동작하니까)  
-하지만 Standalone한 Node를 Single Node Replica Set으로 변환할 수 있다.
+하지만 Standalone한 Node를 Single Node Replica Set으로 변환할 수 있다.  
+([Convert a Standalone to a Replica Set - MongoDB Docs](https://www.mongodb.com/docs/manual/tutorial/convert-standalone-to-replica-set/))
 
 그러면 Standalone Node에서는 왜 Transaction을 지원하지 않는 걸까?  
 MongoDB는 기본적으로 대부분의 Use Case에서 클러스터링 환경이 구축된 상태로 사용되는 DB이기 때문에 그렇다.  

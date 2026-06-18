@@ -102,3 +102,9 @@ const handlePanEmojiSection = (event: PointerEvent, info: PanInfo) => {
 `onPanStart`의 첫 번째 인자가 `PointerEvent`다.  
 framer-motion이 내부적으로 마우스·터치를 모두 포인터 이벤트로 추상화해 전달해준다.  
 덕분에 핸들러 하나로 PC와 태블릿을 모두 처리할 수 있었다.
+
+---
+
+## Reference
+
+- [Pointer events - MDN](https://developer.mozilla.org/en-US/docs/Web/API/Pointer_events)
