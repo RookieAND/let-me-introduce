@@ -38,6 +38,18 @@ export const INFRA_POSTS: Post[] = [
     href: "/posts/docker-kubernetes-ch2",
   },
   {
+    slug: "docker-kubernetes-ch2-2",
+    date: "2026-06-20",
+    cat: "DB / Infra",
+    title: "도커 데몬 — 구조, 설정, 스토리지 드라이버, 모니터링",
+    excerpt: [
+      "dockerd 클라이언트-데몬 통신 구조, TLS Remote API 보안, overlay2·btrfs·ZFS 스토리지 드라이버 원리, docker stats·events·system df 모니터링.",
+    ],
+    tags: ["Docker", "Daemon", "overlay2", "TLS", "모니터링"],
+    read: "12 min",
+    href: "/posts/docker-kubernetes-ch2-2",
+  },
+  {
     slug: "docker-compose-basics",
     date: "2024-10-01",
     cat: "DB / Infra",
