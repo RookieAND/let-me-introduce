@@ -11,7 +11,7 @@ const recent = [...ALL_POSTS].sort((a, b) => b.date.localeCompare(a.date)).slice
 function PostCount() {
   const { rounded, ref } = useCountAnimation(ALL_POSTS.length);
   return (
-    <div className="mt-8 mb-8 pt-8 border-y border-border flex justify-between items-center min-h-18">
+    <div className="mt-8 mb-8 pt-8 flex justify-between items-center min-h-18">
       <div className="flex items-baseline gap-2.5">
         <motion.span
           ref={ref}
