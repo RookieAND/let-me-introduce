@@ -15,7 +15,7 @@ export const TOOLING_POSTS: Post[] = [
   },
   {
     slug: "turborepo-task-configuration",
-    date: "2026-06-16",
+    date: "2025-04-16",
     cat: "Tooling",
     title: "Turborepo v2 Task 설정 완전 정복",
     excerpt: [
