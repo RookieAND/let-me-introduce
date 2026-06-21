@@ -3,7 +3,7 @@ import type { Post } from "#/data/Posts";
 export const FRONTEND_POSTS: Post[] = [
   {
     slug: "react-use-sync-external-store",
-    date: "2026-06-15",
+    date: "2024-06-21",
     cat: "Frontend",
     title: "useSyncExternalStore 기반으로 복잡한 트리 상태 풀어내기",
     excerpt: [

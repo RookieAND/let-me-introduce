@@ -39,7 +39,7 @@ export const TOOLING_POSTS: Post[] = [
   },
   {
     slug: "gemc-monorepo-cli",
-    date: "2026-06-01",
+    date: "2024-12-23",
     cat: "Tooling",
     title: "gemc — gem-server 모노레포를 위한 내부 CLI 개선기",
     excerpt: [

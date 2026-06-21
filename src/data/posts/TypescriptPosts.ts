@@ -39,7 +39,7 @@ export const TYPESCRIPT_POSTS: Post[] = [
   },
   {
     slug: "typescript-satisfies",
-    date: "2026-01-07",
+    date: "2025-10-02",
     cat: "TypeScript",
     title: "TypeScript satisfies 를 알아보자",
     excerpt: [
