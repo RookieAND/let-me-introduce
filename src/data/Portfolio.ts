@@ -73,7 +73,7 @@ export const STACK_CARDS = [
 export const CAREER_ITEMS = [
   {
     when: "2026.03 — 현재",
-    title: "Exelearnce Tech Cell 2",
+    title: "구름 EDU 모집·운영 플랫폼(Exelearnce) 개발",
     badge: null,
     bullets: [
       "수동 DB 제어에 의존하던 권한을 <b>역할·리소스 기반 ABAC 모델</b>로 재설계하고 BE·FE 구현",
@@ -85,7 +85,7 @@ export const CAREER_ITEMS = [
   },
   {
     when: "2024.12 — 2026.02",
-    title: "GEM SQD",
+    title: "교육 운영 플랫폼(GEM) 구축",
     badge: "스쿼드 리더",
     bullets: [
       "Tally·Google Form 에 흩어져 있던 모집 과정을 <b>GEM</b>으로 내재화해 외부 의존 비용 제거",
@@ -97,7 +97,7 @@ export const CAREER_ITEMS = [
   },
   {
     when: "2024.06 — 2024.11",
-    title: "AI/DT TF",
+    title: "AI 디지털교과서(AIDT) 개발",
     badge: null,
     bullets: [
       "구름의 교육부 <b>AI 디지털 교과서 (AIDT)</b> 사업 플랫폼의 학생 대시보드 내 기능 UI 개발 전담",
@@ -106,15 +106,22 @@ export const CAREER_ITEMS = [
     ],
   },
   {
-    when: "2023.08 — 2024.11",
-    title: "EDU Public SQD",
+    when: "2023.03 — 2023.06",
+    title: "구름 EDU B2C 플랫폼 (edu.goorm.io) 개발",
+    badge: "인턴",
+    bullets: [
+      "기존의 Legacy 강의 페이지를 <b>React 18·사내 디자인 시스템</b> 기준으로 재구현하고 모바일 반응형까지 대응",
+      "외부 플랫폼 강좌 <b>쿠폰 발급 도메인</b>을 신설하고 결제 시 선착순 발급 시스템을 설계",
+    ],
+  },
+  {
+    when: "2023.08 — 2024.05",
+    title: "디지털새싹 PMS · KDT 개발",
     badge: null,
     bullets: [
       "강사·교구재·캠프 운영 등 교육 사업 <b>관리 시스템(PMS)</b>을 KoaJS 기반으로 개발·운영",
       "재단용 PMS 운영 통계 어드민을 풀스택 개발, 통계 전용 스키마 설계로 반복 집계 비용 제거",
       "KDT 사업 증빙용 누적·기간별 <b>학습시간 집계 API</b>를 NestJS로 설계하여 실 사용 진행",
-      "기존의 Legacy 강의 페이지를 사내 디자인 시스템 기준으로 재구현하고 모바일 반응형까지 대응",
-      "외부 플랫폼 강좌 <b>쿠폰 발급 도메인</b>을 신설하고 결제 시 선착순 발급 시스템을 설계",
     ],
   },
 ] as const;

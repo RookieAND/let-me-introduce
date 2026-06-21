@@ -10,13 +10,13 @@ export function Footer({ variant = "portfolio" }: FooterProps) {
   return (
     <footer className="border-t border-border py-7.5">
       <div className="max-w-280 mx-auto px-8 w-full flex justify-between items-center flex-wrap gap-3">
-        <span className="font-mono text-[12px] text-text-3">
+        <span className="font-sans text-[12px] text-text-3">
           © 2026 BAIK GWANGIN · Frontend Engineer
         </span>
         {variant === "portfolio" ? (
           <button
             type="button"
-            className="font-mono text-[12px] text-text-3 hover:text-accent transition-colors duration-200 cursor-pointer bg-transparent border-none"
+            className="font-sans text-[12px] text-text-3 hover:text-accent transition-colors duration-200 cursor-pointer bg-transparent border-none"
             onClick={scrollToTop}
           >
             ↑ BACK TO TOP
@@ -25,7 +25,7 @@ export function Footer({ variant = "portfolio" }: FooterProps) {
           <div className="flex gap-5">
             <Link
               to="/"
-              className="font-mono text-[12px] text-text-3 hover:text-accent transition-colors duration-200"
+              className="font-sans text-[12px] text-text-3 hover:text-accent transition-colors duration-200"
             >
               Portfolio
             </Link>
@@ -33,7 +33,7 @@ export function Footer({ variant = "portfolio" }: FooterProps) {
               href="https://github.com/RookieAND"
               target="_blank"
               rel="noreferrer noopener"
-              className="font-mono text-[12px] text-text-3 hover:text-accent transition-colors duration-200"
+              className="font-sans text-[12px] text-text-3 hover:text-accent transition-colors duration-200"
             >
               GitHub ↗
             </a>

@@ -4,7 +4,7 @@ import { useEffect, useRef } from "react";
 export function useCountAnimation(target: number, duration = 1.4) {
   const ref = useRef<HTMLElement>(null);
   const count = useMotionValue(0);
-  const rounded = useTransform(count, (v) => Math.round(v).toLocaleString());
+  const rounded = useTransform(count, (v) => String(Math.round(v)));
   const inView = useInView(ref, { once: true, margin: "-50px" });
 
   useEffect(() => {

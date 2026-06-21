@@ -24,9 +24,9 @@ const textVariants = cva("", {
       body2: "font-sans text-[14.5px] leading-[1.7]",
       body3: "font-sans text-[13.5px] leading-[1.65]",
       // Mono labels
-      caption: "font-mono text-[12px] tracking-[0.03em]",
-      label: "font-mono text-[12px] tracking-[0.06em] uppercase",
-      eyebrow: "font-mono text-[13px] tracking-[0.14em] uppercase",
+      caption: "font-sans text-[12px] tracking-[0.03em]",
+      label: "font-sans text-[12px] tracking-[0.06em] uppercase",
+      eyebrow: "font-sans text-[13px] tracking-[0.14em] uppercase",
     },
     color: {
       default: "text-text",

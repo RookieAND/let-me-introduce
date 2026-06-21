@@ -86,7 +86,7 @@ export function PostsToolbar() {
           placeholder="search posts…"
           value={inputValue}
           onChange={handleChange}
-          className="font-mono text-[13px] text-text bg-surface border border-border rounded-[9px] py-2.25 pl-9 pr-3.5 w-52.5 transition-[border-color,width] duration-200 outline-none placeholder:text-text-3 focus:border-accent focus:w-62.5 max-[640px]:w-full max-[640px]:focus:w-full"
+          className="font-sans text-[13px] text-text bg-surface border border-border rounded-[9px] py-2.25 pl-9 pr-3.5 w-52.5 transition-[border-color,width] duration-200 outline-none placeholder:text-text-3 focus:border-accent focus:w-62.5 max-[640px]:w-full max-[640px]:focus:w-full"
         />
       </div>
     </div>

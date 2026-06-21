@@ -15,7 +15,7 @@ function CardInner({ post }: { post: Post }) {
 
   return (
     <>
-      <div className="font-mono text-[12px] text-text-3 pt-1 leading-[1.5] max-[760px]:pt-0 max-[760px]:order-first">
+      <div className="font-sans text-[12px] text-text-3 pt-1 leading-[1.5] max-[760px]:pt-0 max-[760px]:order-first">
         {month}
         <span className="block text-[13px] text-text-2 max-[760px]:inline max-[760px]:ml-1.5">
           {yearStr}
@@ -43,7 +43,7 @@ function CardInner({ post }: { post: Post }) {
           {post.tags.map((tag) => (
             <span
               key={tag}
-              className="font-mono text-[11px] text-text-3 border border-border rounded-md px-2 py-0.75"
+              className="font-sans text-[11px] text-text-3 border border-border rounded-md px-2 py-0.75"
             >
               #{tag}
             </span>
@@ -51,7 +51,7 @@ function CardInner({ post }: { post: Post }) {
         </div>
       </div>
 
-      <div className="font-mono text-[12px] text-text-3 whitespace-nowrap pt-1 flex items-center gap-1.75 max-[760px]:hidden">
+      <div className="font-sans text-[12px] text-text-3 whitespace-nowrap pt-1 flex items-center gap-1.75 max-[760px]:hidden">
         {post.read}
         <span className="text-accent opacity-0 -translate-x-1.5 transition-all duration-250 group-hover:opacity-100 group-hover:translate-x-0">
           {post.href.startsWith("/") ? "→" : "↗"}

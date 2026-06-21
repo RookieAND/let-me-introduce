@@ -1,7 +1,7 @@
 import { last } from "es-toolkit";
 import { useEffect, useState } from "react";
 
-const SECTION_IDS = ["about", "stack", "career", "work", "contact"];
+const SECTION_IDS = ["about", "stack", "career", "study", "contact"];
 
 export function useNavScroll() {
   const [scrolled, setScrolled] = useState(false);

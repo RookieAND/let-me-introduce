@@ -29,7 +29,7 @@ export function Contact() {
         >
           <a
             href="mailto:gwangin1999@naver.com"
-            className="group inline-flex items-center gap-2.75 px-6 py-3.75 rounded-[11px] border border-border-strong font-mono text-[14px] text-text bg-surface transition-all duration-250 hover:border-accent hover:bg-accent-dim hover:-translate-y-0.75 max-[520px]:w-full max-[520px]:justify-between"
+            className="group inline-flex items-center gap-2.75 px-6 py-3.75 rounded-[11px] border border-border-strong font-sans text-[14px] text-text bg-surface transition-all duration-250 hover:border-accent hover:bg-accent-dim hover:-translate-y-0.75 max-[520px]:w-full max-[520px]:justify-between"
           >
             <span className="text-text-3 group-hover:text-accent-bright transition-colors duration-250">
               Email
@@ -40,7 +40,7 @@ export function Contact() {
             href="https://github.com/RookieAND"
             target="_blank"
             rel="noreferrer noopener"
-            className="group inline-flex items-center gap-2.75 px-6 py-3.75 rounded-[11px] border border-border-strong font-mono text-[14px] text-text bg-surface transition-all duration-250 hover:border-accent hover:bg-accent-dim hover:-translate-y-0.75 max-[520px]:w-full max-[520px]:justify-between"
+            className="group inline-flex items-center gap-2.75 px-6 py-3.75 rounded-[11px] border border-border-strong font-sans text-[14px] text-text bg-surface transition-all duration-250 hover:border-accent hover:bg-accent-dim hover:-translate-y-0.75 max-[520px]:w-full max-[520px]:justify-between"
           >
             <span className="text-text-3 group-hover:text-accent-bright transition-colors duration-250">
               GitHub
@@ -49,7 +49,7 @@ export function Contact() {
           </a>
           <Link
             to="/posts"
-            className="group inline-flex items-center gap-2.75 px-6 py-3.75 rounded-[11px] border border-border-strong font-mono text-[14px] text-text bg-surface transition-all duration-250 hover:border-accent hover:bg-accent-dim hover:-translate-y-0.75 max-[520px]:w-full max-[520px]:justify-between"
+            className="group inline-flex items-center gap-2.75 px-6 py-3.75 rounded-[11px] border border-border-strong font-sans text-[14px] text-text bg-surface transition-all duration-250 hover:border-accent hover:bg-accent-dim hover:-translate-y-0.75 max-[520px]:w-full max-[520px]:justify-between"
           >
             <span className="text-text-3 group-hover:text-accent-bright transition-colors duration-250">
               Writing

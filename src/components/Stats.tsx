@@ -9,9 +9,9 @@ function CountUp({ target, prefix, unit }: { target: number; prefix?: string; un
 
   return (
     <div className="font-display text-[clamp(32px,4vw,46px)] font-semibold tracking-[-0.02em] leading-none flex items-baseline gap-0.75 whitespace-nowrap">
-      {prefix && <span className="text-[0.5em] text-accent font-mono">{prefix}</span>}
+      {prefix && <span className="text-[0.5em] text-accent">{prefix}</span>}
       <motion.span ref={ref}>{rounded}</motion.span>
-      {unit && <span className="text-[0.5em] text-accent font-mono">{unit}</span>}
+      {unit && <span className="text-[0.5em] text-accent">{unit}</span>}
     </div>
   );
 }

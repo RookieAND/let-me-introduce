@@ -15,7 +15,7 @@ export function PostsHeader() {
       />
       <div className="max-w-280 mx-auto px-8 w-full relative z-[2] max-[520px]:px-5">
         <Reveal>
-          <div className="font-mono text-[13px] tracking-[0.14em] uppercase text-accent inline-flex items-center gap-3 mb-5.5 before:content-[''] before:w-8.5 before:h-px before:bg-accent">
+          <div className="font-sans text-[13px] tracking-[0.14em] uppercase text-accent inline-flex items-center gap-3 mb-5.5 before:content-[''] before:w-8.5 before:h-px before:bg-accent">
             Writing
           </div>
         </Reveal>

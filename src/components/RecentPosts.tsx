@@ -54,8 +54,6 @@ export function RecentPosts() {
             </Reveal>
           ))}
         </div>
-        <div className="border-b border-border" />
-
         <Reveal className="flex justify-end mt-8">
           <Link
             to="/posts"

@@ -21,7 +21,7 @@ export function Stack() {
           {STACK_CARDS.map((card, i) => (
             <Reveal key={card.category} delay={i % 2 === 1 ? 0.08 : 0}>
               <div className="bg-surface border border-border rounded-2xl p-7 transition-[border-color] duration-300 hover:border-border-strong">
-                <div className="font-mono text-[12px] tracking-[0.06em] text-text-3 uppercase mb-4.5 flex items-center gap-2.5">
+                <div className="font-sans text-[12px] tracking-[0.06em] text-text-3 uppercase mb-4.5 flex items-center gap-2.5">
                   <span className="w-4.5 h-0.5 bg-accent" />
                   {card.category}
                 </div>
@@ -34,11 +34,11 @@ export function Stack() {
                       {chip.icon ? (
                         <TechIcon slug={chip.icon} size={26} />
                       ) : (
-                        <span className="w-6.5 h-6.5 rounded-full border border-current opacity-30 flex items-center justify-center font-mono text-[10px]">
+                        <span className="w-6.5 h-6.5 rounded-full border border-current opacity-30 flex items-center justify-center font-sans text-[10px]">
                           ~
                         </span>
                       )}
-                      <span className="font-mono text-[11px] tracking-[0.01em] leading-tight text-center w-full break-words px-1">
+                      <span className="font-sans text-[11px] tracking-[0.01em] leading-tight text-center w-full break-words px-1">
                         {chip.label}
                       </span>
                     </div>

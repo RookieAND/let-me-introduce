@@ -19,13 +19,13 @@ function NavRoot({ alwaysScrolled = false, children }: NavProps) {
     <nav
       className={cn(
         "fixed top-0 left-0 right-0 z-[100] h-17 flex items-center transition-[background,border-color,backdrop-filter] duration-300 border-b border-transparent",
-        navScrolled && "bg-[rgba(10,10,11,0.72)] backdrop-blur-[14px] saturate-[1.2] border-border",
+        navScrolled && "nav-bg-scrolled backdrop-blur-[14px] saturate-[1.2] border-border",
       )}
     >
       <div className="max-w-280 mx-auto px-8 w-full flex items-center justify-between">
         <Link
           to="/"
-          className="font-mono text-[14px] tracking-[0.04em] text-text font-medium flex items-center gap-2.25"
+          className="font-sans text-[14px] tracking-[0.04em] text-text font-medium flex items-center gap-2.25"
         >
           <span className="w-1.75 h-1.75 rounded-full bg-accent shadow-[0_0_10px_var(--color-accent)] shrink-0" />
           BAIK GWANGIN

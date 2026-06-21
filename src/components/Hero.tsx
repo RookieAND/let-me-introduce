@@ -60,7 +60,7 @@ export function Hero() {
           ref={g1Ref}
           className="absolute w-135 h-135 rounded-full blur-[90px] opacity-55 will-change-transform animate-drift1"
           style={{
-            background: "radial-gradient(circle, rgba(91,141,239,0.42), transparent 70%)",
+            background: "radial-gradient(circle, var(--color-blob-primary), transparent 70%)",
             top: "-120px",
             right: "-60px",
           }}
@@ -69,7 +69,7 @@ export function Hero() {
           ref={g2Ref}
           className="absolute w-115 h-115 rounded-full blur-[90px] opacity-55 will-change-transform animate-drift2"
           style={{
-            background: "radial-gradient(circle, rgba(60,90,200,0.30), transparent 70%)",
+            background: "radial-gradient(circle, var(--color-blob-secondary), transparent 70%)",
             bottom: "-160px",
             left: "-100px",
           }}
@@ -82,7 +82,7 @@ export function Hero() {
       <div className="max-w-280 mx-auto px-8 w-full relative z-[2] grid grid-cols-[1.25fr_0.9fr] gap-14 items-center pt-20 pb-10 max-[900px]:grid-cols-1 max-[900px]:gap-12">
         {/* Left: text */}
         <div>
-          <div className="reveal in font-mono text-[13px] tracking-[0.14em] uppercase text-accent inline-flex items-center gap-3 mb-6.5 before:content-[''] before:w-8.5 before:h-px before:bg-accent">
+          <div className="reveal in font-sans text-[13px] tracking-[0.14em] uppercase text-accent inline-flex items-center gap-3 mb-6.5 before:content-[''] before:w-8.5 before:h-px before:bg-accent">
             Frontend Engineer
           </div>
 
@@ -139,7 +139,7 @@ export function Hero() {
             className="absolute -inset-3.5 border border-border rounded-[26px] z-[-1]"
             aria-hidden
           />
-          <div className="portrait-overlay relative w-80 h-100 rounded-[18px] overflow-hidden border border-border-strong shadow-[0_30px_80px_-30px_rgba(0,0,0,0.8),0_0_60px_-20px_rgba(91,141,239,0.4)] max-[900px]:w-65 max-[900px]:h-80">
+          <div className="portrait-overlay portrait-shadow relative w-80 h-100 rounded-[18px] overflow-hidden border border-border-strong max-[900px]:w-65 max-[900px]:h-80">
             <img
               src="/assets/profile.jpg"
               alt="백광인 프로필 사진"
@@ -148,7 +148,7 @@ export function Hero() {
               decoding="async"
             />
           </div>
-          <div className="absolute -bottom-3.5 -left-4.5 bg-surface border border-border-strong rounded-[10px] px-3.5 py-2.25 flex items-center gap-2 shadow-[0_12px_30px_-12px_rgba(0,0,0,0.7)]">
+          <div className="absolute -bottom-3.5 -left-4.5 bg-surface border border-border-strong rounded-[10px] px-3.5 py-2.25 flex items-center gap-2 status-card-shadow">
             <span className="w-2 h-2 rounded-full bg-green-ping shadow-[0_0_8px_var(--color-green-ping)] shrink-0" />
             <Text as="span" variant="caption" color="muted" className="text-[11.5px]">
               Fullstack Engineer · RookieAND
@@ -158,7 +158,7 @@ export function Hero() {
       </div>
 
       {/* Scroll hint */}
-      <div className="absolute bottom-7.5 left-1/2 -translate-x-1/2 z-2 font-mono text-[11px] tracking-[0.2em] text-text-3 flex flex-col items-center gap-2.5 uppercase max-[900px]:hidden">
+      <div className="absolute bottom-7.5 left-1/2 -translate-x-1/2 z-2 font-sans text-[11px] tracking-[0.2em] text-text-3 flex flex-col items-center gap-2.5 uppercase max-[900px]:hidden">
         <span>SCROLL</span>
         <span className="w-px h-10 bg-linear-to-b from-accent to-transparent animate-scroll-line" />
       </div>
