@@ -1,9 +1,9 @@
 
-> React 에서 state 를 쓸 줄 모른다는 건 React를 다룰 줄 모른다는 뜻이 아닐까.
+> React 에서 state 를 쓸 줄 모른다는 건 React를 다룰 줄 모른다는 뜻이 아닐까.  
 
-state, React를 처음 입문했을 당시 나에게는 너무나 생소한 개념이었다. 굳이 지역 함수가 아닌 별도의 state 라는 개념을 채용한 이유가 무엇인가? 이런 나의 의문은 React의 생태계를 공부하면서 하나씩 풀렸다.
-하지만 아직도 나는 state를 완벽히 이해했다고 말하기 어렵다. 함수형 업데이트를 진행하면 동기적으로 작동하는 게 아닌가? 라는 잘못된 생각을 최근에야 바로잡게 된 이후 이러한 생각은 더욱 심화되었다.
-따라서 날을 잡아서 state와 관련된 개념을 최대한 깨부수고, 디테일한 설명의 경우에는 추가적으로 React 코드를 좀 뜯어보면서 작동 원리를 이해하고자 한다. 하지만 React 소스 코드의 복잡도란.. 이하 생략..
+state, React를 처음 입문했을 당시 나에게는 너무나 생소한 개념이었다. 굳이 지역 함수가 아닌 별도의 state 라는 개념을 채용한 이유가 무엇인가? 이런 나의 의문은 React의 생태계를 공부하면서 하나씩 풀렸다.  
+하지만 아직도 나는 state를 완벽히 이해했다고 말하기 어렵다. 함수형 업데이트를 진행하면 동기적으로 작동하는 게 아닌가? 라는 잘못된 생각을 최근에야 바로잡게 된 이후 이러한 생각은 더욱 심화되었다.  
+따라서 날을 잡아서 state와 관련된 개념을 최대한 깨부수고, 디테일한 설명의 경우에는 추가적으로 React 코드를 좀 뜯어보면서 작동 원리를 이해하고자 한다. 하지만 React 소스 코드의 복잡도란.. 이하 생략..  
 
 ## state in React
 
@@ -126,9 +126,9 @@ function changeState() {
 }
 ```
 
-> **Batching** 에 대해 더 자세히 기술한 포스팅은 아래에 있다.
+> **Batching** 에 대해 더 자세히 기술한 포스팅은 아래에 있다.  
 
-https://velog.io/@rookieand/React-18%EC%97%90%EC%84%9C-%EC%B6%94%EA%B0%80%EB%90%9C-Auto-Batching-%EC%9D%80-%EB%AC%B4%EC%97%87%EC%9D%B8%EA%B0%80
+https://velog.io/@rookieand/React-18%EC%97%90%EC%84%9C-%EC%B6%94%EA%B0%80%EB%90%9C-Auto-Batching-%EC%9D%80-%EB%AC%B4%EC%97%87%EC%9D%B8%EA%B0%80  
 
 ### State is a snapshot
 
@@ -136,8 +136,8 @@ https://velog.io/@rookieand/React-18%EC%97%90%EC%84%9C-%EC%B6%94%EA%B0%80%EB%90%
 - 또한 React는 컴포넌트 내부의 props, 이벤트 핸들러, 지역 변수를 렌더링이 진행된 순간의 state를 활용하여 계산하고, 이를 최종적으로 반환하게 된다.
 - state는 컴포넌트 외부에서 Closure 형태로 관리되는 변수이다. React 는 컴포넌트 함수가 호출된 순간의 state 값 (스냅샷) 을 제공하며 이는 다음 렌더링 이전까지 변하지 않는다.
 
-> [!IMPORTANT]
-> 하나의 이벤트 핸들러 안에서 `setCount(count + 1)` 을 여러 번 호출해도 `count` 는 현재 렌더링의 스냅샷 값으로 고정되어 있어, 결과는 항상 동일하다. 이전 업데이트 결과를 누적하려면 `setCount(prev => prev + 1)` 처럼 updater function을 사용해야 한다.
+> [!IMPORTANT]  
+> 하나의 이벤트 핸들러 안에서 `setCount(count + 1)` 을 여러 번 호출해도 `count` 는 현재 렌더링의 스냅샷 값으로 고정되어 있어, 결과는 항상 동일하다. 이전 업데이트 결과를 누적하려면 `setCount(prev => prev + 1)` 처럼 updater function을 사용해야 한다.  
 
 ```jsx
 import { useState } from "react";
@@ -291,7 +291,7 @@ export default App;
 - 상단의 코드 내부에도 두 차례 update function 이 실행되며 state 값을 3으로 변경했지만, 이후의 작업에서는 이를 고려하지 않고 기존의 state 값을 기반으로 새롭게 count state 값을 업데이트 한다.
 - 따라서 update function 의 경우 이전 작업의 결과를 기반으로 새로운 값을 업데이트 하지만, 단순히 값을 인자로 넘겼을 경우에는 이전 작업의 결과를 고려하지 않는다는 점을 유의해야 한다.
 
-> React 에서 추천하는 updater function 의 Name Convention
+> React 에서 추천하는 updater function 의 Name Convention  
 
 ```js
 setEnabled((e) => !e);

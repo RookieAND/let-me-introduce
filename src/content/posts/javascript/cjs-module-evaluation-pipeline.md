@@ -5,7 +5,7 @@ Module 클래스, module/exports 의 출처, Module Wrapper, 탐색 알고리즘
 
 그런데 정작 핵심이 되는 한 부분은 설명 없이 넘어갔다. 사실 내가 가장 알고 싶은 부분이기도 하고 말이다.  
 
-> 파일 코드가 실행되며 module.exports 에 값이 채워진다.
+> 파일 코드가 실행되며 module.exports 에 값이 채워진다.  
 
 지난 글에서는 파일이 어떻게 읽히는지, 어떻게 컴파일되는지, 어떻게 실행되는지,  
 그리고 실행 결과가 어떻게 `module.exports` 에 담기는지는 설명하지 않았다.  
@@ -123,14 +123,14 @@ console.log(a.x);          // 1         ← exports.x 는 이미 할당됨
 console.log(a.y);          // undefined ← exports.y 는 아직 실행되지 않음
 ```
 
-**실행 흐름**
+**실행 흐름**  
 
 1. `a.js` 가 먼저 실행된다. `exports.x = 1` 이 실행되어 exports 객체에 x 가 추가된다.  
 2. `require('./b')` 를 호출하는 순간 `a.js` 실행이 일시 중단되고 `b.js` 로딩이 시작된다.  
 3. `b.js` 내부에서 `require('./a')` 를 호출한다. 이 시점에 `a.js` 는 아직 완전히 실행되지 않았다.  
 4. `b.js` 실행이 완료되면 `a.js` 가 재개되어 `exports.y = 2` 가 실행된다.  
 
-**`a.x` 는 1 인데 `a.y` 는 undefined 인 이유**
+**`a.x` 는 1 인데 `a.y` 는 undefined 인 이유**  
 
 (3) 시점에서 `a.js` 의 실행은 `require('./b')` 호출 직전까지만 진행된 상태다.  
 `exports.x = 1` 은 이미 실행되었지만, `exports.y = 2` 는 아직 실행되지 않았다.  
@@ -225,7 +225,7 @@ Module._extensions['.node'] = function(module, filename) { /* process.dlopen */ 
 
 JS 파일의 경우 실행 중 발생한 Side Effect 는 모두 적용되지만, `require()` 가 반환하는 것은 `module.exports` 에 할당된 값만이라는 점을 명심하자.  
 
-**여기서 눈여겨 볼 점은 `this.loaded = true` 이다.**
+**여기서 눈여겨 볼 점은 `this.loaded = true` 이다.**  
 
 로더가 모두 실행되고 결과가 반환된 뒤에야 비로소 `this.loaded = true` 가 된다.  
 즉, 파일 코드가 완전히 평가되고 실행되기 전까지 `module.loaded` 는 항상 `false` 다.  
@@ -569,7 +569,7 @@ result = FunctionPrototypeCall(
 this[kIsExecuting] = false; // ← 실행 완료
 ```
 
-**`kIsExecuting` 플래그의 역할**
+**`kIsExecuting` 플래그의 역할**  
 
 Node.js 내부에서 "이 모듈이 현재 실행 중인가"를 추적하는 심볼이다.  
 `true` 인 동안은 파일 코드가 평가되고 있는 상태이며, `false` 가 되면 실행이 완료된 것이다.  
@@ -577,13 +577,13 @@ Node.js 내부에서 "이 모듈이 현재 실행 중인가"를 추적하는 심
 `module.loaded` 는 상위 `Module.prototype.load` 에서 설정되므로,  
 `kIsExecuting === false` 이지만 아직 `loaded === false` 인 순간이 존재한다.  
 
-**`FunctionPrototypeCall` 을 쓰는 이유**
+**`FunctionPrototypeCall` 을 쓰는 이유**  
 
 `fn.call()` 과 동작은 같다.  
 다만 사용자 코드가 `Function.prototype.call` 을 덮어써도 영향받지 않는다.  
 Node.js 내부에서 primordials 패턴으로 표준 내장 메서드를 시작 시점에 저장해두고 사용하는 방식이다.  
 
-**실행 결과**
+**실행 결과**  
 
 `FunctionPrototypeCall` 이 실행되는 순간 파일 코드가 평가된다.  
 
@@ -618,14 +618,14 @@ exports ─────────┘
 
 두 변수가 동일한 객체를 가리킨 채로 시작한다.  
 
-**`exports.foo = 1` 이 동작하는 이유**
+**`exports.foo = 1` 이 동작하는 이유**  
 
 ```javascript
 exports.foo = 1;
 // exports 와 module.exports 가 같은 객체 → 프로퍼티 추가 시 양쪽 반영
 ```
 
-**`exports = { foo: 1 }` 이 동작하지 않는 이유**
+**`exports = { foo: 1 }` 이 동작하지 않는 이유**  
 
 ```javascript
 exports = { foo: 1 };
@@ -639,14 +639,14 @@ module.exports ──→ 힙: {}           ← require 는 이걸 반환
 exports ─────────→ 힙: { foo: 1 }  ← 연결 끊김, 버려짐
 ```
 
-**`module.exports = { foo: 1 }` 이 동작하는 이유**
+**`module.exports = { foo: 1 }` 이 동작하는 이유**  
 
 ```javascript
 module.exports = { foo: 1 };
 // require 가 반환하는 module.exports 자체를 교체
 ```
 
-> require 가 반환하는 것은 항상 module.exports 다.
+> require 가 반환하는 것은 항상 module.exports 다.  
 
 ---
 
@@ -668,7 +668,7 @@ module.load(filename); // 내부에서 this.loaded = true 까지 완료됨
 return module.exports; // 최종 반환
 ```
 
-**각 시점의 상태 정리**
+**각 시점의 상태 정리**  
 
 ```javascript
 require('./foo') 호출

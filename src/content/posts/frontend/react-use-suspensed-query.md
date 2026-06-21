@@ -1,13 +1,13 @@
-> 왜 **Suspense** 를 썼는데 데이터가 `undefined` 로 추론되는 걸까..?
+> 왜 **Suspense** 를 썼는데 데이터가 `undefined` 로 추론되는 걸까..?  
 
 ## 1. 개요
-현재 개발 중인 pureureum (푸르름) 프로젝트의 경우 react-query 를 적극적으로 사용하여 서버에서 받은 여러 데이터를 캐싱하고 있다. 
+현재 개발 중인 pureureum (푸르름) 프로젝트의 경우 react-query 를 적극적으로 사용하여 서버에서 받은 여러 데이터를 캐싱하고 있다.  
 
-하지만 Typescript 와 React-Query 를 사용했을 때 불편한 점이 `useQuery` 의 return 값 중, data의 타입이 `T | undefined` 로 잡히는 것이었다.
+하지만 Typescript 와 React-Query 를 사용했을 때 불편한 점이 `useQuery` 의 return 값 중, data의 타입이 `T | undefined` 로 잡히는 것이었다.  
 
-이게 왜 불편하냐면, 분명 인계된 `data` 의 타입이 확실히 인계되었음이 보장됨에도 불구하고 타입 체커에서는 자꾸만 `data` 의 타입을 좁히게끔 유도한다는 의미이다. 
+이게 왜 불편하냐면, 분명 인계된 `data` 의 타입이 확실히 인계되었음이 보장됨에도 불구하고 타입 체커에서는 자꾸만 `data` 의 타입을 좁히게끔 유도한다는 의미이다.  
 
-현재 프로젝트에서는 `suspense: true` 옵션을 켜서 React 의 Suspense 와 함께 이를 사용하고 있음에도 data 의 타입이 undefined 로 추론되고 있다.
+현재 프로젝트에서는 `suspense: true` 옵션을 켜서 React 의 Suspense 와 함께 이를 사용하고 있음에도 data 의 타입이 undefined 로 추론되고 있다.  
 
 ```ts
 const ProjectApplyTemplate = () => {
@@ -25,23 +25,23 @@ const ProjectApplyTemplate = () => {
   if (!userProfileData || !projectDetailData) return null;
 ```
 
-이러한 문제는 비단 필자 뿐만이 아니라 react-query 를 사용하는 여러 사용자들도 불편함을 호소하고 있다. issue 를 찾아보니 정말 많은 사람들이 Suspense 를 사용했음에도 왜 데이터의 무결성을 한번 더 검증해야 하는지에 대한 의문을 남겼다.
+이러한 문제는 비단 필자 뿐만이 아니라 react-query 를 사용하는 여러 사용자들도 불편함을 호소하고 있다. issue 를 찾아보니 정말 많은 사람들이 Suspense 를 사용했음에도 왜 데이터의 무결성을 한번 더 검증해야 하는지에 대한 의문을 남겼다.  
 
-물론 fetching 이 실패했을 경우에 대한 대비라던가, enabled 옵션이 꺼졌다거나 하는 케이스로 인해서 데이터가 항상 원하는 타입으로 반환될 것이라는 보장이 없으므로 undefined 가 나올 수도 있다는 가능성은 늘 존재하지만, 적어도 이 부분은 ErrorBoundary 와 Suspense 의 조합으로 다르게 해결할 수 있다고 생각한다.
+물론 fetching 이 실패했을 경우에 대한 대비라던가, enabled 옵션이 꺼졌다거나 하는 케이스로 인해서 데이터가 항상 원하는 타입으로 반환될 것이라는 보장이 없으므로 undefined 가 나올 수도 있다는 가능성은 늘 존재하지만, 적어도 이 부분은 ErrorBoundary 와 Suspense 의 조합으로 다르게 해결할 수 있다고 생각한다.  
 
 다행이도 머지않아 릴리즈 될 v5 의 경우에는 Suspense 옵션이 켜졌을 경우 항상 data 의 타입을 올바르게 추론하는 useSuspensedQuery 훅을 추가할 예정이라고 한다.  
-추가로 `@suspensive/react-query` 라는 라이브러리에서도 `useSuspenseQuery` 훅을 지원한다.
+추가로 `@suspensive/react-query` 라는 라이브러리에서도 `useSuspenseQuery` 훅을 지원한다.  
 
 - https://suspensive.org/docs/react-query/src/useSuspenseQuery.i18n
 - https://tanstack.com/query/v5/docs/react/guides/migrating-to-v5
 
 ## 2. 라이브러리 쓰면 되는 거 아니냐?
 
-물론 react-query 버전을 화끈하게 v5 로 올려버리는 방법 또한 존재한다. 그리고 뭣하면 `@suspensive/react-query` 라이브러리를 쓰면 된다. 근데 왜 안쓰냐? 고작 요거 하나 잡겠다고 버전 업을 하기에는 v4 기반으로 개발된 코드 베이스를 대대적으로 엎어야 하고, 라이브러리를 설치하기에는 그냥 좀 싫었다.
+물론 react-query 버전을 화끈하게 v5 로 올려버리는 방법 또한 존재한다. 그리고 뭣하면 `@suspensive/react-query` 라이브러리를 쓰면 된다. 근데 왜 안쓰냐? 고작 요거 하나 잡겠다고 버전 업을 하기에는 v4 기반으로 개발된 코드 베이스를 대대적으로 엎어야 하고, 라이브러리를 설치하기에는 그냥 좀 싫었다.  
 
-따라서 `toss/slash` 에서 개발한 useSuspensedQuery 코드를 분석하고, 내 입맛대로 이를 살짝 개조하여 올바르게 타입을 반환하는 훅을 만들어야겠다고 생각했다.
+따라서 `toss/slash` 에서 개발한 useSuspensedQuery 코드를 분석하고, 내 입맛대로 이를 살짝 개조하여 올바르게 타입을 반환하는 훅을 만들어야겠다고 생각했다.  
 
-아래는 필자가 개조한 useSuspensedQuery 코드의 전문이다.
+아래는 필자가 개조한 useSuspensedQuery 코드의 전문이다.  
 
 ```ts
 import {
@@ -138,7 +138,7 @@ export function useSuspendedQuery<
 export default useSuspendedQuery;
 ```
 
-내부 구성은 상당히 단촐한데, 쉽게 정리하자면 아래 케이스에 따른 return 타입을 추론하도록 하였다.
+내부 구성은 상당히 단촐한데, 쉽게 정리하자면 아래 케이스에 따른 return 타입을 추론하도록 하였다.  
 
 1. enabled 옵션이 `false` 인 경우, 현재 query 의 state 는 `idle` 이므로 data 가 `undefined` 가 되도록 타입을 추론시킨다.
 
@@ -180,12 +180,12 @@ export function useSuspendedQuery<
 
 3. 나머지 케이스의 경우에도 query 가 무조건 성공했다고 가정하고 data 를 `TData` Generic 타입으로 추론되도록 설정한다.
 
-결국 정리하자면 `enabled: false` 가 아닌 나머지 케이스에 대해서는 해당 queryFn 이 무조건 성공했다고 가정하고, 사용자가 인자로 넣은 `TData` Generic Type 을 data 의 타입으로서 추론되도록 한 것이다.
+결국 정리하자면 `enabled: false` 가 아닌 나머지 케이스에 대해서는 해당 queryFn 이 무조건 성공했다고 가정하고, 사용자가 인자로 넣은 `TData` Generic Type 을 data 의 타입으로서 추론되도록 한 것이다.  
 
-이렇게 하니 코드 상에서 data 가 존재하는지를 한번 더 체크하지 않아도 되었기에 불필요한 유효성 검사를 진행했던 코드를 많이 줄일 수 있었다.
+이렇게 하니 코드 상에서 data 가 존재하는지를 한번 더 체크하지 않아도 되었기에 불필요한 유효성 검사를 진행했던 코드를 많이 줄일 수 있었다.  
 
 중요한 점은 해당 훅은 `useQuery` 훅에 들어갈 인자를 **객체로 넣는 케이스에만** 통용된다는 점이다.  
-만약 훅을 아래와 같이 사용한다면 타입 에러가 100% 날 것이다.
+만약 훅을 아래와 같이 사용한다면 타입 에러가 100% 날 것이다.  
 
 ```ts
 // 요런 케이스는 된다.
@@ -220,7 +220,7 @@ export const useGetProjectList = ({
 ## 3. 결론
 
 `useSuspensedQuery` 도입 이후 react-query 를 사용하기가 한결 더 편해졌다고 생각한다.  
-타입 체커가 의도한대로 데이터 타입을 추론하는 것만으로도 솔직히 이 훅의 존재 의의는 달성했다고 생각한다.
+타입 체커가 의도한대로 데이터 타입을 추론하는 것만으로도 솔직히 이 훅의 존재 의의는 달성했다고 생각한다.  
 
 만약 `TData | undefined` 로 인해 react-query 에 고통받는 분이 있다면, 위 코드를 참고하거나 직접 변형하여 적용해보는 것을 추천한다.  
-물론 현재는 react-query v5와 `@suspensive/react-query` 라이브러리 모두 공식적으로 `useSuspenseQuery` 를 지원하고 있으니, 가능하다면 공식 지원 훅으로 마이그레이션하는 것이 장기적으로 더 좋은 선택이다.
+물론 현재는 react-query v5와 `@suspensive/react-query` 라이브러리 모두 공식적으로 `useSuspenseQuery` 를 지원하고 있으니, 가능하다면 공식 지원 훅으로 마이그레이션하는 것이 장기적으로 더 좋은 선택이다.  

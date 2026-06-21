@@ -10,8 +10,8 @@ for (let i = 0; i < 5; i++) {
 
 ## forEach
 
-배열의 각 요소에 콜백을 실행한다.
-`break`나 `return`으로 중단할 수 없다.
+배열의 각 요소에 콜백을 실행한다.  
+`break`나 `return`으로 중단할 수 없다.  
 
 ```javascript
 [1, 2, 3].forEach((num, index) => {
@@ -21,8 +21,8 @@ for (let i = 0; i < 5; i++) {
 
 ## for...of
 
-ES6에서 추가된 이터러블 순회 문법이다.
-`[Symbol.iterator]` 프로퍼티가 있는 객체라면 모두 순회할 수 있다.
+ES6에서 추가된 이터러블 순회 문법이다.  
+`[Symbol.iterator]` 프로퍼티가 있는 객체라면 모두 순회할 수 있다.  
 
 ```javascript
 const fruits = ['apple', 'banana', 'cherry'];
@@ -44,7 +44,7 @@ for (const [key, value] of map) {
 
 ## for...in
 
-객체의 열거 가능한 프로퍼티 키를 순회한다.
+객체의 열거 가능한 프로퍼티 키를 순회한다.  
 
 ```javascript
 const obj = { a: 1, b: 2, c: 3 };
@@ -53,8 +53,8 @@ for (const key in obj) {
 }
 ```
 
-**주의:** 프로토타입 체인의 열거 가능한 속성까지 포함된다.
-자신의 속성만 필요하면 `hasOwnProperty`로 걸러야 한다.
+**주의:** 프로토타입 체인의 열거 가능한 속성까지 포함된다.  
+자신의 속성만 필요하면 `hasOwnProperty`로 걸러야 한다.  
 
 ```javascript
 for (const key in obj) {
@@ -64,5 +64,5 @@ for (const key in obj) {
 }
 ```
 
-배열 순회에는 `for...of`가 더 적합하다.
-`for...in`은 인덱스를 문자열로 반환하고 순서 보장도 안 된다.
+배열 순회에는 `for...of`가 더 적합하다.  
+`for...in`은 인덱스를 문자열로 반환하고 순서 보장도 안 된다.  

@@ -73,14 +73,14 @@ foo();
 2.  이후 `foo` 함수가 실행되고, 내부의 `bar` 함수가 실행되며 차례로 스택에 추가되었다가 제거된다.
 3.   마지막으로 콜 스택이 비워졌다면 `baz` 함수가 스택에 즉시 추가되어 실행된다.
 
-> **믿음성 문제** 란?
+> **믿음성 문제** 란?  
 
 - 결과적으로 상단의 코드에서 `baz` 는 우리가 설정했던 딜레이인 10ms 보다 더 늦게 실행될 것이다. 
 - `setTimeout` 함수가 호출된 이후 실행된 `foo` 함수가 처리되기까지 오랜 시간이 걸린다면 콜 스택이 비워지지 않아 `baz` 함수가 실행될 수 없기 때문이다. 
 - 따라서 `setTimeout` 의 타이머가 항상 올바르게 작동한다는 보장이 없다. 이를 **믿음성 문제** 라고 한다.
 
-> [!WARNING]
-> `setTimeout(fn, 0)`이라도 콜 스택이 비워지기 전까지 콜백은 실행되지 않는다. 긴 동기 작업 뒤에 타이머를 걸면 실제 지연은 지정 시간보다 훨씬 길어질 수 있다.
+> [!WARNING]  
+> `setTimeout(fn, 0)`이라도 콜 스택이 비워지기 전까지 콜백은 실행되지 않는다. 긴 동기 작업 뒤에 타이머를 걸면 실제 지연은 지정 시간보다 훨씬 길어질 수 있다.  
 
 ## Event Loop
 
@@ -104,12 +104,12 @@ foo();
 
 ### (Macro) Task Queue
 
-> Task queues are sets, not queues, because the event loop processing model grabs the first runnable task from the chosen queue, instead of dequeuing the first task.
+> Task queues are sets, not queues, because the event loop processing model grabs the first runnable task from the chosen queue, instead of dequeuing the first task.  
 
 -   Task Queue란 `setTimeout` 이나 `setInterval` 같은 비동기 함수의 콜백 함수나 이벤트 핸들러 같은 Task가 보관되는 곳이다.
 -   최종적으로 Call Stack에서 실행될 Task들이 모인 하나의 집합 (Set) 이며, 스택이 빌 경우 가장 먼저 들어온 실행 가능한 Task를 추가한다.
 
-> Task Queue 에서 Task란 어떤 것들일까?
+> Task Queue 에서 Task란 어떤 것들일까?  
 
 -   외부 스크립트 (`<script src="...">`)가 로딩될 때 이를 실행하는 작업.
 -   `setTimeout` 이나 `setInterval` 같은 비동기 함수로부터 인계 받은 콜백 함수를 실행하는 작업.
@@ -126,7 +126,7 @@ foo();
 -   Microtask Queue 는 Task Queue 보다 **항상 먼저** 처리된다. 즉, 현재 Task 가 끝나면 이벤트 루프는 다음 Task 를 꺼내기 전에 Microtask Queue 를 완전히 비운다.
 -   일반적인 구현으로는 각 Task가 끝나거나 Event Loop의 시작과 끝에서 체크된다. 이 과정을 표준 문서에서는 **Micro Task Checkpoint** 라고 정의하였다.
 
-> Micro Task Check Point 란?
+> Micro Task Check Point 란?  
 
 - Micro Task Queue가 빌 때까지, Micro Task Queue 에서 가장 오래된 Micro Task를 꺼내 실행하는 과정이다.
 - 해당 과정은 각 Task의 종료와 Micro Task 를 모두 실행시키는 반복 과정의 실행과 끝에서 발생한다.

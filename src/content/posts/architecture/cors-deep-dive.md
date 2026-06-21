@@ -12,13 +12,13 @@
 - 아래 표는 URL `http://store.company.com/dir/page.html`의 출처를 비교한 예시다.
     
     
-    | URL | 결과 |
-    | --- | --- |
-    | http://store.company.com/dir2/other.html | 성공 |
-    | http://store.company.com/dir/inner/another.html | 성공 |
-    | https://store.company.com/secure.html | 실패 (Protocol 이 다름) |
-    | http://store.company.com:81/dir/etc.html | 실패 (Port 가 다름) |
-    | http://news.company.com/dir/other.html | 실패 (Host 가 다름) |
+    | URL | 결과 |  
+    | --- | --- |  
+    | http://store.company.com/dir2/other.html | 성공 |  
+    | http://store.company.com/dir/inner/another.html | 성공 |  
+    | https://store.company.com/secure.html | 실패 (Protocol 이 다름) |  
+    | http://store.company.com:81/dir/etc.html | 실패 (Port 가 다름) |  
+    | http://news.company.com/dir/other.html | 실패 (Host 가 다름) |  
 - 만약 출처에 포트 번호가 명시적으로 포함되어 있다면 **이 또한 같아야** 동일한 출처라고 인정 된다.
 - 하지만 해당 케이스의 경우 표준으로 정해진 것이 아니기 때문에, 브라우저에 따라서 동작이 달라진다.
     - 따라서 [http://localhost:3000](http://localhost:3000) 와 [http://localhost:8080](http://localhost:8080) 도 다른 출처이다. (포트 번호가 다르기 때문)
@@ -55,7 +55,7 @@
 - **Preflight Request** 란, 브라우저에서 요청을 한번에 보내지 않고 먼저 예비 요청을 보내어 접근 허용 여부를 미리 테스트 하는 방식이다.
 - 이때 브라우저가 본 요청을 보내기 전에 `OPTIONS` HTTP Method 를 통해서 보내는 예비 요청을 **Preflight** 라고 하며, 이를 통해 브라우저는 사전에 해당 요청이 정말로 안전한지를 확인한다.
 
-![https://developer.mozilla.org/en-US/docs/Web/HTTP/CORS/preflight_correct.png](https://developer.mozilla.org/en-US/docs/Web/HTTP/CORS/preflight_correct.png)
+![https://developer.mozilla.org/en-US/docs/Web/HTTP/CORS/preflight_correct.png](https://developer.mozilla.org/en-US/docs/Web/HTTP/CORS/preflight_correct.png)  
 
 - 브라우저는 **Preflight** 요청 내의 헤더에 실제 요청에서 **어떤 헤더와 어떤 HTTP Method 를 사용할지**를 알린다.
     - `Access-Control-Request-Headers` : 본 요청 전송 시 어떤 HTTP Method 로 전송할 것인지를 알림.
@@ -115,7 +115,7 @@ Connection: Keep-Alive
 
 - 브라우저에서 제공하는 비동기 리소스 요청 API 인 **XMLHttpsRequest** 나 **fetch API** 는 별도의 옵션 없이 브라우저의 쿠키 정보나 인증 관련 헤더를 요청에 담지 않는다.
 
-![https://developer.mozilla.org/en-US/docs/Web/HTTP/CORS/cred-req-updated.png](https://developer.mozilla.org/en-US/docs/Web/HTTP/CORS/cred-req-updated.png)
+![https://developer.mozilla.org/en-US/docs/Web/HTTP/CORS/cred-req-updated.png](https://developer.mozilla.org/en-US/docs/Web/HTTP/CORS/cred-req-updated.png)  
 
 - 만약 이를 요청에 담아 보내고 싶다면  `credentials` 옵션을 별도로 설정해주어야 한다.
     - **same-origin** : 동일 출처 내에서만 인증 정보를 담을 수 있도록 한다. (기본 값)
@@ -132,4 +132,4 @@ Connection: Keep-Alive
 - 이런 상황에서 악성 유저가 **CSRF (Cross-Site Request Forgery)** 나 **XSS (Cross-Site Scripting)** 같은 방법으로 실제 어플리케이션에서 코드가 실행된 것처럼 악성 코드를 꾸민다면 개인 정보를 쉽게 탈취당할 수 있다.
 - 따라서 다른 출처 간의 리소스를 공유하는 과정에서는 이 요청이 정말로 안전한지, 그리고 서버에서 인증된 출처로부터 온 요청인지를 반드시 검증하는 과정이 필요하다.
 
-> 다음 글의 Cookie, SameSite 정책과 이어집니다.
+> 다음 글의 Cookie, SameSite 정책과 이어집니다.  

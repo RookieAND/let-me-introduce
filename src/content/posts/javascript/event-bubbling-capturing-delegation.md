@@ -1,14 +1,14 @@
 
 
-> 이벤트는 특정한 요소에만 정확히 발동되는 줄 알았던 과거의 나를 생각하며..
+> 이벤트는 특정한 요소에만 정확히 발동되는 줄 알았던 과거의 나를 생각하며..  
 
-이벤트 버블링, 이벤트 캡쳐링. 무슨 이벤트 하나에 이렇게 많은 단어들이 들어가는지 처음 JS에 입문하던 나로서는 이해할 수 없었다. 하지만 Vanilla JS로 직접 같은 카드 찾기 미니 게임을 구현했을 때 `addEventListener` 에서 얼마나 많은 고통을 받았었는가. 이번 포스팅은 그때의 나를 회상하며 다시금 이벤트에 대한 내용을 정리하였다. **과거의 나야, 왜 그때 이벤트 위임을 공부하지 않은 거니..** 
+이벤트 버블링, 이벤트 캡쳐링. 무슨 이벤트 하나에 이렇게 많은 단어들이 들어가는지 처음 JS에 입문하던 나로서는 이해할 수 없었다. 하지만 Vanilla JS로 직접 같은 카드 찾기 미니 게임을 구현했을 때 `addEventListener` 에서 얼마나 많은 고통을 받았었는가. 이번 포스팅은 그때의 나를 회상하며 다시금 이벤트에 대한 내용을 정리하였다. **과거의 나야, 왜 그때 이벤트 위임을 공부하지 않은 거니..**  
 
 ## Event flow
 
 ### 3 Step of Event in DOM
 
-![](https://velog.velcdn.com/images/rookieand/post/839a71c6-4fcb-40e4-8fc5-74c6f11baac6/image.png)
+![](https://velog.velcdn.com/images/rookieand/post/839a71c6-4fcb-40e4-8fc5-74c6f11baac6/image.png)  
 
 
 - 특정 DOM 요소에 이벤트가 발생할 경우 이벤트는 아래와 같은 순서로 전파된다.
@@ -111,10 +111,10 @@ btnNode.addEventListener("click", function (event) {
 // <button id=​"btn">​클릭​</button>​ <div id=​"btn-content">​…​</div>​
 // <button id=​"btn">​클릭​</button>​ <div id=​"content">​…​</div>​
 ```
-![](https://velog.velcdn.com/images/rookieand/post/439bce50-929e-48d1-858a-ce846f2446b1/image.PNG)
+![](https://velog.velcdn.com/images/rookieand/post/439bce50-929e-48d1-858a-ce846f2446b1/image.PNG)  
 
 
-> **event.eventPhase** 속성은 뭘까?
+> **event.eventPhase** 속성은 뭘까?  
 
 - `event.eventPhase` 란 현재 발동 중인 이벤트의 Phase를 정수 값으로 가진 속성이다. 이를 통해 현재 이벤트 흐름의 단계를 알 수 있다.
 - `1` 은 Capturing Phase, `2` 는 Target Phase, `3` 은 Bubbling Phase를 각각 의미한다. Event Flow와 값이 동일하다.
@@ -193,7 +193,7 @@ thirdNode.addEventListener("click", function (event) {
 // id가 `two`인 div 태그의 Click EventListener
 // id가 `first`인 div 태그의 Click EventListener
 ```
-![](https://velog.velcdn.com/images/rookieand/post/6778b245-c0d5-4520-b41f-a47ad5ad7fdb/image.PNG)
+![](https://velog.velcdn.com/images/rookieand/post/6778b245-c0d5-4520-b41f-a47ad5ad7fdb/image.PNG)  
 
 
 ### event.stopPropagation()
@@ -230,7 +230,7 @@ firstNode.addEventListener("click", function (event) {
 
 // id가 `three`인 button 태그의 Click EventListener
 ```
-![](https://velog.velcdn.com/images/rookieand/post/585805d6-c93e-4a31-8b19-155d6ac63cab/image.PNG)
+![](https://velog.velcdn.com/images/rookieand/post/585805d6-c93e-4a31-8b19-155d6ac63cab/image.PNG)  
 
 ## Event Delegation
 

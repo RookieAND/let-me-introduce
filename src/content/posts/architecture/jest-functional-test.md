@@ -48,7 +48,7 @@ test('버튼의 초기 색상이 올바르며, 클릭시 색상이 변경됨.', 
 
 ### 4. 테스트를 1차적으로 실행하여 실패가 되었는지 (red) 확인한다.
 
-![](https://velog.velcdn.com/images/rookieand/post/85fc44be-c86a-48be-8b92-a8cd13b79391/image.PNG)
+![](https://velog.velcdn.com/images/rookieand/post/85fc44be-c86a-48be-8b92-a8cd13b79391/image.PNG)  
 
 
 ### 5. 테스트를 통과시키기 위해 React 코드를 App.js에 작성.
@@ -75,7 +75,7 @@ export default App;
 
 ### 6. 테스트가 통과되었음을 확인 (green) 하고, 다음 개발에 착수
 
-![](https://velog.velcdn.com/images/rookieand/post/2cbc1484-10d5-4e63-acec-fcbb891961a5/image.PNG)
+![](https://velog.velcdn.com/images/rookieand/post/2cbc1484-10d5-4e63-acec-fcbb891961a5/image.PNG)  
 
 
 ## References

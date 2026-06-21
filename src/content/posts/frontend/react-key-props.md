@@ -19,7 +19,7 @@ React 는 두 가지 가정을 세워 휴리스틱 알고리즘으로 이를 `O(
 
 React 공식 문서는 `key` 를 이렇게 설명한다.  
 
-> If the "key" attribute is present, React uses it as a way to identify an element of the same type among its siblings during re-renders.
+> If the "key" attribute is present, React uses it as a way to identify an element of the same type among its siblings during re-renders.  
 
 같은 부모 아래 있는 자식 컴포넌트들 사이에서, 어떤 게 어떤 건지 식별하기 위한 식별자다.  
 매 렌더링마다 React 는 새 트리와 이전 트리를 비교하고, 변화가 없는 컴포넌트를 찾아 재사용한다.  

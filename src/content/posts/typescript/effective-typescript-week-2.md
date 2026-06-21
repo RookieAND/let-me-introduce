@@ -128,7 +128,7 @@ const people = ['alice', 'bob', 'jan'].map((name): Person => ({
 
 ## 객체 래퍼 타입 피하기
 
-JS는 기본형에 메서드 사용 시 **Wrapper 객체**로 래핑합니다.
+JS는 기본형에 메서드 사용 시 **Wrapper 객체**로 래핑합니다.  
 
 ```typescript
 'hello' === 'hello';                      // true
@@ -136,7 +136,7 @@ JS는 기본형에 메서드 사용 시 **Wrapper 객체**로 래핑합니다.
 new String('hello') === new String('hello'); // false
 ```
 
-**기본형**과 **객체 래퍼 타입** 혼용을 피하세요.
+**기본형**과 **객체 래퍼 타입** 혼용을 피하세요.  
 
 ---
 
@@ -157,7 +157,7 @@ const r: Room = {
 const r2: Room = r; // 정상 (임시 변수를 통해 우회됨)
 ```
 
-잉여 속성 체크는 객체 리터럴 할당 시에만 동작하며, 임시 변수로 우회 가능합니다.
+잉여 속성 체크는 객체 리터럴 할당 시에만 동작하며, 임시 변수로 우회 가능합니다.  
 
 ---
 
@@ -170,7 +170,7 @@ const add: CalculateNumber = (a, b) => a + b;
 const sum: CalculateNumber = (a, b) => a - b;
 ```
 
-`typeof`로 기존 함수 타입을 재사용하면 매개변수와 반환값이 자동 추론됩니다:
+`typeof`로 기존 함수 타입을 재사용하면 매개변수와 반환값이 자동 추론됩니다:  
 
 ```typescript
 const checkFetch: typeof fetch = async (input, init) => {

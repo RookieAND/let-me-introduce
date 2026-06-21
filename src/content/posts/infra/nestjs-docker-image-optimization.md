@@ -1,11 +1,11 @@
 ## Introduction
-> 급한 마음에 일단 대충 만들었던 **Dockerfile**, 처음에는 이게 그렇게 큰 문제가 될 줄 몰랐는데...
+> 급한 마음에 일단 대충 만들었던 **Dockerfile**, 처음에는 이게 그렇게 큰 문제가 될 줄 몰랐는데...  
 
-최근 NestJS 에 익숙해질 겸 작은 사이드 프로젝트를 진행하고 있는데, Backend 를 NestJS 로 구축하고 이를 컨테이너 기반으로 운용하기 위해 Dockerfile 을 작성했다.
+최근 NestJS 에 익숙해질 겸 작은 사이드 프로젝트를 진행하고 있는데, Backend 를 NestJS 로 구축하고 이를 컨테이너 기반으로 운용하기 위해 Dockerfile 을 작성했다.  
 
-하지만 그때 당시에는 내가 작성한 Dockerfile 이 그렇게 큰 문제가 될 거라고 생각하지 못했다. **500MB 가 넘는 이미지 사이즈**와 **빌드에 1분이 넘게 걸리는 문제**를 마주하기 전까지는.
+하지만 그때 당시에는 내가 작성한 Dockerfile 이 그렇게 큰 문제가 될 거라고 생각하지 못했다. **500MB 가 넘는 이미지 사이즈**와 **빌드에 1분이 넘게 걸리는 문제**를 마주하기 전까지는.  
 
-이대로는 안되겠다 싶어 결국 서비스 오픈 전 개선을 위해 칼을 빼들었다. 애플리케이션 사이즈에 비해 커진 Docker Image 를 다이어트 시키기 위한 눈물겨운 노력이 이제 시작된다.
+이대로는 안되겠다 싶어 결국 서비스 오픈 전 개선을 위해 칼을 빼들었다. 애플리케이션 사이즈에 비해 커진 Docker Image 를 다이어트 시키기 위한 눈물겨운 노력이 이제 시작된다.  
 
 ## 기존 이미지의 문제점
 
@@ -37,7 +37,7 @@ USER node
 CMD ["node", "dist/main"]
 ```
 
-처음 Docker 를 입문하고 나서 작성했던 초기 **Dockerfile** 은 **아래와 같은 문제를 안고 있다.**
+처음 Docker 를 입문하고 나서 작성했던 초기 **Dockerfile** 은 **아래와 같은 문제를 안고 있다.**  
 
 1. 불필요한 **WORKDIR 선언이 너무 많다.**
 2. deps Stage 에서 생성된 `/node_modules` 을 builder 와 runner Stage **두 차례에 걸쳐 COPY 하고 있다.** 
@@ -53,28 +53,28 @@ CMD ["node", "dist/main"]
 ## 기존 이미지 빌드 테스트
 
 ### 1. 생성된 이미지 사이즈 : **512.4MB**
-상당히 큰 이미지이며 프로젝트 규모가 작음을 고려하면 더욱 개선이 시급하다.
+상당히 큰 이미지이며 프로젝트 규모가 작음을 고려하면 더욱 개선이 시급하다.  
 
 ### 2. 빌드 시간 테스트
 
 #### 2-A. 최초 Docker Image Build **(59.7s)**
  - deps Stage 의 3번째 Step (`pnpm install`) 과 두 차례에 걸친 `/node_modules` COPY 작업에서 많은 시간을 소요하고 있다.
         
-![](https://velog.velcdn.com/images/rookieand/post/a8f47cd6-dfb0-4908-b6a9-169cea17eaa0/image.PNG)
+![](https://velog.velcdn.com/images/rookieand/post/a8f47cd6-dfb0-4908-b6a9-169cea17eaa0/image.PNG)  
 
 
 #### 2-B. NestJS 애플리케이션 내 코드 일부가 변경된 경우 **(16.3s)**
 - 의존성 파일은 변경되지 않아 deps Stage 의 3번째 Step 과 builder Stage 의 2번째 Step 은 CACHED 되었다.
 - 하지만 이후 runner Stage 의 2번째 Step 의 경우 `/node_modules` COPY 작업을 또 다시 처리한다.
         
-![](https://velog.velcdn.com/images/rookieand/post/b8859fa2-c1d3-4e6a-b406-c9c35461d6e7/image.PNG)
+![](https://velog.velcdn.com/images/rookieand/post/b8859fa2-c1d3-4e6a-b406-c9c35461d6e7/image.PNG)  
 
         
 #### 2-C. package.json 의 변경 사항이 발생할 경우 **(38.9s)**
 - 애플리케이션 코드의 변경 사항이 없기에 Build 결과물인 `/dist` 파일을 COPY 하는 작업은 CACHED 되었다.
 - 하지만 그 외 의존성 파일을 설치하고, 이를 복사하는 Step 의 경우 시간을 계속 소비하고 있다.
         
-![](https://velog.velcdn.com/images/rookieand/post/34d7fdb6-a1b4-4aef-a656-db89dab93702/image.PNG)
+![](https://velog.velcdn.com/images/rookieand/post/34d7fdb6-a1b4-4aef-a656-db89dab93702/image.PNG)  
 
 ---
 
@@ -107,7 +107,7 @@ USER node
 CMD ["node", "dist/main"]
 ```
 
-위에서 기술한 문제를 해결하여 새롭게 Dockerfile 을 구축했다.
+위에서 기술한 문제를 해결하여 새롭게 Dockerfile 을 구축했다.  
 
 1. 불필요한 **WORKDIR 선언을 모두 걷어내고, base Stage 에서만 선언했다.**
 2. **Cache Mount 를 활용**하여 의존성이 변경되더라도 재사용이 용이하도록 빌드 전략을 설계했다.
@@ -131,21 +131,21 @@ CMD ["node", "dist/main"]
 #### 2-A. 최초 Docker Image Build **(59.7s > 51s)**
 - 기존에 비해 불필요한 `/node_modules` COPY 작업이 생략되어 빌드 시간이 소폭 줄었다.
         
-![](https://velog.velcdn.com/images/rookieand/post/cc214dca-45fb-48b8-a765-576c6d08d709/image.PNG)
+![](https://velog.velcdn.com/images/rookieand/post/cc214dca-45fb-48b8-a765-576c6d08d709/image.PNG)  
 
         
 #### 2-B. NestJS 애플리케이션 내 코드 일부가 변경된 경우 **(16.3s > 10.4s)**
 - 이전에는 `/node_modules` 을 COPY 하는 작업에서 5초가 소요되었으나, 이를 install 로 대체하여 **2초로 감소**했다.
         
-![](https://velog.velcdn.com/images/rookieand/post/adc35fe1-2b7f-4ab0-9788-9b0ec37b475d/image.PNG)
+![](https://velog.velcdn.com/images/rookieand/post/adc35fe1-2b7f-4ab0-9788-9b0ec37b475d/image.PNG)  
    
 #### 2-C. package.json 의 변경 사항이 발생할 경우 **(38.9s > 22.2s)**
 - 의존성 파일이 변경되더라도 기존에 Cached 되었던 데이터를 재활용하기에 **7초만에 설치를 마무리지었다.**
 - 새롭게 추가된 라이브러리에 대해서만 download 를 진행하고, 그 외는 캐시된 데이터를 사용함을 알 수 있었다.
  
-![](https://velog.velcdn.com/images/rookieand/post/74b4b6ac-dedf-40dd-bfd2-c5433216fc68/image.PNG)
+![](https://velog.velcdn.com/images/rookieand/post/74b4b6ac-dedf-40dd-bfd2-c5433216fc68/image.PNG)  
       
-> ⚠️ 위의 Dockerfile 중에서 **pnpm 관련한 명령어 두 가지**에 대해서 짚고 넘어가자.
+> ⚠️ 위의 Dockerfile 중에서 **pnpm 관련한 명령어 두 가지**에 대해서 짚고 넘어가자.  
 
 
 1. **pnpm config set store-dir /var/pnpm/store**
@@ -161,8 +161,8 @@ CMD ["node", "dist/main"]
     
 ## Conclusion
 
-기존의 이미지 빌드 과정에서 발생했던 여러 문제들을 종합적으로 해결하고, 이를 기반으로 Docker Image 의 용량을 줄여 배포 시간이 더욱 빨라지도록 설계했다.
+기존의 이미지 빌드 과정에서 발생했던 여러 문제들을 종합적으로 해결하고, 이를 기반으로 Docker Image 의 용량을 줄여 배포 시간이 더욱 빨라지도록 설계했다.  
 
-사실 조금만 더 초반에 신경썼으면 진작에 해결 가능한 문제였는데, 서비스 초기 구축을 대충 해버린 나머지 이런 참사가 발생했다고 생각한다.
+사실 조금만 더 초반에 신경썼으면 진작에 해결 가능한 문제였는데, 서비스 초기 구축을 대충 해버린 나머지 이런 참사가 발생했다고 생각한다.  
 
-다음 글에서는 Github Action 을 기반으로 한 CI / CD 과정에서 어떻게 배포 시간을 단축했는지를 소개하려 한다.
+다음 글에서는 Github Action 을 기반으로 한 CI / CD 과정에서 어떻게 배포 시간을 단축했는지를 소개하려 한다.  

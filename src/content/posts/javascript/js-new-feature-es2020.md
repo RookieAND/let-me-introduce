@@ -2,7 +2,7 @@
 
 ## 객체에서도 쓸 수 있는 Spread / Rest
 
-ES2020부터 객체에서도 스프레드와 레스트 연산자를 쓸 수 있다.
+ES2020부터 객체에서도 스프레드와 레스트 연산자를 쓸 수 있다.  
 
 ```javascript
 const person = { name: 'Baik', age: 27, city: 'Seoul' };
@@ -17,7 +17,7 @@ const updated = { ...person, city: 'Busan' };
 
 ## 비동기 이터레이터와 제너레이터
 
-`[Symbol.asyncIterator]`를 구현하면 비동기 데이터를 순차적으로 처리할 수 있다.
+`[Symbol.asyncIterator]`를 구현하면 비동기 데이터를 순차적으로 처리할 수 있다.  
 
 ```javascript
 async function* asyncRange(start, end) {
@@ -34,7 +34,7 @@ for await (const num of asyncRange(1, 5)) {
 
 ## Promise.finally()
 
-성공/실패와 무관하게 항상 실행된다.
+성공/실패와 무관하게 항상 실행된다.  
 
 ```javascript
 fetchData()
@@ -43,14 +43,14 @@ fetchData()
   .finally(() => hideLoadingSpinner()); // 항상 실행
 ```
 
-`finally`의 반환값은 무시된다.
-이전 Promise의 값이 그대로 전달된다.
+`finally`의 반환값은 무시된다.  
+이전 Promise의 값이 그대로 전달된다.  
 
 ## 정규식 개선
 
 ### s 플래그 — dotAll
 
-`.`이 줄바꿈 문자도 매칭한다.
+`.`이 줄바꿈 문자도 매칭한다.  
 
 ```javascript
 /foo.bar/s.test('foo\nbar'); // true

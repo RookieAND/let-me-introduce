@@ -20,7 +20,7 @@ Node.js 모듈 시스템은 처음 로드한 모듈을 `require.cache`에 저장
 
 공식 문서는 이를 명확히 적어뒀다.  
 
-> The `require('mongoose')` call above returns a Singleton object. It means that the first time you call `require('mongoose')`, it is creating an instance of the Mongoose class and returning it.
+> The `require('mongoose')` call above returns a Singleton object. It means that the first time you call `require('mongoose')`, it is creating an instance of the Mongoose class and returning it.  
 
 이를 기반으로 Mongoose는 생성된 Connection 목록을 싱글톤 객체 내부에서 관리한다.  
 

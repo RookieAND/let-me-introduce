@@ -1,13 +1,13 @@
 ## Introduction
-> **pnpm** 을 공부하면서 계속 나오는 Hard Link, Symbolic Link 가 너무 헷갈린다. 
+> **pnpm** 을 공부하면서 계속 나오는 Hard Link, Symbolic Link 가 너무 헷갈린다.  
 
-최근 사내에서 pnpm 을 적극적으로 도입하는 과정에서 pnpm 에 대한 분석을 진행 중이었는데, Hard Link 와 Symbolic Link 가 계속 헷갈리는 내 자신을 발견하고선 이대로 안되겠다 싶어 이 참에 두 개념을 깔끔하게 정리하겠다는 생각이 들었다.
+최근 사내에서 pnpm 을 적극적으로 도입하는 과정에서 pnpm 에 대한 분석을 진행 중이었는데, Hard Link 와 Symbolic Link 가 계속 헷갈리는 내 자신을 발견하고선 이대로 안되겠다 싶어 이 참에 두 개념을 깔끔하게 정리하겠다는 생각이 들었다.  
 
 ## Inode
 
 ### inode 란?
 
-![](https://velog.velcdn.com/images/rookieand/post/19d05085-79e4-42de-95b5-2e0625cfad9b/image.png)
+![](https://velog.velcdn.com/images/rookieand/post/19d05085-79e4-42de-95b5-2e0625cfad9b/image.png)  
 
 - Linux에서 파일과 디렉토리를 식별하고 관리하는 데 사용되는 데이터 구조입니다.
 - 각 파일 및 디렉토리는 시스템 내 고유한 inode를 소유하고 있습니다.
@@ -19,7 +19,7 @@
 
 ### Hard Link 란?
 
-Linux에서 파일 시스템의 파일 이름과 연결되는 Directory Entry입니다.
+Linux에서 파일 시스템의 파일 이름과 연결되는 Directory Entry입니다.  
 - 단일 파일에 대한 **추가 경로를 생성하는 메커니즘이며, 같은 inode 번호를 공유하는 엔트리를 생성합니다.**
   - 즉 하나의 파일에 여러 이름을 제공하는 효과가 있으며, 여러 위치에서 동일한 파일에 접근할 수 있습니다.
 - 파일이 하나의 Hard Link에 의해 열려 내용이 변경되면, 다른 링크로 열 경우에도 변경 사항이 반영됩니다.
@@ -34,10 +34,10 @@ Linux에서 파일 시스템의 파일 이름과 연결되는 Directory Entry입
 
 ## Symbolic Link
 
-Linux에서 절대 경로나 상대 경로의 형태로 된 다른 파일이나 디렉터리에 대한 **참조를 포함하는 별도의 파일**입니다.
+Linux에서 절대 경로나 상대 경로의 형태로 된 다른 파일이나 디렉터리에 대한 **참조를 포함하는 별도의 파일**입니다.  
   - 원본에 대한 디렉터리 경로를 가지고 있어 해당 경로를 사용하여 원본 파일이나 디렉터리에 접근할 수 있습니다.
   - 아래 이미지는 pnpm 에서 프로젝트의 의존성 패키지들을 Symbolic Link 로 참조하는 모습입니다.
-![](https://velog.velcdn.com/images/rookieand/post/e86dc9ea-5f68-4212-967c-674b24c7c874/image.png)
+![](https://velog.velcdn.com/images/rookieand/post/e86dc9ea-5f68-4212-967c-674b24c7c874/image.png)  
 
 
 ### Symbolic Link의 특징
@@ -48,7 +48,7 @@ Linux에서 절대 경로나 상대 경로의 형태로 된 다른 파일이나 
   - 다만 Symbolic Link 간의 순환 참조가 발생할 수 있으므로 사용에 주의해야 합니다.
 
 ## `ln` 명령어
-Hard Link / Symbolic Link를 생성하는 명령어는 `ln`입니다.
+Hard Link / Symbolic Link를 생성하는 명령어는 `ln`입니다.  
 - 첫 번째 인자는 원본 파일명이며, 두 번째 인자는 링크를 생성할 대상 파일이나 디렉터리가 됩니다.
 - 기본적으로 Hard Link를 생성하며, `-s` 옵션을 사용하여 Hard Link 대신 Symbolic Link를 생성할 수 있습니다.
   - [IBM 공식 문서 링크](https://www.ibm.com/docs/zh/aix/7.1?topic=l-ln-command)
@@ -67,7 +67,7 @@ Create a link LINK or DIR/TARGET to the specified TARGET(s)
 ```
 
 ### `ln` 명령어의 옵션 설명
-아래는 `ln` 명령어에서 제공하는 다양한 Flag 목록입니다.
+아래는 `ln` 명령어에서 제공하는 다양한 Flag 목록입니다.  
 
 | 옵션  | 설명                                      |
 |-------|-----------------------------------------|
