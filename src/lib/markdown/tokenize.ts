@@ -169,7 +169,7 @@ export function tokenize(md: string): Block[] {
       i++;
     }
     if (paraLines.length > 0) {
-      blocks.push({ kind: "p", text: paraLines.join(" ") });
+      blocks.push({ kind: "p", text: paraLines.join("\n") });
     }
   }
 
