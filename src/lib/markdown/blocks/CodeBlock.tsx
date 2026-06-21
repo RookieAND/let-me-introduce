@@ -20,7 +20,7 @@ export function CodeBlock({ lang, body }: Props) {
       )}
       <pre className="p-5 bg-surface overflow-x-auto">
         <code
-          className="font-mono text-[13px] leading-[1.75] text-[#c9d1d9] block"
+          className="font-mono text-[13px] leading-[1.75] text-code-fg block"
           dangerouslySetInnerHTML={{ __html: highlight(body, lang) }}
         />
       </pre>
