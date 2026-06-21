@@ -59,7 +59,7 @@ export function Career() {
                 <Text variant="heading6">{item.title}</Text>
                 {item.badge && <Badge>{item.badge}</Badge>}
               </div>
-              <ul className="flex flex-col gap-2.25 mt-1 mb-4 max-w-[64ch]">
+              <ul className="flex flex-col gap-2.25 mt-1 mb-4 max-w-[80ch]">
                 {item.bullets.map((bullet) => (
                   <li
                     key={bullet}

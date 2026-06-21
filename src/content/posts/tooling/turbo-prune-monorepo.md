@@ -127,4 +127,5 @@ RUN --mount=type=cache,id=pnmcache,target=/var/pnpm/store \
 
 ### Turbo Cache 문제
 
-매 빌드마다 생성되는 turbo cache를 Docker 빌드 간에 재활용할 수 없어 매번 전체 빌드가 수행된다. Remote Cache 사용을 고려하고 있으며, SRE 팀에서 자체적으로 캐싱 이미지를 구축하는 방향으로 진행 중이다.  
+매 빌드마다 생성되는 turbo cache를 Docker 빌드 간에 재활용할 수 없어 매번 전체 빌드가 수행된다.  
+Remote Cache 사용을 고려하고 있으며, SRE 팀에서 자체적으로 캐싱 이미지를 구축하는 방향으로 진행 중이다.  
