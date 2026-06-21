@@ -11,9 +11,9 @@ export const STATS = [
     prefix: "",
     target: 83,
     unit: "% ↓",
-    label: "Docker 배포 시간 단축",
-    method: "멀티스테이지 빌드 최적화",
-    context: "단독 · Docker",
+    label: "FE 빌드 시간 단축",
+    method: "Vite v5→v8 청크 분리 전략",
+    context: "단독 · Vite",
   },
   {
     prefix: "",
@@ -25,11 +25,11 @@ export const STATS = [
   },
   {
     prefix: "",
-    target: 79,
-    unit: "/79",
-    label: "유닛 테스트 통과",
-    method: "0건에서 안전망 구축",
-    context: "단독 · 테스트 도입",
+    target: 71,
+    unit: "% ↓",
+    label: "Docker 배포 시간 단축",
+    method: "멀티스테이지 빌드 최적화",
+    context: "단독 · Docker",
   },
 ] as const;
 
@@ -78,9 +78,9 @@ export const CAREER_ITEMS = [
     bullets: [
       "수동 DB 제어에 의존하던 권한을 <b>역할·리소스 기반 ABAC 모델</b>로 재설계하고 BE·FE 구현",
       "<b>Turborepo 호환 Remote Cache</b>를 AWS EFS 위에 구성해 CI 빌드 시간 최대 70% 단축",
-      "<b>Playwright E2E</b>와 유닛 테스트 79건을 설계해 시스템 버그를 사전 차단하는 테스트망 구축",
-      "빌드 속도와 캐시 효율의 Trade-Off를 고려하여 <b>청크 분리 전략</b>을 설계, 재다운로드 90% 절감",
-      "pnpm v11 <b>native deploy</b> 로 전환해 store 재활용 이점을 살려 Docker 빌드 시간 82% 단축",
+      "<b>Vitest</b> 커버리지 80%를 CI 게이트로 강제하고, E2E 중복 140건 제거·병렬화로 실행 시간 12분 → 4분 단축",
+      "Vite v5 → v8 업그레이드 및 <b>청크 분리 전략</b> 도입으로 FE 빌드 시간 8.5s → 1.44s (83% 단축)",
+      "<b>Dockerfile 멀티스테이지 빌드 최적화</b> 및 이미지 레이어 개선으로 Docker 배포 시간 163s → 48s (71% 단축)",
     ],
   },
   {
@@ -92,7 +92,7 @@ export const CAREER_ITEMS = [
       "지원자 행동 데이터를 자체 트래킹해 모집 과정의 이탈 구간을 짚어내는 <b>데이터 기반 운영</b> 전환",
       "4~5명 스쿼드 구성원을 리딩하며 자체 비전·로드맵 제시와 개발자 스크럼 진행으로 성장 주도",
       "복잡한 지원서·강좌·유닛 테이블을 <b>Headless 기반 공통 UI 시스템</b>으로 통합 전환",
-      "이벤트 기반 출결 처리를 재설계해 데이터 실시간 반영, 출결 문의 전월 대비 52% 감소",
+      "이벤트 기반 출결 처리를 재설계해 데이터 실시간 반영, 출결 문의 전년 대비 52% 감소",
     ],
   },
   {
@@ -101,8 +101,8 @@ export const CAREER_ITEMS = [
     badge: null,
     bullets: [
       "구름의 교육부 <b>AI 디지털 교과서 (AIDT)</b> 사업 플랫폼의 학생 대시보드 내 기능 UI 개발 전담",
-      "오답노트·AI 추천 콘텐츠 모달 등 핵심 학습 기능을 Compound Pattern 기반으로 설계·개발",
-      "5Depth 구조의 학습맵 내 선택·연동 로직을 트리 자료구조로 설계하고 이를 React가 구독하도록 개발",
+      "오답노트·감정평가·학습목표·시험과제 <b>4종 대시보드</b>를 3개월 내 FE 전담 설계·구현",
+      "5Depth 학습맵을 트리 클래스로 구현하고 <b>useSyncExternalStore</b>로 선택 노드 목록만 컴포넌트에 전파",
     ],
   },
   {
@@ -119,8 +119,8 @@ export const CAREER_ITEMS = [
     title: "디지털새싹 PMS · KDT 개발",
     badge: null,
     bullets: [
-      "강사·교구재·캠프 운영 등 교육 사업 <b>관리 시스템(PMS)</b>을 KoaJS 기반으로 개발·운영",
-      "재단용 PMS 운영 통계 어드민을 풀스택 개발, 통계 전용 스키마 설계로 반복 집계 비용 제거",
+      "누적 사용자 11만+ 규모의 교육 사업 <b>관리 시스템(PMS)</b>을 KoaJS 기반으로 개발·운영",
+      "17개 시도교육청 계정별 <b>운영 통계 대시보드</b>를 구현해 10만 건의 지역 단위 현황 가시화",
       "KDT 사업 증빙용 누적·기간별 <b>학습시간 집계 API</b>를 NestJS로 설계하여 실 사용 진행",
     ],
   },
@@ -131,7 +131,7 @@ export const WORK_ITEMS = [
     name: "모노레포 빌드 환경 고도화",
     kind: "Infra / DevOps",
     lines: [
-      "Turbo Remote Cache와 Docker 멀티스테이지 빌드를 도입해 CI 빌드 70%, 배포 시간 83%를 줄였습니다.",
+      "Turbo Remote Cache, Vite 청크 분리 전략, Docker 멀티스테이지 빌드로 CI 70%, FE 빌드 83%, Docker 배포 71%를 줄였습니다.",
       "pnpm·Vite·ESLint 버전 업데이트를 순차적으로 반영하며 팀이 사용할 개발 환경을 다졌습니다.",
     ],
   },
@@ -159,7 +159,7 @@ export const AWARDS = [
 ] as const;
 
 export const CERTS = [
-  { name: "MongoDB Associate Developer (Node.js)", year: "2025.02" },
+  { name: "MongoDB Associate Developer (Node.js)", year: "2025.01" },
   { name: "OPIc IH · ACTFL", year: "2024.02" },
   { name: "건국대학교 글로컬캠퍼스 컴퓨터공학부 학사", year: "2017.03 ~ 2025.02" },
 ] as const;
