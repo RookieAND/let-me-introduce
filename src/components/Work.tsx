@@ -4,14 +4,14 @@ import { WORK_ITEMS } from "#/data/Portfolio";
 
 export function Work() {
   return (
-    <section className="relative py-30 max-[520px]:py-21" id="work">
-      <div className="max-w-280 mx-auto px-8 w-full max-[520px]:px-5">
+    <section className="relative py-30 max-compact:py-21" id="work">
+      <div className="max-w-280 mx-auto px-8 w-full max-compact:px-5">
         <Reveal className="flex items-baseline gap-4.5 mb-14">
           <Text variant="caption" color="accent">
             04
           </Text>
           <Text variant="heading4">Selected Work</Text>
-          <Text variant="caption" color="subtle" className="ml-auto max-[600px]:hidden">
+          <Text variant="caption" color="subtle" className="ml-auto max-narrow:hidden">
             {"// 실무에서는 이런 일들을 해왔습니다"}
           </Text>
         </Reveal>
@@ -19,7 +19,7 @@ export function Work() {
         <div className="flex flex-col">
           {WORK_ITEMS.map((item, i) => (
             <Reveal key={item.name} delay={i * 0.05}>
-              <div className="grid grid-cols-[230px_1fr] gap-7 px-1 py-6 border-t border-border last:border-b transition-[padding,background] duration-250 hover:bg-surface hover:px-4.5 max-[640px]:grid-cols-1 max-[640px]:gap-2">
+              <div className="grid grid-cols-[230px_1fr] gap-7 px-1 py-6 border-t border-border last:border-b transition-[padding,background] duration-250 hover:bg-surface hover:px-4.5 max-sm:grid-cols-1 max-sm:gap-2">
                 <div>
                   <Text variant="heading6">{item.name}</Text>
                   <Text variant="label" color="subtle" className="tracking-[0.06em] mt-1.75 block">

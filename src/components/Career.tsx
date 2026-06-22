@@ -5,14 +5,14 @@ import { CAREER_ITEMS } from "#/data/Portfolio";
 
 export function Career() {
   return (
-    <section className="relative py-30 max-[520px]:py-21" id="career">
-      <div className="max-w-280 mx-auto px-8 w-full max-[520px]:px-5">
+    <section className="relative py-30 max-compact:py-21" id="career">
+      <div className="max-w-280 mx-auto px-8 w-full max-compact:px-5">
         <Reveal className="flex items-baseline gap-4.5 mb-14">
           <Text variant="caption" color="accent">
             03
           </Text>
           <Text variant="heading4">Career</Text>
-          <Text variant="caption" color="subtle" className="ml-auto max-[600px]:hidden">
+          <Text variant="caption" color="subtle" className="ml-auto max-narrow:hidden">
             {"// 2023 — Now"}
           </Text>
         </Reveal>
@@ -33,18 +33,24 @@ export function Career() {
               Fullstack Engineer
             </Text>
           </div>
-          <div className="ml-auto font-mono text-[12.5px] text-text-3 text-right max-[600px]:hidden">
+          <Text
+            as="div"
+            variant="caption"
+            color="subtle"
+            fontFamily="mono"
+            className="ml-auto text-[12.5px] text-right max-narrow:hidden"
+          >
             2023.08
             <br />— 현재
-          </div>
+          </Text>
         </Reveal>
 
         <Reveal>
-          <Text variant="subtitle2" color="muted" className="max-w-[80ch] -mt-7 mb-10">
+          <Text variant="subtitle2" color="muted" className="max-w-80ch -mt-7 mb-10">
             IT 에듀테크 기업인 구름의 교육 사업 플랫폼 (구름 EDU) 을 개발해왔습니다.
             <br />
             서비스 개발에서 소규모의{" "}
-            <strong className="text-text font-semibold">스쿼드 리더</strong>를 거쳤고, 지금은 교육
+            <Text as="strong" color="default" className="font-semibold">스쿼드 리더</Text>를 거쳤고, 지금은 교육
             사업의 모집 단계와 학습 경험을 주로 다룹니다.
           </Text>
         </Reveal>
@@ -59,11 +65,14 @@ export function Career() {
                 <Text variant="heading6">{item.title}</Text>
                 {item.badge && <Badge>{item.badge}</Badge>}
               </div>
-              <ul className="flex flex-col gap-2.25 mt-1 mb-4 max-w-[80ch]">
+              <ul className="flex flex-col gap-2.25 mt-1 mb-4 max-w-80ch">
                 {item.bullets.map((bullet) => (
-                  <li
+                  <Text
+                    as="li"
                     key={bullet}
-                    className="relative pl-5 text-text-2 text-[14.5px] leading-[1.62]"
+                    variant="body2"
+                    color="muted"
+                    className="relative pl-5 leading-relaxed"
                   >
                     <span
                       className="absolute left-0.5 top-2.25 w-1.5 h-1.5 rounded-xs bg-accent rotate-45"
@@ -71,7 +80,7 @@ export function Career() {
                     />
                     {/* biome-ignore lint/security/noDangerouslySetInnerHtml: static portfolio data */}
                     <span dangerouslySetInnerHTML={{ __html: bullet }} />
-                  </li>
+                  </Text>
                 ))}
               </ul>
             </Reveal>

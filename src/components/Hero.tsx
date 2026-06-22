@@ -79,12 +79,17 @@ export function Hero() {
       </div>
 
       {/* Content */}
-      <div className="max-w-280 mx-auto px-8 w-full relative z-[2] grid grid-cols-[1.25fr_0.9fr] gap-14 items-center pt-20 pb-10 max-[900px]:grid-cols-1 max-[900px]:gap-12">
+      <div className="max-w-280 mx-auto px-8 w-full relative z-[2] grid grid-cols-[1.25fr_0.9fr] gap-14 items-center pt-20 pb-10 max-tablet-wide:grid-cols-1 max-tablet-wide:gap-12">
         {/* Left: text */}
         <div>
-          <div className="reveal in font-sans text-[13px] tracking-[0.14em] uppercase text-accent inline-flex items-center gap-3 mb-6.5 before:content-[''] before:w-8.5 before:h-px before:bg-accent">
+          <Text
+            as="div"
+            variant="eyebrow"
+            color="accent"
+            className="reveal in inline-flex items-center gap-3 mb-6.5 before:content-[''] before:w-8.5 before:h-px before:bg-accent"
+          >
             Frontend Engineer
-          </div>
+          </Text>
 
           <Text variant="heading1" className="reveal in d1 mb-2.5 hero-name-sheen">
             백광인
@@ -103,11 +108,11 @@ export function Hero() {
             Baik&nbsp;Gwangin
           </Text>
 
-          <Text variant="subtitle1" className="reveal in d2 max-w-[30em]">
+          <Text variant="subtitle1" className="reveal in d2 max-w-30em">
             요구사항 너머의{" "}
-            <strong className="text-accent-bright font-semibold">맥락을 읽고</strong>,<br />
+            <Text as="strong" color="bright" className="font-semibold">맥락을 읽고</Text>,<br />
             최선의 해결책을 찾아{" "}
-            <strong className="text-accent-bright font-semibold">끝까지 실행</strong>
+            <Text as="strong" color="bright" className="font-semibold">끝까지 실행</Text>
             하는 개발자입니다.
           </Text>
 
@@ -134,12 +139,12 @@ export function Hero() {
         </div>
 
         {/* Right: portrait */}
-        <div className="portrait-wrap relative justify-self-center max-[900px]:justify-self-start">
+        <div className="portrait-wrap relative justify-self-center max-tablet-wide:justify-self-start">
           <div
-            className="absolute -inset-3.5 border border-border rounded-[26px] z-[-1]"
+            className="absolute -inset-3.5 border border-border rounded-portrait z-[-1]"
             aria-hidden
           />
-          <div className="portrait-overlay portrait-shadow relative w-80 h-100 rounded-[18px] overflow-hidden border border-border-strong max-[900px]:w-65 max-[900px]:h-80">
+          <div className="portrait-overlay portrait-shadow relative w-80 h-100 rounded-card-lg overflow-hidden border border-border-strong max-tablet-wide:w-65 max-tablet-wide:h-80">
             <img
               src="/assets/profile.jpg"
               alt="백광인 프로필 사진"
@@ -148,7 +153,7 @@ export function Hero() {
               decoding="async"
             />
           </div>
-          <div className="absolute -bottom-3.5 -left-4.5 bg-surface border border-border-strong rounded-[10px] px-3.5 py-2.25 flex items-center gap-2 status-card-shadow">
+          <div className="absolute -bottom-3.5 -left-4.5 bg-surface border border-border-strong rounded-chip px-3.5 py-2.25 flex items-center gap-2 status-card-shadow">
             <span className="w-2 h-2 rounded-full bg-green-ping shadow-[0_0_8px_var(--color-green-ping)] shrink-0" />
             <Text as="span" variant="caption" color="muted" className="text-[11.5px]">
               Fullstack Engineer · RookieAND
@@ -158,10 +163,15 @@ export function Hero() {
       </div>
 
       {/* Scroll hint */}
-      <div className="absolute bottom-7.5 left-1/2 -translate-x-1/2 z-2 font-sans text-[11px] tracking-[0.2em] text-text-3 flex flex-col items-center gap-2.5 uppercase max-[900px]:hidden">
+      <Text
+        as="div"
+        variant="caption"
+        color="subtle"
+        className="absolute bottom-7.5 left-1/2 -translate-x-1/2 z-2 text-[11px] tracking-[0.2em] flex flex-col items-center gap-2.5 uppercase max-tablet-wide:hidden"
+      >
         <span>SCROLL</span>
         <span className="w-px h-10 bg-linear-to-b from-accent to-transparent animate-scroll-line" />
-      </div>
+      </Text>
     </header>
   );
 }

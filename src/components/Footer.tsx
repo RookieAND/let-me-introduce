@@ -1,4 +1,5 @@
 import { Link } from "react-router-dom";
+import { Text } from "#/components/ui/text";
 import { useTheme } from "#/hooks/UseTheme";
 
 interface FooterProps {
@@ -12,41 +13,52 @@ export function Footer({ variant = "portfolio" }: FooterProps) {
   return (
     <footer className="border-t border-border py-7.5">
       <div className="max-w-280 mx-auto px-8 w-full flex justify-between items-center flex-wrap gap-3">
-        <span className="font-sans text-[12px] text-text-3">
+        <Text as="span" variant="caption" color="subtle">
           © 2026 BAIK GWANGIN · Frontend Engineer
-        </span>
+        </Text>
         <div className="flex items-center gap-5">
           {variant === "portfolio" ? (
-            <button
+            <Text
+              as="button"
               type="button"
-              className="font-sans text-[12px] text-text-3 hover:text-accent transition-colors duration-200 cursor-pointer bg-transparent border-none"
+              variant="caption"
+              color="subtle"
+              className="hover:text-accent transition-colors duration-200 cursor-pointer bg-transparent border-none"
               onClick={scrollToTop}
             >
               ↑ BACK TO TOP
-            </button>
+            </Text>
           ) : (
             <>
-              <Link
-                to="/"
-                className="font-sans text-[12px] text-text-3 hover:text-accent transition-colors duration-200"
+              <Text
+                variant="caption"
+                color="subtle"
+                asChild
+                className="hover:text-accent transition-colors duration-200"
               >
-                Portfolio
-              </Link>
-              <a
+                <Link to="/">Portfolio</Link>
+              </Text>
+              <Text
+                as="a"
                 href="https://github.com/RookieAND"
                 target="_blank"
                 rel="noreferrer noopener"
-                className="font-sans text-[12px] text-text-3 hover:text-accent transition-colors duration-200"
+                variant="caption"
+                color="subtle"
+                className="hover:text-accent transition-colors duration-200"
               >
                 GitHub ↗
-              </a>
+              </Text>
             </>
           )}
-          <button
+          <Text
+            as="button"
             type="button"
             onClick={toggle}
             aria-label={theme === "dark" ? "라이트 모드로 전환" : "다크 모드로 전환"}
-            className="font-sans text-[12px] text-text-3 hover:text-accent transition-colors duration-200 cursor-pointer bg-transparent border-none flex items-center gap-1.5"
+            variant="caption"
+            color="subtle"
+            className="hover:text-accent transition-colors duration-200 cursor-pointer bg-transparent border-none flex items-center gap-1.5"
           >
             {theme === "dark" ? (
               <svg viewBox="0 0 24 24" width={13} height={13} fill="none" stroke="currentColor" strokeWidth="1.75" strokeLinecap="round" strokeLinejoin="round" aria-hidden={true}>
@@ -66,7 +78,7 @@ export function Footer({ variant = "portfolio" }: FooterProps) {
               </svg>
             )}
             {theme === "dark" ? "LIGHT" : "DARK"}
-          </button>
+          </Text>
         </div>
       </div>
     </footer>

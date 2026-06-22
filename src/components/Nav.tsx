@@ -1,6 +1,7 @@
 import * as NavigationMenuPrimitive from "@radix-ui/react-navigation-menu";
 import type { ReactNode } from "react";
 import { Link, useLocation } from "react-router-dom";
+import { Text } from "#/components/ui/text";
 import { useNavScroll } from "#/hooks/UseNavScroll";
 import { cn } from "#/lib/Utils";
 
@@ -23,13 +24,17 @@ function NavRoot({ alwaysScrolled = false, children }: NavProps) {
       )}
     >
       <div className="max-w-280 mx-auto px-8 w-full flex items-center justify-between">
-        <Link
-          to="/"
-          className="font-sans text-[14px] tracking-[0.04em] text-text font-medium flex items-center gap-2.25"
+        <Text
+          variant="body2"
+          color="default"
+          asChild
+          className="tracking-[0.04em] font-medium flex items-center gap-2.25"
         >
-          <span className="w-1.75 h-1.75 rounded-full bg-accent shadow-[0_0_10px_var(--color-accent)] shrink-0" />
-          BAIK GWANGIN
-        </Link>
+          <Link to="/">
+            <span className="w-1.75 h-1.75 rounded-full bg-accent shadow-[0_0_10px_var(--color-accent)] shrink-0" />
+            BAIK GWANGIN
+          </Link>
+        </Text>
 
         <div className="flex items-center gap-2">
           {!isPostsPage && (
@@ -81,19 +86,28 @@ function NavLink({
   className?: string;
   children: ReactNode;
 }) {
-  const base = "font-mono text-[12.5px] tracking-[0.03em] transition-colors duration-200";
-
   return (
     <NavigationMenuPrimitive.Item>
       <NavigationMenuPrimitive.Link asChild>
         {to ? (
-          <Link to={to} className={cn(base, className)}>
-            {children}
-          </Link>
+          <Text
+            variant="caption"
+            fontFamily="mono"
+            asChild
+            className={cn("transition-colors duration-200", className)}
+          >
+            <Link to={to}>{children}</Link>
+          </Text>
         ) : (
-          <a href={href} className={cn(base, className)}>
+          <Text
+            as="a"
+            href={href}
+            variant="caption"
+            fontFamily="mono"
+            className={cn("transition-colors duration-200", className)}
+          >
             {children}
-          </a>
+          </Text>
         )}
       </NavigationMenuPrimitive.Link>
     </NavigationMenuPrimitive.Item>

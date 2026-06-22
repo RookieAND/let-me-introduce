@@ -13,33 +13,40 @@ function PostCount() {
   return (
     <div className="mt-8 mb-8 pt-8 flex justify-between items-center min-h-18">
       <div className="flex items-baseline gap-2.5">
-        <motion.span
-          ref={ref}
-          className="font-display text-[clamp(38px,5vw,58px)] font-semibold tracking-[-0.03em] leading-none tabular-nums"
+        <Text
+          fontFamily="display"
+          asChild
+          className="text-[clamp(38px,5vw,58px)] font-semibold tracking-[-0.03em] leading-none tabular-nums"
         >
-          {rounded}
-        </motion.span>
-        <span className="font-mono text-accent text-[clamp(13px,1.5vw,17px)] tracking-widest uppercase leading-none">
+          <motion.span ref={ref}>{rounded}</motion.span>
+        </Text>
+        <Text
+          as="span"
+          variant="eyebrow"
+          color="accent"
+          fontFamily="mono"
+          className="text-[clamp(13px,1.5vw,17px)] tracking-widest leading-none"
+        >
           posts
-        </span>
+        </Text>
       </div>
-      <span className="font-mono text-text-3 text-[11.5px] tracking-[0.06em]">
+      <Text as="span" variant="caption" color="subtle" fontFamily="mono" className="text-[11.5px] tracking-[0.06em]">
         2022.12 — 현재
-      </span>
+      </Text>
     </div>
   );
 }
 
 export function RecentPosts() {
   return (
-    <section className="relative py-30 max-[520px]:py-21" id="study">
-      <div className="max-w-280 mx-auto px-8 w-full max-[520px]:px-5">
+    <section className="relative py-30 max-compact:py-21" id="study">
+      <div className="max-w-280 mx-auto px-8 w-full max-compact:px-5">
         <Reveal className="flex items-baseline gap-4.5">
           <Text variant="caption" color="accent">
             04
           </Text>
           <Text variant="heading4">My Study</Text>
-          <Text variant="caption" color="subtle" className="ml-auto max-[600px]:hidden">
+          <Text variant="caption" color="subtle" className="ml-auto max-narrow:hidden">
             {"// 배운 것들을 꾸준히 기록해왔습니다"}
           </Text>
         </Reveal>
@@ -55,12 +62,15 @@ export function RecentPosts() {
           ))}
         </div>
         <Reveal className="flex justify-end mt-8">
-          <Link
-            to="/posts"
-            className="font-mono text-[13px] text-text-2 hover:text-accent transition-colors duration-200 flex items-center gap-1.75"
+          <Text
+            variant="body3"
+            color="muted"
+            fontFamily="mono"
+            asChild
+            className="hover:text-accent transition-colors duration-200 flex items-center gap-1.75"
           >
-            모든 글 보기 →
-          </Link>
+            <Link to="/posts">모든 글 보기 →</Link>
+          </Text>
         </Reveal>
       </div>
     </section>
