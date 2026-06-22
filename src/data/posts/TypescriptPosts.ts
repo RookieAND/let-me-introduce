@@ -2,6 +2,18 @@ import type { Post } from "#/data/Posts";
 
 export const TYPESCRIPT_POSTS: Post[] = [
   {
+    slug: "typescript-duck-typing-excess-property-check",
+    date: "2025-01-22",
+    cat: "TypeScript",
+    title: "Duck Typing 과 Excess Property Check 에 대하여",
+    excerpt: [
+      "변수에 담으면 되는데 리터럴로 바로 넘기면 에러가 터진다 — 구조적 타이핑과 잉여 속성 검사가 나뉘는 이유.",
+    ],
+    tags: ["TypeScript", "구조적 타이핑", "잉여 속성 검사"],
+    read: "6 min",
+    href: "/posts/typescript-duck-typing-excess-property-check",
+  },
+  {
     slug: "typescript-module-resolution",
     date: "2026-05-26",
     cat: "TypeScript",
