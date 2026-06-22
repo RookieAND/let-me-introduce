@@ -2,6 +2,18 @@ import type { Post } from "#/data/Posts";
 
 export const FRONTEND_POSTS: Post[] = [
   {
+    slug: "robots-txt-noindex",
+    date: "2024-05-15",
+    cat: "Frontend",
+    title: "robots.txt 와 noindex 를 함께 쓰면 검색 노출을 막을 수 없다",
+    excerpt: [
+      "CS 요청으로 마주친 robots.txt + noindex 충돌 — 둘을 함께 걸면 색인은 생성되는데 noindex 는 작동하지 않는 최악의 상태가 된다.",
+    ],
+    tags: ["SEO", "robots.txt", "noindex", "검색엔진", "Google Search Console"],
+    read: "5 min",
+    href: "/posts/robots-txt-noindex",
+  },
+  {
     slug: "react-use-sync-external-store",
     date: "2024-06-21",
     cat: "Frontend",

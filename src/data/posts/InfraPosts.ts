@@ -2,6 +2,18 @@ import type { Post } from "#/data/Posts";
 
 export const INFRA_POSTS: Post[] = [
   {
+    slug: "elastic-apm-rum",
+    date: "2025-07-10",
+    cat: "DB / Infra",
+    title: "Elastic APM & RUM — 데이터 모델과 RUM JS Agent 실전 사용",
+    excerpt: [
+      "Span·Transaction·Trace·Error·Metadata로 구성된 APM 데이터 모델 개념 정리와, RUM JS Agent 자동 계측·수동 트랜잭션·managed: true 동작 원리까지.",
+    ],
+    tags: ["Elastic", "APM", "RUM", "모니터링", "Distributed Tracing", "Core Web Vitals"],
+    read: "25 min",
+    href: "/posts/elastic-apm-rum",
+  },
+  {
     slug: "valkey-hash-key-expiration",
     date: "2026-02-20",
     cat: "DB / Infra",
