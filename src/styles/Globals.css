@@ -27,11 +27,22 @@
   /* ── Radius ── */
   --radius-btn: 9px;
   --radius-btn-sm: 7px;
+  --radius-tag: 5px;
+  --radius-chip: 10px;
+  --radius-card: 14px;
+  --radius-card-lg: 18px;
+  --radius-portrait: 26px;
 
   /* ── Shadows ── */
   --shadow-btn-glow: 0 10px 30px -8px rgba(91, 141, 239, 0.6);
   --shadow-btn-glow-sm: 0 6px 16px -6px rgba(91, 141, 239, 0.5);
 }
+
+/* ── Custom Breakpoints ── */
+@custom-variant max-compact (@media (max-width: 520px));
+@custom-variant max-narrow (@media (max-width: 600px));
+@custom-variant max-tablet (@media (max-width: 760px));
+@custom-variant max-tablet-wide (@media (max-width: 900px));
 
 /* ── Base ── */
 @layer base {
@@ -90,6 +101,20 @@
 }
 
 /* ── Scroll Reveal ── */
+/* ── Content Width Utilities ── */
+@layer utilities {
+  .max-w-article { max-width: 740px; }
+  .max-w-18ch { max-width: 18ch; }
+  .max-w-30ch { max-width: 30ch; }
+  .max-w-30em { max-width: 30em; }
+  .max-w-58ch { max-width: 58ch; }
+  .max-w-60ch { max-width: 60ch; }
+  .max-w-64ch { max-width: 64ch; }
+  .max-w-68ch { max-width: 68ch; }
+  .max-w-70ch { max-width: 70ch; }
+  .max-w-80ch { max-width: 80ch; }
+}
+
 @layer utilities {
   .scrollbar-hide {
     scrollbar-width: none;
