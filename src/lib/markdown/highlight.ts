@@ -40,7 +40,9 @@ const LANG_ALIAS: Record<string, string> = {
 };
 
 export function highlight(code: string, lang: string): string {
+  if (!lang) return escapeHtml(code);
   const normalized = LANG_ALIAS[lang] ?? lang;
+  if (!hljs.getLanguage(normalized)) return escapeHtml(code);
   try {
     return hljs.highlight(code, { language: normalized, ignoreIllegals: true }).value;
   } catch {
