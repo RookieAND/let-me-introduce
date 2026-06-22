@@ -55,7 +55,7 @@ interface Props {
 export function CalloutBlock({ calloutType, lines }: Props) {
   const cfg = CONFIG[calloutType];
   return (
-    <div className={`${cfg.bg} border ${cfg.border} rounded-[10px] px-5 py-4 my-6`}>
+    <div className={`${cfg.bg} border ${cfg.border} rounded-chip px-5 py-4 my-6`}>
       <div
         className={`flex items-center gap-2 font-sans font-semibold text-[13px] tracking-[0.04em] uppercase mb-2 ${cfg.title}`}
       >

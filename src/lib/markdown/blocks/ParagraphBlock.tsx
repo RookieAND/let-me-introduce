@@ -1,4 +1,5 @@
 import type { ReactNode } from "react";
+import { Text } from "#/components/ui/text";
 import { parseInline } from "#/lib/markdown/parseInline";
 
 interface Props {
@@ -19,8 +20,8 @@ export function ParagraphBlock({ text }: Props) {
   });
 
   return (
-    <p className="font-sans text-[16px] leading-[1.9] text-text-2 mb-5 last:mb-0">
+    <Text variant="body1" color="muted" className="text-[16px] leading-[1.9] mb-5 last:mb-0">
       {nodes}
-    </p>
+    </Text>
   );
 }

@@ -12,7 +12,7 @@ export function CodeBlock({ lang, body }: Props) {
   }
 
   return (
-    <div className="mb-6 rounded-[12px] overflow-hidden border border-border">
+    <div className="mb-6 rounded-xl overflow-hidden border border-border">
       {lang && (
         <div className="px-4 py-2 bg-surface-2 border-b border-border font-mono text-[11px] text-text-3 tracking-[0.06em] uppercase">
           {lang}

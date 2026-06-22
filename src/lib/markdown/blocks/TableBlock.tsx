@@ -7,14 +7,14 @@ interface Props {
 
 export function TableBlock({ headers, rows }: Props) {
   return (
-    <div className="my-7 w-full overflow-x-auto rounded-[10px] border border-border">
+    <div className="my-7 w-full overflow-x-auto rounded-chip border border-border">
       <table className="w-full text-left border-collapse">
         <thead>
           <tr className="border-b border-border-strong">
             {headers.map((h, j) => (
               <th
                 key={j}
-                className="bg-surface-2 px-4 py-3 font-mono text-[11.5px] tracking-[0.06em] uppercase text-text-3 whitespace-nowrap first:rounded-tl-[9px] last:rounded-tr-[9px]"
+                className="bg-surface-2 px-4 py-3 font-mono text-[11.5px] tracking-[0.06em] uppercase text-text-3 whitespace-nowrap first:rounded-tl-btn last:rounded-tr-btn"
               >
                 {parseInline(h)}
               </th>

@@ -54,7 +54,7 @@ export function MermaidBlock({ code }: MermaidBlockProps) {
 
   if (error) {
     return (
-      <div className="my-6 rounded-[12px] border border-red-400/40 bg-red-500/8 px-5 py-4">
+      <div className="my-6 rounded-xl border border-red-400/40 bg-red-500/8 px-5 py-4">
         <p className="font-mono text-[12px] text-red-300">mermaid: {error}</p>
       </div>
     );
@@ -62,13 +62,13 @@ export function MermaidBlock({ code }: MermaidBlockProps) {
 
   if (!svg) {
     return (
-      <div className="my-6 h-40 animate-pulse rounded-[12px] border border-border bg-surface" />
+      <div className="my-6 h-40 animate-pulse rounded-xl border border-border bg-surface" />
     );
   }
 
   return (
     <div
-      className="my-6 flex justify-center overflow-x-auto rounded-[12px] border border-border bg-surface p-6 [&_svg]:max-w-full"
+      className="my-6 flex justify-center overflow-x-auto rounded-xl border border-border bg-surface p-6 [&_svg]:max-w-full"
       dangerouslySetInnerHTML={{ __html: svg }}
     />
   );

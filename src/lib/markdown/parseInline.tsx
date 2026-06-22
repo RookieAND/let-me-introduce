@@ -32,7 +32,7 @@ export function parseInline(text: string): ReactNode {
       parts.push(
         <code
           key={key++}
-          className="font-mono text-[0.875em] bg-surface border border-border rounded-[5px] px-1.5 py-0.5 text-accent-bright"
+          className="font-mono text-[0.875em] bg-surface border border-border rounded-tag px-1.5 py-0.5 text-accent-bright"
         >
           {code}
         </code>,
