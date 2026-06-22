@@ -1,5 +1,6 @@
 import { minBy } from "es-toolkit";
 import { type ReactNode, useEffect, useRef, useState } from "react";
+import { Text } from "#/components/ui/text";
 import type { TocEntry } from "#/lib/markdown/slugify";
 
 const NAV_HEIGHT = 68;
@@ -103,14 +104,19 @@ export function PostToc({ headings }: { headings: TocEntry[] }) {
 
   return (
     <nav aria-label="목차">
-      <p className="font-mono text-[10px] tracking-[0.12em] uppercase text-text-3 mb-3 pl-3">
+      <Text
+        as="p"
+        fontFamily="mono"
+        color="subtle"
+        className="text-[10px] tracking-[0.12em] uppercase mb-3 pl-3"
+      >
         On this page
-      </p>
+      </Text>
 
       <div className="relative">
         <div className="absolute left-0 top-0 bottom-0 w-px bg-border" />
         <div
-          className="absolute w-[2px] bg-accent rounded-full transition-[top,height,left] duration-200 ease-out"
+          className="absolute w-0.5 bg-accent rounded-full transition-[top,height,left] duration-200 ease-out"
           style={{ top: indicator.top, height: indicator.height, left: indicator.left }}
         />
 
@@ -152,11 +158,14 @@ export function PostToc({ headings }: { headings: TocEntry[] }) {
                 />
               )}
 
-              <a
+              <Text
+                as="a"
                 href={`#${id}`}
                 data-toc-id={id}
-                className={`block py-[5px] font-sans text-[12.5px] leading-[1.45] transition-colors duration-150 ${TEXT_INDENT[level] ?? "pl-4"} ${
-                  activeId === id ? "text-text font-medium" : "text-text-3 hover:text-text-2"
+                variant="caption"
+                color={activeId === id ? "default" : "subtle"}
+                className={`block py-[5px] text-[12.5px] leading-[1.45] transition-colors duration-150 ${TEXT_INDENT[level] ?? "pl-4"} ${
+                  activeId === id ? "font-medium" : "hover:text-text-2"
                 }`}
                 onClick={(e) => {
                   e.preventDefault();
@@ -167,7 +176,7 @@ export function PostToc({ headings }: { headings: TocEntry[] }) {
                 }}
               >
                 {renderTocText(text)}
-              </a>
+              </Text>
             </li>
           ))}
         </ul>

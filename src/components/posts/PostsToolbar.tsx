@@ -73,7 +73,7 @@ export function PostsToolbar() {
         ))}
       </ToggleGroupPrimitive.Root>
 
-      <div className="ml-auto relative max-[640px]:ml-0 max-[640px]:w-full">
+      <div className="ml-auto relative max-sm:ml-0 max-sm:w-full">
         <label htmlFor={searchId} className="sr-only">
           글 검색
         </label>
@@ -86,7 +86,7 @@ export function PostsToolbar() {
           placeholder="search posts…"
           value={inputValue}
           onChange={handleChange}
-          className="font-sans text-[13px] text-text bg-surface border border-border rounded-[9px] py-2.25 pl-9 pr-3.5 w-52.5 transition-[border-color,width] duration-200 outline-none placeholder:text-text-3 focus:border-accent focus:w-62.5 max-[640px]:w-full max-[640px]:focus:w-full"
+          className="font-sans text-[13px] text-text bg-surface border border-border rounded-btn py-2.25 pl-9 pr-3.5 w-52.5 transition-[border-color,width] duration-200 outline-none placeholder:text-text-3 focus:border-accent focus:w-62.5 max-sm:w-full max-sm:focus:w-full"
         />
       </div>
     </div>

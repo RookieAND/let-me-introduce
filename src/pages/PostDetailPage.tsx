@@ -3,6 +3,7 @@ import { Link, Navigate, useParams } from "react-router-dom";
 import { Footer } from "#/components/Footer";
 import { Nav } from "#/components/Nav";
 import { PostToc } from "#/components/posts/PostToc";
+import { Text } from "#/components/ui/text";
 import { ALL_POSTS, CONTENT_LOADERS } from "#/data/Posts";
 import { MarkdownRenderer } from "#/lib/Markdown";
 import { extractHeadings } from "#/lib/markdown/slugify";
@@ -47,7 +48,7 @@ export function PostDetailPage() {
   return (
     <>
       <div
-        className="fixed top-0 left-0 h-[2px] bg-accent z-[200] transition-[width] duration-75 ease-linear"
+        className="fixed top-0 left-0 h-0.5 bg-accent z-[200] transition-[width] duration-75 ease-linear"
         style={{ width: `${progress}%` }}
         aria-hidden
       />
@@ -67,56 +68,71 @@ export function PostDetailPage() {
         Article stays perfectly centered on all screen sizes.
       */}
       <div className="pt-32 pb-28">
-        <div className="grid grid-cols-1 xl:grid-cols-[1fr_min(740px,100%)_1fr] max-w-[740px] xl:max-w-none mx-auto">
+        <div className="grid grid-cols-1 xl:grid-cols-[1fr_min(740px,100%)_1fr] max-w-article xl:max-w-none mx-auto">
           {/* Left col: TOC (xl only) */}
           <div className="hidden xl:flex justify-end pr-10 items-start">
-            <div className="sticky top-28 w-[200px] max-h-[calc(100vh-140px)] overflow-y-auto scrollbar-hide">
+            <div className="sticky top-28 w-50 max-h-[calc(100vh-140px)] overflow-y-auto scrollbar-hide">
               <PostToc headings={headings} />
             </div>
           </div>
 
           {/* Center col: article */}
-          <article className="px-8 max-[520px]:px-5">
-            <Link
-              to="/posts"
-              className="group inline-flex items-center gap-2 font-mono text-[12.5px] text-text-3 hover:text-text mb-10 transition-colors duration-150"
+          <article className="px-8 max-compact:px-5">
+            <Text
+              variant="caption"
+              color="subtle"
+              fontFamily="mono"
+              asChild
+              className="group inline-flex items-center gap-2 hover:text-text mb-10 transition-colors duration-150"
             >
-              <span className="transition-transform duration-200 group-hover:-translate-x-1">
-                ←
-              </span>
-              글 목록으로
-            </Link>
+              <Link to="/posts">
+                <span className="transition-transform duration-200 group-hover:-translate-x-1">←</span>
+                글 목록으로
+              </Link>
+            </Text>
 
             <header className="mb-10">
-              <div className="font-mono text-[11.5px] tracking-[0.1em] uppercase text-accent mb-4">
+              <Text
+                as="div"
+                fontFamily="mono"
+                color="accent"
+                className="text-[11.5px] tracking-[0.1em] uppercase mb-4"
+              >
                 {post.cat}
-              </div>
-              <h1 className="font-display font-semibold text-[clamp(26px,4vw,44px)] leading-[1.15] tracking-[-0.02em] text-text mb-5">
+              </Text>
+              <Text
+                as="h1"
+                fontFamily="display"
+                className="font-semibold text-[clamp(26px,4vw,44px)] leading-[1.15] tracking-[-0.02em] mb-5"
+              >
                 {post.title}
-              </h1>
-              <div className="mb-6 max-w-[58ch] flex flex-col gap-1.5">
+              </Text>
+              <div className="mb-6 max-w-58ch flex flex-col gap-1.5">
                 {post.excerpt.map((line) => (
-                  <p key={line} className="font-sans text-[16px] leading-[1.75] text-text-2">
+                  <Text key={line} variant="body1" color="muted" className="text-[16px] leading-[1.75]">
                     {line}
-                  </p>
+                  </Text>
                 ))}
               </div>
-              <div className="flex items-center gap-3.5 font-mono text-[12.5px] text-text-3 flex-wrap">
+              <Text as="div" variant="caption" color="subtle" fontFamily="mono" className="flex items-center gap-3.5 flex-wrap">
                 <span>
                   {yearStr}년 {monthNum}월
                 </span>
                 <span className="text-border-strong">·</span>
                 <span>{post.read} read</span>
-              </div>
+              </Text>
               {post.tags.length > 0 && (
                 <div className="flex flex-wrap gap-1.75 mt-5">
                   {post.tags.map((tag) => (
-                    <span
+                    <Text
+                      as="span"
                       key={tag}
-                      className="font-mono text-[11px] text-text-3 border border-border rounded-md px-2 py-0.75"
+                      fontFamily="mono"
+                      color="subtle"
+                      className="text-[11px] border border-border rounded-md px-2 py-0.75"
                     >
                       #{tag}
-                    </span>
+                    </Text>
                   ))}
                 </div>
               )}
@@ -127,15 +143,18 @@ export function PostDetailPage() {
             <MarkdownRenderer content={content} />
 
             <div className="mt-16 pt-8 border-t border-border">
-              <Link
-                to="/posts"
-                className="group inline-flex items-center gap-2 font-mono text-[12.5px] text-text-3 hover:text-text transition-colors duration-150"
+              <Text
+                variant="caption"
+                color="subtle"
+                fontFamily="mono"
+                asChild
+                className="group inline-flex items-center gap-2 hover:text-text transition-colors duration-150"
               >
-                <span className="transition-transform duration-200 group-hover:-translate-x-1">
-                  ←
-                </span>
-                모든 글 보기
-              </Link>
+                <Link to="/posts">
+                  <span className="transition-transform duration-200 group-hover:-translate-x-1">←</span>
+                  모든 글 보기
+                </Link>
+              </Text>
             </div>
           </article>
 

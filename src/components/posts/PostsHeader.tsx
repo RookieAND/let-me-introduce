@@ -13,11 +13,16 @@ export function PostsHeader() {
         }}
         aria-hidden
       />
-      <div className="max-w-280 mx-auto px-8 w-full relative z-[2] max-[520px]:px-5">
+      <div className="max-w-280 mx-auto px-8 w-full relative z-[2] max-compact:px-5">
         <Reveal>
-          <div className="font-sans text-[13px] tracking-[0.14em] uppercase text-accent inline-flex items-center gap-3 mb-5.5 before:content-[''] before:w-8.5 before:h-px before:bg-accent">
+          <Text
+            as="div"
+            variant="eyebrow"
+            color="accent"
+            className="inline-flex items-center gap-3 mb-5.5 before:content-[''] before:w-8.5 before:h-px before:bg-accent"
+          >
             Writing
-          </div>
+          </Text>
         </Reveal>
         <Reveal delay={0.08}>
           <Text
@@ -28,7 +33,7 @@ export function PostsHeader() {
           </Text>
         </Reveal>
         <Reveal delay={0.16}>
-          <Text variant="subtitle2" color="muted" className="max-w-[70ch]">
+          <Text variant="subtitle2" color="muted" className="max-w-70ch">
             배운 것을 설명할 수 있을 때 비로소 온전히 이해한 것이라 믿습니다.
             <br />
             개인적으로 공부하며 얻은 지식과 개발을 진행하며 부딪힌 문제와 그 해결 과정을 정리합니다.

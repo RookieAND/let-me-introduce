@@ -22,15 +22,15 @@ export function PostsPage() {
         </Nav.Link>
       </Nav>
       <PostsHeader />
-      <div className="max-w-280 mx-auto px-8 w-full max-[520px]:px-5">
+      <div className="max-w-280 mx-auto px-8 w-full max-compact:px-5">
         <PostsToolbar />
       </div>
       {!isFiltering && (
-        <div className="max-w-280 mx-auto px-8 w-full max-[520px]:px-5">
+        <div className="max-w-280 mx-auto px-8 w-full max-compact:px-5">
           <FeaturedPost />
         </div>
       )}
-      <main className="max-w-280 mx-auto px-8 w-full max-[520px]:px-5">
+      <main className="max-w-280 mx-auto px-8 w-full max-compact:px-5">
         <PostsList />
       </main>
       <Footer variant="posts" />

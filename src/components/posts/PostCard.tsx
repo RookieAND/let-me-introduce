@@ -7,7 +7,7 @@ interface PostCardProps {
 }
 
 const CARD_CLASS =
-  "group grid grid-cols-[120px_1fr_auto] gap-7 items-start px-2 py-7.5 border-t border-border transition-[background] duration-250 hover:bg-surface max-[760px]:grid-cols-1 max-[760px]:gap-2.5";
+  "group grid grid-cols-[120px_1fr_auto] gap-7 items-start px-2 py-7.5 border-t border-border transition-[background] duration-250 hover:bg-surface max-tablet:grid-cols-1 max-tablet:gap-2.5";
 
 function CardInner({ post }: { post: Post }) {
   const [yearStr, monthStr] = post.date.split("-");
@@ -15,12 +15,12 @@ function CardInner({ post }: { post: Post }) {
 
   return (
     <>
-      <div className="font-sans text-[12px] text-text-3 pt-1 leading-[1.5] max-[760px]:pt-0 max-[760px]:order-first">
+      <Text as="div" variant="caption" color="subtle" className="pt-1 leading-normal max-tablet:pt-0 max-tablet:order-first">
         {month}
-        <span className="block text-[13px] text-text-2 max-[760px]:inline max-[760px]:ml-1.5">
+        <Text as="span" variant="body3" color="muted" className="block max-tablet:inline max-tablet:ml-1.5">
           {yearStr}
-        </span>
-      </div>
+        </Text>
+      </Text>
 
       <div className="min-w-0">
         <Text variant="label" color="accent" className="tracking-[0.06em] mb-2.25 block">
@@ -32,7 +32,7 @@ function CardInner({ post }: { post: Post }) {
         >
           {post.title}
         </Text>
-        <div className="max-w-[64ch] mb-3.5 flex flex-col gap-1">
+        <div className="max-w-64ch mb-3.5 flex flex-col gap-1">
           {post.excerpt.map((line) => (
             <Text key={line} variant="body2" color="muted">
               {line}
@@ -41,22 +41,25 @@ function CardInner({ post }: { post: Post }) {
         </div>
         <div className="flex flex-wrap gap-1.75">
           {post.tags.map((tag) => (
-            <span
+            <Text
+              as="span"
               key={tag}
-              className="font-sans text-[11px] text-text-3 border border-border rounded-md px-2 py-0.75"
+              variant="caption"
+              color="subtle"
+              className="text-[11px] border border-border rounded-md px-2 py-0.75"
             >
               #{tag}
-            </span>
+            </Text>
           ))}
         </div>
       </div>
 
-      <div className="font-sans text-[12px] text-text-3 whitespace-nowrap pt-1 flex items-center gap-1.75 max-[760px]:hidden">
+      <Text as="div" variant="caption" color="subtle" className="whitespace-nowrap pt-1 flex items-center gap-1.75 max-tablet:hidden">
         {post.read}
         <span className="text-accent opacity-0 -translate-x-1.5 transition-all duration-250 group-hover:opacity-100 group-hover:translate-x-0">
           {post.href.startsWith("/") ? "→" : "↗"}
         </span>
-      </div>
+      </Text>
     </>
   );
 }
