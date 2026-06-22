@@ -1,6 +1,6 @@
 import { Pagination } from "#/components/ui/pagination";
 import { Text } from "#/components/ui/text";
-import { POSTS } from "#/data/Posts";
+import { ALL_POSTS } from "#/data/Posts";
 import { usePostsParams } from "#/hooks/UsePostsParams";
 import { PostCard } from "./PostCard";
 
@@ -11,7 +11,7 @@ export function PostsList() {
 
   const q = query.trim().toLowerCase();
 
-  const filtered = POSTS.filter((p) => {
+  const filtered = ALL_POSTS.filter((p) => {
     const matchCat = activeCat === "all" || p.cat === activeCat;
     const hay = [p.title, ...p.excerpt, ...p.tags, p.cat].join(" ").toLowerCase();
     const matchQ = !q || hay.includes(q);

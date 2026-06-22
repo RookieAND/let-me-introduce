@@ -1,13 +1,13 @@
 import * as ToggleGroupPrimitive from "@radix-ui/react-toggle-group";
 import { debounce, groupBy } from "es-toolkit";
 import { type ChangeEvent, useEffect, useId, useMemo, useState } from "react";
-import { CATEGORIES, type Category, POSTS } from "#/data/Posts";
+import { ALL_POSTS, CATEGORIES, type Category } from "#/data/Posts";
 import { usePostsParams } from "#/hooks/UsePostsParams";
 import { cn } from "#/lib/Utils";
 
-const grouped = groupBy(POSTS, (p) => p.cat);
+const grouped = groupBy(ALL_POSTS, (p) => p.cat);
 const counts: Record<string, number> = {
-  all: POSTS.length,
+  all: ALL_POSTS.length,
   ...Object.fromEntries(Object.entries(grouped).map(([k, v]) => [k, v.length])),
 };
 
