@@ -103,7 +103,7 @@
 /* ── Scroll Reveal ── */
 /* ── Content Width Utilities ── */
 @layer utilities {
-  .max-w-article { max-width: 740px; }
+  .max-w-article { max-width: 980px; }
   .max-w-18ch { max-width: 18ch; }
   .max-w-30ch { max-width: 30ch; }
   .max-w-30em { max-width: 30em; }
