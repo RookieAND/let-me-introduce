@@ -2,6 +2,18 @@ import type { Post } from "#/data/Posts";
 
 export const TYPESCRIPT_POSTS: Post[] = [
   {
+    slug: "typescript-isolated-declarations",
+    date: "2025-05-19",
+    cat: "TypeScript",
+    title: "isolatedDeclarations 의 장단점을 알아보자",
+    excerpt: [
+      "TypeScript 5.5 에서 export 타입 명시를 강제하는 이 옵션이 왜 생겼는지, 지금 당장 켜도 빌드가 빨라지지 않는 이유까지.",
+    ],
+    tags: ["TypeScript", "isolatedDeclarations", "d.ts", "빌드"],
+    read: "10 min",
+    href: "/posts/typescript-isolated-declarations",
+  },
+  {
     slug: "typescript-duck-typing-excess-property-check",
     date: "2025-01-22",
     cat: "TypeScript",
