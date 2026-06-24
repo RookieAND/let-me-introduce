@@ -2,6 +2,18 @@ import type { Post } from "#/data/Posts";
 
 export const INFRA_POSTS: Post[] = [
   {
+    slug: "gem-form-elastic-apm-rum",
+    date: "2025-07-17",
+    cat: "DB / Infra",
+    title: "GEM Form 에 ES APM RUM 을 도입해보자",
+    excerpt: [
+      "Sentry 대신 ES APM RUM 을 선택한 이유부터, RumAgent Singleton · 수동 Route 트랜잭션 · 필터 체계 · 휴리스틱 이름 문제 해결까지.",
+    ],
+    tags: ["Elastic", "APM", "RUM", "모니터링", "React", "Distributed Tracing"],
+    read: "20 min",
+    href: "/posts/gem-form-elastic-apm-rum",
+  },
+  {
     slug: "elastic-apm-rum",
     date: "2025-07-10",
     cat: "DB / Infra",
