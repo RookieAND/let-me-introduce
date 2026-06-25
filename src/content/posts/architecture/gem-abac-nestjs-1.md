@@ -53,17 +53,18 @@ VIEWER 역할  → Space 전체에 열람 권한
 
 ---
 
-## ABAC, 그리고 엄밀히는 무엇인가?
+## PBAC, 그리고 엄밀히는 무엇인가?
 
-ABAC(Attribute-Based Access Control)는 사용자·리소스·환경의 **속성(Attribute)** 을 동적으로 평가해서 권한을 결정하는 방식이다.  
+PBAC(Policy-Based Access Control)는 "누가 무엇을 어떤 조건에서 할 수 있는가"를 **Policy Rule** 로 선언하고, 런타임에 그 규칙을 평가해서 권한을 결정하는 방식이다.  
 
-근데 우리가 만든 게 순수 ABAC냐 하면 솔직히 조금 다르다. 순수 ABAC는 속성값을 동적으로 조합해서 평가하는데, 우리 시스템에는 **Level이라는 역할 추상화가 중간에 존재한다.**  
+근데 우리가 만든 게 운영자가 PolicyRule을 직접 정의하는 형태냐 하면 솔직히 조금 다르다.
+우리 시스템에는 **Level이라는 프리셋 추상화가 중간에 존재한다.**  
 
-운영자는 드롭다운에서 Level을 선택하고, 시스템이 런타임에 CASL PolicyRule로 변환해서 ABAC 방식으로 집행한다.  
+운영자는 드롭다운에서 Level을 선택하고, 시스템이 런타임에 CASL PolicyRule로 변환해서 집행한다.  
 
-엄밀히 말하면 **리소스 스코프 RBAC + ABAC 집행 레이어의 하이브리드**다. (물론 ABAC라고 불러도 틀린 건 아니다 — CASL은 ABAC 패턴을 구현하고, 핵심 문제도 ABAC 방식으로 해결했으니까)  
+엄밀히 말하면 **Level 프리셋 기반 PBAC**다. PolicyRule을 직접 건드리는 대신, 미리 정의된 정책 집합 중 하나를 고르는 구조다. (물론 PBAC라고 불러도 틀린 건 아니다 — 결국 PolicyRule이 접근을 제어하고, 핵심 문제도 Policy 선언으로 해결했으니까)  
 
-왜 순수 ABAC 대신 Level 추상화를 뒀느냐. 운영자가 개별 PolicyRule을 직접 건드리게 하면 휴먼 에러 위험이 너무 높다. Level이라는 프리셋을 두고, Level로 표현하기 어려운 예외 케이스만 PolicyOverride로 처리하는 구조가 현실적이었다.  
+왜 직접 PolicyRule 대신 Level 추상화를 뒀느냐. 운영자가 개별 PolicyRule을 직접 건드리게 하면 휴먼 에러 위험이 너무 높다. Level이라는 프리셋을 두고, Level로 표현하기 어려운 예외 케이스만 PolicyOverride로 처리하는 구조가 현실적이었다.  
 
 ---
 
@@ -236,7 +237,7 @@ Level 체계로 처리하기 어려운 케이스가 있다.
 }
 ```
 
-이 부분만큼은 진짜 ABAC다. PolicyOverride는 개발자가 직접 제어하는 것으로 정책을 결정했다. 일반 UI에서는 생성/수정이 불가하다.  
+이 부분만큼은 진짜 PBAC다. PolicyOverride는 개발자가 직접 제어하는 것으로 정책을 결정했다. 일반 UI에서는 생성/수정이 불가하다.  
 
 ---
 

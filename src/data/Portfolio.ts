@@ -76,7 +76,7 @@ export const CAREER_ITEMS = [
     title: "구름 EDU 모집·운영 플랫폼(Exelearnce) 개발",
     badge: null,
     bullets: [
-      "수동 DB 제어에 의존하던 권한을 <b>역할·리소스 기반 ABAC 모델</b>로 재설계하고 BE·FE 구현",
+      "수동 DB 제어에 의존하던 권한을 <b>역할·리소스 기반 PBAC 모델</b>로 재설계하고 BE·FE 구현",
       "<b>Turborepo 호환 Remote Cache</b>를 AWS EFS 위에 구성해 CI 빌드 시간 최대 70% 단축",
       "<b>Vitest</b> 커버리지 80%를 CI 게이트로 강제하고, E2E 중복 140건 제거·병렬화로 실행 시간 12분 → 4분 단축",
       "Vite v5 → v8 업그레이드 및 <b>청크 분리 전략</b> 도입으로 FE 빌드 시간 8.5s → 1.44s (83% 단축)",
@@ -136,7 +136,7 @@ export const WORK_ITEMS = [
     ],
   },
   {
-    name: "ABAC 권한 관리 체계",
+    name: "PBAC 권한 관리 체계",
     kind: "Architecture",
     lines: [
       "수동 DB 제어에 기대던 권한 관리를 역할·리소스·액션 기반 모델로 재설계했습니다.",

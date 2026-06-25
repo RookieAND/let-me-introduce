@@ -50,7 +50,7 @@ export const FEATURED_POST: Post = {
   excerpt: [
     "RBAC으로 표현 불가능한 요구사항에서 출발해 CASL + Level 추상화로 리소스 단위 권한 체계를 설계한 과정.",
   ],
-  tags: ["CASL", "ABAC", "NestJS", "권한", "아키텍처"],
+  tags: ["CASL", "PBAC", "NestJS", "권한", "아키텍처"],
   href: "/posts/gem-abac-nestjs-1",
 };
 

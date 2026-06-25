@@ -2,6 +2,18 @@ import type { Post } from "#/data/Posts";
 
 export const TOOLING_POSTS: Post[] = [
   {
+    slug: "native-esm-importmap",
+    date: "2026-06-25",
+    cat: "Tooling",
+    title: "native ESM 과 importmap 의 상호 관계",
+    excerpt: [
+      "bare specifier 에러 하나에서 시작해 브라우저의 모듈 해석 알고리즘과 importmap 스펙까지 — 번들러 없는 ESM 환경이 어떻게 가능한지.",
+    ],
+    tags: ["ESM", "importmap", "브라우저", "번들러", "JavaScript"],
+    read: "8 min",
+    href: "/posts/native-esm-importmap",
+  },
+  {
     slug: "pnpm-v11-docker-deploy-optimization",
     date: "2026-06-17",
     cat: "Tooling",

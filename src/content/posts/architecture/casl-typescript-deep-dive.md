@@ -1,6 +1,6 @@
 ## 기존 포스트에서 다루지 못한 것
 
-[CASL/ABAC로 권한을 선언형으로 다시 설계하기](/posts/casl-abac-declarative-permissions)에서는 DB 제어를 걷어내고 `defineAbilityFor`로 권한을 코드에 선언하는 큰 그림을 정리했다.  
+[CASL/PBAC로 권한을 선언형으로 다시 설계하기](/posts/casl-abac-declarative-permissions)에서는 DB 제어를 걷어내고 `defineAbilityFor`로 권한을 코드에 선언하는 큰 그림을 정리했다.  
 글을 쓰면서 CASL 타입 시스템에 대한 설명이 자꾸 길어졌는데, 욕심 부리면 글이 산으로 가니까 이 두 가지를 별도 글로 분리했다.  
 
 1. `InferSubjects` / `MongoAbility` / `ForcedSubject` — CASL 타입 시스템의 역할

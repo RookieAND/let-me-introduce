@@ -1,5 +1,8 @@
 > 처음에는 Guard 하나에서 모든 권한 검증을 끝내고 싶었다. 간단할 것 같았다. 그런데 구현하다 보니, Guard와 Service가 각각 다른 역할을 해야 한다는 게 보이기 시작했다.  
 
+1편에서 정의한 Level, PolicyRule, ResourcePermission, PolicyOverride — 이 개념들이 실제 코드에서 어떻게 동작하는지를 이 편에서 다룬다.
+`expandLevelToRules`로 Level을 PolicyRule로 변환하는 과정, Ability를 빌드하는 `AbilityFactory`, Guard와 Service 두 계층의 검증 구조를 코드와 함께 따라간다.
+
 ## 왜 검증을 두 단계로 나눴는가
 
 Guard에서 완벽한 권한 검증을 하려면 "이 사용자가 이 특정 리소스에 접근 가능한가"까지 확인해야 한다.  
@@ -172,7 +175,7 @@ class AbilityClsService {
 
 ---
 
-## Guard (1차 검증) — @WithCourseAccess 데코레이터
+## Guard — @WithCourseAccess 데코레이터
 
 실제 컨트롤러에서는 Guard를 직접 등록하지 않는다. Subject별 전용 데코레이터가 Guard 3개를 한 번에 적용한다.  
 
@@ -199,7 +202,11 @@ export function WithCourseAccess(options: WithCourseAccessOptions) {
 }
 ```
 
-`WithCourseAccessGuard` 내부에서는 request에서 courseId를 추출하고, Course를 DB에서 조회한 뒤 `assertCan`을 호출한다. 즉 Guard에서 이미 리소스를 로드하고 Condition 매칭까지 처리한다.  
+`LoadAbilityGuard`가 1차를 담당한다. Ability를 빌드해 CLS에 저장하고, 해당 Action에 대한 규칙이 아예 없으면 즉시 403을 반환한다. DB 리소스 조회 없이 빠른 차단이 이 지점에서 일어난다.
+
+`WithCourseAccessGuard`가 2차를 담당한다. request에서 courseId를 추출하고, Course를 DB에서 조회한 뒤 `assertCan`으로 리소스 Condition까지 평가한다.
+
+request params에 resource ID가 있는 엔드포인트 — GET/DELETE처럼 기존 리소스를 대상으로 하는 경우 — 는 Guard 단계에서 2차 검증까지 끝낼 수 있다. Service의 `assertCan`은 이런 경우에도 Defense-in-depth 목적으로 유지하거나, Guard가 없는 내부 Service 호출에서 쓴다.
 
 타입 안전성도 챙겼다. `SubjectActionMap` 타입 덕분에 잘못된 action-subject 조합은 컴파일 에러가 난다.  
 
