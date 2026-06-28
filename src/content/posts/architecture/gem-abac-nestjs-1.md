@@ -3,7 +3,7 @@
 ## GEM 서비스가 어떻게 생겼는지 먼저 알아야 한다
 
 권한 얘기를 하기 전에 GEM의 구조를 먼저 짚어야 한다.
-어떤 Resource가 있고 어떻게 계층을 이루는지 모르면 이 다음 얘기가 공중에 뜬다.
+어떤 Resource가 있고 어떻게 계층을 이루는지부터 잡아두지 않으면 이후 설계 이야기가 맥락 없이 느껴진다.
 
 GEM은 **Space → Course → Unit** 이라는 계층 구조를 가진다.
 
@@ -97,7 +97,7 @@ CASL이 위 두 조건을 이미 충족했고, 그것만으로도 충분했다. 
 
 ---
 
-## Level / PolicyRule / ResourcePermission / PolicyOverride: 네 개념이 서로 어떻게 연결되는가
+## 핵심 개념 네 가지 — Level · PolicyRule · ResourcePermission · PolicyOverride
 
 설계 이야기로 들어가기 전에, 이 시스템을 이루는 핵심 개념들을 먼저 잡아두자.
 코드가 나오기 전에 이 개념들이 머릿속에 잡혀있어야 흐름이 끊기지 않는다.
@@ -123,7 +123,6 @@ DB에는 이 Level 값만 저장된다. 실제 허용 Action 목록은 런타임
 
 ### PolicyRule — CASL이 실제로 평가하는 단위
 
-Level은 사람이 쓰는 언어고, PolicyRule은 시스템이 읽는 언어다.
 "어떤 Subject의, 어떤 Resource에, 어떤 Action을, 허용/거부한다"를 표현하는 단위이고, CASL이 실제로 평가하는 게 이 구조다.
 
 ```json
@@ -183,7 +182,7 @@ Level로 표현하기 어려운 예외는 **PolicyOverride**로 처리한다.
 ## DB에는 Level만, Action 목록은 코드에: 세 가지 설계 결정의 이유
 
 이 설계에서 의식적으로 내린 결정이 세 가지 있다.
-각각 "왜"가 있었기 때문에 그냥 넘어가기 아깝다.
+각각 이유가 있어서 짚어두고 싶다.
 
 첫 번째는 **DB에는 Level만 저장한다는 것**이다.
 실제 허용 Action 목록은 코드 상수(`LEVEL_POLICY_MAP`)에서 관리한다.

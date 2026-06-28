@@ -49,7 +49,7 @@ class AssignCreatorAdminHandler implements ICommandHandler {
 }
 ```
 
-이 구조의 장점은 새 Subject가 추가될 때 해당 Service에서 동일한 커맨드를 발행하기만 하면 된다는 것이다.
+새 Subject가 추가될 때는 해당 Service에서 동일한 커맨드를 발행하기만 하면 된다.
 권한 부여 로직은 핸들러 한 곳에만 있다.
 
 핸들러 내부에서는 `findOneAndUpdate + upsert` 패턴을 사용한다.

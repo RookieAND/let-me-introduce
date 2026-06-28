@@ -1,7 +1,7 @@
 > 처음에는 Guard 하나에서 모든 권한 검증을 끝내고 싶었다. 간단할 것 같았다. 그런데 구현하다 보니, Guard와 Service가 각각 다른 역할을 해야 한다는 게 보이기 시작했다.
 
-1편에서 정의한 Level, PolicyRule, ResourcePermission, PolicyOverride — 이 개념들이 실제 코드에서 어떻게 동작하는지를 이 편에서 다룬다.
-`expandLevelToRules`로 Level을 PolicyRule로 변환하는 과정, Ability를 빌드하는 `AbilityFactory`, Guard와 Service 두 계층의 검증 구조를 코드와 함께 따라간다.
+1편에서 정의한 개념들이 실제 코드에서 어떻게 동작하는지 따라간다.
+`expandLevelToRules`, `AbilityFactory`, Guard/Service 검증 구조 순서로 살펴본다.
 
 ## Guard 하나로 다 하려다 막힌 이유
 
@@ -101,7 +101,7 @@ private createFromRules({ rules }: { rules: PolicyRule[] }): AppAbility {
 }
 ```
 
-Allow를 먼저 전부 등록하고 Deny를 나중에 등록한다. PolicyOverride Deny가 마지막에 등록되므로 어떤 Allow 규칙도 덮어쓴다.
+Allow를 먼저 전부 등록하고 Deny를 나중에 등록한다. PolicyOverride Deny가 마지막에 등록되므로 어떤 Allow 규칙보다도 우선한다.
 
 여기서 짚고 넘어갈 부분이 있다. `resources: ['course-7']`는 그대로 CASL에 전달할 수 없다. MongoDB 조건 형식으로 변환이 필요하다.
 
