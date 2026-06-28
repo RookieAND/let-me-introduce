@@ -12,8 +12,7 @@
 새 시스템에서 리소스를 생성하면 생성자에게 ADMIN 권한이 자동으로 부여되어야 한다.
 
 처음에는 Service 로직에 직접 권한 부여 코드를 넣으려고 했다.
-그런데 이렇게 하면 모든 생성 Service에 권한 부여 코드가 흩어진다.
-새 Subject가 추가될 때마다 해당 Service를 수정해야 하는 구조가 된다.
+그런데 이렇게 하면 권한 부여 코드가 생성 Service마다 흩어지고, 새 Subject가 추가될 때마다 해당 Service를 수정해야 하는 구조가 된다.
 
 그 시점에 CQRS의 `CommandBus`가 눈에 들어왔다.
 GEM은 이미 CQRS 패턴을 일부 도입하고 있었는데, 사실 그때까지 `CommandBus`를 "이벤트 발행용 도구" 정도로만 쓰고 있었다.
@@ -49,10 +48,10 @@ class AssignCreatorAdminHandler implements ICommandHandler {
 }
 ```
 
-새 Subject가 추가될 때는 해당 Service에서 동일한 커맨드를 발행하기만 하면 된다.
-권한 부여 로직은 핸들러 한 곳에만 있다.
+새 Subject가 추가될 때는 해당 Service에서 같은 커맨드를 발행하면 끝이다.
+권한 부여 로직은 핸들러 한 곳에만 있으니 수정이 필요하면 거기만 건드리면 된다.
 
-핸들러 내부에서는 `findOneAndUpdate + upsert` 패턴을 사용한다.
+위 예시는 개념 전달을 위해 단순화했다. 실제 핸들러 내부는 `findOneAndUpdate + upsert` 패턴으로 구현했다.
 
 ```typescript
 @CommandHandler(AssignCreatorAdminCommand)
@@ -67,7 +66,7 @@ class AssignCreatorAdminHandler implements ICommandHandler {
 }
 ```
 
-이미 다른 Level이 있는 상태에서 생성자가 리소스를 다시 만들어도 ADMIN으로 덮어쓰지 않고 upsert가 처리한다.
+레코드가 이미 존재하더라도 upsert로 처리하기 때문에 중복 생성 없이 안전하다.
 
 ---
 
@@ -112,11 +111,9 @@ DB에 저장된 ResourcePermission이 1건이어도 런타임에 하위 Subject 
 스크립트 실행 후에도 "이 사용자는 왜 접근이 안 되는가"를 개별적으로 추적해야 하는 상황이 생길 게 뻔했다.
 
 그래서 Lazy 생성 전략을 도입했다.
-권한 체크에서 ResourcePermission이 없는 사용자가 접근하면, 일정 조건 하에 기본 권한을 자동으로 생성한다.
-놓친 케이스는 첫 접근 시 자동으로 처리된다.
+ResourcePermission이 없는 사용자가 접근하면 스크립트에서 미처 처리하지 못한 케이스로 간주하고, 기존 SpaceUser 데이터를 기반으로 기본 권한을 자동으로 생성한다.
 
-사전에 완벽한 마이그레이션 스크립트를 만드는 것보다, 불완전한 스크립트와 Lazy 생성을 조합하는 쪽이 실제로는 훨씬 안전하다는 걸 이 과정에서 배웠다.
-마이그레이션 스크립트의 완성도 요건 자체가 낮아지니까.
+마이그레이션 스크립트의 완성도 요건 자체가 낮아지니까, 불완전한 스크립트와 Lazy 생성을 조합하는 쪽이 완벽한 스크립트 하나보다 실제로는 훨씬 안전하다는 걸 이 과정에서 배웠다.
 
 ---
 
@@ -127,7 +124,7 @@ DB에 저장된 ResourcePermission이 1건이어도 런타임에 하위 Subject 
 
 마이그레이션 전략을 두 가지로 검토했다.
 
-- **옵션 A: 일괄 마이그레이션** — 배포 전에 모든 SpaceUser를 ResourcePermission으로 변환하는 스크립트를 실행한다. 단순하지만 데이터가 많으면 배포 전 오랜 시간이 걸리고, 실패하면 롤백이 복잡하다.
+- **옵션 A: 일괄 마이그레이션** — 배포 전에 모든 SpaceUser를 ResourcePermission으로 변환하는 스크립트를 실행한다. 단순하지만 데이터가 많으면 배포 전 오랜 시간이 걸리고 실패 시 롤백도 복잡해진다.
 - **옵션 B: 점진적 마이그레이션 (채택)** — 새 시스템 배포 후 기존 SpaceUser 데이터를 백그라운드에서 순차적으로 변환한다. 배포와 마이그레이션이 분리되어 안전하다. LazyPermissionService와 함께 쓰면 변환이 완료되지 않은 사용자도 첫 접근 시 자동 처리된다.
 
 ```typescript
@@ -149,9 +146,9 @@ async function migrateSpaceUsersToResourcePermissions() {
 ```
 
 역할(Role) → Level 매핑 테이블을 먼저 정의하는 게 핵심이었다.
-기존 역할과 새 Level이 1:1로 대응되지 않는 케이스가 있어서, 이 매핑을 정하는 데 시간이 꽤 걸렸다.
+기존 역할과 새 Level이 1:1로 대응되지 않는 케이스가 있었는데, 그 매핑을 정하는 데 시간이 꽤 걸렸다.
 
-예를 들어 기존 MANAGER 역할은 새 시스템의 ADMIN과 EDITOR 사이 어딘가였는데, 어느 쪽으로 올릴지를 결정하는 게 기술적인 문제가 아니라 비즈니스 판단의 문제였다.
+예를 들어 기존 MANAGER 역할은 새 시스템의 ADMIN과 EDITOR 사이 어딘가에 해당했는데, 어느 쪽으로 맞출지는 기술적인 문제가 아니라 비즈니스 판단의 문제였다.
 이런 결정 하나하나를 기획팀과 확인하면서 진행했고, 결국 매핑 테이블 완성에만 하루 이상을 썼다.
 
 ---
@@ -178,7 +175,7 @@ async revokeLevel({ userId, subject, resourceId }) {
 }
 ```
 
-짚어둘 게 `invalidateAbility()` 호출이다.
+한 가지 짚어둘 게 있다. `invalidateAbility()` 호출이다.
 권한을 변경한 직후 해당 요청 내에서 Ability가 재빌드되도록 보장한다.
 외부 관리자 권한을 즉시 회수해야 하는 케이스에서 이 한 줄이 없으면, 같은 요청 내에서 캐시된 Ability가 여전히 유효한 상태로 남는다.
 
@@ -200,7 +197,7 @@ Phase 5-4: Unit 컨트롤러 → @CheckAbility 교체
 ```
 
 Phase 5-1이 가장 까다로웠다.
-기존 RoleGuard가 실행되면서 동시에 새 Ability도 빌드해야 하는데, 이 시점에 ResourcePermission이 없는 사용자가 대부분이라 Ability가 빈 상태로 빌드됐다.
+기존 RoleGuard가 실행되면서 동시에 새 Ability도 빌드해야 했다. 그런데 이 시점에는 ResourcePermission이 없는 사용자가 대부분이라 Ability가 빈 상태로 빌드됐다.
 LazyPermissionService와 연계해서 첫 접근 시 자동 생성 로직을 먼저 붙이고 나서야 기존 Guard와 새 Guard를 안전하게 공존시킬 수 있었다.
 
 각 단계마다 해당 Subject의 E2E 테스트를 돌려서 회귀가 없는지 확인하고 넘어갔다.
@@ -232,7 +229,7 @@ it('EDITOR는 course-7을 삭제할 수 있고, course-8은 삭제할 수 없다
 ```
 
 Deny Override 케이스를 테스트하는 게 특히 중요했다.
-EDITOR 권한이 있어도 PolicyOverride로 Delete가 Deny 되면 안 된다는 걸 명시적으로 검증한다.
+EDITOR 권한이 있어도 PolicyOverride Deny가 걸리면 실제로 차단되어야 한다는 걸 명시적으로 검증한다.
 
 **통합 테스트 (7케이스)** — 실제 DB에 ResourcePermission을 넣고, buildForUser가 올바른 Ability를 만드는지 확인한다.
 
