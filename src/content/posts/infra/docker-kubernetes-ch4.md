@@ -221,8 +221,50 @@ docker compose -f ./path/to/docker-compose.yml config
 
 ##### 4.3.2.2 도커 컴포즈 네트워크
 
+YAML 파일에 네트워크 항목을 따로 정의하지 않으면, Docker Compose는 프로젝트마다 Bridge 타입의 네트워크를 자동으로 하나 만든다.
+이름은 `[프로젝트 이름]_default` 형식이며, `docker compose up`으로 생성되고 `docker compose down`으로 삭제된다.
+
+```bash
+# myapp 디렉토리에서 실행했다면 네트워크 이름은 myapp_default
+docker network ls
+# NETWORK ID     NAME            DRIVER    SCOPE
+# abc123def456   myapp_default   bridge    local
+```
+
+이 네트워크 안에서는 서비스 이름 자체가 호스트 이름이 된다.
+Compose가 컨테이너를 생성할 때 `--net-alias`를 서비스 이름으로 자동 설정하기 때문이다.
+덕분에 web 컨테이너에서 `mysql`이라는 이름으로 DB에 접근하면, Docker 내부 DNS가 해당 컨테이너 IP로 알아서 변환해준다.
+
+`docker compose scale`로 같은 서비스의 컨테이너를 여러 개 띄운 경우에도 서비스 이름 하나로 접근할 수 있다.
+동일한 `--net-alias`를 가진 컨테이너가 여럿이면 요청이 라운드 로빈 방식으로 분산된다.
+명시적으로 로드밸런서를 구성하지 않아도 스케일 아웃이 자연스럽게 되는 이유가 여기에 있다.
+
 ##### 4.3.2.3 도커 스웜 모드와 함께 사용하기
 
-##### 4.3.2.1 YAML 파일 작성
+`docker-compose.yml` 파일은 Docker Swarm에서도 그대로 활용할 수 있다.
+Swarm에서는 이 YAML 파일로 생성된 컨테이너 묶음을 **Stack**이라고 부른다.
+Docker Compose의 Service가 Docker Swarm의 Service로 그대로 이어진다고 생각하면 편하다.
+차이점이 있다면 Swarm에서는 서비스들이 단일 호스트가 아닌 클러스터 전체에 분산 배포된다는 것이다.
 
-### 4.4 도커 학습을 마치며
+Stack은 `docker-compose`가 아닌 `docker stack` 명령어로 제어한다.
+Swarm 클러스터 위에서 동작하기 때문에 별도의 명령어 체계를 사용한다.
+
+```bash
+# YAML 파일로 Stack 배포
+docker stack deploy -c docker-compose.yml mystack
+
+# 생성된 Stack 목록 확인
+docker stack ls
+
+# Stack 내 서비스 목록 확인
+docker service ls
+
+# Stack 제거
+docker stack rm mystack
+```
+
+그런데 한 가지 짚고 넘어갈 게 있다.
+
+`links`와 `depends_on`은 Swarm Stack에서 사용할 수 없다.
+Swarm은 컨테이너를 여러 호스트에 분산 배치하는데, 이 두 옵션은 컨테이너가 같은 호스트에 있어야만 동작하는 구조이기 때문이다.
+서비스 간 통신은 Overlay 네트워크를 통해 이루어지며, Stack의 네트워크도 자동으로 Overlay 타입으로 설정된다.

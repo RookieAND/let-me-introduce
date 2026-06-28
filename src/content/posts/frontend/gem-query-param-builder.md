@@ -383,11 +383,11 @@ getFilter(field: FilterableFields<T>): FilterCriteria<T> | undefined;
 
 ---
 
-## QueryParams — build() 결과도 타입이 생성된다
+## QueryParams — 직렬화 결과도 타입으로 만들어진다
 
-여기서 멈추지 않고, `build()`가 반환하는 객체도 타입 추론이 되도록 설계했다.
+타입 설계의 마지막 조각이다. 빌더는 최종적으로 필터·정렬 조건을 URL 파라미터 형태의 객체로 직렬화해 반환해야 한다. 그 반환 타입도 단순한 `Record<string, unknown>`이 아니라, 타입 추론이 되도록 미리 설계해둬야 했다.
 
-`filter__name__i_like`, `sort__createdAt` 같은 키를 런타임에 문자열로 만드는 건 쉽다.  
+`filter__name__i_like`, `sort__createdAt` 같은 키를 런타임에 문자열로 만드는 건 어렵지 않다.  
 그런데 이 키들이 타입 레벨에서도 존재해야 IDE 자동완성과 타입 검사가 의미 있어진다.
 
 이 역할을 `QueryParams<T, P>` 타입이 담당하며, 핵심은 Template Literal Type으로 키를 생성하는 `MakeFilterKey`다.
@@ -448,6 +448,14 @@ export type QueryParams<T extends Record<string, unknown>, P extends PaginationP
 `immer`를 도입하거나 매번 spread 연산자로 복사를 챙기는 건 원하지 않았다. 설계 자체가 불변이면 그런 처리가 필요 없다.
 
 모든 내부 상태는 `readonly`이며, 메서드를 호출하면 상태를 변경하는 대신 새 인스턴스를 만들어 반환한다.
+
+클래스가 담당하는 역할은 크게 다섯 가지다.
+
+1. **필터 조건 관리**: 연산자별 편의 메서드(`eq`, `like`, `in` 등)가 외부에 노출되고, 내부 `filter()` private 메서드가 실제 상태 변경을 담당한다.
+2. **정렬 조건 관리**: `orderBy()`로 정렬 기준과 방향을 추가하고, `clearSorts()`로 전체를 초기화한다.
+3. **페이지네이션 관리**: offset 방식은 `page()`·`take()`, cursor 방식은 `cursor()`가 담당한다. typed this로 두 방식을 타입 레벨에서 분리해 잘못된 호출을 막는다.
+4. **조건 직렬화**: `build()`가 내부 상태를 URL 파라미터 형태의 `QueryParams<T, P>` 객체로 변환해 반환한다.
+5. **불변 인스턴스 반환**: 모든 메서드가 기존 인스턴스를 변경하지 않고 새 인스턴스를 반환해, React `useState` 연동이 자연스럽게 된다.
 
 ```typescript
 // Shared/Model/QueryParamBuilder/QueryParamBuilder.ts
@@ -733,20 +741,35 @@ setSearchParams(queryBuilder.toUrlParams(), { replace: true });
 
 ### 컴파일러가 규약을 강제하게 됐다
 
-`filter__status__in` 같은 오타는 이제 불가능하다.  
-존재하지 않는 필드, 해당 필드에 허용되지 않는 연산자는 컴파일 에러로 잡힌다.  
-규약을 아는 사람만 올바르게 쓸 수 있던 API가 컴파일러가 올바른 사용을 강제하는 API가 됐다.
+도입 이전에는 쿼리 파라미터를 직접 문자열로 작성해야 했다.
+
+```typescript
+// ❌ AS-IS — 오타도, 잘못된 연산자 조합도 컴파일러가 잡을 수 없다
+searchParams: {
+  filter__stutus__in: filterStatus,  // status → stutus 오타
+  sort__createAt: 'DESC',            // createdAt → createAt 오타
+  filter__id__like: someId,          // number 필드에 like 연산자
+}
+
+// ✅ TO-BE — 필드명, 연산자, 값의 타입이 모두 컴파일 타임에 검증된다
+queryBuilder
+  .in('stutus', filterStatus)   // 존재하지 않는 필드 → 컴파일 에러
+  .orderBy('createAt', 'DESC')  // 오타 → 컴파일 에러
+  .like('id', 'john')           // number 필드에 like → 컴파일 에러
+```
+
+`filter__stutus__in`으로 오타를 내도, 숫자 필드에 `like`를 써도 런타임에 API가 실패하기 전까지 아무것도 알려주지 않던 구조가, 잘못된 사용 자체를 작성할 수 없는 구조로 바뀌었다.
 
 ### 소비자 코드에서 런타임 방어 로직이 사라졌다
 
 연산자를 지정하면 값의 타입이 자동으로 좁혀지기 때문에 꺼내서 쓰는 쪽에서 분기가 사라졌다.
 
 ```typescript
-// ❌ AS-IS — value: any 때문에 소비자가 직접 타입을 판별
-const filter = queryBuilder.getFilter('level', 'in');
-if (!filter) return [];
-if (Array.isArray(filter.value)) return filter.value as Level[];
-return String(filter.value).split(',') as Level[];
+// ❌ AS-IS — URL searchParams에서 직접 읽어야 했다. 타입은 항상 string | null
+const [searchParams] = useSearchParams();
+const filterLevelIn = searchParams.get('filter__level__in'); // string | null
+// in 연산자는 쉼표로 구분된 문자열이지만, 그 사실을 소비자가 직접 알아야 한다
+const levels = filterLevelIn ? (filterLevelIn.split(',') as Level[]) : [];
 
 // ✅ TO-BE — FilterValue가 string[]을 보장. 런타임 분기 불필요
 const filter = queryBuilder.getFilter('level', 'in');
@@ -755,9 +778,34 @@ return filter?.value ?? [];
 
 ### 새 필드 추가가 메서드 호출 하나로 줄었다
 
-예전에는 Query 타입, API 함수, 위젯 훅, Context를 네 곳에서 고쳐야 했다.  
-지금은 `queryBuilder.eq('type', UNIT_TYPE.RECRUITMENT)` 한 줄이다.  
-URL 동기화, 직렬화, 타입 검증이 한 번에 처리된다.
+이전에는 Course 권한 테이블에 정렬 기준 하나를 추가하는 작업이 네 곳의 수정을 불렀다.
+
+```typescript
+// ❌ AS-IS — 필드 하나에 최소 4곳을 건드려야 한다
+
+// 1. Query 타입에 새 필드 추가
+type GetCoursePermissionQuery = {
+  sort__level?: 'ASC' | 'DESC'; // 추가
+};
+
+// 2. API 함수에 파라미터 전달 + optional이면 조건부 spread도
+...(sortLevel && { sort__level: sortLevel }),
+
+// 3. 훅에 useState 추가 + onChange 핸들러 작성
+const [sortLevel, setSortLevel] = useState<'ASC' | 'DESC' | undefined>();
+
+// 4. Context에 새 상태와 dispatch 등록
+const CoursePermissionTableDispatchContext = createContext({
+  setSortLevel: () => {},
+  // ...
+});
+
+// ✅ TO-BE — 메서드 호출 하나
+queryBuilder.orderBy('level', 'ASC')
+```
+
+URL 반영은 훅이 알아서 처리하고, 타입이 틀리면 컴파일러가 잡는다.  
+정렬 기준 하나 추가가 네 파일 수정에서 메서드 호출 하나로 줄었다.
 
 ---
 
