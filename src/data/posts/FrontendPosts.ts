@@ -2,6 +2,42 @@ import type { Post } from "#/data/Posts";
 
 export const FRONTEND_POSTS: Post[] = [
   {
+    slug: "gem-query-param-builder",
+    date: "2025-05-20",
+    cat: "Frontend",
+    title: "QueryParamBuilder — filter__field__operator 규약을 타입 시스템 안으로",
+    excerpt: [
+      "GEM 테이블 8개에 흩어진 필터·정렬 상태를 URL로 옮기며, 잘못된 연산자 조합을 컴파일 타임에 막고 URL 동기화까지 한 번에 처리하는 불변 빌더를 만든 이야기.",
+    ],
+    tags: ["TypeScript", "React", "TanStack Table", "URL 동기화", "빌더 패턴"],
+    read: "20 min",
+    href: "/posts/gem-query-param-builder",
+  },
+  {
+    slug: "elastic-apm-rum",
+    date: "2025-07-10",
+    cat: "Frontend",
+    title: "Elastic APM & RUM — 데이터 모델과 RUM JS Agent 실전 사용",
+    excerpt: [
+      "Span·Transaction·Trace·Error·Metadata로 구성된 APM 데이터 모델 개념 정리와, RUM JS Agent 자동 계측·수동 트랜잭션·managed: true 동작 원리까지.",
+    ],
+    tags: ["Elastic", "APM", "RUM", "모니터링", "Distributed Tracing", "Core Web Vitals"],
+    read: "25 min",
+    href: "/posts/elastic-apm-rum",
+  },
+  {
+    slug: "frontend-test-thoughts",
+    date: "2024-12-11",
+    cat: "Frontend",
+    title: "프론트엔드 테스트 코드에 대한 고찰",
+    excerpt: [
+      "테스트 코드를 왜 써야 하는지 뒤늦게 납득한 과정 — 피드백 사이클 단축부터 테크스펙으로서의 테스트까지.",
+    ],
+    tags: ["Testing", "프론트엔드", "TDD"],
+    read: "12 min",
+    href: "/posts/frontend-test-thoughts",
+  },
+  {
     slug: "robots-txt-noindex",
     date: "2024-05-15",
     cat: "Frontend",

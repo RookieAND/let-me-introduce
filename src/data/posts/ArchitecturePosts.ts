@@ -50,18 +50,6 @@ export const ARCHITECTURE_POSTS: Post[] = [
     href: "/posts/casl-typescript-deep-dive",
   },
   {
-    slug: "frontend-test-thoughts",
-    date: "2024-12-11",
-    cat: "Architecture",
-    title: "프론트엔드 테스트 코드에 대한 고찰",
-    excerpt: [
-      "테스트 코드를 왜 써야 하는지 뒤늦게 납득한 과정 — 피드백 사이클 단축부터 테크스펙으로서의 테스트까지.",
-    ],
-    tags: ["Testing", "프론트엔드", "TDD"],
-    read: "12 min",
-    href: "/posts/frontend-test-thoughts",
-  },
-  {
     slug: "http-cookie-samesite",
     date: "2023-05-11",
     cat: "Architecture",
