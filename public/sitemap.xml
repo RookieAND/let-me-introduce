@@ -4,18 +4,23 @@
   <!-- Main pages -->
   <url>
     <loc>https://rookieand.vercel.app/</loc>
-    <lastmod>2026-06-19</lastmod>
+    <lastmod>2026-06-30</lastmod>
     <changefreq>monthly</changefreq>
     <priority>1.0</priority>
   </url>
   <url>
     <loc>https://rookieand.vercel.app/posts</loc>
-    <lastmod>2026-06-19</lastmod>
+    <lastmod>2026-06-30</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.9</priority>
   </url>
 
   <!-- Frontend -->
+  <url><loc>https://rookieand.vercel.app/posts/gem-query-param-builder</loc><priority>0.7</priority></url>
+  <url><loc>https://rookieand.vercel.app/posts/elastic-apm-rum</loc><priority>0.7</priority></url>
+  <url><loc>https://rookieand.vercel.app/posts/frontend-test-thoughts</loc><priority>0.7</priority></url>
+  <url><loc>https://rookieand.vercel.app/posts/robots-txt-noindex</loc><priority>0.7</priority></url>
+  <url><loc>https://rookieand.vercel.app/posts/react-use-sync-external-store-internals</loc><priority>0.7</priority></url>
   <url><loc>https://rookieand.vercel.app/posts/react-use-sync-external-store</loc><priority>0.7</priority></url>
   <url><loc>https://rookieand.vercel.app/posts/sse-react-event-registry</loc><priority>0.7</priority></url>
   <url><loc>https://rookieand.vercel.app/posts/react-display-name</loc><priority>0.7</priority></url>
@@ -53,6 +58,9 @@
   <url><loc>https://rookieand.vercel.app/posts/covidkorea-status-project</loc><priority>0.7</priority></url>
 
   <!-- TypeScript -->
+  <url><loc>https://rookieand.vercel.app/posts/typescript-indexed-access-type</loc><priority>0.7</priority></url>
+  <url><loc>https://rookieand.vercel.app/posts/typescript-isolated-declarations</loc><priority>0.7</priority></url>
+  <url><loc>https://rookieand.vercel.app/posts/typescript-duck-typing-excess-property-check</loc><priority>0.7</priority></url>
   <url><loc>https://rookieand.vercel.app/posts/typescript-module-resolution</loc><priority>0.7</priority></url>
   <url><loc>https://rookieand.vercel.app/posts/typescript-union-contravariance</loc><priority>0.7</priority></url>
   <url><loc>https://rookieand.vercel.app/posts/typescript-enum</loc><priority>0.7</priority></url>
@@ -65,6 +73,7 @@
   <url><loc>https://rookieand.vercel.app/posts/effective-typescript-week-1</loc><priority>0.7</priority></url>
 
   <!-- JavaScript -->
+  <url><loc>https://rookieand.vercel.app/posts/promise-with-resolver</loc><priority>0.7</priority></url>
   <url><loc>https://rookieand.vercel.app/posts/cjs-module-evaluation-pipeline</loc><priority>0.7</priority></url>
   <url><loc>https://rookieand.vercel.app/posts/cjs-require-module-resolution</loc><priority>0.7</priority></url>
   <url><loc>https://rookieand.vercel.app/posts/javascript-event-loop</loc><priority>0.7</priority></url>
@@ -95,6 +104,7 @@
   <url><loc>https://rookieand.vercel.app/posts/js-variables-data-types</loc><priority>0.7</priority></url>
 
   <!-- Backend -->
+  <url><loc>https://rookieand.vercel.app/posts/suites-nestjs-auto-mock-testing</loc><priority>0.7</priority></url>
   <url><loc>https://rookieand.vercel.app/posts/suites-nestjs-auto-mock</loc><priority>0.7</priority></url>
   <url><loc>https://rookieand.vercel.app/posts/tsjest-to-swcjest-migration</loc><priority>0.7</priority></url>
   <url><loc>https://rookieand.vercel.app/posts/queue-delayed-job-bullmq-fix</loc><priority>0.7</priority></url>
@@ -117,7 +127,13 @@
   <url><loc>https://rookieand.vercel.app/posts/eslint-prettier</loc><priority>0.7</priority></url>
 
   <!-- Tooling -->
+  <url><loc>https://rookieand.vercel.app/posts/native-esm-importmap</loc><priority>0.7</priority></url>
+  <url><loc>https://rookieand.vercel.app/posts/modulepreload-preload</loc><priority>0.7</priority></url>
   <url><loc>https://rookieand.vercel.app/posts/pnpm-v11-docker-deploy-optimization</loc><priority>0.7</priority></url>
+  <url><loc>https://rookieand.vercel.app/posts/pnpm-v11-sqlite-usage</loc><priority>0.7</priority></url>
+  <url><loc>https://rookieand.vercel.app/posts/vite-code-splitting-bundle</loc><priority>0.7</priority></url>
+  <url><loc>https://rookieand.vercel.app/posts/module-federation</loc><priority>0.7</priority></url>
+  <url><loc>https://rookieand.vercel.app/posts/how-bundler-works</loc><priority>0.7</priority></url>
   <url><loc>https://rookieand.vercel.app/posts/turborepo-task-configuration</loc><priority>0.7</priority></url>
   <url><loc>https://rookieand.vercel.app/posts/changesets-monorepo-versioning</loc><priority>0.7</priority></url>
   <url><loc>https://rookieand.vercel.app/posts/gemc-monorepo-cli</loc><priority>0.7</priority></url>
@@ -128,12 +144,16 @@
   <url><loc>https://rookieand.vercel.app/posts/turbo-prune-monorepo</loc><priority>0.7</priority></url>
 
   <!-- DB / Infra -->
+  <url><loc>https://rookieand.vercel.app/posts/gem-form-elastic-apm-rum</loc><priority>0.7</priority></url>
   <url><loc>https://rookieand.vercel.app/posts/valkey-hash-key-expiration</loc><priority>0.7</priority></url>
   <url><loc>https://rookieand.vercel.app/posts/mongoose-connection-internals</loc><priority>0.7</priority></url>
   <url><loc>https://rookieand.vercel.app/posts/docker-kubernetes-ch1</loc><priority>0.7</priority></url>
   <url><loc>https://rookieand.vercel.app/posts/docker-kubernetes-ch2</loc><priority>0.7</priority></url>
   <url><loc>https://rookieand.vercel.app/posts/docker-kubernetes-ch2-2</loc><priority>0.7</priority></url>
+  <url><loc>https://rookieand.vercel.app/posts/docker-kubernetes-ch4</loc><priority>0.7</priority></url>
   <url><loc>https://rookieand.vercel.app/posts/docker-compose-basics</loc><priority>0.7</priority></url>
+  <url><loc>https://rookieand.vercel.app/posts/mongodb-primary-election</loc><priority>0.7</priority></url>
+  <url><loc>https://rookieand.vercel.app/posts/mongodb-transaction-log</loc><priority>0.7</priority></url>
   <url><loc>https://rookieand.vercel.app/posts/nestjs-docker-image-optimization</loc><priority>0.7</priority></url>
   <url><loc>https://rookieand.vercel.app/posts/github-actions-docker-deploy</loc><priority>0.7</priority></url>
 
