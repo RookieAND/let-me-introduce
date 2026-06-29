@@ -26,6 +26,18 @@ export const TOOLING_POSTS: Post[] = [
     href: "/posts/pnpm-v11-docker-deploy-optimization",
   },
   {
+    slug: "pnpm-v11-sqlite-usage",
+    date: "2026-03-01",
+    cat: "Tooling",
+    title: "pnpm v11이 CAS 인덱스를 SQLite로 전환한 이유",
+    excerpt: [
+      "수백만 개의 .mpk 파일을 단일 index.db로 교체한 pnpm v11 — 번들 매니페스트, WAL 모드, 배치 쓰기, 그리고 node:sqlite 빌트인까지.",
+    ],
+    tags: ["pnpm", "SQLite", "Node.js", "패키지 관리"],
+    read: "10 min",
+    href: "/posts/pnpm-v11-sqlite-usage",
+  },
+  {
     slug: "turborepo-task-configuration",
     date: "2025-04-16",
     cat: "Tooling",
