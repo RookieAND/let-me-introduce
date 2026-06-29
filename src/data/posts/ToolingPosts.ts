@@ -14,6 +14,18 @@ export const TOOLING_POSTS: Post[] = [
     href: "/posts/native-esm-importmap",
   },
   {
+    slug: "modulepreload-preload",
+    date: "2026-06-29",
+    cat: "Tooling",
+    title: "preload 와 modulepreload, 브라우저는 어떻게 다르게 처리하는가",
+    excerpt: [
+      "waterfall 문제를 해결하는 두 가지 힌트 — HTTP 캐시에 파일을 채우는 preload와 ESM 모듈 맵에 파싱·컴파일 결과까지 올리는 modulepreload의 차이.",
+    ],
+    tags: ["preload", "modulepreload", "ESM", "브라우저", "번들러"],
+    read: "8 min",
+    href: "/posts/modulepreload-preload",
+  },
+  {
     slug: "pnpm-v11-docker-deploy-optimization",
     date: "2026-06-17",
     cat: "Tooling",
