@@ -1,7 +1,10 @@
 ## 들어가며
 과거 처음으로 JS 생태계에 입문했을 당시, 나는 번들러 없이 브라우저에서 직접 ESM을 써본 적이 있다.
 그때는 번들러에 대한 개념이 아예 없었기 때문에 여러 JS 파일을 만들고 import / export 로 이를 참조하도록 했다.
-Vite나 webpack 없이, 그냥 `<script type="module">`만으로 의존성을 관리할 수 있으면 얼마나 단순해질까 하는 생각에서 시작된 실험이었다. 실제로 간단한 유틸 함수는 문제없이 동작했다. 그런데 npm 패키지를 하나 쓰려는 순간 브라우저 콘솔이 에러를 뱉었다.
+
+Vite나 webpack 없이, 그냥 `<script type="module">`만으로 의존성을 관리할 수 있으면 얼마나 단순해질까 하는 생각에서 시작된 실험이었다. 
+실제로 간단한 유틸 함수는 문제없이 동작했다. 그런데 npm 패키지를 하나 쓰려는 순간 브라우저 콘솔이 에러를 뱉었다.
+
 ```javascript
 TypeError: Failed to resolve module specifier "react".
 Relative references must start with either "/", "./", or "../".

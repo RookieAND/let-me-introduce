@@ -1,6 +1,8 @@
 ## 왜 Code Generator를 만들었나
 
-모노레포 서버 프로젝트를 세팅하면서 반복되는 코드를 생성해야 하는 케이스가 여럿 생겼다. 새 패키지를 추가할 때마다 `package.json`, `tsconfig.json`, `.eslintrc.js`, `.swcrc.json` 같은 파일들을 매번 직접 만들어야 했고, MongoDB Collection을 추가할 때도 Schema, Repository, Index 파일을 동일한 패턴으로 반복했다.  
+모노레포 서버 프로젝트를 세팅하면서 반복되는 코드를 생성해야 하는 케이스가 여럿 생겼다.   
+새 패키지를 추가할 때마다 `package.json`, `tsconfig.json`, `.eslintrc.js`, `.swcrc.json` 같은 파일들을 매번 직접 만들어야 했고,   
+MongoDB Collection을 추가할 때도 Schema, Repository, Index 파일을 동일한 패턴으로 반복했다.  
 
 명령어 하나로 이 모든 걸 자동 생성할 수 있다면 DX가 크게 향상될 거라 생각해 Code Generator를 직접 만들기로 했다.  
 
@@ -10,7 +12,7 @@
 
 **hygen**과 비교해 **PlopJS**를 선택했다. 주요 이유는 다음과 같다.  
 
-- hygen은 Append/Prepend만 지원하고 전체 수정(Modify)은 불가능하다. PlopJS는 Custom Action을 JS로 더 유연하게 구현할 수 있다
+- hygen은 Append/Prepend만 지원하고 전체 수정(Modify)은 불가능하다. PlopJS는 Custom Action을 JS로 더 유연하게 구현할 수 있다.
 - PlopJS는 특정 액션 실패 시 이후 액션 중단 여부를 `abortOnFail`로 설정할 수 있다
 - hygen은 EJS 템플릿에 코드와 변수를 함께 작성해 재사용성이 낮다. PlopJS는 Template 코드와 Prompt/Action을 분리해 동일한 템플릿을 여러 액션에 재사용할 수 있다
 - PlopJS의 HandleBar 템플릿 엔진이 Python Jinja2와 유사해 러닝커브가 낮았다

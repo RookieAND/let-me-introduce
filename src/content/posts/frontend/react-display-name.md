@@ -1,6 +1,7 @@
 ## displayName이란?
 
-`displayName`은 React 컴포넌트에 **디버깅용 이름을 명시적으로 부여하는 정적 프로퍼티**다. React DevTools와 에러 메시지에서 컴포넌트를 식별하는 데 사용되며, 런타임 동작에는 전혀 영향을 주지 않는다.  
+`displayName`은 React 컴포넌트에 **디버깅용 이름을 명시적으로 부여하는 정적 프로퍼티**다.  
+React DevTools와 에러 메시지에서 컴포넌트를 식별하는 데 사용되며, 런타임 동작에는 전혀 영향을 주지 않는다.  
 
 ```typescript
 const MyComponent = () => <div>Hello</div>;
@@ -17,7 +18,8 @@ React DevTools는 컴포넌트 이름을 표시할 때 `displayName` → `Functi
 2. 없으면 JS 엔진이 자동으로 채워주는 `Function.name`을 읽는다
 3. 둘 다 없으면 `Anonymous`로 표시한다
 
-**`Function.name`**은 JavaScript 명세에 정의된 함수 객체의 내장 프로퍼티다. ES6 이전에는 변수에 할당해도 이름이 추론되지 않았지만, ES6부터는 좌변 식별자에서 이름을 자동으로 추론한다.  
+**`Function.name`**은 JavaScript 명세에 정의된 함수 객체의 내장 프로퍼티다.  
+ES6 이전에는 변수에 할당해도 이름이 추론되지 않았지만, ES6부터는 좌변 식별자에서 이름을 자동으로 추론한다.  
 
 ```javascript
 // ES6 이후 — 변수에 직접 할당 시 추론 가능
@@ -76,7 +78,8 @@ const HeavyComponent = React.memo(function HeavyComponent() {
 });
 ```
 
-익명 함수를 `React.memo`로 감싸면 안쪽 함수의 `Function.name`이 `""`라 이름 추론이 불가하다. named function을 사용하면 `Function.name`이 자동으로 채워지므로 `displayName` 설정을 생략할 수 있다.  
+익명 함수를 `React.memo`로 감싸면 안쪽 함수의 `Function.name`이 `""`라 이름 추론이 불가하다.  
+named function을 사용하면 `Function.name`이 자동으로 채워지므로 `displayName` 설정을 생략할 수 있다.  
 
 ### forwardRef (React 18 이하)
 
@@ -119,7 +122,6 @@ const TextInput = ({ label, ref, ...props }: TextInputProps & { ref?: React.Ref<
 ```
 
 `forwardRef`가 사라지므로 기존에 관련 `displayName` 패턴도 불필요해졌다.  
-
 그렇다고 `displayName` 자체가 불필요해진 건 아니다.  
 
 - **HOC**: React 19에서도 HOC 패턴은 유지되므로 여전히 필요하다
