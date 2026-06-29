@@ -62,6 +62,18 @@ export const INFRA_POSTS: Post[] = [
     href: "/posts/docker-kubernetes-ch2-2",
   },
   {
+    slug: "docker-kubernetes-ch4",
+    date: "2026-06-29",
+    cat: "DB / Infra",
+    title: "도커 컴포즈 — YAML 작성부터 네트워크·스웜 스택까지",
+    excerpt: [
+      "YAML 파일 하나로 여러 컨테이너를 관리하는 Docker Compose — 서비스·네트워크·볼륨 정의, 자동 서비스 디스커버리, Swarm Stack 배포까지.",
+    ],
+    tags: ["Docker", "Docker Compose", "Swarm", "YAML", "네트워크"],
+    read: "10 min",
+    href: "/posts/docker-kubernetes-ch4",
+  },
+  {
     slug: "docker-compose-basics",
     date: "2024-10-01",
     cat: "DB / Infra",
