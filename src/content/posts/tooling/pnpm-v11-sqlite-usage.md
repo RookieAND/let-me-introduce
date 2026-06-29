@@ -48,6 +48,74 @@ pnpm v10 까지의 CAS 는 `~/.pnpm-store/v10/index/` 디렉토리 아래에 패
 
 ---
 
+## es-toolkit을 찾기까지: v10과 v11의 절차
+
+`pnpm install`을 실행하면 pnpm은 lockfile을 읽고 필요한 패키지가 스토어에 있는지 확인한다.
+이때 v10과 v11이 거치는 절차가 다르다. es-toolkit@1.46.1을 예시로 살펴보자.
+
+v10은 lockfile에서 읽은 integrity를 먼저 hex로 변환해야 했다.
+
+```typescript
+// crypto/integrity/src/index.ts
+// 1단계: base64 → hex 변환
+export function parseIntegrity(integrity: string): ParsedIntegrity {
+  const match = integrity.match(INTEGRITY_REGEX)
+  const hexDigest = Buffer.from(match[2], 'base64').toString('hex')
+  return { algorithm: match[1], hexDigest }
+}
+// sha512-5eNtXOs3tbfxXOj04tjj...== → e5e36d5ceb37b5b7f15ce8f4e2d8e3b1...
+
+// store/cafs/src/getFilePathInCafs.ts
+// 2단계: hex로 .mpk 파일 경로 구성
+export function getIndexFilePathInCafs(storeDir, integrity, pkgId): string {
+  const { hexDigest } = parseIntegrity(integrity)
+  const hex = hexDigest.substring(0, 64)
+  return path.join(storeDir,
+    `index/${hex.slice(0, 2)}/${hex.slice(2)}-${pkgId.replace(/[\\/:*?"<>|]/g, '+')}.mpk`
+  )
+}
+// → ~/.pnpm-store/v10/index/e5/e36d5ceb...830cd9a-registry.npmjs.org+es-toolkit@1.46.1.mpk
+
+// store/pkg-finder/src/index.ts
+// 3단계: .mpk 읽기 + 역직렬화
+const { files: indexFiles } = await readMsgpackFile<PackageFilesIndex>(pkgIndexFilePath)
+
+// reviewing/dependencies-hierarchy/src/readManifestFromCafs.ts
+// 4단계: package.json content hash 추출 → files/에서 별도 읽기
+const pkgJsonEntry = pkgIndex.files.get('package.json')
+const filePath = getFilePathByModeInCafs(storeDir, pkgJsonEntry.digest, pkgJsonEntry.mode)
+// → ~/.pnpm-store/v10/files/9a/3f2c1b...
+const manifest = loadJsonFileSync<DependencyManifest>(filePath)
+// → { name: 'es-toolkit', version: '1.46.1', bin: {}, engines: {...} }
+
+// 5단계: indexFiles 순회 → node_modules/ 하드링크
+```
+
+변환 한 번, 파일 읽기 두 번이다.
+
+v11은 lockfile의 integrity를 그대로 SQLite key로 쓴다.
+
+```javascript
+// 1단계: integrity + pkgId로 key 조립 (변환 없음)
+const key = 'sha512-5eNtXOs3tbfxXOj04tjjseeWkRWaoCjdEI+96DgwzZoe6c9juL49pXlzAFTI72aWC9Y8p7168g6XIKjh7k6pyQ==\tes-toolkit@1.46.1'
+
+// 2단계: SQLite 조회 한 번
+db.prepare('SELECT data FROM package_index WHERE key = ?').get(key)
+
+// 3단계: BLOB 역직렬화 → 메타데이터 + 파일 목록 동시에
+// bundledManifest: { name: 'es-toolkit', version: '1.46.1', bin: {}, engines: {...} }
+// files: [ { name: 'package.json', digest: '...', mode: 0o644 }, ... ]
+
+// 4단계: files/ → node_modules/ 하드링크
+```
+
+조회 한 번에 메타데이터와 파일 목록이 같이 나온다.
+v10이 파일 시스템을 두 번 건드렸다면, v11은 SQLite 한 번으로 끝낸다.
+
+이후 섹션들은 이 차이를 만드는 각각의 설계 결정을 들여다본다.
+
+---
+
 ## SQLite 기반 스토어의 구조
 
 pnpm v11에서는 인덱스 디렉토리 전체가 단일 SQLite 파일로 교체된다.  
@@ -93,7 +161,7 @@ SQLite 입장에서는 하나의 파일을 열고 B-tree 인덱스를 통해 O(l
 하지만 pnpm v11에서는 패키지 구성에 필요한 정보를 `index.db`에 미리 저장해둔다.  
 위 JSON 구조가 MessagePack 으로 직렬화되어 `index.db` 에 BLOB으로 저장된다.  
 
-이 덕에 설치 과정에서 CAS의 `.zip` 파일을 열어 `package.json`을 파싱하는 과정을 완전히 생략할 수 있다.
+이 덕에 설치 과정에서 `files/` 디렉토리에서 `package.json`을 별도로 읽는 과정을 완전히 생략할 수 있다.
 
 > 번들 매니페스트는 "패키지를 열어보지 않고도 패키지를 안다"는 아이디어다.  
 최초 fetch 시점에 필요한 메타데이터를 추출해 DB에 저장해두면, 이후 설치에서는 DB 조회 한 번으로 충분하다.
