@@ -30,7 +30,7 @@ export const UnitTableContextProvider = ({ children }) => {
 메모리에만 상태를 두니 새로고침하면 초기화되는 건 당연한 일이었는데, 그게 사용자 입장에서 얼마나 불편한지는 막상 CS가 쌓이기 전까지 제대로 인식하지 못했다.
 
 하지만 운영이 시작되면서 "필터를 걸어놓은 상태로 링크를 공유하고 싶어요"라는 요청이 하나씩 들어오기 시작했다.  
-하지만 공유된 URL에는 필터나 정렬 정보가 아무것도 없으니 당연히 공유가 안 된다.. 그때서야 이 구조의 한계가 명확해졌다.
+공유된 URL에는 필터나 정렬 정보가 아무것도 없으니 당연히 공유가 안 됐고, 그때서야 이 구조의 한계가 명확해졌다.
 
 거기에 더해서, 필터·정렬 필드를 하나 추가하려면 `useState` 선언부터 Context 등록까지 전부 순서대로 고쳐야 했다.  
 서비스 내 테이블이 8개를 넘어가는 시점에서 이대로는 안 되겠다 싶었다.
@@ -164,7 +164,7 @@ export const FILTER_MAPPER = {
 
 규약을 도입한 뒤에도 프론트엔드 코드를 들여다보면 뭔가 찜찜한 부분이 있었다.
 
-규약은 형식만 통일했을 뿐이다. 그 규약을 올바르게 지키고 있는지 확인하는 건 여전히 개발자 몫이었다.
+규약은 형식만 통일했을 뿐이어서 그 규약을 올바르게 지키고 있는지 확인하는 건 여전히 개발자 몫이었다.
 
 ```typescript
 // entities/application/api/get.ts — 규약 도입 이후
@@ -198,7 +198,7 @@ searchParams: {
 규약을 아는 사람이라면 쓸 수 있는 코드지만, 규약이 올바른지 확인하는 건 여전히 개발자 몫이었다.  
 `filter__stutus__in`으로 오타를 내도, 숫자 필드에 `like`를 써도 런타임에 API가 실패하기 전까지 아무것도 알려주지 않았다.
 
-규약은 있는데 그 규약을 강제하는 장치가 없었다. 오로지 개발자가 기억하고 책임져야 하는 구조였다.
+규약은 있는데 그 규약을 강제하는 장치가 없어서 오로지 개발자가 기억하고 책임져야 하는 구조였다.
 
 ---
 
@@ -221,7 +221,7 @@ searchParams: {
 
 ## QueryParamBuilder를 만들기로 했다
 
-세 문제를 다시 보면 공통 원인이 하나다. 규약이 코드 바깥에 있었다.  
+세 문제를 다시 보면 공통 원인이 하나인데, 규약이 코드 바깥에 있었다는 것이다.  
 개발자가 규약을 알고, 타입에 옮기고, 호출 지점마다 맞는지 확인하는 모든 책임을 졌다.
 
 그렇다면 규약을 타입 시스템 안으로 가져오면 어떨까?  
@@ -231,13 +231,11 @@ searchParams: {
 
 빌더를 개발하기 전에 세 가지 원칙을 먼저 잡았다.
 
-**타입이 올바른 사용을 강제한다.** 숫자 필드에 `like`를 쓰는 일, 존재하지 않는 필드를 필터하는 일을 런타임이 아니라 컴파일 타임에 막는다.  
-허용되는 API의 경계를 개발자가 결정하는 게 아니라, 타입 시스템이 결정하도록 설계한다.
+첫 번째는 **타입이 올바른 사용을 강제**하는 것이었다. 숫자 필드에 `like`를 쓰는 일, 존재하지 않는 필드를 필터하는 일을 런타임이 아니라 컴파일 타임에 막는 구조를 목표로 했다. 허용되는 API의 경계를 개발자가 결정하는 게 아니라 타입 시스템이 결정하도록 설계하는 것이다.
 
-**상태 변경은 새 인스턴스로만 이루어진다.** 메서드를 호출하면 기존 인스턴스를 변경하는 게 아니라 새 인스턴스를 반환해서, `useState(queryBuilder)` 하나로 React 상태 관리가 자연스럽게 연결된다.
+두 번째는 **상태 변경이 새 인스턴스로만 이루어지는 것**이었다. 메서드를 호출하면 기존 인스턴스를 변경하는 게 아니라 새 인스턴스를 반환하기 때문에 `useState(queryBuilder)` 하나로 React 상태 관리가 자연스럽게 연결된다.
 
-**값의 저장과 직렬화는 분리한다.** 필터·정렬 조건은 내부에 원본 그대로 보존하고, URL 문자열로의 변환은 실제로 요청을 보내는 시점에만 일어난다.  
-이렇게 하면 "지금 어떤 조건이 걸려 있는가"를 언제든 원본 타입으로 꺼낼 수 있다.
+세 번째는 **값의 저장과 직렬화를 분리**하는 것이었다. 필터·정렬 조건은 내부에 원본 그대로 보존하고, URL 문자열로의 변환은 실제로 요청을 보내는 시점에만 일어난다. 이렇게 하면 "지금 어떤 조건이 걸려 있는가"를 언제든 원본 타입으로 꺼낼 수 있다.
 
 ---
 
@@ -347,8 +345,7 @@ queryBuilder.filter('id', 'john', 'like');
 
 ## FilterValue — 연산자가 값의 타입도 결정한다
 
-타입 설계를 이어가다가 한 가지가 더 보였다.  
-연산자가 결정되는 순간, 그 연산자에 넣어야 하는 값의 타입도 자동으로 좁힐 수 있다는 것이다.  
+타입 설계를 이어가다 보니 한 가지가 더 보였는데, 연산자가 결정되는 순간 그 연산자에 넣어야 하는 값의 타입도 자동으로 좁힐 수 있다는 것이었다.  
 `gte` 연산자라면 값이 `number`나 `Date`여야 하고, `like`라면 `string`이어야 한다. `in`이라면 배열이어야 한다.
 
 이 역할을 `FilterValue<T, K, Op>` 조건부 타입이 담당한다.
@@ -385,7 +382,7 @@ getFilter(field: FilterableFields<T>): FilterCriteria<T> | undefined;
 
 ## QueryParams — 직렬화 결과도 타입으로 만들어진다
 
-타입 설계의 마지막 조각이다. 빌더는 최종적으로 필터·정렬 조건을 URL 파라미터 형태의 객체로 직렬화해 반환해야 한다. 그 반환 타입도 단순한 `Record<string, unknown>`이 아니라, 타입 추론이 되도록 미리 설계해둬야 했다.
+빌더가 최종적으로 필터·정렬 조건을 URL 파라미터 형태의 객체로 직렬화해 반환할 때, 그 반환 타입도 단순한 `Record<string, unknown>`이 아니라 타입 추론이 되도록 미리 설계해둬야 했다.
 
 `filter__name__i_like`, `sort__createdAt` 같은 키를 런타임에 문자열로 만드는 건 어렵지 않다.  
 그런데 이 키들이 타입 레벨에서도 존재해야 IDE 자동완성과 타입 검사가 의미 있어진다.
@@ -441,11 +438,11 @@ export type QueryParams<T extends Record<string, unknown>, P extends PaginationP
 
 ## 불변 빌더 클래스: 메서드마다 새 인스턴스를 반환한다
 
-타입 설계가 끝났으면 이제 클래스를 만들 차례였다.
+타입 설계가 끝났으니 클래스를 만들 차례였다.
 
 클래스 설계에서 가장 먼저 고민한 건 불변성이었다.  
 불변성이 없으면 `useState`에 감쌌을 때 React가 상태 변경을 감지하지 못하거나, 의도치 않은 참조 공유로 버그가 생긴다.  
-`immer`를 도입하거나 매번 spread 연산자로 복사를 챙기는 건 원하지 않았다. 설계 자체가 불변이면 그런 처리가 필요 없다.
+`immer`를 도입하거나 매번 spread 연산자로 복사를 챙기는 건 원하지 않았는데, 설계 자체가 불변이면 그런 처리가 필요 없기 때문이다.
 
 모든 내부 상태는 `readonly`이며, 메서드를 호출하면 상태를 변경하는 대신 새 인스턴스를 만들어 반환한다.
 
@@ -498,8 +495,7 @@ notIn<K extends FilterableFields<T>>(field: K, values: NonNullable<T[K]>[]): Que
 
 ---
 
-세 번째 원칙 — 값의 저장과 직렬화를 분리한다 — 이 가장 구체적으로 드러나는 지점이 `in()` 메서드다.  
-배열을 내부에 원본 그대로 저장하는 것도 설계 의도였다.
+세 번째 원칙 — 값의 저장과 직렬화를 분리한다 — 이 가장 구체적으로 드러나는 지점이 `in()` 메서드인데, 배열을 내부에 원본 그대로 저장하는 것도 같은 설계 의도에서 비롯된다.
 
 ```typescript
 in<K extends FilterableFields<T>>(
@@ -536,8 +532,7 @@ build(): QueryParams<T, P> {
 
 ---
 
-페이지네이션 방식이 offset과 cursor 두 가지이다 보니, cursor 기반으로 초기화한 빌더에서 실수로 `page()`를 호출하는 경우가 생길 수 있었다.  
-이걸 런타임이 아니라 타입 수준에서 막고 싶었다.
+페이지네이션 방식이 offset과 cursor 두 가지이다 보니, cursor 기반으로 초기화한 빌더에서 실수로 `page()`를 호출하는 경우가 생길 수 있었는데 이걸 런타임이 아니라 타입 수준에서 막고 싶었다.
 
 ```typescript
 // typed this: P가 OffsetPagination일 때만 컴파일된다
@@ -610,11 +605,9 @@ export function useTableQueryOptions<T>(options?: OffsetOptions<T>) {
 
 `fromUrl()` 정적 메서드가 핵심이다.  
 URL에 이미 `filter__type__eq=RECRUITMENT&sort__createdAt=DESC`가 있다면 이를 파싱해서 빌더를 초기화하며, `options`는 URL에 값이 없을 때의 기본값 역할을 한다.  
-의존성 배열을 `[]`로 고정한 것도 의도된 설계다. 마운트 시 한 번만 URL을 읽어 초기화하고, 이후 상태 변경은 모두 `setQueryBuilder`를 통해 이루어진다.
+의존성 배열을 `[]`로 고정한 건 마운트 시 한 번만 URL을 읽어 초기화하고 이후 상태 변경은 모두 `setQueryBuilder`를 통해 이루어지도록 하기 위한 의도된 설계다.
 
-URL 동기화에서도 신경 쓸 지점이 있었다.  
-단순히 `setSearchParams(queryBuilder.toUrlParams())`를 호출하면 URL에 있던 다른 파라미터가 전부 날아간다.  
-탭 선택이나 모달 상태처럼 테이블과 무관한 파라미터들도 같이.
+단순히 `setSearchParams(queryBuilder.toUrlParams())`를 호출하면 URL에 있던 다른 파라미터가 전부 날아가는 문제가 있었는데, 탭 선택이나 모달 상태처럼 테이블과 무관한 파라미터들도 함께 사라지기 때문이다.
 
 ```typescript
 const setSearchParamsRef = useRef(setSearchParams);
@@ -669,7 +662,7 @@ const onPaginationChange: OnChangeFn<PaginationState> = useCallback(
 10개씩 보다가 2페이지를 보는 도중에 페이지 크기를 50개로 바꾸면, 기존 `pageIndex`를 그대로 유지했을 때 서버에 없는 페이지를 요청하게 된다.  
 페이지 크기가 바뀌면 무조건 첫 페이지로 돌아가는 게 맞다.
 
-`onSortingChange`는 TanStack Table이 전달하는 방식 때문에 조금 다른 접근이 필요했다.
+TanStack Table이 정렬 상태를 전달하는 방식 때문에 `onSortingChange`는 조금 다른 접근이 필요했다.
 
 ```typescript
 const onSortingChange: OnChangeFn<SortingState> = useCallback((updater) => {
@@ -712,8 +705,7 @@ return prev.page(next.pageIndex + 1);
 ```
 
 그런데 이 방식이 마음에 들지 않았다. `QueryParamBuilder` 내부가 1-based라는 사실을 쓰는 쪽에서 기억하고 있어야 하며, 변환을 빠뜨리면 조용히 틀린 페이지를 요청하게 된다.  
-결국 `QueryParamBuilder` 자체를 0-based로 전환했다.  
-TanStack Table, `QueryParamBuilder` 내부, API 파라미터 모두 `page: 0`이 첫 페이지로 통일되면서 변환 로직이 완전히 사라졌다.
+결국 `QueryParamBuilder` 자체를 0-based로 전환했는데, TanStack Table, `QueryParamBuilder` 내부, API 파라미터 모두 `page: 0`이 첫 페이지로 통일되면서 변환 로직이 완전히 사라졌다.
 
 ```typescript
 // ✅ 변환 없이 그대로 전달
@@ -804,8 +796,7 @@ const CoursePermissionTableDispatchContext = createContext({
 queryBuilder.orderBy('level', 'ASC')
 ```
 
-URL 반영은 훅이 알아서 처리하고, 타입이 틀리면 컴파일러가 잡는다.  
-정렬 기준 하나 추가가 네 파일 수정에서 메서드 호출 하나로 줄었다.
+URL 반영은 훅이 알아서 처리하고 타입이 틀리면 컴파일러가 잡기 때문에, 정렬 기준 하나 추가가 네 파일 수정에서 메서드 호출 하나로 줄었다.
 
 ---
 
