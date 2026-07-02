@@ -2,7 +2,7 @@
 
 ## 공식 명칭에는 상표를 붙이기
 
-TS의 구조적 타이핑은 때로 의도치 않은 타입 호환을 허용한다.  
+TS의 구조적 타이핑은 때로 의도치 않은 타입 호환을 허용한다.
 
 ```typescript
 interface Vector2D {
@@ -17,7 +17,7 @@ function calculateNorm(p: Vector2D) {
 calculateNorm({ x: 3, y: 4, z: 1 }); // 정상 — z 필드가 있어도 통과
 ```
 
-상표(brand)를 추가해 명목적 타이핑을 흉내낼 수 있다.  
+상표(brand)를 추가해 명목적 타이핑을 흉내낼 수 있다.
 
 ```typescript
 interface Vector2D {
@@ -38,7 +38,7 @@ calculateNorm(vec2D(3, 4)); // 정상
 calculateNorm({ x: 3, y: 4, z: 1, _brand: '2D' }); // 사용자가 의도적으로 추가하면 막을 수 없다
 ```
 
-절대 경로에도 상표를 적용할 수 있다.  
+절대 경로에도 상표를 적용할 수 있다.
 
 ```typescript
 type AbsolutePath = string & { _brand: 'abs' };
@@ -52,13 +52,13 @@ function listAbsolutePath(path: AbsolutePath) {
 }
 ```
 
-`AbsolutePath`는 타입 시스템에서만 존재한다. 런타임에는 그냥 `string`이다.  
+`AbsolutePath`는 타입 시스템에서만 존재한다. 런타임에는 그냥 `string`이다.
 
 ---
 
 ## any의 사용 범위를 최소로 좁히기
 
-`any`를 넓게 사용하면 타입 안전성이 무너진다.  
+`any`를 넓게 사용하면 타입 안전성이 무너진다.
 
 ```typescript
 // 나쁜 패턴
@@ -69,7 +69,7 @@ config.timeout; // any
 const config = loadConfig() as AppConfig;
 ```
 
-함수 반환 타입에 `any`를 쓰면 그 `any`가 호출한 쪽으로 전파된다.  
+함수 반환 타입에 `any`를 쓰면 그 `any`가 호출한 쪽으로 전파된다.
 
 ```typescript
 function getThing(): any { // 위험
@@ -80,7 +80,7 @@ const thing = getThing(); // any
 thing.doSomething(); // 오류가 감지되지 않는다
 ```
 
-강제로 `any`를 써야 한다면 타입 단언을 최소 범위에서 사용한다.  
+강제로 `any`를 써야 한다면 타입 단언을 최소 범위에서 사용한다.
 
 ```typescript
 function processInput(value: string) {
@@ -92,7 +92,7 @@ function processInput(value: string) {
 
 ## any를 구체적으로 변형해서 사용하기
 
-`any` 대신 더 구체적인 타입을 사용하면 타입 정보를 보존할 수 있다.  
+`any` 대신 더 구체적인 타입을 사용하면 타입 정보를 보존할 수 있다.
 
 ```typescript
 // 너무 광범위
@@ -106,7 +106,7 @@ function getFirstElement(arr: any[]) {
 }
 ```
 
-객체도 마찬가지다.  
+객체도 마찬가지다.
 
 ```typescript
 function hasTwelveLetterKey(o: { [key: string]: any }) {
@@ -121,7 +121,7 @@ function hasTwelveLetterKey(o: { [key: string]: any }) {
 
 ## 타입 단언문보다 타입 안전 접근법 사용하기
 
-`as unknown as T` 패턴은 `any`를 중간에 끼워 타입 체커를 우회한다.  
+`as unknown as T` 패턴은 `any`를 중간에 끼워 타입 체커를 우회한다.
 
 ```typescript
 function safeToString(val: unknown) {
@@ -129,7 +129,7 @@ function safeToString(val: unknown) {
 }
 ```
 
-더 안전한 방법은 타입 가드를 사용하는 것이다.  
+더 안전한 방법은 타입 가드를 사용하는 것이다.
 
 ```typescript
 function safeToString(val: unknown): string {
@@ -144,7 +144,7 @@ function safeToString(val: unknown): string {
 
 ## any의 진화를 이해하기
 
-변수에 처음 `any`가 할당된 후 값을 추가하면 타입이 진화한다.  
+변수에 처음 `any`가 할당된 후 값을 추가하면 타입이 진화한다.
 
 ```typescript
 function range(start: number, limit: number) {
@@ -156,7 +156,7 @@ function range(start: number, limit: number) {
 }
 ```
 
-`noImplicitAny` 옵션이 켜져 있으면 명시적 타입 어노테이션을 요구한다.  
+`noImplicitAny` 옵션이 켜져 있으면 명시적 타입 어노테이션을 요구한다.
 
 ```typescript
 function range(start: number, limit: number): number[] {
@@ -172,8 +172,8 @@ function range(start: number, limit: number): number[] {
 
 ## 모르는 타입의 값에는 any 대신 unknown 사용하기
 
-`any`는 양방향으로 할당 가능해 타입 안전성을 파괴한다.  
-`unknown`은 모든 타입을 할당받지만, 사용하려면 반드시 타입을 좁혀야 한다.  
+`any`는 양방향으로 할당 가능해 타입 안전성을 파괴한다.
+`unknown`은 모든 타입을 할당받지만, 사용하려면 반드시 타입을 좁혀야 한다.
 
 ```typescript
 function parseYAML(yaml: string): unknown {
@@ -189,7 +189,7 @@ book.title; // 오류 — unknown 타입
 book as Book; // 단언으로 좁히기
 ```
 
-제네릭보다 `unknown`이 더 안전한 경우도 있다.  
+제네릭보다 `unknown`이 더 안전한 경우도 있다.
 
 ```typescript
 function safeParseYAML<T>(yaml: string): T {
@@ -201,4 +201,4 @@ function betterParseYAML(yaml: string): unknown {
 }
 ```
 
-`unknown`은 `any`의 타입 안전 버전이다.  
+`unknown`은 `any`의 타입 안전 버전이다.

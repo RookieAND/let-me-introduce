@@ -1,8 +1,8 @@
 
-> ❓ **주의**!  
-해당 글은 아직 **react-reconciler** 내 구현체에 대한 세밀한 분석이 끝나지 않았습니다.  
-**useEffect** 가 **Message Channel API** 를 기반으로 실행되는 과정을 중점으로 서술합니다.  
-만약 틀린 점이 있다면 부디 React Fiber 장인 분들의 많은 의견과 질책 부탁드립니다.  
+> ❓ **주의**!
+해당 글은 아직 **react-reconciler** 내 구현체에 대한 세밀한 분석이 끝나지 않았습니다.
+**useEffect** 가 **Message Channel API** 를 기반으로 실행되는 과정을 중점으로 서술합니다.
+만약 틀린 점이 있다면 부디 React Fiber 장인 분들의 많은 의견과 질책 부탁드립니다.
 
 ## Introduction
 
@@ -152,7 +152,7 @@ function unstable_scheduleCallback(
     // ... 지연된 Task 에 대한 처리, 생략
   } else {
     newTask.sortIndex = expirationTime;
-    
+  
     // TaskQueue 힙에 새로운 Task 추가.
     push(taskQueue, newTask);
     // 스케줄링된 작업이 없다면 (isHostCallbackScheduled flag 가 false 라면), requestHostCallback 호출
@@ -222,7 +222,7 @@ else if (typeof MessageChannel !== 'undefined') {
     - 자세한 구조는 flush 가 반환하는 함수인 workLoop 와, 해당 함수가 잔여 Task 의 여부를 체크하는 로직을 확인하면 좋다.
         - flushWork : https://github.com/facebook/react/blob/v18.2.0/packages/scheduler/src/forks/Scheduler.js#L165
         - workLoop : https://github.com/facebook/react/blob/v18.2.0/packages/scheduler/src/forks/Scheduler.js#L235
-        
+      
 
 ```jsx
 const performWorkUntilDeadline = () => {
@@ -255,7 +255,7 @@ const performWorkUntilDeadline = () => {
 ## MessageChannel
 
 
-> ❓ 왜 Paint 이후에 Schedule 된 작업을 실행하기 위해서 **MessageChannel API** 를 사용했을까?  
+> ❓ 왜 Paint 이후에 Schedule 된 작업을 실행하기 위해서 **MessageChannel API** 를 사용했을까?
 
 - Paint 이후 시점을 정확히 Catch 하기 위해서는 **MessageChannel API** 의 동작 원리를 파악해야 한다.
 - **MessageChannel API 는** 두 개의 클라이언트 사이에서 양방향으로 메세지를 주고 받을 수 있는 메세지 채널을 생성하는 Web API 이다.
@@ -279,7 +279,7 @@ const performWorkUntilDeadline = () => {
 - 이후 **schedulePerformWorkUntilDeadline** 함수에  `port2.postMessage(null)` 을 실행하는 콜백을 할당했다.
 - 이 경우 만약 **schedulePerformWorkUntilDeadline** 함수가 실행되면 `port2.postMessage(null)` 가 실행되는 것이고, 그 결과로 port1 의 `onmessage` 핸들러에 등록된 **performWorkUntilDeadline 가 실행된다.**
 
-> 이때, `onmessage` 핸들러에 등록된 콜백은 비동기로 동작하기에 Task Queue 에 들어간다.  
+> 이때, `onmessage` 핸들러에 등록된 콜백은 비동기로 동작하기에 Task Queue 에 들어간다.
 
 - 브라우저가 화면을 렌더링하는 과정에서 Call Stack 을 사용하고, 이는 비동기로 실행된 Task 들이 브라우저의 렌더링이 종료되기 이전에는 **실행될 수 없음**을 의미한다.
 - 따라서 브라우저의 렌더링이 종료되는 시점, 즉 **Paint 가 완료된 시점에서** Call Stack 이 비고, 이때 `onmessage` 핸들러에 등록되어 실행되었던 **performWorkUntilDeadline** 이 바로 실행된다.
@@ -291,7 +291,7 @@ const performWorkUntilDeadline = () => {
         - When a port's [port message queue](https://html.spec.whatwg.org/multipage/web-messaging.html#port-message-queue) is enabled, the [event loop](https://html.spec.whatwg.org/multipage/webappapis.html#event-loop) must use it as one of its [task sources](https://html.spec.whatwg.org/multipage/webappapis.html#task-source).
         - Port Message Queue 에 1개 이상의 Task 가 적재될 경우, 무조건 해당 Task 를 소비해야 한다.
 
-> 하지만 이 방식도 **만능은 아니라는 걸** 알아야 한다.  
+> 하지만 이 방식도 **만능은 아니라는 걸** 알아야 한다.
 
 - 해당 Effect 가 실행되기 전에 리렌더링이 발생하는 경우 (useLayoutEffect) 에는 Paint 이전에 해당 Effect 를 소비할 가능성도 있다.
 

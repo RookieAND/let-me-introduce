@@ -1,10 +1,10 @@
 ## Introduction
-> `Promise.withResolver` 는 2024년에 새롭게 등장한 **Promise Static Method** 입니다.  
+> `Promise.withResolver` 는 2024년에 새롭게 등장한 **Promise Static Method** 입니다.
 
-사내 개발자 스크럼에서 공유할 내용을 찾던 도중에 작지만 재밌는 메서드가 이번에 새로 추가되어 간단하게 조사를 진행해보았습니다.  
+사내 개발자 스크럼에서 공유할 내용을 찾던 도중에 작지만 재밌는 메서드가 이번에 새로 추가되어 간단하게 조사를 진행해보았습니다.
 
-이 메서드는 주로 Promise 를 Resolve 시키거나 Reject 하는 로직을 Promise 내부가 아닌 **외부에서 결정할 수 있도록** 해줍니다.  
-즉, Promise 의 이행 여부를 생성자 내부의 Callback 에서 결정짓지 않고 외부의 컨텍스트에서 결정지을 수 있도록 하는 메서드립니다.  
+이 메서드는 주로 Promise 를 Resolve 시키거나 Reject 하는 로직을 Promise 내부가 아닌 **외부에서 결정할 수 있도록** 해줍니다.
+즉, Promise 의 이행 여부를 생성자 내부의 Callback 에서 결정짓지 않고 외부의 컨텍스트에서 결정지을 수 있도록 하는 메서드립니다.
 
 #### TC31 Github
 
@@ -13,9 +13,9 @@
 
 ## 왜 나왔는가?
 
-Promise 를 다루기 위해서 사용자는 반드시 Resolve 함수와 Reject 함수를 인자로 받는 Callback 을 **Promise 생성자에 넘겨야 했습니다.**  
+Promise 를 다루기 위해서 사용자는 반드시 Resolve 함수와 Reject 함수를 인자로 받는 Callback 을 **Promise 생성자에 넘겨야 했습니다.**
 
-이러한 설계는 보통 Callback 이 내부에서 비동기 함수를 호출한 후, 그 결과에 따라 Promise 를 Resolve 하거나 Reject 시키는 경우 쓰였습니다.  
+이러한 설계는 보통 Callback 이 내부에서 비동기 함수를 호출한 후, 그 결과에 따라 Promise 를 Resolve 하거나 Reject 시키는 경우 쓰였습니다.
 
 ```jsx
 const promise = new Promise((resolve, reject) => {
@@ -33,9 +33,9 @@ promise
   .catch((err) => console.error('promise is rejected'));
 ```
 
-그런데 만약 사용자가 Promise 를 생성했지만 **이행 결과를 초기화 이후에 결정짓고 싶을 때**는 어떨까요?  
+그런데 만약 사용자가 Promise 를 생성했지만 **이행 결과를 초기화 이후에 결정짓고 싶을 때**는 어떨까요?
 
-보통은 Callback 의 외부 컨텍스트에서 식별자를 정의하고, Callback 내부에서 식별자에 인자로 받은 `resolve`, `reject` 함수를 넘기는 편입니다.  
+보통은 Callback 의 외부 컨텍스트에서 식별자를 정의하고, Callback 내부에서 식별자에 인자로 받은 `resolve`, `reject` 함수를 넘기는 편입니다.
 
 ## 위와 관련한 예제 코드
 
@@ -78,13 +78,13 @@ class CancelToken {
   // @gate experimental
   it('emits all HTML as one unit', async () => {
     let hasLoaded = false;
-    
+  
     // 1. resolve 함수를 받을 식별자를 선언한다.
     let resolve;
-    
+  
     // 2. Promise 생성자 내부 함수에서 resolvePromise 에 resolve 함수를 넘긴다.
     const promise = new Promise(r => (resolve = r));
-    
+  
     // 3. hasLoaded 가 false 이므로 아직 이행되지 않은 Promise 를 던진다.
     function Wait() {
       if (!hasLoaded) {
@@ -115,11 +115,11 @@ class CancelToken {
   });
 ```
 
-이렇듯 Resolve, Reject 함수를 받기 위한 식별자를 사전에 생성하는 코드는 프로덕션 레벨의 라이브러리에서 심심찮게 보이는 패턴입니다.  
+이렇듯 Resolve, Reject 함수를 받기 위한 식별자를 사전에 생성하는 코드는 프로덕션 레벨의 라이브러리에서 심심찮게 보이는 패턴입니다.
 
 ## Deferred Promise
 
-Promise 가 생성되는 레벨에서 이행 여부가 결정되지 않고, 이후의 단계에서 결정되기 때문에 이러한 패턴을 **Deferred Promise** 라고 불리며, 실제 jQuery 에서도 이러한 패턴을 돕는 유틸 함수가 존재합니다.  
+Promise 가 생성되는 레벨에서 이행 여부가 결정되지 않고, 이후의 단계에서 결정되기 때문에 이러한 패턴을 **Deferred Promise** 라고 불리며, 실제 jQuery 에서도 이러한 패턴을 돕는 유틸 함수가 존재합니다.
 
 ```jsx
 var _deferred = function(param) {
@@ -153,7 +153,7 @@ _deferred(false)
 
 ## Usage
 
-**Promise.withResolver** 함수는 `promise`, `resolve`, `reject` 속성이 담긴 객체를 반환합니다.  
+**Promise.withResolver** 함수는 `promise`, `resolve`, `reject` 속성이 담긴 객체를 반환합니다.
 
 - promise : Promise 객체
 - resolve : 반환된 Promise 를 이행시키는 함수
@@ -163,7 +163,7 @@ _deferred(false)
 const { promise, resolve, reject } = Promise.withResolver()
 ```
 
-위의 코드는 정확히 아래의 형식과 동일합니다.  
+위의 코드는 정확히 아래의 형식과 동일합니다.
 
 ```tsx
 let resolve, reject;
@@ -200,11 +200,11 @@ fs.unlink(`${imageFile.path}`, (error) => {
 ```
 async init() {
     const { promise, resolve, reject } = Promise.withResolver();
-    
+  
     if (typeof window === 'undefined') {
         reject('T Map 은 Server Side 에서 사용할 수 없습니다.');
     }
-    
+  
     const mapElement = document.getElementById(mapId);
 
     if (!mapElement) {
@@ -230,7 +230,7 @@ async init() {
 
 ## Conclusion
 
-> 뭐… 새로운 메서드가 추가된 건 좋은데 언제 이걸 어떻게 잘 써먹어야 할지는 잘 모르겠네요  
+> 뭐… 새로운 메서드가 추가된 건 좋은데 언제 이걸 어떻게 잘 써먹어야 할지는 잘 모르겠네요
 
 - Promise 생성자를 호출하고, 해당 Promise 의 이행 여부를 지연시키는 패턴을 아직 많이 못봤습니다.
 - 하지만 일단 이런게 있다는 걸 알아는 뒀으니 괜찮지 않을까요?

@@ -2,8 +2,8 @@
 
 ## 기본 문법
 
-`async` 함수는 항상 Promise를 반환한다.  
-`await`는 Promise가 완료될 때까지 함수 실행을 일시 중단한다.  
+`async` 함수는 항상 Promise를 반환한다.
+`await`는 Promise가 완료될 때까지 함수 실행을 일시 중단한다.
 
 ```javascript
 async function fetchUser(id) {
@@ -13,7 +13,7 @@ async function fetchUser(id) {
 }
 ```
 
-Promise 체이닝과 비교하면 읽기가 훨씬 쉽다.  
+Promise 체이닝과 비교하면 읽기가 훨씬 쉽다.
 
 ```javascript
 // Promise 체이닝
@@ -32,7 +32,7 @@ async function fetchUser(id) {
 
 ## 에러 처리
 
-rejected Promise는 `try/catch`로 잡는다.  
+rejected Promise는 `try/catch`로 잡는다.
 
 ```javascript
 async function fetchData() {
@@ -49,8 +49,8 @@ async function fetchData() {
 
 ## async 함수의 중요한 특성
 
-`async` 키워드가 붙은 함수는 항상 비동기로 실행된다.  
-캐시된 값을 동기적으로 반환하려 해도 Promise로 감싸진다.  
+`async` 키워드가 붙은 함수는 항상 비동기로 실행된다.
+캐시된 값을 동기적으로 반환하려 해도 Promise로 감싸진다.
 
 ```javascript
 async function getValue() {
@@ -62,7 +62,7 @@ getValue().then(v => console.log(v)); // 42
 
 ## 병렬 실행
 
-순서가 없는 여러 비동기 작업은 `Promise.all`로 병렬 처리한다.  
+순서가 없는 여러 비동기 작업은 `Promise.all`로 병렬 처리한다.
 
 ```javascript
 async function fetchAll() {
@@ -77,7 +77,7 @@ async function fetchAll() {
 
 ## Top-level await
 
-ES2022부터 모듈의 최상위 레벨에서 `await`를 직접 쓸 수 있다.  
+ES2022부터 모듈의 최상위 레벨에서 `await`를 직접 쓸 수 있다.
 
 ```javascript
 // module.js

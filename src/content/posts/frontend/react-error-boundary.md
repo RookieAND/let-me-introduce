@@ -1,12 +1,12 @@
-> ErrorBoundary 는 어떻게 하위 컴포넌트의 에러를 Catch 할 수 있는 걸까?  
+> ErrorBoundary 는 어떻게 하위 컴포넌트의 에러를 Catch 할 수 있는 걸까?
 
 ## Introduction
 
-사내 프로젝트와 개인 프로젝트에서 요즘 내가 잘 사용하려고 하는 친구가 바로 Suspense 와 ErrorBoundary 다.  
-API 통신이 아직 마무리 되지 않았거나 중간에 문제가 생겼을 경우 사용자에게 이를 즉각적으로 알릴 수 있는 좋은 수단이라고 생각하기 때문이다.  
+사내 프로젝트와 개인 프로젝트에서 요즘 내가 잘 사용하려고 하는 친구가 바로 Suspense 와 ErrorBoundary 다.
+API 통신이 아직 마무리 되지 않았거나 중간에 문제가 생겼을 경우 사용자에게 이를 즉각적으로 알릴 수 있는 좋은 수단이라고 생각하기 때문이다.
 
-하지만 정작 이 ErrorBoundary 가 어떤 목적과 구조를 가지고 동작하는지 잘 몰랐기 때문에,  
-이번 사내 개발자 스크럼에서 에러 바운더리의 구조와 설계를 분석하고 이를 공유하기 위해 해당 포스트를 작성하게 되었다.  
+하지만 정작 이 ErrorBoundary 가 어떤 목적과 구조를 가지고 동작하는지 잘 몰랐기 때문에,
+이번 사내 개발자 스크럼에서 에러 바운더리의 구조와 설계를 분석하고 이를 공유하기 위해 해당 포스트를 작성하게 되었다.
 
 ## ErrorBoundary 란?
 
@@ -20,7 +20,7 @@ API 통신이 아직 마무리 되지 않았거나 중간에 문제가 생겼을
     - **ErrorBoundary** 컴포넌트는 didCatch, error 속성을 가진 객체를 state 로 담고 있다.
     - `didCatch`  는 현재 ErrorBoundary 의 자식 컴포넌트에 에러가 발생하여 catch 한 상태인지를 나타낸다.
     - `error` 는 자식 컴포넌트에 어떤 에러가 발생했는지에 대한 정보를 담은 Error 객체이다.
-    
+  
 ```jsx
 type ErrorBoundaryState = { didCatch: boolean; error: any };
 
@@ -29,20 +29,20 @@ const initialState: ErrorBoundaryState = {
   error: null,
 };
 ```
-    
+  
 
 2. ui props
     - `fallback` 은 단순히 에러가 발생했을 때 보여줄 "UI", 즉 컴포넌트를 인자로 받는다.
     - 만약 `fallback` 이 유효한 ReactElement 가 아니라면 ErrorBoundary 는 다음으로 `fallbackRender` 의 유효성 검사를 진행한다.
     - `fallbackRender` 의 경우 함수형 컴포넌트만을 받으며, 발생한 에러 객체와 ErrorBoundary 내의 state 를 초기화할 함수인 resetErrorBoundary 함수를 props로 넘겨준다.
     - `fallbackComponent` 의 경우 클래스형 컴포넌트, 함수형 컴포넌트 두 개를 모두 받을 수 있으며, 여기서는 클래스형 컴포넌트를 고려하여 추가한 것으로 보인다.
-        
+      
 ```jsx
         const { didCatch, error } = this.state;
-        
+      
         // 일단 렌더링할 대상을 자식 컴포넌트로 둔다.
         let childToRender = children;
-        
+      
         // 만약 didCatch 가 true 라면, 자식 컴포넌트에서 에러가 발생했으므로 fallback UI를 띄운다.
         // fallback => fallbackRender => fallbackComponent 순으로 체크하며, 셋 다 유효하지 않다면 에러를 띄운다.
         if (didCatch) {
@@ -50,15 +50,15 @@ const initialState: ErrorBoundaryState = {
                 error,
                 resetErrorBoundary: this.resetErrorBoundary,
               };
-        
+      
         			// fallback Props 가 유효한 React Element 라면, 이를 보여준다.
               if (isValidElement(fallback)) {
                 childToRender = fallback;
-        
+      
         		  // fallbackRender 가 함수형 컴포넌트일 경우 fallbackProps 를 인계하여 보여준다.
               } else if (typeof fallbackRender === "function") {
                 childToRender = fallbackRender(props);
-        
+      
         			// fallbackComponent 가 존재한다면, 새로운 Element 를 생성하고 fallbackProps 를 인계한다. 
               } else if (FallbackComponent) {
                 childToRender = createElement(FallbackComponent, props); // fallbackProps 인계
@@ -68,7 +68,7 @@ const initialState: ErrorBoundaryState = {
                 );
               }
             }
-        
+      
         // 이후 ErrorBoundary 컴포넌트를 렌더링 한다, 이때 하위 컴포넌트에 Provider 를 주입한다.
         // 주입된 Context 에는 didCatch, error, resetErrorBoundary 가 담긴 객체가 존재한다.
         return createElement(
@@ -119,24 +119,24 @@ const initialState: ErrorBoundaryState = {
     - **`static getDerivedStateFromError`** 메서드는 자식 컴포넌트에서 에러가 발생한 경우 호출되며, 인자로 error 를 받아 새롭게 갱신된 state 를 반환하는 메서드다.
     - 따라서 state 가 변경되어 리렌더링을 유발시키며, ErrorBoundary 의 경우 `didCatch` 를 true 로 변경시켜 fallback UI를 보이도록 한다.
     - 해당 메서드는 **render phase** 에서 호출된다.
-        
+      
 ```jsx
 static getDerivedStateFromError(error: Error) {
   return { didCatch: true, error };
 }
 ```
-        
+      
     - **`componentDidCatch`** 메서드는 자식 컴포넌트에서 에러가 발생한 경우 호출되며, 두 개의 매개변수를 전달 받는다.
     - 매개변수는 에러 객체인 `error` 와 어떤 컴포넌트에서 에러가 발생했는지에 대한 StackTrace 정보를 담은 `info` 객체다.
     - ErrorBoundary 에서는 두 인자를 `onError` 콜백 함수에게 넘긴다.
     - **commit phase 에서 실행**되므로 Error Logging 작업을 보통 여기서 처리한다. 따라서 `onError` props 에 에러를 로깅하는 로직을 넣는 것이 바람직하다.
-        
+      
 ```jsx
 componentDidCatch(error: Error, info: ErrorInfo) {
   this.props.onError?.(error, info);
 }
 ```
-       
+     
 ## 현재 개인적으로 사용 중인 모습
 
 ```tsx

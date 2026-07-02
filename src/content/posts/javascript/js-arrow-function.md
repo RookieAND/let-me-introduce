@@ -2,8 +2,8 @@
 
 ## 화살표 함수 기본 문법
 
-ES6에서 추가된 함수 선언 방식이다.  
-단일 표현식이면 `{}` 없이 암묵적 반환이 가능하다.  
+ES6에서 추가된 함수 선언 방식이다.
+단일 표현식이면 `{}` 없이 암묵적 반환이 가능하다.
 
 ```javascript
 const add = (a, b) => a + b;
@@ -34,7 +34,7 @@ button.addEventListener('click', () => {
 
 ### 3. 생성자 함수
 
-화살표 함수는 prototype이 없어서 `new`로 호출할 수 없다.  
+화살표 함수는 prototype이 없어서 `new`로 호출할 수 없다.
 
 ```javascript
 const Foo = () => {};
@@ -43,7 +43,7 @@ new Foo(); // TypeError: Foo is not a constructor
 
 ### 4. arguments 객체
 
-화살표 함수는 `arguments`를 상속한다.  
+화살표 함수는 `arguments`를 상속한다.
 
 ```javascript
 const fn = () => {
@@ -51,7 +51,7 @@ const fn = () => {
 };
 ```
 
-`arguments` 대신 rest 파라미터를 쓴다.  
+`arguments` 대신 rest 파라미터를 쓴다.
 
 ```javascript
 const fn = (...args) => {
@@ -61,8 +61,8 @@ const fn = (...args) => {
 
 ## 핵심 차이: this 바인딩
 
-일반 함수는 호출 방식에 따라 `this`가 동적으로 결정된다.  
-화살표 함수는 선언 시점의 상위 스코프 `this`를 렉시컬하게 캡처한다.  
+일반 함수는 호출 방식에 따라 `this`가 동적으로 결정된다.
+화살표 함수는 선언 시점의 상위 스코프 `this`를 렉시컬하게 캡처한다.
 
 ```javascript
 class Timer {

@@ -1,6 +1,6 @@
 # [#JS] Destructuring
 
-배열의 값 또는 객체의 프로퍼티를 풀어서 개별 변수에 할당하는 문법이다.  
+배열의 값 또는 객체의 프로퍼티를 풀어서 개별 변수에 할당하는 문법이다.
 
 ## 객체 구조 분해
 
@@ -34,7 +34,7 @@ console.log(city); // "Seoul"
 
 ## 배열 구조 분해
 
-인덱스 순서 기반이다.  
+인덱스 순서 기반이다.
 
 ```javascript
 const [first, second, ...rest] = [1, 2, 3, 4, 5];
@@ -67,4 +67,4 @@ function greet({ name, greeting = 'Hello' }) {
 greet({ name: 'Baik' }); // "Hello, Baik!"
 ```
 
-rest 연산자는 마지막에만 쓸 수 있고 뒤에 쉼표를 붙이면 안 된다.  
+rest 연산자는 마지막에만 쓸 수 있고 뒤에 쉼표를 붙이면 안 된다.

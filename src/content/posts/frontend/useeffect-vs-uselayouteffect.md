@@ -1,15 +1,15 @@
 
-> useEffect는 많이 썼다만 useLayoutEffect는 대체 뭘까?  
+> useEffect는 많이 썼다만 useLayoutEffect는 대체 뭘까?
 
-시니어 프론트엔드 개발자 테오님의 카카오톡 그룹 채팅방을 보던 도중, useEffect는 가끔 Paint 작업 이전에도 실행될 수 있느냐는 질문을 보았다. 처음에는 엥? useEffect는 항상 브라우저가 완전히 렌더링 된 이후에 실행되는 거 아닌가? 일부러 React 에서 약간의 timeout 까지 줘가며 Passive Effect를 실행시키는데, 이게 말이 되나 싶어 그렇지 않다는 답글을 달았다.  
+시니어 프론트엔드 개발자 테오님의 카카오톡 그룹 채팅방을 보던 도중, useEffect는 가끔 Paint 작업 이전에도 실행될 수 있느냐는 질문을 보았다. 처음에는 엥? useEffect는 항상 브라우저가 완전히 렌더링 된 이후에 실행되는 거 아닌가? 일부러 React 에서 약간의 timeout 까지 줘가며 Passive Effect를 실행시키는데, 이게 말이 되나 싶어 그렇지 않다는 답글을 달았다.
 
-하지만 질문자 분께서 제공해주신 포스팅을 보니, 내가 알고 있던 상식이 뒤바뀌는 결과를 낳게 되어 이 번뜩이는 지식을 재빨리 글로서 정리하고자 한다. 우리가 알고 있었던 useEffect의 당연한 공식이 어쩌면 가끔은 비정상적으로 동작할 수 있다는 유익한 정보를 여러분들께서도 알기 바란다.  
+하지만 질문자 분께서 제공해주신 포스팅을 보니, 내가 알고 있던 상식이 뒤바뀌는 결과를 낳게 되어 이 번뜩이는 지식을 재빨리 글로서 정리하고자 한다. 우리가 알고 있었던 useEffect의 당연한 공식이 어쩌면 가끔은 비정상적으로 동작할 수 있다는 유익한 정보를 여러분들께서도 알기 바란다.
 
 ## useEffect VS useLayoutEffect
 
 ### useEffect
 
-![](https://velog.velcdn.com/images/rookieand/post/27c02182-4bea-48ee-a80d-76099d4f2b80/image.png)  
+![](https://velog.velcdn.com/images/rookieand/post/27c02182-4bea-48ee-a80d-76099d4f2b80/image.png)
 
 - `useEffect` 는 일반적으로 React의 Commit Phase를 마친 후, 브라우저가 **렌더링 된 후**에 실행된다.
 - 따라서 `useEffect` 훅은 대부분의 경우 브라우저의 Layout과 Paint 작업을 마친 이후 실행된다.
@@ -31,8 +31,8 @@
 
 ### useEffect는 가끔 Paint 이전에 실행될 수 있다.
 
-> [!WARNING]  
-> `useLayoutEffect` 에서 setState를 호출해 리렌더링이 발생하면, 이전 렌더링의 `useEffect` (Passive Effect) 가 Paint 이전에 실행된다. `useEffect` 가 항상 Paint 이후에 실행된다고 가정하면 예상치 못한 버그가 생길 수 있다.  
+> [!WARNING]
+> `useLayoutEffect` 에서 setState를 호출해 리렌더링이 발생하면, 이전 렌더링의 `useEffect` (Passive Effect) 가 Paint 이전에 실행된다. `useEffect` 가 항상 Paint 이후에 실행된다고 가정하면 예상치 못한 버그가 생길 수 있다.
 
 - 이상적인 케이스에서 React는 항상 `useEffect` 훅이 Paint 작업 이후에 실행되도록 보장한다.
 - 하지만 `useLayoutEffect` 에서 리렌더링이 발생할 경우, `useEffect` 의 작업인 Passive Effect가 Paint 작업 이전에 실행된다.
@@ -66,9 +66,9 @@ const ResponsiveInput = ({ onClear, ...props }) => {
 
 ### 왜 이런 결과가 나오게 되었는가?
 
-> React will **always flush a previous render's effects** before starting a new update.  
+> React will **always flush a previous render's effects** before starting a new update.
 
-![](https://velog.velcdn.com/images/rookieand/post/c1be3947-3af7-400b-bda6-e0eef883e2c9/image.png)  
+![](https://velog.velcdn.com/images/rookieand/post/c1be3947-3af7-400b-bda6-e0eef883e2c9/image.png)
 
 
 - React 는 기본적으로 새로운 렌더링을 진행하기 전에, 기존의 렌더링 작업에 묶였던 Effect들을 모두 실행시키고, 재수집하는 과정을 거치기 때문이다.

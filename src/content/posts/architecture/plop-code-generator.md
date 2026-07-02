@@ -1,16 +1,16 @@
 ## 왜 Code Generator를 만들었나
 
-모노레포 서버 프로젝트를 세팅하면서 반복되는 코드를 생성해야 하는 케이스가 여럿 생겼다.   
-새 패키지를 추가할 때마다 `package.json`, `tsconfig.json`, `.eslintrc.js`, `.swcrc.json` 같은 파일들을 매번 직접 만들어야 했고,   
-MongoDB Collection을 추가할 때도 Schema, Repository, Index 파일을 동일한 패턴으로 반복했다.  
+모노레포 서버 프로젝트를 세팅하면서 반복되는 코드를 생성해야 하는 케이스가 여럿 생겼다. 
+새 패키지를 추가할 때마다 `package.json`, `tsconfig.json`, `.eslintrc.js`, `.swcrc.json` 같은 파일들을 매번 직접 만들어야 했고, 
+MongoDB Collection을 추가할 때도 Schema, Repository, Index 파일을 동일한 패턴으로 반복했다.
 
-명령어 하나로 이 모든 걸 자동 생성할 수 있다면 DX가 크게 향상될 거라 생각해 Code Generator를 직접 만들기로 했다.  
+명령어 하나로 이 모든 걸 자동 생성할 수 있다면 DX가 크게 향상될 거라 생각해 Code Generator를 직접 만들기로 했다.
 
 ---
 
 ## PlopJS를 선택한 이유
 
-**hygen**과 비교해 **PlopJS**를 선택했다. 주요 이유는 다음과 같다.  
+**hygen**과 비교해 **PlopJS**를 선택했다. 주요 이유는 다음과 같다.
 
 - hygen은 Append/Prepend만 지원하고 전체 수정(Modify)은 불가능하다. PlopJS는 Custom Action을 JS로 더 유연하게 구현할 수 있다.
 - PlopJS는 특정 액션 실패 시 이후 액션 중단 여부를 `abortOnFail`로 설정할 수 있다
@@ -26,7 +26,7 @@ pnpm i plop typescript --filter="@gem-server/code-generator"
 pnpm i -D node-plop handlebarjs cross-env tsx --filter="@gem-server/code-generator"
 ```
 
-TypeScript로 작성된 Plopfile을 실행하기 위해 `cross-env`와 `tsx`를 사용한다.  
+TypeScript로 작성된 Plopfile을 실행하기 위해 `cross-env`와 `tsx`를 사용한다.
 
 ```json
 {
@@ -40,7 +40,7 @@ TypeScript로 작성된 Plopfile을 실행하기 위해 `cross-env`와 `tsx`를 
 
 ## Generator 구조
 
-PlopJS의 Generator는 **description**, **prompt**, **action** 세 부분으로 구성된다.  
+PlopJS의 Generator는 **description**, **prompt**, **action** 세 부분으로 구성된다.
 
 - **Description**: Generator 설명. 목록 출력 시 함께 표시된다
 - **Prompt**: 사용자에게서 필요한 값을 얻기 위한 프롬프트. 내부적으로 [Inquirer.js](https://github.com/SBoudrias/Inquirer.js)를 사용한다
@@ -50,7 +50,7 @@ PlopJS의 Generator는 **description**, **prompt**, **action** 세 부분으로 
 
 ## Generator 제작 예시
 
-Collection 생성 Generator의 Prompt 정의:  
+Collection 생성 Generator의 Prompt 정의:
 
 ```typescript
 prompts: [
@@ -78,7 +78,7 @@ prompts: [
 ],
 ```
 
-Handlebar 템플릿 파일 (`.hbs`):  
+Handlebar 템플릿 파일 (`.hbs`):
 
 ```typescript
 import { Prop, Schema, SchemaFactory } from '@nestjs/mongoose';
@@ -92,9 +92,9 @@ export class {{pascalCase collection}} {}
 export const {{pascalCase collection}}Schema = SchemaFactory.createForClass({{pascalCase collection}});
 ```
 
-`{{}}` (이중 중괄호) 안에 변수를 기입하면 생성 시 주입된 값으로 대체된다. `pascalCase`, `kebabCase`, `lowerCase` 같은 문자열 변환 함수를 기본으로 제공한다.  
+`{{}}` (이중 중괄호) 안에 변수를 기입하면 생성 시 주입된 값으로 대체된다. `pascalCase`, `kebabCase`, `lowerCase` 같은 문자열 변환 함수를 기본으로 제공한다.
 
-Action 정의:  
+Action 정의:
 
 ```typescript
 actions: [
@@ -116,7 +116,7 @@ actions: [
 
 ## Custom Action 제작
 
-파일 생성 외에도 커스텀 로직을 실행해야 할 때 Custom Action을 만들 수 있다. Generator 실행 후 `pnpm i`를 자동으로 실행하는 `runCommandAction`을 만들었다.  
+파일 생성 외에도 커스텀 로직을 실행해야 할 때 Custom Action을 만들 수 있다. Generator 실행 후 `pnpm i`를 자동으로 실행하는 `runCommandAction`을 만들었다.
 
 ```typescript
 import { exec } from 'node:child_process';
@@ -135,7 +135,7 @@ export const runCommandAction: CustomActionFunction = async (answer, config) => 
 };
 ```
 
-`CustomActionFunction` 타입에 따라 구현하며, Error를 던지면 Action이 실패 처리되고, string을 return하면 터미널에 메시지로 출력된다.  
+`CustomActionFunction` 타입에 따라 구현하며, Error를 던지면 Action이 실패 처리되고, string을 return하면 터미널에 메시지로 출력된다.
 
 ```typescript
 const generator = (plop: NodePlopAPI) => {
@@ -146,7 +146,7 @@ const generator = (plop: NodePlopAPI) => {
 };
 ```
 
-Generator의 actions 배열에서 사용할 때:  
+Generator의 actions 배열에서 사용할 때:
 
 ```typescript
 actions: [
@@ -158,10 +158,10 @@ actions: [
 ],
 ```
 
-TypeScript에서는 사용자가 생성한 Action임을 명시하기 위해 `CustomActionConfig<K>` 타입을 명시해야 에러가 나지 않는다.  
+TypeScript에서는 사용자가 생성한 Action임을 명시하기 위해 `CustomActionConfig<K>` 타입을 명시해야 에러가 나지 않는다.
 
 ---
 
 ## 결과
 
-새 패키지를 추가할 때 `pnpm plop`을 실행하면 프롬프트에 값을 입력하는 것만으로 필요한 파일 전체와 `pnpm i`까지 자동으로 처리된다. MongoDB Collection 추가도 마찬가지다. 반복 작업에서 생기는 오타나 누락을 줄이고, 프로젝트 내 일관된 파일 구조를 강제할 수 있다.  
+새 패키지를 추가할 때 `pnpm plop`을 실행하면 프롬프트에 값을 입력하는 것만으로 필요한 파일 전체와 `pnpm i`까지 자동으로 처리된다. MongoDB Collection 추가도 마찬가지다. 반복 작업에서 생기는 오타나 누락을 줄이고, 프로젝트 내 일관된 파일 구조를 강제할 수 있다.

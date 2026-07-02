@@ -1,14 +1,14 @@
 ## Mutation이란?
 
-Mutation은 서버에 Side-Effect를 일으키도록 하는 함수다. 인계 받은 쿼리 값을 기반으로 새로운 결과를 도출해 서버에 변경 사항을 적용하도록 요청한다. 보통 POST, PUT, DELETE 같이 데이터를 수정하거나 추가하는 요청과 함께 사용된다.  
+Mutation은 서버에 Side-Effect를 일으키도록 하는 함수다. 인계 받은 쿼리 값을 기반으로 새로운 결과를 도출해 서버에 변경 사항을 적용하도록 요청한다. 보통 POST, PUT, DELETE 같이 데이터를 수정하거나 추가하는 요청과 함께 사용된다.
 
 ---
 
 ## useQuery와의 차이
 
-**useQuery**는 자동으로 실행된다. `refetchOnWindowFocus`, `refetchInterval` 등의 옵션으로 백그라운드에서 자동 갱신된다.  
+**useQuery**는 자동으로 실행된다. `refetchOnWindowFocus`, `refetchInterval` 등의 옵션으로 백그라운드에서 자동 갱신된다.
 
-**useMutation**은 사용자가 직접 언제 실행할지를 결정해야 한다. 반환되는 `mutate` 함수를 호출해야 mutation이 시행된다.  
+**useMutation**은 사용자가 직접 언제 실행할지를 결정해야 한다. 반환되는 `mutate` 함수를 호출해야 mutation이 시행된다.
 
 ```typescript
 function AddComment({ id }) {
@@ -30,13 +30,13 @@ function AddComment({ id }) {
 }
 ```
 
-또한 useQuery는 하나의 queryCache를 구독하는 여러 queryObserver를 생성해 동일한 결과를 공유한다. useMutation은 호출할 때마다 1:1로 대응하는 mutationCache에 결과가 저장된다.  
+또한 useQuery는 하나의 queryCache를 구독하는 여러 queryObserver를 생성해 동일한 결과를 공유한다. useMutation은 호출할 때마다 1:1로 대응하는 mutationCache에 결과가 저장된다.
 
 ---
 
 ## useMutation 콜백
 
-`onSuccess`, `onError`, `onSettled`, `onMutate` 옵션으로 작업 흐름을 제어할 수 있다.  
+`onSuccess`, `onError`, `onSettled`, `onMutate` 옵션으로 작업 흐름을 제어할 수 있다.
 
 ```typescript
 useMutation(addTodo, {
@@ -55,10 +55,10 @@ mutate(todo, {
 });
 ```
 
-**useMutation**에 정의된 콜백이 먼저 실행되고, **mutate**에 정의된 콜백이 이후 실행된다. 컴포넌트가 중간에 unmount되면 callback이 더 이상 실행되지 않으므로 주의해야 한다.  
+**useMutation**에 정의된 콜백이 먼저 실행되고, **mutate**에 정의된 콜백이 이후 실행된다. 컴포넌트가 중간에 unmount되면 callback이 더 이상 실행되지 않으므로 주의해야 한다.
 
-> [!IMPORTANT]  
-> 페이지 이동이 잦은 플로우에서 라우팅·toast 같은 중요한 후속 처리를 `mutate` 호출 측 콜백에 두면, 컴포넌트가 먼저 언마운트될 경우 실행되지 않는다. 이런 로직은 `useMutation`의 `onSuccess`에 두는 것이 안전하다.  
+> [!IMPORTANT]
+> 페이지 이동이 잦은 플로우에서 라우팅·toast 같은 중요한 후속 처리를 `mutate` 호출 측 콜백에 두면, 컴포넌트가 먼저 언마운트될 경우 실행되지 않는다. 이런 로직은 `useMutation`의 `onSuccess`에 두는 것이 안전하다.
 
 - `variables`: mutate 함수 호출 시 넘긴 인자
 - `data`: mutationFn이 실행된 결과 값 (onSuccess, onSettled)
@@ -80,9 +80,9 @@ const mutation = useMutation({
 });
 ```
 
-`invalidateQueries`는 특정 쿼리의 status를 즉시 stale로 변경하며 백그라운드 refetch를 유도한다. staleTime 설정을 무시하며, 렌더링 중인 쿼리도 백그라운드에서 refetch한다.  
+`invalidateQueries`는 특정 쿼리의 status를 즉시 stale로 변경하며 백그라운드 refetch를 유도한다. staleTime 설정을 무시하며, 렌더링 중인 쿼리도 백그라운드에서 refetch한다.
 
-Query Filter로 더 정교하게 제어할 수 있다.  
+Query Filter로 더 정교하게 제어할 수 있다.
 
 ```typescript
 // 1번 쿼리(key: ['todos'])와 2번 쿼리(key: ['todos', { page: 1 }]) 둘 다 invalid
@@ -113,7 +113,7 @@ const useMutateTodo = () => {
 };
 ```
 
-mutation 결과가 유효한 값임을 보장할 때는 굳이 refetch를 유도하지 않고 서버 반환값으로 즉시 캐시를 업데이트한다. 단, 불변성을 지켜서 새 객체나 배열로 업데이트해야 한다.  
+mutation 결과가 유효한 값임을 보장할 때는 굳이 refetch를 유도하지 않고 서버 반환값으로 즉시 캐시를 업데이트한다. 단, 불변성을 지켜서 새 객체나 배열로 업데이트해야 한다.
 
 ```typescript
 // ❌ 직접 수정 — 버그 발생 가능
@@ -130,7 +130,7 @@ queryClient.setQueryData(['posts', { id }], (oldData) =>
 
 ### Optimistic Update
 
-mutation이 성공할 것이라 가정하고 **미리 캐시 값을 업데이트**하는 기법이다. 실패하면 이전 값으로 롤백한다.  
+mutation이 성공할 것이라 가정하고 **미리 캐시 값을 업데이트**하는 기법이다. 실패하면 이전 값으로 롤백한다.
 
 ```typescript
 useMutation({
@@ -155,4 +155,4 @@ useMutation({
 });
 ```
 
-`onMutate`에서 `cancelQueries`를 호출하는 이유는 Optimistic Update 진행 중 외부 refetch가 발생하면 데이터가 재수정될 수 있기 때문이다. 거의 확실하게 요청이 성공할 케이스에만 적용하자.  
+`onMutate`에서 `cancelQueries`를 호출하는 이유는 Optimistic Update 진행 중 외부 refetch가 발생하면 데이터가 재수정될 수 있기 때문이다. 거의 확실하게 요청이 성공할 케이스에만 적용하자.

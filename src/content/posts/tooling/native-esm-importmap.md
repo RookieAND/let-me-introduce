@@ -136,7 +136,7 @@ Specifier를 URL로 파싱하기 전에 importmap lookup을 먼저 수행하고,
 <script type="module">
   import React from 'react';
   import { createRoot } from 'react-dom/client';
-  
+
   const root = createRoot(document.getElementById('app'));
   root.render(React.createElement('h1', null, 'Hello, native ESM'));
 </script>

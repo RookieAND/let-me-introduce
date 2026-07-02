@@ -1,11 +1,11 @@
 
-> **react-query** 를 쓰라고 해서 쓰긴 쓰는데.. 이걸 왜 써야 하는 걸까?  
+> **react-query** 를 쓰라고 해서 쓰긴 쓰는데.. 이걸 왜 써야 하는 걸까?
 
-필자는 프론트엔드 개발을 계속 진행하던 도중, 개발자 커뮤니티에서 무한 스크롤 구현을 쉽게 하시려면 `react query` 와 Intersection Observer를 잘 버무려서 구현하면 좋다는 말을 듣고 무작정 react query를 시작하였다.  
+필자는 프론트엔드 개발을 계속 진행하던 도중, 개발자 커뮤니티에서 무한 스크롤 구현을 쉽게 하시려면 `react query` 와 Intersection Observer를 잘 버무려서 구현하면 좋다는 말을 듣고 무작정 react query를 시작하였다.
 
-물론 리액트 쿼리를 사용한 입장으로서 만족감은 최상이었다, 기존의 `useState` 와 전역 상태관리 라이브러리를 활용하여 서버에서부터 데이터를 받아와 이를 보관하는 과정은 종종 예상치 못한 에러를 내뿜기 마련이었고, 해당 코드를 일관성 있게 작성하는 것은 더더욱 어려웠다. 하지만 리액트 쿼리는 이러한 단점을 많이 상쇄시켜준 고마운 친구였다.  
+물론 리액트 쿼리를 사용한 입장으로서 만족감은 최상이었다, 기존의 `useState` 와 전역 상태관리 라이브러리를 활용하여 서버에서부터 데이터를 받아와 이를 보관하는 과정은 종종 예상치 못한 에러를 내뿜기 마련이었고, 해당 코드를 일관성 있게 작성하는 것은 더더욱 어려웠다. 하지만 리액트 쿼리는 이러한 단점을 많이 상쇄시켜준 고마운 친구였다.
 
-하지만 이 고마운 친구가 정확히 어떤 일을 하는 건지, 그리고 나는 이걸 왜 써야 하는지에 대한 심도 있는 고찰이 필요한 시점이 바로 지금이라고 생각하여, 리액트 쿼리가 어쩌다 만들어졌고 이걸 써야 하는 이유와, 리액트 쿼리를 사용함에 있어 필요한 기본 지식을 정리하고자 한다.  
+하지만 이 고마운 친구가 정확히 어떤 일을 하는 건지, 그리고 나는 이걸 왜 써야 하는지에 대한 심도 있는 고찰이 필요한 시점이 바로 지금이라고 생각하여, 리액트 쿼리가 어쩌다 만들어졌고 이걸 써야 하는 이유와, 리액트 쿼리를 사용함에 있어 필요한 기본 지식을 정리하고자 한다.
 
 ## Server State
 
@@ -32,7 +32,7 @@
 
 ### React Query 가 대체 뭔가?
 
-> **fetching, caching, synchronizing and updating server state** in your React applications - tanstack  
+> **fetching, caching, synchronizing and updating server state** in your React applications - tanstack
 
 -   react-query는 서버에서부터 데이터를 fetching하고, 클라이언트와 동기화하는 라이브러리이다.
 -   서버로부터 받아온 데이터를 별도의 키를 통해 관리하고, **캐싱**하는 역할도 한다.
@@ -73,7 +73,7 @@
 
 ### React Query 에서 쿼리는 무엇을 의미하는가?
 
-> A query is a declarative dependency on an asynchronous source of data that is tied to a unique key  
+> A query is a declarative dependency on an asynchronous source of data that is tied to a unique key
 
 -   Query는 Server state를 요청하는 함수 (QueryFn) 과 함께 고유한 키 (QueryKey) 로 매핑된다.
 -   서버로부터 데이터를 가져올 경우에는 `useQuery`, `useInfiniteQuery` Hook을 쓴다.

@@ -12,10 +12,9 @@ export function ParagraphBlock({ text }: Props) {
 
   lines.forEach((line, idx) => {
     const isLast = idx === lines.length - 1;
-    const hasBreak = line.endsWith("  ");
-    nodes.push(parseInline(hasBreak ? line.slice(0, -2) : line));
+    nodes.push(parseInline(line.trimEnd()));
     if (!isLast) {
-      nodes.push(hasBreak ? <br key={idx} /> : " ");
+      nodes.push(<br key={idx} />);
     }
   });
 

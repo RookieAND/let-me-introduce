@@ -1,9 +1,9 @@
 
-> 내가 아는 **MIME** 이라고는 인터넷에서 나도는 그 밈밖에 몰랐는데...  
+> 내가 아는 **MIME** 이라고는 인터넷에서 나도는 그 밈밖에 몰랐는데...
 
-최근 우연히 개발 관련 오픈 채팅방에 들어갔는데, 어떤 분께서 HTTP Request Header의 필드인 `Content-type` 에 대해서 질문을 주셨다. 요지는 `application/json` 이 뭘 의미하는 거에요? 였는데.. 지금까지 나는 요청을 보낼때 "아, 나 지금 json 파일 보낸거니까 이거 보고 체크해~" 정도로만 알았지 정확히 이 친구가 뭘 의미하는지를 몰랐었다.  
+최근 우연히 개발 관련 오픈 채팅방에 들어갔는데, 어떤 분께서 HTTP Request Header의 필드인 `Content-type` 에 대해서 질문을 주셨다. 요지는 `application/json` 이 뭘 의미하는 거에요? 였는데.. 지금까지 나는 요청을 보낼때 "아, 나 지금 json 파일 보낸거니까 이거 보고 체크해~" 정도로만 알았지 정확히 이 친구가 뭘 의미하는지를 몰랐었다.
 
-따라서 기왕 이렇게 된거 아주 끝을 보자는 마인드로 관련된 자료를 쭉 찾아보았다. 항상 무언가를 탐구하고 이해하는 과정에서 많은 피로감과 어려움을 느끼지만 그래도 이걸 왜 쓰는지를 비로소 알게 되면 눈이 맑게 개이는 느낌이 아주 좋다. 이렇게 말을 하니까 나도 참 정상인은 아닌가보다. 사서 고생한다는 게 딱 이럴때 쓰는 말인가.  
+따라서 기왕 이렇게 된거 아주 끝을 보자는 마인드로 관련된 자료를 쭉 찾아보았다. 항상 무언가를 탐구하고 이해하는 과정에서 많은 피로감과 어려움을 느끼지만 그래도 이걸 왜 쓰는지를 비로소 알게 되면 눈이 맑게 개이는 느낌이 아주 좋다. 이렇게 말을 하니까 나도 참 정상인은 아닌가보다. 사서 고생한다는 게 딱 이럴때 쓰는 말인가.
 
 ## MIME Type
 
@@ -36,7 +36,7 @@
 -   이후, 가장 앞에 `00` 을 추가하여 각 섹션을 8 bit로 맞춰준다. ASCII 는 MSB가 `0` 이기 때문이다.
 -   마지막으로 각 섹션에 `32` (100000) 를 더하여 최소 값을 32 이상으로 해 화면에 보이는 문자로만 인코딩되게끔 한다.
 
-![](https://velog.velcdn.com/images/rookieand/post/7493c30e-9086-42d5-85e1-427f4d564be1/image.PNG)  
+![](https://velog.velcdn.com/images/rookieand/post/7493c30e-9086-42d5-85e1-427f4d564be1/image.PNG)
 
 #### 2-3. UUEncode는 어떤 점이 문제였을까?
 
@@ -64,9 +64,9 @@
 text/plain;charset=us-ascii
 ```
 
-> type의 종류  
+> type의 종류
 
-기본적으로 MIME type의 `type` 은 크게 두 가지 분류로 나뉜다.  
+기본적으로 MIME type의 `type` 은 크게 두 가지 분류로 나뉜다.
 
 -   `discrete` (개별) 타입은 IANA에서 지정한 단일 문서의 카테고리다.
     -   text : 텍스트를 포함하는 모든 문서 [plain, html, css, javascript]
@@ -140,7 +140,7 @@ text/plain;charset=us-ascii
     - 이후 Buffer의 위쪽부터 6 bit 단위로 잘라 값을 읽은 후, 사전에 정렬시킨 64개의 문자 중에서 매칭되는 것을 고른다.
     - 만약 3 Byte가 다 들어오지 않았다면, 빈 Byte 만큼 `=` 으로 패딩된다.
 
-    ![](https://velog.velcdn.com/images/rookieand/post/c3d3b8a0-b164-418b-9bf2-fb98ab65706d/image.PNG)  
+    ![](https://velog.velcdn.com/images/rookieand/post/c3d3b8a0-b164-418b-9bf2-fb98ab65706d/image.PNG)
 
 ## References
 
