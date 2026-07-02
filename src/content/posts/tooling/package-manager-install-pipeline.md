@@ -43,15 +43,25 @@
 Resolution 단계는 이 범위 선언을 구체적인 버전 하나로 확정하는 과정이다.
 
 ```yaml
-# yarn.lock (Resolution 결과 — Yarn Berry)
-"react@npm:^18.0.0":
-  version: 18.3.1
-  resolution: "react@npm:18.3.1"
-  dependencies:
-    loose-envify: "npm:^1.1.0"
-  checksum: 10c0/abc123def456...
-  languageName: node
-  linkType: hard
+# pnpm-lock.yaml (Resolution 결과)
+lockfileVersion: '9.0'
+
+importers:
+  .:
+    dependencies:
+      react:
+        specifier: ^18.0.0   # package.json에 선언한 범위
+        version: 18.3.1      # Resolution이 확정한 버전
+
+packages:
+  react@18.3.1:
+    resolution:
+      integrity: sha512-KcYjB+tq9lhk...
+
+snapshots:
+  react@18.3.1:
+    dependencies:
+      loose-envify: 1.4.0
 ```
 
 lock 파일이 있으면 별도의 레지스트리 API 호출이 필요 없다.
@@ -70,6 +80,7 @@ semver 범위에 맞는 **최신 버전을 레지스트리에서 조회**하고,
 
 Resolution으로 설치할 버전 목록이 확정됐으므로 이제 실제 파일을 가져와야 한다.
 Fetch 단계는 패키지 tarball을 캐시로 내려받는 과정이다.
+tarball이란 패키지 소스 파일 전체를 하나로 묶은 압축 파일(`.tgz`)이다. npm 레지스트리에 패키지를 배포할 때 이 형식으로 업로드하기 때문에, 설치 시점에 내려받는 실체가 바로 이 tarball이다.
 
 ```
 npm 레지스트리
@@ -83,12 +94,6 @@ npm 레지스트리
 다만 두 매니저의 캐시 범위가 다른데, pnpm은 `~/.pnpm-store/`에 시스템 전역으로 저장해 모든 프로젝트가 공유하는 반면, Yarn Berry의 `.yarn/cache/`는 프로젝트 루트에 위치하는 로컬 캐시다.
 
 ```yaml
-# yarn.lock
-"react@npm:18.3.1":
-  version: 18.3.1
-  resolution: "react@npm:18.3.1"
-  checksum: 10c0/f67e9c0b7b8fa6e7d3e946a1a3c9d7e2f3b4a5c6d8e9f0a1b2c3d4e5f6a7b8c9d0e1f2a3b4c5d6e7f8a9b0c1d2e3f4a5b6c7d8e9f0
-
 # pnpm-lock.yaml
 packages:
   react@18.3.1:
