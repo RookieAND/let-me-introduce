@@ -158,6 +158,18 @@ export const TOOLING_POSTS: Post[] = [
     href: "/posts/plop-code-generator",
   },
   {
+    slug: "package-manager-install-pipeline",
+    date: "2024-11-20",
+    cat: "Tooling",
+    title: "패키지 매니저 설치 파이프라인 — Resolution, Fetch, Link",
+    excerpt: [
+      "`yarn install`이나 `pnpm install`을 칠 때 나타나는 세 단계가 각각 어떤 문제를 푸는지, 그리고 pnpm과 Yarn Berry가 Link에서 왜 갈리는지.",
+    ],
+    tags: ["pnpm", "Yarn Berry", "패키지 관리", "Node.js"],
+    read: "12 min",
+    href: "/posts/package-manager-install-pipeline",
+  },
+  {
     slug: "hard-link-symbolic-link",
     date: "2024-11-12",
     cat: "Tooling",
