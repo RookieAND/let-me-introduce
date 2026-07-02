@@ -314,9 +314,34 @@ const selectedNodeList: AchievementNode[] = useSyncExternalStore(
 
 ---
 
-## 개선 결과
+## 개발 중 만난 버그: unsubscribe 정리 함수의 오류
 
-컴포넌트 코드가 단순해졌다.  
+실제로 합쳐진 코드에 버그가 하나 있었는데, `subscribe`가 반환하는 정리 함수가 잘못 작성됐기 때문이다.
+
+```typescript
+// ❌ 잘못된 구현 — !this.listeners.has(element)는 항상 false → 빈 Set 반환
+return () => {
+  this.listeners = new Set(
+    Array.from(this.listeners).filter(
+      (element) => !this.listeners.has(element),
+    ),
+  );
+};
+
+// ✅ 올바른 구현 — Set.delete로 클로저에 캡처된 listener만 정확히 제거
+return () => {
+  this.listeners.delete(listener);
+};
+```
+
+언마운트 시 의도한 리스너만 제거되어야 하는데, 잘못된 코드는 Set 전체를 비워버린다.
+현재 구현에서는 인스턴스가 `useMemo` 범위 안에서만 관리되어 실제로는 터지지 않았지만, 리스너가 복수로 붙는 상황이 생기면 바로 문제가 된다.
+
+---
+
+## 달성한 것: setState 콜백에서 메서드 호출 하나로
+
+컴포넌트 코드가 단순해졌다.
 
 ```typescript
 // AS-IS: setState 콜백 안에 로직이 뒤엉킴
@@ -340,22 +365,18 @@ setLearningMap(prev => ({
 achievementTree.toggleNodeSelected(targetIndex);
 ```
 
-최상위부터 말단 노드까지 이어지던 스프레드 연산자와 `map` 체인이 사라졌다.  
-Cascading, Guard 같은 도메인 규칙이 `setState` 콜백 안에 뒤섞이지 않는다.  
+최상위부터 말단 노드까지 이어지던 스프레드 연산자와 `map` 체인이 사라졌다.
+Cascading, Guard 같은 도메인 규칙이 `setState` 콜백 안에 뒤섞이지 않는다.
 
-선택 노드 목록이 `AchievementNode[]`로 타입이 보장된다.  
-어디서든 꺼내 쓰면 클래스 메서드를 바로 쓸 수 있다.  
+선택 노드 목록이 `AchievementNode[]`로 타입이 보장되기 때문에 어디서든 꺼내 쓰면 클래스 메서드를 바로 쓸 수 있다.
 
-학생 리포트 / 학급 리포트 토글 규칙이 Tree 클래스 안에 완전히 갇혔다.  
-컴포넌트는 리포트 타입을 알 필요가 없다. Tree를 생성할 때 한 번만 넘기면 끝이다.  
+학생 리포트 / 학급 리포트 토글 규칙이 Tree 클래스 안에 완전히 갇혔기 때문에 컴포넌트는 리포트 타입을 알 필요가 없고, Tree를 생성할 때 한 번만 넘기면 끝이다.
 
 ---
 
-## 주의사항: 놓치면 조용히 터지는 두 가지
+## 주의사항: getSnapshot의 참조 동일성
 
-### getSnapshot 참조 동일성
-
-`getSnapShot`이 `this.currentSelectedNodeList`를 그대로 반환하는 구조이기 때문에, `emitChange` 없이 배열 내부만 변경되면 React가 변경을 감지하지 못할 수 있다. `updateSelectedNode`에서 새 배열 참조를 만들어주면 더 안전하다.  
+`getSnapShot`이 `this.currentSelectedNodeList`를 그대로 반환하는 구조이기 때문에, `emitChange` 없이 배열 내부만 변경되면 React가 변경을 감지하지 못할 수 있다. `updateSelectedNode`에서 새 배열 참조를 만들어주면 더 안전하다.
 
 ```typescript
 public updateSelectedNode() {
@@ -365,38 +386,14 @@ public updateSelectedNode() {
 }
 ```
 
-### unsubscribe 로직 버그
-
-실제로 합쳐진 코드에 버그가 하나 있었는데, `subscribe`가 반환하는 정리 함수가 잘못 작성됐기 때문이다.  
-
-```typescript
-// ❌ 잘못된 구현 — !this.listeners.has(element)는 항상 false → 빈 Set 반환
-return () => {
-  this.listeners = new Set(
-    Array.from(this.listeners).filter(
-      (element) => !this.listeners.has(element),
-    ),
-  );
-};
-
-// ✅ 올바른 구현 — Set.delete로 클로저에 캡처된 listener만 정확히 제거
-return () => {
-  this.listeners.delete(listener);
-};
-```
-
-언마운트 시 의도한 리스너만 제거되어야 하는데, 잘못된 코드는 Set 전체를 비워버린다.  
-현재 구현에서는 인스턴스가 `useMemo` 범위 안에서만 관리되어 실제로는 터지지 않았지만, 리스너가 복수로 붙는 상황이 생기면 바로 문제가 된다.  
-
 ---
 
 ## 마치며
 
-처음엔 `useState`로도 충분히 다룰 수 있을 거라 생각했다.  
+처음엔 `useState`로도 충분히 다룰 수 있을 거라 생각했다.
 노드 하나를 바꾸기 위해 최상위부터 전부 복사해야 하는 코드를 마주하고 나서야 접근이 틀렸다는 걸 깨달았다.
 
-`useSyncExternalStore`가 진가를 발휘하는 상황은 결국 하나로 수렴하는 것 같다.  
-**복잡한 비즈니스 로직이 상태 업데이트 함수 안에 뭉치기 시작할 때.**  
+`useSyncExternalStore`가 진가를 발휘하는 상황은 결국 하나로 수렴하는 것 같은데, **복잡한 비즈니스 로직이 상태 업데이트 함수 안에 뭉치기 시작할 때**가 바로 그 지점이다.
 
-그 이전에는 `useState`로 충분하고, 그 이후에는 Class를 외부 스토어로 꺼내는 게 맞다.  
+그 이전에는 `useState`로 충분하고, 그 이후에는 Class를 외부 스토어로 꺼내는 게 맞다.
 "어떻게 불변성을 지키며 업데이트할까"가 아니라 "이 로직 자체를 React 밖으로 꺼낼 수 있을까"를 먼저 고민하게 됐다.
