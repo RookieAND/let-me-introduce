@@ -38,6 +38,18 @@ export const JAVASCRIPT_POSTS: Post[] = [
     href: "/posts/promise-with-resolver",
   },
   {
+    slug: "js-ast-deep-dive",
+    date: "2023-10-15",
+    cat: "JavaScript",
+    title: "Babel 플러그인을 만들다 파고든 AST 구조와 Visitor 패턴",
+    excerpt: [
+      "path와 node가 왜 다른지 몰라 헤맸다. 소스 코드가 AST가 되는 과정, DFS와 Visitor 패턴, parse → traverse → generate 전체 파이프라인을 직접 파고들었다.",
+    ],
+    tags: ["JavaScript", "AST", "Babel", "파서"],
+    read: "12 min",
+    href: "/posts/js-ast-deep-dive",
+  },
+  {
     slug: "event-bubbling-capturing-delegation",
     date: "2023-02-10",
     cat: "JavaScript",
