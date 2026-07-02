@@ -98,7 +98,7 @@ export const FRONTEND_POSTS: Post[] = [
     href: "/posts/react-display-name",
   },
   {
-    slug: "partial-pre-rendering",
+    slug: "nextjs-partial-pre-rendering",
     date: "2024-05-31",
     cat: "Frontend",
     title: "Partial Pre-rendering",
