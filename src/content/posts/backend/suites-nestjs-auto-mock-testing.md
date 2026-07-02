@@ -15,7 +15,7 @@ const emailService = {
 const service = new UserService(userRepo as any, emailService as any);
 ```
 
-의존성이 3개만 넘어도 셋업 코드가 서비스 로직보다 길어졌다. `as any` 캐스팅 때문에 타입 안전성도 없었다. `UserRepository`에 메서드가 추가되면 테스트 파일을 직접 찾아가 수동으로 stub을 추가해야 했다.  
+의존성이 3개만 넘어도 셋업 코드가 서비스 로직보다 길어졌고, `as any` 캐스팅 때문에 타입 안전성도 없었다. 거기에 `UserRepository`에 메서드가 추가되면 테스트 파일을 직접 찾아가 수동으로 stub을 추가해야 했다.  
 
 ---
 
@@ -55,7 +55,7 @@ npm install --save-dev @suites/unit @suites/di.nestjs @suites/doubles.jest
 
 ### Solitary: 완전 격리
 
-모든 의존성을 Auto-Mock으로 교체한다. 외부 I/O(DB, 메일, HTTP)가 많은 서비스에 적합하다.  
+모든 의존성을 Auto-Mock으로 교체하기 때문에 외부 I/O(DB, 메일, HTTP)가 많은 서비스에 적합하다.  
 
 ```typescript
 beforeEach(async () => {
@@ -77,7 +77,7 @@ it('사용자를 조회한다', async () => {
 
 ### Sociable: 부분 실제 구현
 
-`.expose()`로 지정한 의존성은 실제 인스턴스를 사용하고, 나머지만 mock으로 교체한다. 클래스 간 협력이 올바른지 검증할 때 쓴다.  
+`.expose()`로 지정한 의존성은 실제 인스턴스를 사용하고 나머지만 mock으로 교체하기 때문에, 클래스 간 협력이 올바른지 검증할 때 쓴다.  
 
 ```typescript
 beforeAll(async () => {
@@ -145,7 +145,7 @@ import { sendEmail } from './email-utils';
 
 ## 결과
 
-수동 mock 방식에서 @suites로 전환한 뒤 달라진 것들이다.  
+수동 mock 방식에서 @suites로 전환하고 나서 실제로 달라진 것들을 정리하면 아래와 같다.  
 
 - 셋업 코드가 **의존성 수에 무관하게 4줄 고정** (`TestBed.solitary().compile()` 패턴)
 - `as any` 캐스팅 전면 제거 — `Mocked<T>`로 타입 자동완성이 동작
