@@ -1,6 +1,7 @@
 ## 문제: 타입은 맞는데 에러가 난다
 
-이벤트 시스템을 만들다가 이상한 타입 에러를 만났다. 이벤트 타입별로 Payload를 제네릭으로 연결해뒀고 구조도 딱히 복잡하지 않았는데, 핸들러를 `emit`으로 호출하는 순간 TypeScript가 갑자기 교차 타입(`A & B`)을 요구하기 시작했다.
+이벤트 시스템을 만들다가 이상한 타입 에러를 만났다.  
+이벤트 타입별로 Payload를 제네릭으로 연결해뒀고 구조도 딱히 복잡하지 않았는데, 핸들러를 `emit`으로 호출하는 순간 TypeScript가 갑자기 교차 타입(`A & B`)을 요구하기 시작했다.
 
 ```typescript
 const EVENT = {
@@ -42,13 +43,15 @@ Property 'maxCount' is missing in type
 but required in type '{ maxCount: number; currentCount: number; }'
 ```
 
-PayloadA는 분명히 만족하는데 왜 PayloadB까지 요구하는 건지 당장 이해가 되지 않았다. 유니온 타입이어야 할 자리에 왜 교차 타입이 나타나는가?
+PayloadA는 분명히 만족하는데 왜 PayloadB까지 요구하는 건지 당장 이해가 되지 않았다. 
+유니온 타입이어야 할 자리에 왜 교차 타입이 나타나는가?
 
 ---
 
 ## 원인: 함수 매개변수의 반공변성
 
-이 현상은 함수 매개변수의 **반공변성(Contravariance)** 때문이다. 처음에는 TypeScript가 오탐을 하는 게 아닐까 싶었는데, 파고들수록 이건 의도된 동작이었다.
+이 현상은 함수 매개변수의 **반공변성(Contravariance)** 때문이다.
+처음에는 TypeScript가 오탐을 하는 게 아닐까 싶었는데, 파고들수록 이건 의도된 동작이었다.
 
 배열이나 객체 속성은 공변적(Covariant)이어서 타입 상속 관계가 그대로 유지된다.
 
@@ -80,7 +83,8 @@ const brokenHandler: AnimalHandler = handleOnlyDog;
 brokenHandler(new Cat()); // Cat에는 bark()가 없음
 ```
 
-이걸 이벤트 시스템에 대입하면 왜 교차 타입을 요구하는지가 보인다. `EventHandler<EventType>`은 TypeScript의 기본 분산(Distributive) 방식으로 계산되면 이렇게 펼쳐진다.
+이걸 이벤트 시스템에 대입하면 왜 교차 타입을 요구하는지가 보인다. 
+`EventHandler<EventType>`은 TypeScript의 기본 분산(Distributive) 방식으로 계산되면 이렇게 펼쳐진다.
 
 ```typescript
 type EventHandler =
@@ -88,7 +92,8 @@ type EventHandler =
   | ((p: PayloadB) => void);
 ```
 
-`handler(payload)`를 호출하는 상황을 생각해보자. `handler`가 실제로 어떤 함수인지는 컴파일 타임에 알 수 없는데, PayloadA를 받는 함수일 수도 있고 PayloadB를 받는 함수일 수도 있다. TypeScript 입장에서 두 경우를 모두 안전하게 처리하려면 두 타입을 동시에 만족하는 교차 타입 `PayloadA & PayloadB`만이 유일한 답이 된다.
+`handler(payload)`를 호출하는 상황을 생각해보자. `handler`가 실제로 어떤 함수인지는 컴파일 타임에 알 수 없는데, PayloadA를 받는 함수일 수도 있고 PayloadB를 받는 함수일 수도 있다. 
+TypeScript 입장에서 두 경우를 모두 안전하게 처리하려면 두 타입을 동시에 만족하는 교차 타입 `PayloadA & PayloadB`만이 유일한 답이 된다.
 
 ```typescript
 // ❌ PayloadA만 전달 → handler가 PayloadB 함수면 런타임 에러
@@ -124,7 +129,9 @@ function dispatch(action: Action) {
 
 `if (action.type === "SET_NAME")`은 런타임 분기다. TypeScript는 제어 흐름 분석(Control Flow Analysis)으로 각 분기에서 타입을 좁히는데, `type`과 `payload`가 같은 객체 안에 묶여 있기 때문에 `type`이 좁혀지는 순간 `payload`도 함께 좁혀진다.
 
-제네릭은 이와 다르다. `emit<T>(type: T, payload: Payload[T])`에서 `T`가 특정 이벤트 타입으로 고정되더라도, TypeScript는 `type`과 `payload` 두 매개변수 사이의 상관관계를 추론하지 않는다. 런타임 분기가 없으니 제어 흐름 분석도 통하지 않고, 두 인자가 같은 객체에 묶인 것도 아니라서 타입이 함께 좁혀지지 않기 때문이다. 제네릭은 컴파일 타임 추상화일 뿐이고, TypeScript는 그 위에서 상관관계를 별도로 추론해주지 않는다.
+제네릭은 이와 다르다. `emit<T>(type: T, payload: Payload[T])`에서 `T`가 특정 이벤트 타입으로 고정되더라도, TypeScript는 `type`과 `payload` 두 매개변수 사이의 상관관계를 추론하지 않는다. 
+런타임 분기가 없으니 제어 흐름 분석도 통하지 않고, 두 인자가 같은 객체에 묶인 것도 아니라서 타입이 함께 좁혀지지 않기 때문이다. 
+즉 제네릭은 단순히 컴파일 타임에 대한 추상화일 뿐이고, TypeScript는 그 위에서 상관관계를 별도로 추론해주지 않는다.
 
 ---
 
@@ -197,6 +204,9 @@ class EventRegistry {
 
 ## 마치며
 
-사실 처음에는 TypeScript가 오탐을 하는 거라고 생각했다. `T`로 묶인 두 인자가 같은 타입을 가리킨다는 게 코드 위에서 이미 명확해 보였으니까. 그런데 결국 이건 TypeScript가 제네릭 인자들 사이의 상관관계를 추론하지 않는다는 근본적인 제약에서 비롯된 현상이었다.
+사실 처음에는 TypeScript가 오탐을 하는 거라고 생각했다. `T`로 묶인 두 인자가 같은 타입을 가리킨다는 게 코드 위에서 이미 명확해 보였으니 말이다.
+그런데 결국 이건 TypeScript가 제네릭 인자들 사이의 상관관계를 추론하지 않는다는 근본적인 제약에서 비롯된 현상이었다.
 
-타입 가드가 작동하는 이유와 제네릭이 작동하지 않는 이유를 나란히 놓고 보고 나서야, "같은 타입 변수로 묶었다"는 것이 TypeScript에게 아무런 단서도 되지 않는다는 걸 이해했다. TypeScript는 오직 제어 흐름 분석과 구조적 타이핑만으로 타입을 좁히는데, 제네릭은 그 흐름 바깥에 있다. 비분산 조건부 타입은 그 한계를 우회하는 방법이지, TypeScript가 상관관계를 이해하게 만드는 방법이 아니다.
+타입 가드가 작동하는 이유와 제네릭이 작동하지 않는 이유를 나란히 놓고 보고 나서야, "같은 타입 변수로 묶었다"는 것이 TypeScript에게 아무런 단서도 되지 않는다는 걸 이해했다. 
+TypeScript가 타입을 좁히는 수단은 오직 제어 흐름 분석과 구조적 타이핑뿐이고, 제네릭은 그 흐름 바깥에 있다. 
+비분산 조건부 타입은 그 한계를 우회하는 방법이지, TypeScript가 상관관계를 이해하게 만드는 방법이 아니다.
