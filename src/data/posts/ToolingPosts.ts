@@ -111,14 +111,14 @@ export const TOOLING_POSTS: Post[] = [
   },
   {
     slug: "turborepo-remote-cache-self-hosted",
-    date: "2025-05-01",
+    date: "2026-06-01",
     cat: "Tooling",
-    title: "Turborepo Remote Cache, 클라우드 대신 직접 구축한 이유",
+    title: "Kubernetes로 넘어간 빌드 환경, Turbo Cache는 EFS로 해결했다",
     excerpt: [
-      "추가 비용 없이 AWS EFS + Jenkins로 Remote Cache 서버를 직접 구축해 CI 빌드 속도를 끌어올린 과정.",
+      "EC2 SPOT에서 K8s로 빌드 시스템이 이전된 후, HTTP Remote Cache 서버 대신 AWS EFS PVC 마운트로 Turbo Cache를 구성한 이유와 동작 방식.",
     ],
-    tags: ["Turborepo", "pnpm", "CI", "빌드 캐시"],
-    read: "11 min",
+    tags: ["Turborepo", "Kubernetes", "AWS EFS", "빌드 캐시"],
+    read: "13 min",
     href: "/posts/turborepo-remote-cache-self-hosted",
   },
   {
