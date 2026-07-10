@@ -2,6 +2,18 @@ import type { Post } from "#/data/Posts";
 
 export const FRONTEND_POSTS: Post[] = [
   {
+    slug: "callback-ref-when-and-why",
+    date: "2026-07-10",
+    cat: "Frontend",
+    title: "우리가 Callback Ref 를 써야 하는 순간과 그 이유",
+    excerpt: [
+      "useEffect 안에서 ref.current 를 읽으려 했더니 null 이 나왔다. [ref.current] 를 의존성 배열에 넣어도 아무 일도 일어나지 않았다. Render Phase 와 Commit Phase 의 타이밍 차이를 파고들며 Callback Ref 가 왜 정석인지를 정리한다.",
+    ],
+    tags: ["React", "Ref", "useRef", "Callback Ref", "Render Phase", "Commit Phase"],
+    read: "10 min",
+    href: "/posts/callback-ref-when-and-why",
+  },
+  {
     slug: "gem-query-param-builder",
     date: "2025-05-20",
     cat: "Frontend",
