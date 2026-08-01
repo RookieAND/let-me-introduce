@@ -74,6 +74,30 @@ export const INFRA_POSTS: Post[] = [
     href: "/posts/docker-kubernetes-ch4",
   },
   {
+    slug: "docker-kubernetes-ch7",
+    date: "2026-07-20",
+    cat: "DB / Infra",
+    title: "쿠버네티스 리소스 관리 — 네임스페이스·ConfigMap·Secret",
+    excerpt: [
+      "네임스페이스로 리소스를 논리적으로 분리하고, ConfigMap·Secret 으로 설정값을 파드와 분리하는 방법. kustomize 의 해시 접미사가 자동 Rolling Update 를 트리거하는 메커니즘까지.",
+    ],
+    tags: ["Kubernetes", "Namespace", "ConfigMap", "Secret", "kustomize"],
+    read: "18 min",
+    href: "/posts/docker-kubernetes-ch7",
+  },
+  {
+    slug: "docker-kubernetes-ch8",
+    date: "2026-08-01",
+    cat: "DB / Infra",
+    title: "인그레스 (Ingress) — L7 라우팅과 SSL 종료",
+    excerpt: [
+      "여러 Deployment 를 단일 URL 뒤에 숨기는 인그레스의 구조와 컨트롤러 배포, Endpoint 로 직접 트래픽을 넘기는 Bypass, rewrite-target·SSL/TLS·다중 컨트롤러 활용까지.",
+    ],
+    tags: ["Kubernetes", "Ingress", "Nginx", "TLS", "라우팅"],
+    read: "14 min",
+    href: "/posts/docker-kubernetes-ch8",
+  },
+  {
     slug: "docker-compose-basics",
     date: "2024-10-01",
     cat: "DB / Infra",
