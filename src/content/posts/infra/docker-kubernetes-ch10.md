@@ -527,41 +527,87 @@ imagePullSecrets:
 `--as` 옵션이나 토큰을 매번 손으로 넘기는 대신, ServiceAccount 로 인증하는 `kubeconfig` 파일을 아예 만들어둘 수도 있다.
 CI/CD 파이프라인처럼 사람이 아닌 주체가 클러스터를 다뤄야 할 때 특히 유용하다.
 
-`kubeconfig` 는 크게 세 조각으로 이루어진다.
-어느 클러스터에 접속할지(`cluster`), 누구로 인증할지(`user`), 그리고 이 둘을 묶은 접속 설정(`context`)이다.
-`kubectl config` 명령으로 조각을 하나씩 채워보자.
+`kubeconfig` 는 크게 세 종류의 항목으로 이루어진다.
+`clusters`, `users`, `contexts` 인데, 실제 파일을 열어보면 이 셋이 어떻게 맞물리는지가 한눈에 들어온다.
+
+```yaml
+## sa.config 의 구조
+apiVersion: v1
+kind: Config
+current-context: sa-context      # 지금 사용 중인 컨텍스트
+clusters:                        # ① 접속할 수 있는 클러스터 목록
+  - name: my-cluster
+    cluster:
+      server: https://<APISERVER>
+      certificate-authority-data: LS0tLS1CRUdJTi...
+users:                           # ② 인증 정보(신원) 목록
+  - name: rookieand
+    user:
+      token: eyJhbGciOi...
+contexts:                        # ③ 클러스터 + 사용자 + 네임스페이스 조합
+  - name: sa-context
+    context:
+      cluster: my-cluster
+      user: rookieand
+      namespace: default
+```
+
+`clusters` 는 접속 대상이 되는 클러스터를 정의한다. 어디로(`server`) 붙고 그 클러스터를 어떻게 검증할지(`certificate-authority-data`)가 담긴다.
+`users` 는 그 클러스터에 누구로 인증할지를 정의한다. 여기서는 SA 토큰을 넣었지만, 인증서 키 쌍을 넣을 수도 있다.
+`contexts` 는 앞의 둘을 어느 네임스페이스에서 쓸지까지 묶은 "접속 프로파일"이다.
+
+여기서 중요한 건 `clusters` 와 `users` 가 서로 독립적으로 정의된다는 점이다.
+클러스터가 여러 개고 사용자가 여러 명이어도, `contexts` 에서 필요한 조합만 골라 이어주면 된다.
+"prod 클러스터에 관리자 인증서로", "dev 클러스터에 rookieand SA 로" 같은 조합을 컨텍스트 이름 하나로 전환할 수 있는 것이다.
+
+이제 이 세 항목을 `kubectl config` 명령으로 하나씩 채워보자.
 
 ```shell
-## 1. 접속할 클러스터 등록 (API 서버 주소 + CA 인증서)
+## 1. 접속할 클러스터 등록 (clusters 에 추가)
 kubectl config set-cluster my-cluster \
   --server=https://<APISERVER> \
   --certificate-authority=ca.crt \
   --embed-certs=true \
   --kubeconfig=sa.config
 
-## 2. SA 토큰을 사용자 인증 정보로 등록
+## 2. SA 토큰을 사용자 인증 정보로 등록 (users 에 추가)
 kubectl config set-credentials rookieand \
   --token=$(kubectl create token rookieand) \
   --kubeconfig=sa.config
 
-## 3. 클러스터와 사용자를 묶은 컨텍스트 생성
+## 3. 클러스터와 사용자를 묶은 컨텍스트 생성 (contexts 에 추가)
 kubectl config set-context sa-context \
   --cluster=my-cluster \
   --user=rookieand \
   --namespace=default \
   --kubeconfig=sa.config
+```
 
-## 4. 방금 만든 컨텍스트를 기본값으로 지정
+세 항목을 채웠다고 바로 적용되는 건 아니다.
+`kubeconfig` 에는 컨텍스트가 여러 개 들어 있을 수 있고, `kubectl` 은 그중 `current-context` 로 지정된 하나만 사용한다.
+그래서 방금 만든 `sa-context` 를 현재 컨텍스트로 바꿔줘야 한다.
+
+```shell
+## 등록된 컨텍스트 목록 확인 (현재 컨텍스트에 * 표시)
+kubectl config get-contexts --kubeconfig=sa.config
+
+## 지금 사용 중인 컨텍스트 이름만 확인
+kubectl config current-context --kubeconfig=sa.config
+
+## 사용할 컨텍스트를 sa-context 로 전환
 kubectl config use-context sa-context --kubeconfig=sa.config
 ```
 
-이제 `--kubeconfig=sa.config` 를 붙여 실행하는 모든 명령은 `rookieand` SA 의 권한으로 동작한다.
+`use-context` 로 전환하고 나면, 이후 `--kubeconfig=sa.config` 를 붙여 실행하는 모든 명령은 `rookieand` SA 의 권한으로, `default` 네임스페이스를 대상으로 동작한다.
 
 ```shell
-kubectl get services --kubeconfig=sa.config
+kubectl get services --kubeconfig=sa.config   # sa-context 기준으로 조회된다
 ```
 
-토큰을 넣었으므로 이 `kubeconfig` 는 토큰 유효 기간이 지나면 만료된다는 점만 기억해두자.
+참고로 7 장에서 `kubectl config set-context --current --namespace=production` 으로 네임스페이스만 바꿨던 것도 결국 이 컨텍스트를 조작하는 명령이었다.
+컨텍스트 하나가 "어느 클러스터에 · 누구로 · 어느 네임스페이스에서" 붙을지를 통째로 들고 있다는 걸 떠올리면, 이 명령이 왜 그렇게 동작했는지도 자연스럽게 이어진다.
+
+마지막으로 토큰을 넣었으므로 이 `kubeconfig` 는 토큰 유효 기간이 지나면 만료된다는 점만 기억해두자.
 
 ---
 
