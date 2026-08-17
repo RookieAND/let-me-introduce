@@ -417,27 +417,73 @@ spec:
 ### 10.3.3 쿠버네티스 SDK 로 파드 내부에서 API 서버에 접근하기
 
 `curl` 로 직접 호출하는 방식은 동작 원리를 이해하기엔 좋지만, 실제 애플리케이션에서 이렇게 쓰는 경우는 드물다.
-kubernetes 는 주요 언어별로 공식 클라이언트 SDK(client-go, client-python 등)를 제공한다.
+kubernetes 는 주요 언어별로 공식 클라이언트 SDK 를 제공하는데, Node.js 진영에는 `@kubernetes/client-node` 가 있다.
 
-이 SDK 들은 파드 안에서 실행될 때 방금 본 마운트 경로(`/var/run/secrets/...`)를 알아서 읽어 인증을 처리한다.
+이 SDK 는 파드 안에서 실행될 때 방금 본 마운트 경로(`/var/run/secrets/...`)를 알아서 읽어 인증을 처리한다.
 이 방식을 In-Cluster Config 라고 부른다. 토큰 경로나 API 서버 주소를 코드에 적을 필요가 없다.
 
-```python
-from kubernetes import client, config
+```javascript
+import { KubeConfig, CoreV1Api } from "@kubernetes/client-node";
 
-## 파드에 마운트된 토큰·CA 를 자동으로 읽어 인증한다
-config.load_incluster_config()
+const kc = new KubeConfig();
+kc.loadFromCluster(); // 파드에 마운트된 토큰·CA 를 자동으로 읽어 인증한다
 
-v1 = client.CoreV1Api()
-for svc in v1.list_namespaced_service("default").items:
-    print(svc.metadata.name)
+const k8sApi = kc.makeApiClient(CoreV1Api);
+const services = await k8sApi.listNamespacedService({ namespace: "default" });
+
+for (const svc of services.items) {
+  console.log(svc.metadata?.name);
+}
 ```
 
-Go 의 client-go 라면 `rest.InClusterConfig()` 가 같은 역할을 한다.
-로컬에서 개발할 때는 `~/.kube/config` 를 읽는 함수(`config.load_kube_config()` / `clientcmd.BuildConfigFromFlags`)로 바꿔 끼우면 되고, 나머지 코드는 그대로 둘 수 있다.
+로컬에서 개발할 때는 `kc.loadFromCluster()` 를 `~/.kube/config` 를 읽는 `kc.loadFromDefault()` 로 바꿔 끼우면 되고, 나머지 코드는 그대로 둘 수 있다.
+파드 안이냐 로컬이냐에 따라 인증 정보를 어디서 가져올지만 달라질 뿐, API 를 호출하는 코드는 동일하다.
+
+여기서 한 가지 짚어둘 게 있다.
+`loadFromCluster()` 가 토큰을 자동으로 읽어준다고 해서, 아무 파드나 API 를 호출할 수 있는 건 아니다.
+그 토큰이 가리키는 ServiceAccount 에 미리 권한이 부여되어 있어야 실제로 응답을 받을 수 있다.
+지금까지 다룬 조각들이 결국 어떻게 하나로 이어지는지, 구조로 정리하면 이렇다.
+
+```mermaid
+flowchart TB
+    subgraph setup["① 배포 전 · 권한 부여"]
+        direction LR
+        ROLE["Role<br/>service-reader<br/>(services: get, list)"]
+        RB["RoleBinding"]
+        SA["ServiceAccount<br/>rookieand"]
+        ROLE --- RB
+        RB --- SA
+    end
+
+    subgraph run["② 파드 실행 시"]
+        direction TB
+        POD["Pod<br/>serviceAccountName: rookieand"]
+        TOKEN["/var/run/secrets/.../token<br/>토큰·CA 자동 마운트"]
+        APP["Node SDK<br/>kc.loadFromCluster()"]
+        POD --> TOKEN --> APP
+    end
+
+    SA ==>|"이 SA 로 파드 실행"| POD
+    APP -->|"Authorization: Bearer 토큰"| API["kube-apiserver"]
+
+    subgraph check["③ API 서버 내부 검증"]
+        direction TB
+        AUTHN["인증<br/>토큰 → system:serviceaccount:default:rookieand"]
+        AUTHZ["인가<br/>이 SA 의 RoleBinding·Role 조회"]
+        AUTHN --> AUTHZ
+    end
+
+    API --> check
+    AUTHZ -->|권한 있음| OK["200 OK · 서비스 목록 반환"]
+    AUTHZ -->|권한 없음| NO["403 Forbidden"]
+```
+
+핵심은 ①번 단계다.
+`rookieand` SA 에 `service-reader` Role 이 RoleBinding 으로 연결되어 있지 않으면, ③번의 인가 단계에서 그대로 `403 Forbidden` 으로 막힌다.
+SDK 가 인증을 대신 처리해준다는 건 어디까지나 "토큰을 알아서 실어준다"는 뜻이지, 권한까지 만들어준다는 뜻은 아닌 셈이다.
 
 결국 파드에서 API 서버에 접근하는 일은 "SA 를 만들고 → 필요한 권한을 RoleBinding 으로 붙이고 → 파드에 그 SA 를 지정하면" 끝난다.
-인증 자체는 kubernetes 와 SDK 가 알아서 처리해주는 셈이다.
+그 뒤의 토큰 마운트와 인증 과정은 kubernetes 와 SDK 가 알아서 처리해주는 셈이다.
 
 ---
 
