@@ -98,6 +98,42 @@ export const INFRA_POSTS: Post[] = [
     href: "/posts/docker-kubernetes-ch8",
   },
   {
+    slug: "docker-kubernetes-ch9",
+    date: "2026-08-15",
+    cat: "DB / Infra",
+    title: "퍼시스턴트 볼륨 — 로컬 볼륨에서 네트워크 볼륨까지",
+    excerpt: [
+      "노드를 옮겨 다니는 Pod 의 데이터를 어떻게 보존할까. hostPath·emptyDir 로컬 볼륨의 한계와 NFS·iSCSI·클라우드 볼륨 같은 네트워크 볼륨, 그 위의 PV·PVC 추상화까지.",
+    ],
+    tags: ["Kubernetes", "PersistentVolume", "PVC", "Volume", "Storage"],
+    read: "6 min",
+    href: "/posts/docker-kubernetes-ch9",
+  },
+  {
+    slug: "docker-kubernetes-ch10",
+    date: "2026-09-01",
+    cat: "DB / Infra",
+    title: "ServiceAccount 와 RBAC — 쿠버네티스의 인증과 인가",
+    excerpt: [
+      "kubectl 요청이 거치는 인증·인가·어드미션 단계부터 ServiceAccount·Role·ClusterRole 바인딩, SA 토큰과 SDK 로 API 서버에 접근하는 법, kubeconfig 컨텍스트 전환, x509 인증서 기반 사용자 인증까지.",
+    ],
+    tags: ["Kubernetes", "RBAC", "ServiceAccount", "kubeconfig", "인증"],
+    read: "20 min",
+    href: "/posts/docker-kubernetes-ch10",
+  },
+  {
+    slug: "docker-kubernetes-ch11-1",
+    date: "2026-10-03",
+    cat: "DB / Infra",
+    title: "파드의 자원 사용량 제한 — Requests·Limits 와 QoS",
+    excerpt: [
+      "requests 와 limits 가 스케줄링·cgroup 으로 이어지는 원리, 메모리 부족 시 누가 먼저 죽을지 정하는 QoS 클래스, ResourceQuota·LimitRange 와 이를 동작시키는 Admission Controller 까지.",
+    ],
+    tags: ["Kubernetes", "Resource", "QoS", "ResourceQuota", "LimitRange"],
+    read: "16 min",
+    href: "/posts/docker-kubernetes-ch11-1",
+  },
+  {
     slug: "docker-compose-basics",
     date: "2024-10-01",
     cat: "DB / Infra",
