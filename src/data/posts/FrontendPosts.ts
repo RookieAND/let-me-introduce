@@ -2,6 +2,18 @@ import type { Post } from "#/data/Posts";
 
 export const FRONTEND_POSTS: Post[] = [
   {
+    slug: "roll-and-call-devlog-2",
+    date: "2026-11-22",
+    cat: "Frontend",
+    title: "Roll & Call 개발 일지 (2) — 이미지 변환 한도를 넘기고 변환 시점을 옮긴 열흘",
+    excerpt: [
+      "폭마다 쌓이던 Vercel 이미지 변환, 폭을 바꾸다 402로 깨진 로고, Pro 플랜을 올렸다 내리기까지. 요청할 때 변환하던 이미지를 업로드할 때 한 번 줄이는 방식으로 옮기고 GIF를 애니메이션 WebP로 바꾼 기록.",
+    ],
+    tags: ["Next.js", "next/image", "Vercel", "WebP", "OffscreenCanvas", "Roll & Call"],
+    read: "10 min",
+    href: "/posts/roll-and-call-devlog-2",
+  },
+  {
     slug: "callback-ref-when-and-why",
     date: "2026-07-10",
     cat: "Frontend",

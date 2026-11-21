@@ -2,6 +2,31 @@ import type { Post } from "#/data/Posts";
 
 export const BACKEND_POSTS: Post[] = [
   {
+    slug: "roll-and-call-devlog-3",
+    date: "2026-11-22",
+    cat: "Backend",
+    title:
+      "Roll & Call 개발 일지 (3) — 같은 추첨이 두 번 돌지 않게, 같은 사람이 두 곳에 신청하지 않게",
+    excerpt: [
+      "GM 버튼과 마감 크론이 같은 순간 추첨을 돌릴 때는 게임 행 잠금 뒤 다시 확인하기로, 같은 사람이 시간 겹치는 구인에 동시에 신청할 때는 사용자 단위 advisory lock으로. 잠금의 단위를 경합 대상에 맞춘 기록.",
+    ],
+    tags: ["PostgreSQL", "Lock", "Advisory Lock", "Transaction", "Drizzle", "Roll & Call"],
+    read: "10 min",
+    href: "/posts/roll-and-call-devlog-3",
+  },
+  {
+    slug: "roll-and-call-devlog-1",
+    date: "2026-11-21",
+    cat: "Backend",
+    title: "Roll & Call 개발 일지 (1) — 마이페이지가 가끔 멈추던 이유",
+    excerpt: [
+      "Promise.all이 사실은 직렬로 돌던 커넥션 풀 max: 1, 트랜잭션 풀러에서 줄 선 쿼리, 검증 없이 믿은 JWT까지. 서버리스 Next.js + Supabase에서 마이페이지를 두 번 고친 기록.",
+    ],
+    tags: ["Next.js", "Supabase", "PostgreSQL", "Connection Pool", "Suspense", "Roll & Call"],
+    read: "9 min",
+    href: "/posts/roll-and-call-devlog-1",
+  },
+  {
     slug: "suites-nestjs-auto-mock-testing",
     date: "2025-11-12",
     cat: "Backend",
